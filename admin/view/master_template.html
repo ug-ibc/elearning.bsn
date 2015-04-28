@@ -1,0 +1,37 @@
+
+{include file="template/meta.html"}
+
+<body>
+	<script>
+		var basedomain = "{$basedomain}";
+	</script>
+	
+	{if ($admin)}
+	<div id="container" class="effect mainnav-lg">
+		
+
+			
+			{include file= "template/header.html"} 
+
+			<div class="boxed">
+
+				<!--CONTENT CONTAINER-->
+				<!--===================================================-->
+				<div id="content-container">
+					
+					
+					{$content}
+
+				</div>
+			{include file= "template/sidebar.html"}
+
+			{include file= "template/top-bar.html"}
+
+			</div>
+			{include file= "template/footer.html"}
+			{include file= "template/jsplugin.html"}
+	</div>
+	{else}
+		{$content}
+		{include file= "template/jsplugin.html"}
+	{/if}			

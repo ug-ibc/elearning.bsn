@@ -1,0 +1,156 @@
+
+        <div class="container">
+        <div class="women-in">
+            <div class="col-md-9 col-d">
+
+                <a href="{$basedomain}paket/detail/?id={$topcontent.id}"><img class="img-responsive pic-in" src="{$basedomain}public_assets/{$topcontent.image}" alt=" " ></a>
+                {*}
+                <div class="banner">
+                    <div class="banner-matter">
+                        <label>Collection</label>
+                        <h2>Summmer</h2>
+                        <p>Helping you look cool</p>
+                        
+                        </div>
+                        <div class="you">
+                            <span>40<label>%</label></span>
+                            <small>off</small>
+                        </div>          
+                        <p  class="para-in">Some text regarding the featured product.</p>
+                </div>
+                {/*}
+                <!---->
+                <div class="in-line">
+                    <div class="para-an">
+                        <h3>PRODUK TERBARU</h3>
+                        <p>Check our all latest products in this section.</p>
+                    </div>
+                    <div class="lady-in">
+                        {if $produk}
+                        {foreach $produk as $val}
+                        <div class="col-md-4 you-para">
+                            <a href="{$basedomain}paket/detail/?id={$val.id}"><img class="img-responsive pic-in" src="{$basedomain}public_assets/{$val.image}" alt=" " ></a>
+                            {*}<div class="you-in">
+                                <span>15<label>%</label></span>
+                            <small>off</small>
+                            </div>{/*}
+                            <p>{$val.title}</p>
+                            {*}<span>$179.00  | <label class="cat-in"> </label> <a href="#">Add to Cart </a></span>{/*}
+                        </div>
+                        {/foreach}
+                        {/if}
+                        {*}
+                        <div class="col-md-4 you-para">
+                            <a href="{$basedomain}paket/detail"><img class="img-responsive pic-in" src="{$basedomain}assets/img/pi4.jpg" alt=" " ></a>
+                            <div class="you-in">
+                                <span>15<label>%</label></span>
+                            <small>off</small>
+                            </div>
+                            <p>Premium Denim Women's Hidden</p>
+                            
+                        </div>
+                        <div class="col-md-4 you-para para-grid">
+                            <a href="{$basedomain}paket/detail"><img class="img-responsive pic-in" src="{$basedomain}assets/img/pi5.jpg" alt=" " ></a>
+                            <div class="you-in">
+                                <span>15<label>%</label></span>
+                            <small>off</small>
+                            </div>
+                            <p>Premium Denim Women's Hidden</p>
+                            
+                        </div>
+                        
+                        <div class="col-md-4 you-para">
+                            <a href="{$basedomain}paket/detail"><img class="img-responsive pic-in" src="{$basedomain}assets/img/pi6.jpg" alt=" " ></a>
+                            <div class="you-in">
+                                <span>15<label>%</label></span>
+                            <small>off</small>
+                            </div>
+                            <p>Premium Denim Women's Hidden</p>
+                            
+                        </div>
+                        <div class="col-md-4 you-para">
+                            <a href="{$basedomain}paket/detail"><img class="img-responsive pic-in" src="{$basedomain}assets/img/pi5.jpg" alt=" " ></a>
+                            <div class="you-in">
+                                <span>15<label>%</label></span>
+                            <small>off</small>
+                            </div>
+                            <p>Premium Denim Women's Hidden</p>
+                            
+                        </div>
+                        <div class="col-md-4 you-para para-grid">
+                            <a href="{$basedomain}paket/detail"><img class="img-responsive pic-in" src="{$basedomain}assets/img/pi4.jpg" alt=" " ></a>
+                            <div class="you-in">
+                                <span>15<label>%</label></span>
+                            <small>off</small>
+                            </div>
+                            <p>Premium Denim Women's Hidden</p>
+                            
+                        </div>{/*}
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-m-left">
+
+                {if $slider}
+
+                {foreach $slider as $k => $val}
+                
+                    {if $k==0}<a href="{$basedomain}paket/detail/?id={$val.id}"><img class="img-responsive pic-in" src="{$basedomain}public_assets/{$val.image}" alt=" " ></a>
+                    {else}
+                    <div class="discount">
+                        <a href="{$basedomain}paket/detail/?id={$val.id}"><img class="img-responsive pic-in" src="{$basedomain}public_assets/{$val.image}" alt=" " >  </a>        
+                        <a href="{$basedomain}paket/detail/?id={$val.id}" class="know-more">know more</a>
+                    </div>
+                    {/if}
+                {/foreach}
+                {/if}
+                {*}
+                <div class="in-left">               
+                    <p class="code">Cool COLLECTIONS</p>        
+                    <div class="cool">      
+                    </div>      
+                </div>
+                
+                <div class="discount">
+                    <a href="{$basedomain}paket/detail"><img class="img-responsive pic-in" src="{$basedomain}assets/img/p2.jpg" alt=" " >  </a>        
+                        <p class="no-more">Exclusive <b>discount</b> <span>Womens wear</span></p>                   
+                    <a href="{$basedomain}paket/detail" class="know-more">know more</a>
+                </div>
+                <div class="discount">
+                    <a href="{$basedomain}paket/detail"><img class="img-responsive pic-in" src="{$basedomain}assets/img/p3.jpg" alt=" " ></a>          
+                        <p class="no-more no-get">Get Exclusive <b>discount on</b> <span>Ladies wear</span></p>                 
+                    <a href="{$basedomain}paket/detail" class="know-more">know more</a>
+                </div>
+                <div class="discount">
+                    <a href="{$basedomain}paket/detail"><img class="img-responsive pic-in" src="{$basedomain}assets/img/p3.jpg" alt=" " ></a>          
+                        <p class="no-more no-get">Get Exclusive <b>discount on</b> <span>Ladies wear</span></p>                 
+                    <a href="{$basedomain}paket/detail" class="know-more">know more</a>
+                </div>
+                {/*}
+                {*}
+                <div class="twitter-in">
+                    <h5>TWITTER  UPDATES</h5>
+                    <span class="twitter-ic">   </span>
+                    <div class="up-date">
+                        <p>@suniljoshi Looks like nice and dicent design</p>
+                        <a href="#">http://bit.ly/sun</a>
+                        <p class="ago">About 1 hour ago via twitterfeed</p>
+                    </div>
+                    <div class="up-date">
+                        <p>@suniljoshi Looks like nice and dicent design</p>
+                        <a href="#">http://bit.ly/sun</a>
+                        <p class="ago">About 1 hour ago via twitterfeed</p>
+                    </div>
+                    <a href="#" class="tweets">More Tweets</a>
+                    <div class="clearfix"> </div>
+                </div>
+                {/*}
+            </div>
+            <div class="clearfix"> </div>
+            </div>
+            <!---->
+                  
+            {include file="paket/more-paket.html"}        
+        </div>
+    </div>

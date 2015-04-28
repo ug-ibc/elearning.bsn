@@ -1,0 +1,145 @@
+<div class="container" style="margin-top:100px;margin-bottom:20px;">
+	<div class="row">
+		 <div class="col-xs-7 col-md-7 col-md-offset-1">
+		 <span style="font-size:30px;color:#E06517">Info Pendaftaran</span>
+		</div>
+	</div>
+	<div class="row">
+		 <div class="col-xs-7 col-md-7 col-md-offset-1" style="background-color:#FFF;padding-top:10px">
+				
+					<div class="thumbnail">
+						<div class="form-group">
+				            <label for="recipient-name" class="control-label">{$msg}</label>
+				            
+				          </div>
+				        
+					</div>
+				
+				  </div> 
+				  
+				   <div class="col-xs-4 col-md-4 ">
+					<!-- <div class="thumbnail">
+						 <span style="font-size:20px;color:#E06517">Tawar Harga</span><br/>
+						
+						<br/>
+						
+						<div class="row">
+							
+						   <div class="col-xs-12 col-md-12 ">
+						<div style="font-size:16px;color:#E06517;width:99%; background-color:#F1F1F1;padding:10px" align="center">Rp . 500.000,-</div>
+						</div>
+						</div>
+						</br/>
+						<a href="#" style="background-color:#E06517;padding:5px;color:#fff">Ping</a>
+						<p>&nbsp;</p>
+					</div> -->
+					<div class="thumbnail">
+						<span style="font-size:20px;color:#000">Best </span><span style="font-size:20px;color:#E06517">Ping!</span><br/>
+						
+						<div class="row">
+							
+						   <div class="col-xs-9 col-md-9 ">
+							&nbsp;
+						   </div>
+						   <div class="col-xs-3 col-md-3 ">
+						<a href="#"><i class="glyphicon glyphicon-thumbs-down"></i></a>&nbsp;&nbsp;<a href="#"><i class="glyphicon glyphicon-thumbs-up"></i></a>
+							</div>
+						</div>
+						<br/>
+						<div class="row">
+							
+						   <div class="col-xs-4 col-md-4 ">
+						   
+								<img class="img-circle" src="{$basedomain}assets/img/user.jpg">
+						   </div> 
+						   <div class="col-xs-8 col-md-8 "></BR>
+							<strong>Junaedi</strong><br/>
+						   <span style="font-size:20px;color:#E06517"> Rp. 500.000,-</span>
+						   <hr/>
+						   </div>
+						</div>
+						
+						<div class="row">
+							
+						   <div class="col-xs-4 col-md-4 ">
+						   
+								<img class="img-circle" src="{$basedomain}assets/img/user.jpg">
+						   </div> 
+						   <div class="col-xs-8 col-md-8 "></BR>
+							<strong>Junaedi</strong><br/>
+						   <span style="font-size:20px;color:#E06517"> Rp. 400.000,-</span>
+						   <hr/>
+						   </div>
+						</div>
+						
+						<div class="row">
+							
+						   <div class="col-xs-4 col-md-4 ">
+						   
+								<img class="img-circle" src="{$basedomain}assets/img/user.jpg">
+						   </div> 
+						   <div class="col-xs-8 col-md-8 "></BR>
+							<strong>Junaedi</strong><br/>
+						   <span style="font-size:20px;color:#E06517"> Rp. 300.000,-</span>
+						   <hr/>
+						   </div>
+						</div>
+						
+						<div class="row">
+							
+						   <div class="col-xs-4 col-md-4 ">
+						   
+								<img class="img-circle" src="{$basedomain}assets/img/user.jpg">
+						   </div> 
+						   <div class="col-xs-8 col-md-8 "></BR>
+							<strong>Junaedi</strong><br/>
+						   <span style="font-size:20px;color:#E06517"> Rp. 100.000,-</span>
+						   <hr/>
+						   </div>
+						</div>
+						
+						
+					</div>
+					
+				  </div> 
+	</div>
+</div>
+
+<script type="text/javascript">
+	
+	{literal}
+
+	$(document).on('change','.selectProvinsi', function(){
+
+		var id = $(this).val();
+		$.post(basedomain+'register/ajax',{idprovinsi:id}, function(data){
+
+			var html = "";
+
+			if (data.status==true){
+				
+
+				html += '<div class="form-group">';
+			    html += '        <label for="recipient-name" class="control-label">Kota</label>';
+			    html += '       	<select class="form-control" name="city">';
+				$.each(data.res, function(i,value){
+					$.each(value.city, function(i,val){
+						html += '       		<option value="'+val.kode_wilayah+'">'+val.nama_wilayah+'</option>';
+					})
+				})
+			    html += '       	</select>';
+		        html += '  </div>';
+
+				
+			}
+			
+			$('.selectCity').css('display','block');
+			$('.selectCity').append(html);
+			
+
+		}, "JSON")	
+	})
+	
+
+	{/literal}
+</script>

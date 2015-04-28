@@ -1,0 +1,83 @@
+
+ <script>
+        {literal}
+
+        $(document).on('click','.menu', function(){
+
+          $(".top-nav ul").slideToggle(500, function(){
+            });
+        })
+
+
+          $("span.menu").click(function(){
+            // alert('ada');
+            // $(".top-nav ul").slideToggle(500, function(){
+            // });
+          });
+
+          function blur()
+          {
+            if (this.value == '') {this.value = '';}
+          }
+
+        {/literal}
+        </script>
+<!--header-->
+    <div class="header">
+    <div class="header-top">
+      <div class="container">
+        <div class="header-grid">
+          <ul>
+            <li><a href="#" class="scroll">Form Perjanjian</a></li>
+            {*}<li><a href="#" class="scroll">Privacy</a></li>{/*}
+            <li><a href="#" class="scroll">Ketentuan</a></li>           
+            <li><a href="{$basedomain}kontak" class="scroll">Kontak  </a></li>
+          </ul>
+        </div>
+        <div class="header-grid-right">
+          <a href="#" class="sign-in">Login</a>
+          <form>
+            <input type="text" value="Email" onfocus="this.value='';" onblur="blur()">
+            <input type="text" value="Password" onfocus="this.value='';" onblur="blur()">
+            <input type="submit" value="Go" >
+          </form>
+          <label>|</label>
+          <a href="signup.html" class="sign-up">Register</a>
+        </div>
+        <div class="clearfix"> </div>
+      </div>
+    </div>
+    <div class="container">
+    <div class="header-bottom">     
+        <div class="logo">
+          <a href="{$basedomain}"><img src="{$basedomain}assets/img/logo-lelangbusana.png" alt=" " width="100px" height="100px"></a>
+        </div>
+          <div class="ad-right">
+          {*}<img class="img-responsive" src="{$basedomain}assets/img/ad.png" alt=" " >{/*}
+        </div>
+        <div class="clearfix"> </div>
+      </div>  
+      <div class="header-bottom-bottom">
+        <div class="top-nav">
+          <span class="menu"> </span>
+          <ul>
+            <li class="active"><a href="{$basedomain}">HOME </a></li>
+            <li><a href="{$basedomain}paket/batik" >Batik</a></li>
+            <li><a href="{$basedomain}paket/busana" >Busana</a></li>
+            <li><a href="{$basedomain}paket/gamis" >Gamis</a></li>
+            
+          </ul> 
+       
+          
+          <div class="clearfix"> </div>         
+        </div>
+        <div class="search">
+          <form>
+            <input type="text" value="Cari" onfocus="this.value = '';" onblur="blur()" >
+            <input type="submit"  value="">
+          </form>
+        </div>
+        <div class="clearfix"> </div>
+        </div>
+    </div>
+  </div>

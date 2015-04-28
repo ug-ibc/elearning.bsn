@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="{$basedomain}css/demo/nifty-demo.min.css" type="text/css" />
+<script src="{$basedomain}js/demo/bg-images.js"></script>
+	<div id="container" class="cls-container">
+		
+		<!-- BACKGROUND IMAGE -->
+		<!--===================================================-->
+		<div id="bg-overlay" class="bg-img"></div>
+		
+		
+		<!-- HEADER -->
+		<!--===================================================-->
+		<div class="cls-header cls-header-lg">
+			<div class="cls-brand">
+				<a class="box-inline">
+					<!-- <img alt="Admin" src="images/logo.png" class="brand-icon"> -->
+					<span class="brand-title">E-Learning BSN <span class="text-thin">Admin</span></span>
+				</a>
+			</div>
+		</div>
+		<!--===================================================-->
+		
+		
+		<!-- LOGIN FORM -->
+		<!--===================================================-->
+		<div class="cls-content">
+			<div class="cls-content-sm panel">
+				<div class="panel-body">
+					<!-- <img width="130px" src="{$basedomain}images/logos/logo-login.png" alt="Logo" /> -->
+					<p class="pad-btm">Sign In to your account</p>
+					<form action="{$basedomain}login/local" class="form" method="post">
+						<div class="form-group">
+							<div class="input-group">
+								<div class="input-group-addon"><i class="fa fa-user"></i></div>
+								<input type="text" class="form-control" placeholder="Username" name="username" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
+								<input type="password" class="form-control" placeholder="Password" name="password" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-8 text-left checkbox">
+								<label class="form-checkbox form-icon">
+								<input type="checkbox"> Remember me
+								</label>
+							</div>
+							<div class="col-xs-4">
+								<div class="form-group text-right">
+								<input type="hidden" name="token" value="1">
+								<!-- <button class="btn btn-success text-uppercase" type="submit">Sign In</button> -->
+								</div>
+							</div>
+						</div>
+						<!-- <div class="mar-btm"><em>- or -</em></div> -->
+						<button class="btn btn-primary btn-lg btn-block" type="submit">
+							Sign In
+						</button>
+					</form>
+				</div>
+			</div>
+			<div class="pad-ver">
+				<a href="#" class="btn-link mar-rgt">Forgot password ?</a>
+				<a href="#" class="btn-link mar-lft">Create a new account</a>
+			</div>
+		</div>
+		<!--===================================================-->
+		
+		
+	</div>
+	<!--===================================================-->
+	<!-- END OF CONTAINER -->

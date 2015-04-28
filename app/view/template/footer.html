@@ -1,0 +1,67 @@
+<div class="footer">
+        <div class="container">
+                <div class="footer-class">
+                <div class="class-footer">
+                    <ul>
+                        <li ><a href="#" class="scroll">HOME </a><label>|</label></li>
+                        <li><a href="#" class="scroll">Batik</a><label>|</label></li>
+                        <li><a href="#" class="scroll">Busana</a><label>|</label></li>
+                        <li><a href="#" class="scroll">Gamis</a><label>|</label></li>
+                    </ul>
+                    <p class="footer-grid">&copy; 2014 lelangbusana.com{*}Template by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> {/*}</p>
+                </div>   
+                <div class="footer-left">
+                    <a href="index.html"><img src="{$basedomain}assets/images/logo1.png" alt=" " ></a>
+                </div> 
+                <div class="clearfix"> </div>
+                </div>
+         </div>
+    </div>
+</body>
+</html>
+
+
+<script type="text/javascript">
+{literal}
+        $(window).load(function() {
+            $("#flexiselDemo1").flexisel({
+                visibleItems: 4,
+                animationSpeed: 1000,
+                autoPlay: true,
+                autoPlaySpeed: 3000,            
+                pauseOnHover: true,
+                enableResponsiveBreakpoints: true,
+                responsiveBreakpoints: { 
+                    portrait: { 
+                        changePoint:480,
+                        visibleItems: 1
+                    }, 
+                    landscape: { 
+                        changePoint:640,
+                        visibleItems: 2
+                    },
+                    tablet: { 
+                        changePoint:768,
+                        visibleItems: 3
+                    }
+                }
+            });
+            
+        });
+
+{/literal}    
+    </script>
+
+<script type="text/javascript" src="{$basedomain}assets/js/jquery.flexisel.js"></script>
+
+<script type="application/x-javascript"> 
+{literal}
+    addEventListener("load", function() {
+        setTimeout(hideURLbar, 0); 
+    }, false); 
+
+    function hideURLbar(){ window.scrollTo(0,1); } 
+
+{/literal}
+</script>
+

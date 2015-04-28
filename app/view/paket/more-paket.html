@@ -1,0 +1,39 @@
+
+    
+    <!---->
+    <div class="lady-in-on">
+        <div class="buy-an">
+            <h3>PRODUK LAIN</h3>
+            <p>Check our all latest products in this section.</p>
+        </div>
+        <ul id="flexiselDemo1">    
+            {if $otherproduct} 
+            {foreach $otherproduct as $val}    
+            <li><a href="{$basedomain}paket/detail/?id={$val.id}"><img class="img-responsive women" src="{$basedomain}public_assets/{$val.image}" alt=""></a>
+            <div class="hide-in">
+            <p>{$val.title}</p>
+            {/foreach}
+            {/if}
+            {*}<span>$179.00  |  <a href="#">Buy Now </a></span>{/*}
+            </div></li>
+
+            {*}
+            <li><a href="#"><img class="img-responsive women" src="{$basedomain}assets/img/pic1.jpg" alt=""></a>
+            <div class="hide-in">
+            <p>Premium Denim Women's Hidden</p>
+            
+            </div></li>
+            <li><a href="#"><img class="img-responsive women" src="{$basedomain}assets/img/pic.jpg" alt=""></a>
+            <div class="hide-in">
+            <p>Premium Denim Women's Hidden</p>
+            
+            </div></li>
+            <li><a href="#"><img class="img-responsive women" src="{$basedomain}assets/img/pic2.jpg" alt=""></a>
+            <div class="hide-in">
+            <p>Premium Denim Women's Hidden</p>
+            
+            </div></a></li>{/*}
+        </ul>
+                
+    </div>
+

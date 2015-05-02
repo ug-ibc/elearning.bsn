@@ -36,17 +36,6 @@ class home extends Controller {
     	return $this->loadView('home');
     }
 
-    function detail(){
-		
-		
-
-    	return $this->loadView('paket/detail');
-    }
-    function categori(){
-		
-		
-    	return $this->loadView('paket/categori-paket');
-    }
 }
 
 ?>

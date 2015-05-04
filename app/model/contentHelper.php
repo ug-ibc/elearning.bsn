@@ -1,7 +1,7 @@
 <?php
 class contentHelper extends Database {
 	
-	var $prefix = "lelang";
+	var $prefix = "";
 	var $salt = "";
 	function __construct()
 	{

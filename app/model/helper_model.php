@@ -4,7 +4,7 @@
 class helper_model extends Database {
 	
 	var $user = null;
-    var $prefix = "lelang";
+    var $prefix = "";
 	function __construct()
 	{
 		$session = new Session;

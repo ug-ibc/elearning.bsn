@@ -21,17 +21,7 @@ class home extends Controller {
 	
 	function index(){
 		
-		$getTopContent = $this->contentHelper->getArticle(false, array('topcontent'=>true));
-		$getSlider = $this->contentHelper->getArticle(false, array('slider'=>true));
-		$getOtherProduct = $this->contentHelper->getArticle(false, array('random'=>true));
-		$getProduk = $this->contentHelper->getArticle();
 		
-		// pr($getSlider);
-
-		$this->view->assign('topcontent', $getTopContent[0]);
-		$this->view->assign('slider', $getSlider);
-		$this->view->assign('produk', $getProduk);
-		$this->view->assign('otherproduct', $getOtherProduct);
 
     	return $this->loadView('home');
     }

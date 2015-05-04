@@ -90,7 +90,6 @@ class Session
 	public function get_session($sessName=false)
 	{
 		global $CONFIG;
-		
 		if (array_key_exists('admin', $CONFIG)){
 			$configkey = 'admin';
 		}
@@ -109,8 +108,7 @@ class Session
 			if (isset($_SESSION[$uniqSess])) $session = $_SESSION[$uniqSess];
 		}
 		
-		
-		return decode($session[$configkey]);
+		if (isset($session[$configkey])) return decode($session[$configkey]);
 	}
     
     public function delete_session($sessName=false)

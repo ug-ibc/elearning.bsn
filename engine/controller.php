@@ -43,7 +43,7 @@ class Controller extends Application{
 		
 
 		if ($this->configkey=='admin'){
-			$this->view->assign('menu',$this->menuDinamis());
+			// $this->view->assign('menu',$this->menuDinamis());
 		}
 
 		

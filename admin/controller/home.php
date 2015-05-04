@@ -24,10 +24,10 @@ class home extends Controller {
 	}
 	
 	public function index(){
-		$this->view->assign('active','active');
+		// $this->view->assign('active','active');
 
 		// pr($_SESSION);exit;
-		$this->view->assign('data',$data);
+		// $this->view->assign('data',$data);
 
 		return $this->loadView('home/home');
 

@@ -16,7 +16,7 @@ class loginHelper extends Database {
 		
 		// pr($data);		
 		
-		$sql = "SELECT * FROM admin_member WHERE username = '{$username}' LIMIT 1";
+		$sql = "SELECT * FROM user WHERE username = '{$username}' LIMIT 1";
 		// pr($sql);exit;
 		$res = $this->fetch($sql,0,0);
 		// pr($res);exit;

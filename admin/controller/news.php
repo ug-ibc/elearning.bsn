@@ -1,7 +1,7 @@
 <?php
 // defined ('TATARUANG') or exit ( 'Forbidden Access' );
 
-class home extends Controller {
+class news extends Controller {
 	
 	var $models = FALSE;
 	
@@ -20,16 +20,20 @@ class home extends Controller {
 	public function loadmodule()
 	{
 		
-		$this->models = $this->loadModel('marticle');
+		$this->models = $this->loadModel('mnews');
 	}
 	
 	public function index(){
-		// $this->view->assign('active','active');
+		
 
-		// pr($_SESSION);exit;
-		// $this->view->assign('data',$data);
+		return $this->loadView('news/newslist');
 
-		return $this->loadView('home/home');
+	}
+
+	public function addnews(){
+		
+
+		return $this->loadView('news/addnews');
 
 	}
 

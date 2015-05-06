@@ -1,3 +1,75 @@
+
+<script>
+$(document).ready(function() {
+	// MORRIS AREA CHART
+	// =================================================================
+	// Require MorrisJS Chart
+	// -----------------------------------------------------------------
+	// http://morrisjs.github.io/morris.js/
+	// =================================================================
+
+	Morris.Area({
+		element: 'demo-morris-area',
+		data: [{
+			period: 'January',
+			dl: 77,
+			up: 25
+			}, {
+			period: 'February',
+			dl: 127,
+			up: 58
+			}, {
+			period: 'March',
+			dl: 115,
+			up: 46
+			}, {
+			period: 'April',
+			dl: 239,
+			up: 57
+			}, {
+			period: 'May',
+			dl: 46,
+			up: 75
+			}, {
+			period: 'June',
+			dl: 97,
+			up: 57
+			}, {
+			period: 'July',
+			dl: 105,
+			up: 70
+			}, {
+			period: 'August',
+			dl: 115,
+			up: 106
+			}, {
+			period: 'September',
+			dl: 239,
+			up: 187
+			}, {
+			period: 'October',
+			dl: 246,
+			up: 215
+			}],
+		gridEnabled: false,
+		gridLineColor: 'transparent',
+		behaveLikeLine: true,
+		xkey: 'period',
+		ykeys: ['dl', 'up'],
+		labels: ['Visitor', 'Registered User'],
+		lineColors: ['#045d97'],
+		pointSize: 0,
+		pointStrokeColors : ['#045d97'],
+		lineWidth: 0,
+		resize:true,
+		hideHover: 'auto',
+		fillOpacity: 0.7,
+		parseTime:false
+	});
+
+})	
+</script>
+
 <!--Page Title-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <div id="page-title">
@@ -19,7 +91,7 @@
 <!--Breadcrumb-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <ol class="breadcrumb">
-	<li><a href="#">Home</a></li>
+	<li><a href="{$basedomain}">Home</a></li>
 	<li class="active">Dashboard</li>
 </ol>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -29,18 +101,101 @@
 <!--===================================================-->
 <div id="page-content">
 	
-	<!-- Row selection and deletion (multiple rows) -->
-	<!--===================================================-->
-	<div class="panel">
-		
-		<div class="panel-body">
-			
-			<img src="{$basedomain}images/gallery/dashboard.jpg" width="99%">
-
+	<div class="row">
+		<div class="col-sm-6 col-lg-3">
+					
+			<!--Registered User-->
+			<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+			<div class="panel media pad-all">
+				<div class="media-left">
+					<span class="icon-wrap icon-wrap-sm icon-circle bg-success">
+					<i class="fa fa-user fa-2x"></i>
+					</span>
+				</div>
+	
+				<div class="media-body">
+					<p class="text-2x mar-no text-thin">241</p>
+					<p class="text-muted mar-no">Registered User</p>
+				</div>
+			</div>
+			<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+		</div>
+		<div class="col-sm-6 col-lg-3">
+					
+			<!--Available Course-->
+			<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+			<div class="panel media pad-all">
+				<div class="media-left">
+					<span class="icon-wrap icon-wrap-sm icon-circle bg-info">
+					<i class="fa fa-book fa-2x"></i>
+					</span>
+				</div>
+	
+				<div class="media-body">
+					<p class="text-2x mar-no text-thin">10</p>
+					<p class="text-muted mar-no">Available Course</p>
+				</div>
+			</div>
+			<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+		</div>
+		<div class="col-sm-6 col-lg-3">
+	
+			<!--Ebook-->
+			<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+			<div class="panel media pad-all">
+				<div class="media-left">
+					<span class="icon-wrap icon-wrap-sm icon-circle bg-warning">
+					<i class="fa fa-download fa-2x"></i>
+					</span>
+				</div>
+	
+				<div class="media-body">
+					<p class="text-2x mar-no text-thin">345</p>
+					<p class="text-muted mar-no">Ebook Downloaded</p>
+				</div>
+			</div>
+			<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+		</div>
+		<div class="col-sm-6 col-lg-3">
+	
+			<!--Online Users-->
+			<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+			<div class="panel media pad-all">
+				<div class="media-left">
+					<span class="icon-wrap icon-wrap-sm icon-circle bg-danger">
+					<i class="fa fa-plane fa-2x"></i>
+					</span>
+				</div>
+	
+				<div class="media-body">
+					<p class="text-2x mar-no text-thin">45</p>
+					<p class="text-muted mar-no">Online users</p>
+				</div>
+			</div>
+			<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
 		</div>
 	</div>
-	<!--===================================================-->
-	<!-- End Row selection and deletion (multiple rows) -->
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel">
+				<div class="panel-heading">
+					<h3 class="panel-title">Visitor Chart</h3>
+				</div>
+				<div class="panel-body">
+	
+					<!--Morris Area Chart placeholder-->
+					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+					<div id="demo-morris-area" style="height:212px"></div>
+					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	
+				</div>
+			</div>
+		</div>
+	</div>
 	
 	
 	
@@ -48,5 +203,3 @@
 <!--===================================================-->
 <!--End page content-->
 
-<!--===================================================-->
-<!--END CONTENT CONTAINER-->

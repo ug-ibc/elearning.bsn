@@ -16,4 +16,5 @@ newtemplate/tmp/*
 newtemplate/admin/tmp/*
 newtemplate/logs/*
 newtemplate/config/access.php
+.fuse*
 

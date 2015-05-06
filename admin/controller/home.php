@@ -20,14 +20,20 @@ class home extends Controller {
 	public function loadmodule()
 	{
 		
-		$this->models = $this->loadModel('marticle');
+		$this->marticle = $this->loadModel('marticle');
 	}
 	
 	public function index(){
-		// $this->view->assign('active','active');
+		
+		// uploadFile($data,$path=null,$ext){
+		
 
-		// pr($_SESSION);exit;
-		// $this->view->assign('data',$data);
+
+		
+		$data1 = 1;
+		$vardata = array("coba data","array 2");
+		// pr($vardata);
+		$this->view->assign('data',$vardata);
 
 		return $this->loadView('home/home');
 

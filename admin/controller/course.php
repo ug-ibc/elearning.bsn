@@ -36,6 +36,21 @@ class course extends Controller {
 		return $this->loadView('course/addgroup');
 	}
 
+	public function courselist(){
+		return $this->loadView('course/courselist');	
+	}
+
+	public function addcourse(){
+		return $this->loadView('course/addcourse');	
+	}
+
+	public function upload(){
+		return $this->loadView('course/uploadfile');	
+	}
+
+	public function uploadfile(){
+		return $this->loadView('course/uploadform');	
+	}
 }
 
 ?>

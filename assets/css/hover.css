@@ -2113,6 +2113,8 @@
 
 /* Shutter Out Vertical */
 .hvr-shutter-out-vertical {
+  
+  border-radius:7px;
   display: inline-block;
   vertical-align: middle;
   -webkit-transform: translateZ(0);
@@ -2122,13 +2124,16 @@
   backface-visibility: hidden;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
-  background: #e1e1e1;
+  background: #6EC24B;
   -webkit-transition-property: color;
   transition-property: color;
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
+  text-decoration: none;
 }
 .hvr-shutter-out-vertical:before {
+  text-decoration: none;
+  border-radius:7px;
   content: "";
   position: absolute;
   z-index: -1;
@@ -2136,7 +2141,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: #2098d1;
+  background: #6EC24B;
   -webkit-transform: scaleY(0);
   transform: scaleY(0);
   -webkit-transform-origin: 50%;
@@ -2150,6 +2155,7 @@
 }
 .hvr-shutter-out-vertical:hover, .hvr-shutter-out-vertical:focus, .hvr-shutter-out-vertical:active {
   color: white;
+  text-decoration: none;
 }
 .hvr-shutter-out-vertical:hover:before, .hvr-shutter-out-vertical:focus:before, .hvr-shutter-out-vertical:active:before {
   -webkit-transform: scaleY(1);

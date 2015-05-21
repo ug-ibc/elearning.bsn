@@ -150,7 +150,7 @@ function imageFrame($filename=false, $framefile=false)
  * @return String full_name = full name of uploaded file, include extension
  * @return String raw_name = raw name of uploaded file
  * */
-function uploadFile($data,$path=null,$ext){
+function uploadFile($data,$path=null,$ext='image'){
 	global $CONFIG;
 	
 	if (array_key_exists('admin',$CONFIG)) $key = 'admin';

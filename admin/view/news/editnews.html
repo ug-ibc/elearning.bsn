@@ -1,0 +1,139 @@
+<script>
+$(document).ready(function() {
+	$('#brief').summernote({
+		height: 200
+	});
+	$('#isi').summernote({
+		height: 200
+	});
+})	
+</script>
+<!--Page Title-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<style>
+	        .form-horizontal .control-label{
+	            text-align: left;
+	        }
+	        .col-sm-2 {
+	            text-align: left;
+	        }
+
+  		</style>	
+
+<div id="page-title">
+	<h1 class="page-header text-overflow">Create News</h1>
+
+	<!--Searchbox-->
+	<div class="searchbox">
+		<div class="input-group custom-search-form">
+			<input type="text" class="form-control" placeholder="Search..">
+			<span class="input-group-btn">
+				<button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+			</span>
+		</div>
+	</div>
+</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End page title-->
+
+<!--Breadcrumb-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<ol class="breadcrumb">
+	<li><a href="{$basedomain}">Home</a></li>
+	<li class="active">Add News</li>
+</ol>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End breadcrumb-->
+
+<!--Page content-->
+<!--===================================================-->
+<div id="page-content">
+	
+	<div class="row">
+
+	<div class="col-sm-12">
+			<div class="panel">
+				<div class="panel-heading">
+					<h3 class="panel-title">Publish</h3>
+				</div>
+	
+				<!--Horizontal Form-->
+				<!--===================================================-->
+				<form class="form-horizontal" action="" method="post">
+					<div class="panel-body">
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Judul</label>
+							<div class="col-sm-7">
+								<input type="text" name="judul" class="form-control" value="{$data.judul}">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Author</label>
+							<div class="col-sm-7">
+								<input type="text" name="author" class="form-control" value="{$data.author}">
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Publish</label>
+							<div class="col-sm-3">
+								<div class="input-group date">
+									<input type="text" class="form-control" name="publish" value="{$data.posted}">
+									<span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Brief</label>
+							<div class="col-sm-9">
+								<textarea name="brief" id="brief">{$data.brief}</textarea>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">News</label>
+							<div class="col-sm-9">
+								<textarea name="isi" id="isi">{$data.isi}</textarea>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Status</label>
+							<div class="col-sm-9">
+								<select class="selectpicker" name="status">
+									<option value="{if $data.status==0} Draft 
+									{elseif $data.status==1} Published 
+									{elseif $data.status==2} Unpublished
+									{/if}">
+									{if $data.status==0}Draft 
+									{elseif $data.status==1} Published 
+									{elseif $data.status==2} Unpublished
+									{/if}</option>
+									<option value="0">Draft</option>
+									<option value="1">Publish</option>
+									<option value="2">Unpublish</option>
+								</select>
+							</div>
+						</div>
+
+					</div>
+					<div class="panel-footer text-right">
+						<button class="btn btn-info" type="submit">Save</button>
+					</div>
+				</form>
+				<!--===================================================-->
+				<!--End Horizontal Form-->
+	
+			</div>
+		</div>
+		
+	
+	
+</div>
+<!--===================================================-->
+<!--End page content-->
+

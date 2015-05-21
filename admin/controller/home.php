@@ -20,43 +20,25 @@ class home extends Controller {
 	public function loadmodule()
 	{
 		
-		$this->models = $this->loadModel('marticle');
+		$this->marticle = $this->loadModel('marticle');
 	}
 	
 	public function index(){
-		// $this->view->assign('active','active');
+		
+		// uploadFile($data,$path=null,$ext){
+		
 
-		// pr($_SESSION);exit;
-		// $this->view->assign('data',$data);
+
+		
+		$data1 = 1;
+		$vardata = array("coba data","array 2");
+		// pr($vardata);
+		$this->view->assign('data',$vardata);
 
 		return $this->loadView('home/home');
 
 	}
 
-	public function frame(){
-
-		$data = $this->models->get_frameList();
-		// pr($data);
-		$this->view->assign('data',$data);
-
-		return $this->loadView('listFrame');
-	}
-	
-	function ajax()
-	{
-		
-		$id = _p('id');
-		$n_status = _p('n_status');
-		
-		$data = $this->models->updateStatusFrame($id, $n_status);
-		if ($data){
-			print json_encode(array('status'=>true));
-		}else{
-			print json_encode(array('status'=>false));
-		}
-
-		exit;
-	}
 }
 
 ?>

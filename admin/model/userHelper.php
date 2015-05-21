@@ -86,7 +86,7 @@ class userHelper extends Database {
 
         $filter = "";
         if(!$id==false) $filter = " AND id = {$id}";
-        $sql = "SELECT * FROM `social_member` WHERE 1";
+        $sql = "SELECT * FROM `user` WHERE 1";
         $res = $this->fetch($sql,1);  
         if(empty($res)){return false;}
         return $res; 

@@ -29,21 +29,29 @@ class user extends Controller {
 		
 		$dataUser = $this->userHelper->getUserData();
 
-		// pr($_POST);
+		
+		if ($dataUser){
 
-		if ($_POST['status']){
-			
-			$iduser = implode(',', $_POST['ids']);
-			$updateUser = $this->userHelper->updateUser($iduser, $_POST['status']);
-			if ($updateUser){
-				$this->view->assign('status',true);
-			}else{
-				$this->view->assign('status',false);
+			foreach ($dataUser as $key => $value) {
+				$dataUser[$key]['change_date'] = changeDate($value['register_date']);
+				
 			}
 		}
 
+		// pr($dataUser);
+		// if ($_POST['status']){
+			
+		// 	$iduser = implode(',', $_POST['ids']);
+		// 	$updateUser = $this->userHelper->updateUser($iduser, $_POST['status']);
+		// 	if ($updateUser){
+		// 		$this->view->assign('status',true);
+		// 	}else{
+		// 		$this->view->assign('status',false);
+		// 	}
+		// }
+
 		$this->view->assign('data',$dataUser);
-		return $this->loadView('user');
+		return $this->loadView('user/userlist');
 
 	}
     
@@ -56,7 +64,7 @@ class user extends Controller {
 
 	}
 	
-	function add(){
+	function adduser(){
        
 		global $basedomain;
 		
@@ -86,7 +94,7 @@ class user extends Controller {
 		// }
 		// pr($_POST);
 		
-		return $this->loadView('user-detail');
+		return $this->loadView('user/adduser');
 
 	}
 	
@@ -132,9 +140,11 @@ class user extends Controller {
 		return $this->loadView('user-detail');
 	}
 	
-	function delete()
+	function deleteuser()
 	{
 		$id = intval(_p('id'));
+		pr($_POST);
+		exit;
 		if ($id>0){
 			$del = $this->userHelper->deleteUser($id);
 			if ($del){

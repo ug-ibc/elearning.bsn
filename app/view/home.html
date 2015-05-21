@@ -1,156 +1,213 @@
-
-        <div class="container">
-        <div class="women-in">
-            <div class="col-md-9 col-d">
-
-                <a href="{$basedomain}paket/detail/?id={$topcontent.id}"><img class="img-responsive pic-in" src="{$basedomain}public_assets/{$topcontent.image}" alt=" " ></a>
-                {*}
-                <div class="banner">
-                    <div class="banner-matter">
-                        <label>Collection</label>
-                        <h2>Summmer</h2>
-                        <p>Helping you look cool</p>
-                        
-                        </div>
-                        <div class="you">
-                            <span>40<label>%</label></span>
-                            <small>off</small>
-                        </div>          
-                        <p  class="para-in">Some text regarding the featured product.</p>
-                </div>
-                {/*}
-                <!---->
-                <div class="in-line">
-                    <div class="para-an">
-                        <h3>PRODUK TERBARU</h3>
-                        <p>Check our all latest products in this section.</p>
-                    </div>
-                    <div class="lady-in">
-                        {if $produk}
-                        {foreach $produk as $val}
-                        <div class="col-md-4 you-para">
-                            <a href="{$basedomain}paket/detail/?id={$val.id}"><img class="img-responsive pic-in" src="{$basedomain}public_assets/{$val.image}" alt=" " ></a>
-                            {*}<div class="you-in">
-                                <span>15<label>%</label></span>
-                            <small>off</small>
-                            </div>{/*}
-                            <p>{$val.title}</p>
-                            {*}<span>$179.00  | <label class="cat-in"> </label> <a href="#">Add to Cart </a></span>{/*}
-                        </div>
-                        {/foreach}
-                        {/if}
-                        {*}
-                        <div class="col-md-4 you-para">
-                            <a href="{$basedomain}paket/detail"><img class="img-responsive pic-in" src="{$basedomain}assets/img/pi4.jpg" alt=" " ></a>
-                            <div class="you-in">
-                                <span>15<label>%</label></span>
-                            <small>off</small>
-                            </div>
-                            <p>Premium Denim Women's Hidden</p>
-                            
-                        </div>
-                        <div class="col-md-4 you-para para-grid">
-                            <a href="{$basedomain}paket/detail"><img class="img-responsive pic-in" src="{$basedomain}assets/img/pi5.jpg" alt=" " ></a>
-                            <div class="you-in">
-                                <span>15<label>%</label></span>
-                            <small>off</small>
-                            </div>
-                            <p>Premium Denim Women's Hidden</p>
-                            
-                        </div>
-                        
-                        <div class="col-md-4 you-para">
-                            <a href="{$basedomain}paket/detail"><img class="img-responsive pic-in" src="{$basedomain}assets/img/pi6.jpg" alt=" " ></a>
-                            <div class="you-in">
-                                <span>15<label>%</label></span>
-                            <small>off</small>
-                            </div>
-                            <p>Premium Denim Women's Hidden</p>
-                            
-                        </div>
-                        <div class="col-md-4 you-para">
-                            <a href="{$basedomain}paket/detail"><img class="img-responsive pic-in" src="{$basedomain}assets/img/pi5.jpg" alt=" " ></a>
-                            <div class="you-in">
-                                <span>15<label>%</label></span>
-                            <small>off</small>
-                            </div>
-                            <p>Premium Denim Women's Hidden</p>
-                            
-                        </div>
-                        <div class="col-md-4 you-para para-grid">
-                            <a href="{$basedomain}paket/detail"><img class="img-responsive pic-in" src="{$basedomain}assets/img/pi4.jpg" alt=" " ></a>
-                            <div class="you-in">
-                                <span>15<label>%</label></span>
-                            <small>off</small>
-                            </div>
-                            <p>Premium Denim Women's Hidden</p>
-                            
-                        </div>{/*}
-                        <div class="clearfix"> </div>
-                    </div>
-                </div>
+<section id="featured">
+     
+    <!-- Slider -->
+        <div id="main-slider" class="flexslider">
+            <ul class="slides">
+              <li>
+                <img src="{$basedomain}assets/img/slides/1.jpg" alt="" />
+              </li>
+              <li>
+                <img src="{$basedomain}assets/img/slides/1.jpg" alt="" />
+              </li>
+              <li>
+                <img src="{$basedomain}assets/img/slides/1.jpg" alt="" />
+              </li>
+            </ul>
+        </div>
+    <!-- end slider -->
+ 
+    </section>
+    <section class="callaction">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" align="center">
+                <h1>DISTANCE SYSTEM LEARNING</h1>
             </div>
-            <div class="col-md-3 col-m-left">
 
-                {if $slider}
-
-                {foreach $slider as $k => $val}
-                
-                    {if $k==0}<a href="{$basedomain}paket/detail/?id={$val.id}"><img class="img-responsive pic-in" src="{$basedomain}public_assets/{$val.image}" alt=" " ></a>
-                    {else}
-                    <div class="discount">
-                        <a href="{$basedomain}paket/detail/?id={$val.id}"><img class="img-responsive pic-in" src="{$basedomain}public_assets/{$val.image}" alt=" " >  </a>        
-                        <a href="{$basedomain}paket/detail/?id={$val.id}" class="know-more">know more</a>
-                    </div>
-                    {/if}
-                {/foreach}
-                {/if}
-                {*}
-                <div class="in-left">               
-                    <p class="code">Cool COLLECTIONS</p>        
-                    <div class="cool">      
-                    </div>      
-                </div>
-                
-                <div class="discount">
-                    <a href="{$basedomain}paket/detail"><img class="img-responsive pic-in" src="{$basedomain}assets/img/p2.jpg" alt=" " >  </a>        
-                        <p class="no-more">Exclusive <b>discount</b> <span>Womens wear</span></p>                   
-                    <a href="{$basedomain}paket/detail" class="know-more">know more</a>
-                </div>
-                <div class="discount">
-                    <a href="{$basedomain}paket/detail"><img class="img-responsive pic-in" src="{$basedomain}assets/img/p3.jpg" alt=" " ></a>          
-                        <p class="no-more no-get">Get Exclusive <b>discount on</b> <span>Ladies wear</span></p>                 
-                    <a href="{$basedomain}paket/detail" class="know-more">know more</a>
-                </div>
-                <div class="discount">
-                    <a href="{$basedomain}paket/detail"><img class="img-responsive pic-in" src="{$basedomain}assets/img/p3.jpg" alt=" " ></a>          
-                        <p class="no-more no-get">Get Exclusive <b>discount on</b> <span>Ladies wear</span></p>                 
-                    <a href="{$basedomain}paket/detail" class="know-more">know more</a>
-                </div>
-                {/*}
-                {*}
-                <div class="twitter-in">
-                    <h5>TWITTER  UPDATES</h5>
-                    <span class="twitter-ic">   </span>
-                    <div class="up-date">
-                        <p>@suniljoshi Looks like nice and dicent design</p>
-                        <a href="#">http://bit.ly/sun</a>
-                        <p class="ago">About 1 hour ago via twitterfeed</p>
-                    </div>
-                    <div class="up-date">
-                        <p>@suniljoshi Looks like nice and dicent design</p>
-                        <a href="#">http://bit.ly/sun</a>
-                        <p class="ago">About 1 hour ago via twitterfeed</p>
-                    </div>
-                    <a href="#" class="tweets">More Tweets</a>
-                    <div class="clearfix"> </div>
-                </div>
-                {/*}
-            </div>
-            <div class="clearfix"> </div>
-            </div>
-            <!---->
-                  
-            {include file="paket/more-paket.html"}        
         </div>
     </div>
+    </section>
+    <section class="callaction">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3" align="center">
+                <img src="{$basedomain}assets/img/data/standarisasi.JPG" alt="" width="40%"/>
+                <h3><span>STANDARISASI</span></h3>
+                <p>Lorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer lacinia...<a href="#"><strong><i>Baca Selengkapnya</i></strong></a></p>
+            </div>
+            <div class="col-md-3" align="center">
+                <img src="{$basedomain}assets/img/data/sertifikasi.JPG" alt="" width="40%"/>
+                <h3><span>SERTIFIKASI</span></h3>
+                <p>Lorem ipsum dolor sit amet, consectetur consectetur  adipiscing elit donec mer lacinia. adipiscing elit donec mer lacinia....<a href="#"><strong><i>Baca Selengkapnya</i></strong></a></p>
+            </div>
+            <div class="col-md-3" align="center">
+                <img src="{$basedomain}assets/img/data/akreditasi.JPG" alt="" width="40%"/>
+                <h3><span>AKREDITASI</span></h3>
+                <p>Lorem ipsum dolor sit amet,  consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer lacinia....<a href="#"><strong><i>Baca Selengkapnya</i></strong></a></p>
+            </div>
+            <div class="col-md-3" align="center">
+                <img src="{$basedomain}assets/img/data/metrologi.JPG" alt="" width="40%"/>
+                <h3><span>METROLOGI</span></h3>
+                <p>Lorem ipsum dolor sit amet, consectetur consectetur  adipiscing elit donec mer lacinia. adipiscing elit donec mer lacinia....<a href="#"><strong><i>Baca Selengkapnya</i></strong></a></p>
+            </div>
+
+            
+        </div>
+        
+    </div>
+    </section>
+
+    <section id="featured" style="background-color:#6EC046">
+
+    <div class="container">
+         <div class="row">
+            <div class="col-md-6">
+                <img src="{$basedomain}assets/img/data/belajar.PNG" alt="" width="100%"/>
+            </div>
+            <div class="col-md-6">
+                <img src="{$basedomain}assets/img/data/elearning.PNG" alt="" width="100%"/>
+            </div>
+         </div>
+    </div>
+    </section>
+
+    <section class="callaction">
+    <div class="container">
+
+        <div class="row">
+
+        <div class="col-md-12" align="center">
+            <h3>UPPCOMING PREPARE CLASSES</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur consectetur  adipiscing elit donec mer lacinia.</p>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div style="border:2px solid #E3E3E3">
+                    <img src="{$basedomain}assets/img/data/phonic.JPG" alt="" width="100%"/>
+                    <div style="padding-left:15px;padding-bottom:20px">
+                        <h4><span>PHONICS AND READING</span></h4>
+                        
+                    <img src="img/data/star.JPG" alt=""/> (3 reviews)<br/><br/>
+                        <i class="fa fa-file-text-o"></i> 10 LESSONS
+                    </div>
+                    <div style="border-top:2px solid #E3E3E3;padding:5px 0px" align="center">
+                        <i class="fa fa-file-text"></i> <strong>APPLY NOW</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div style="border:2px solid #E3E3E3">
+                    <img src="{$basedomain}assets/img/data/health.JPG" alt="" width="100%"/>
+                    <div style="padding-left:15px;padding-bottom:20px">
+                    <h4><span>HEALTH AND DIET</span></h4>
+                    <img src="img/data/star.JPG" alt=""/> (3 reviews)<br/><br/>
+            
+                        <i class="fa fa-file-text-o"></i> 10 LESSONS
+                        </div>
+                    <div style="border-top:2px solid #E3E3E3;padding:5px 0px" align="center">
+                        <i class="fa fa-file-text"></i> <strong>APPLY NOW</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div style="border:2px solid #E3E3E3">
+                    <img src="{$basedomain}assets/img/data/writing.JPG" alt="" width="100%"/>
+                    <div style="padding-left:15px;padding-bottom:20px">
+                    <h4><span>WRITING SKILLS</span></h4>
+                    <img src="img/data/star.JPG" alt=""/> (3 reviews)<br/><br/>
+            
+                        <i class="fa fa-file-text-o"></i> 10 LESSONS
+                    </div>
+                    <div style="border-top:2px solid #E3E3E3;padding:5px 0px" align="center">
+                        <i class="fa fa-file-text"></i> <strong>APPLY NOW</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div style="border:2px solid #E3E3E3">
+                    <img src="{$basedomain}assets/img/data/playground.JPG" alt="" width="100%"/>
+                    <div style="padding-left:15px;padding-bottom:20px">
+                    <h4><span>PLAYGROUND</span></h4>
+                        <img src="img/data/star.JPG" alt=""/> (3 reviews)<br/><br/>
+            
+                        <i class="fa fa-file-text-o"></i> 10 LESSONS
+                        </div>
+                    <div style="border-top:2px solid #E3E3E3;padding:5px 0px" align="center">
+                        <i class="fa fa-file-text"></i> <strong>APPLY NOW</strong>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+        
+    </div>
+    </section>
+    <section id="featured" style="background-color:#FFFFFF;height:60px">
+        <div class="container">
+            &nbsp;
+        </div>
+    </section>
+    <section id="featured" style="background-color:#EBEBEB">
+
+    <div class="container">
+         <div class="row">
+            <div class="col-lg-4">
+                <h3 align="center">BERITA</h3>
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="col-md-12" align="center"  style="border-radius:50%;background-color:#9BDEF1;min-height:50px;padding:10px">
+                            16<br/>
+                            SEP
+                        </div>
+                    </div>
+                    <div class="col-md-8" >
+                        <p align="justify"> Blan ditiis praesen tium itiis praesen tium volupt atum dele niti atquepra esentium </p>
+                        + <span style="color:#7DA55C">more info</span>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="col-md-12" align="center"  style="border-radius:50%;background-color:#9BDEF1;min-height:50px;padding:10px">
+                            16<br/>
+                            SEP
+                        </div>
+                    </div>
+                    <div class="col-md-8" >
+                        <p align="justify"> Blan ditiis praesen tium itiis praesen tium volupt atum dele niti atquepra esentium </p>
+                        + <span style="color:#7DA55C">more info</span>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="col-md-12" align="center"  style="border-radius:50%;background-color:#9BDEF1;min-height:50px;padding:10px">
+                            16<br/>
+                            SEP
+                        </div>
+                    </div>
+                    <div class="col-md-8" >
+                        <p align="justify"> Blan ditiis praesen tium itiis praesen tium volupt atum dele niti atquepra esentium </p>
+                        + <span style="color:#7DA55C">more info</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4" align="center">
+                <h3>QUOTE OF THE DAY</h3>
+                <p><i>&quot; Blanditiis praesentium voluptatum deleniti atquepraesentium voluptatum deleniti atque corrupti quos dolores et quas &quot;</i></p>
+                <strong style="color:#7DA55C"><i>Albert Einstein</i></strong>
+            </div>
+            <div class="col-lg-4">
+                <h3 align="center">GLOSARIUM</h3> 
+                <p>Blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in 
+                </p>
+                <p style="padding-left:15px"><span style="color:#7DA55C">STANDARISASI</span><br/>
+                    Blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in 
+                </p>
+            </div>
+         </div>
+    </div>
+    </section>

@@ -3,6 +3,24 @@ class marticle extends Database {
 	
 	var $prefix = "lelang";
 	
+
+	function testModel()
+	{
+
+		$upload = uploadFile('gambar',false);
+		$upload = uploadFile('dokumen',false,'doc');
+		$upload = uploadFile('video',false,'video');
+
+		$namaFile = $upload['full_name'];
+		$sql = "SELECT * FROM user";
+		$res = $this->fetch($sql); //ngeluarin data
+		// $res = $this->query($sql); //ngeluarin data
+
+		if ($res) return $res;
+		return false;
+		
+	}
+
 	function article_inp($data)
 	{
 		

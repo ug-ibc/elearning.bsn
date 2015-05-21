@@ -1,14 +1,25 @@
 <script>
 $(document).ready(function() {
-	$('#deskripsi').summernote({
+	$('#brief').summernote({
+		height: 200
+	});
+	$('#isi').summernote({
 		height: 200
 	});
 })	
-
-
 </script>
 <!--Page Title-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<style>
+	        .form-horizontal .control-label{
+	            text-align: left;
+	        }
+	        .col-sm-2 {
+	            text-align: left;
+	        }
+
+  		</style>	
 <div id="page-title">
 	<h1 class="page-header text-overflow">Create News</h1>
 
@@ -39,39 +50,7 @@ $(document).ready(function() {
 <div id="page-content">
 	
 	<div class="row">
-		<div class="col-sm-8">
-			<div class="form-group form-group-lg">
-				<div class="col-sm-12" style="margin-bottom:30px">
-					<input type="text" placeholder="Enter title Here" class="form-control">
-				</div>
-
-				<div class="col-sm-12">
-				    <div class="input-group">
-		                <span class="input-group-btn">
-		                    <span class="btn btn-primary btn-file">
-		                        Browse image <input type="file" multiple>
-		                    </span>
-		                </span>
-            			<input type="text" class="form-control" readonly>
-        			</div>
-				</div>
-
-				<div class="col-sm-12">
-					<div class="panel">
-						<div class="panel-body">
-		
-							<!--Summernote-->
-							<!--===================================================-->
-							<div id="deskripsi"></div>
-							<!--===================================================-->
-							<!-- End Summernote -->
-		
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-4">
+	<div class="col-sm-12">
 			<div class="panel">
 				<div class="panel-heading">
 					<h3 class="panel-title">Publish</h3>
@@ -79,47 +58,68 @@ $(document).ready(function() {
 	
 				<!--Horizontal Form-->
 				<!--===================================================-->
-				<form class="form-horizontal">
+				<form class="form-horizontal" action="{$basedomain}news/inputnews" method="post">
 					<div class="panel-body">
+
 						<div class="form-group">
+							<label class="col-sm-2 control-label">Judul</label>
+							<div class="col-sm-7">
+								<input type="text" name="judul" class="form-control">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Author</label>
+							<div class="col-sm-7">
+								<input type="text" name="author" class="form-control">
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Publish</label>
 							<div class="col-sm-3">
-								<button class="btn btn-default">Save Draft</button>
-							</div>
-							<div class="col-sm-9 text-right">
-								<button class="btn btn-default">Preview</button>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">Status</label>
-							<div class="col-sm-9">
-								<select class="selectpicker">
-									<option>Draft</option>
-									<option>Publish</option>
-									<option>Unpublish</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">Publish</label>
-							<div class="col-sm-9">
 								<div class="input-group date">
-									<input type="text" class="form-control">
+									<input type="text" class="form-control" name="publish">
 									<span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span>
 								</div>
 							</div>
 						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Brief</label>
+							<div class="col-sm-9">
+								<textarea name="brief" id="brief"></textarea>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">News</label>
+							<div class="col-sm-9">
+								<textarea name="isi" id="isi"></textarea>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Status</label>
+							<div class="col-sm-9">
+								<select class="selectpicker" name="status">
+									<option value="0">Draft</option>
+									<option value="1">Publish</option>
+									<option value="2">Unpublish</option>
+								</select>
+							</div>
+						</div>
+
 					</div>
 					<div class="panel-footer text-right">
-						<button class="btn btn-info" type="submit">Publish</button>
+						<button class="btn btn-info" type="submit">Save</button>
 					</div>
 				</form>
 				<!--===================================================-->
 				<!--End Horizontal Form-->
 	
 			</div>
-		</div>
-	</div>
-	
+		</div>	
 	
 </div>
 <!--===================================================-->

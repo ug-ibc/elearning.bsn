@@ -20,12 +20,14 @@ class course extends Controller {
 	public function loadmodule()
 	{
 		
-		$this->marticle = $this->loadModel('mcourse');
+		$this->mcourse = $this->loadModel('mcourse');
 	}
 	
 	public function index(){
-		
-		
+		// echo "masukk ajaa";
+		$select = $this->mcourse->select_data();
+		// pr($select);
+		$this->view->assign('data',$select);
 		return $this->loadView('course/coursegroup');
 
 	}
@@ -51,6 +53,27 @@ class course extends Controller {
 	public function uploadfile(){
 		return $this->loadView('course/uploadform');	
 	}
+	
+	public function ajax_insert(){
+		
+		// pr($_POST);
+		// echo masuk;
+		// exit;
+		global $basedomain;
+		$namagrup =$_POST['namagrup'];
+		$syaratkelulusan =$_POST['syaratkelulusan'];
+		$n_status = 1;
+		if ($namagrup != '' && $syaratkelulusan != ''){
+			$insert = $this->mcourse->insert_data($namagrup,$syaratkelulusan,$n_status);
+			// echo json_encode($data);
+		}
+		exit;
+		// echo "<script>window.location.href='".$basedomain."course/index'</script>";	
+		// return $this->loadView('course/index');	
+	}
+	
+	
+	
 }
 
 ?>

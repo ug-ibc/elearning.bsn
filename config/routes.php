@@ -7,6 +7,9 @@
 
 $ROUTES = array(
 		'home',
+                'berita',
+                'quiz',
+                'profil',
 		'register',
                 'recovery',
                 'kontak',

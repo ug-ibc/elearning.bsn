@@ -59,7 +59,7 @@ $(window).on('load', function() {
 <!--Page content-->
 <!--===================================================-->
 <div id="page-content">
-	
+	<!--{pr($data)}-->
 	<!-- Row selection and deletion (multiple rows) -->
 	<!--===================================================-->
 	<div class="panel">
@@ -77,25 +77,34 @@ $(window).on('load', function() {
 			<table id="newslist" class="table table-striped table-bordered" cellspacing="0" width="100%">
 				<thead>
 					<tr>
+						<th>No</th>
 						<th>Group Name</th>
 						<th>Requirement</th>
 						<th class="min-tablet">Create Time</th>
 						<th class="min-tablet">Status</th>
+						<th class="min-tablet">Action</th>
 					</tr>
 				</thead>
 				<tbody>
+					{$no = 1}
+					{foreach $data as $value}
 					<tr>
-						<td>Title 1</td>
-						<td>System Architect</td>
-						<td>2011-04-25</td>
+						<td align="center">{$no}</td>
+						<td>{$value.namagrup}</td>
+						<td>{$value.syaratkelulusan}</td>
+						<td>{$value.create_time}</td>
+						<td style="color:green">
+							{if $value.n_status == '1'}
+								{$var = 'Active'}
+								{$var}
+							{else}
+								{$var = 'Non Active'}	
+								{$var}
+							{/if}</td>
 						<td style="color:green">Active</td>
 					</tr>
-					<tr>
-						<td>Title 2</td>
-						<td>Accountant</td>
-						<td>2011-07-25</td>
-						<td style="color:red">Unactive</td>
-					</tr>
+					<!--{$no++}-->
+					{/foreach}
 				</tbody>
 			</table>
 		</div>

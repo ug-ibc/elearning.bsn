@@ -1,4 +1,21 @@
 
+{$classHome=''}
+{$classBerita=''}
+{$classProfil=''}
+{$classQuiz=''}
+
+{if $page.page=='home'}
+    {$classHome='class="active"'}
+{/if}
+{if $page.page=='berita'}
+    {$classBerita='class="active"'}
+{/if}
+{if $page.page=='profil'}
+    {$classProfil='class="active"'}
+{/if}
+{if $page.page=='quiz'}
+    {$classQuiz='class="active"'}
+{/if}
 <div id="wrapper">
   <!-- start header -->
   <header>
@@ -21,11 +38,12 @@
                 </div>
                 <div class="navbar-collapse collapse " style="overflow:auto">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="{$basedomain}">BERANDA</a></li> 
-                      <li><a href="profil.php">PROFIL</a></li>
-                      <li><a href="quiz.php">E-LEARNING</a></li>
+                        <li {$classHome}><a href="{$basedomain}">BERANDA</a></li> 
+                      <li {$classProfil}><a href="{$basedomain}profil">PROFIL</a></li>
+                      <li {$classQuiz}><a href="{$basedomain}quiz">E-LEARNING</a></li>
                         <li><a href="kursus.php">KURSUS</a></li>
-                        <li><a href="{$basedomain}berita">BERITA</a></li>
+                        <li {$classBerita}><a href="{$basedomain}berita">BERITA</a></li>
+                    </ul>
                 </div>
             </div>
         </div>

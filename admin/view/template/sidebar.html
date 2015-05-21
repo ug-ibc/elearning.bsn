@@ -119,7 +119,7 @@
 							<!--Submenu-->
 							<ul class="collapse {if $page.page eq 'user'}in{/if}">
 								{*}<li><a href="{$basedomain}user/adduser">New User</a></li>{/*}
-								<li class={if $page.function eq 'index'}"active-link"{/if}><a href="{$basedomain}user">User list</a></li>
+								<li class={if $page.page eq 'user' && $page.function eq 'index'}"active-link"{/if}><a href="{$basedomain}user">User list</a></li>
 							</ul>
 						</li>
 					</ul>

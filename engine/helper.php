@@ -37,7 +37,8 @@ function _r($data)
 
 function clean($data)
 {
-	return trim(strip_tags($data));
+	if (is_array($data)) return $data;
+	else return trim(strip_tags($data));
 }
 
 function error_code($code=000)

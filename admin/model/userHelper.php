@@ -145,13 +145,13 @@ class userHelper extends Database {
 
     function updateUser($data=false,$n_status=0)
     {
-
+        // pr($data);
         if (empty($data)) return false;
 
         
         
-        $sql = "UPDATE social_member SET n_status = {$n_status} WHERE id IN ({$data}) LIMIT 1";
-        pr($sql);
+        $sql = "UPDATE user SET n_status = {$n_status} WHERE idUser IN ({$data}) LIMIT 1";
+        // pr($sql);exit;
         $res = $this->query($sql);
         if ($res) return true;
         return false;

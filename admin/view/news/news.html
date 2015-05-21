@@ -1,26 +1,17 @@
 <script>
 $(document).ready(function() {
-	$('#brief').summernote({
+	$('#deskripsi').summernote({
 		height: 200
 	});
-	$('#isi').summernote({
+	$('#deskripsi2').summernote({
 		height: 200
 	});
 })	
+
+
 </script>
 <!--Page Title-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-<style>
-	        .form-horizontal .control-label{
-	            text-align: left;
-	        }
-	        .col-sm-2 {
-	            text-align: left;
-	        }
-
-  		</style>	
-
 <div id="page-title">
 	<h1 class="page-header text-overflow">Create News</h1>
 
@@ -60,58 +51,27 @@ $(document).ready(function() {
 	
 				<!--Horizontal Form-->
 				<!--===================================================-->
-				<form class="form-horizontal" action="{$basedomain}news/inputnews" method="post">
+				<form class="form-horizontal">
 					<div class="panel-body">
-
 						<div class="form-group">
-							<label class="col-sm-2 control-label">Judul</label>
-							<div class="col-sm-7">
-								<input type="text" name="judul" class="form-control">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-sm-2 control-label">Author</label>
-							<div class="col-sm-7">
-								<input type="text" name="author" class="form-control">
-							</div>
-						</div>
-						
-						<div class="form-group">
-							<label class="col-sm-2 control-label">Publish</label>
-							<div class="col-sm-3">
-								<div class="input-group date">
-									<input type="text" class="form-control" name="publish">
-									<span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-sm-2 control-label">Brief</label>
+							<label class="col-sm-3 control-label">Status</label>
 							<div class="col-sm-9">
-								<textarea name="brief" id="brief"></textarea>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-sm-2 control-label">News</label>
-							<div class="col-sm-9">
-								<textarea name="isi" id="isi"></textarea>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-sm-2 control-label">Status</label>
-							<div class="col-sm-9">
-								<select class="selectpicker" name="status">
+								<select class="selectpicker">
 									<option value="0">Draft</option>
 									<option value="1">Publish</option>
 									<option value="2">Unpublish</option>
 								</select>
 							</div>
 						</div>
-
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Publish</label>
+							<div class="col-sm-9">
+								<div class="input-group date">
+									<input type="text" class="form-control">
+									<span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="panel-footer text-right">
 						<button class="btn btn-info" type="submit">Save</button>

@@ -60,20 +60,20 @@ $(document).ready(function() {
 	
 				<!--Horizontal Form-->
 				<!--===================================================-->
-				<form class="form-horizontal" action="{$basedomain}news/inputnews" method="post">
+				<form class="form-horizontal" action="" method="post">
 					<div class="panel-body">
 
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Judul</label>
 							<div class="col-sm-7">
-								<input type="text" name="judul" class="form-control">
+								<input type="text" name="judul" class="form-control" value="{$data.judul}">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Author</label>
 							<div class="col-sm-7">
-								<input type="text" name="author" class="form-control">
+								<input type="text" name="author" class="form-control" value="{$data.author}">
 							</div>
 						</div>
 						
@@ -81,7 +81,7 @@ $(document).ready(function() {
 							<label class="col-sm-2 control-label">Publish</label>
 							<div class="col-sm-3">
 								<div class="input-group date">
-									<input type="text" class="form-control" name="publish">
+									<input type="text" class="form-control" name="publish" value="{$data.posted}">
 									<span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span>
 								</div>
 							</div>
@@ -90,14 +90,14 @@ $(document).ready(function() {
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Brief</label>
 							<div class="col-sm-9">
-								<textarea name="brief" id="brief"></textarea>
+								<textarea name="brief" id="brief">{$data.brief}</textarea>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-sm-2 control-label">News</label>
 							<div class="col-sm-9">
-								<textarea name="isi" id="isi"></textarea>
+								<textarea name="isi" id="isi">{$data.isi}</textarea>
 							</div>
 						</div>
 
@@ -105,6 +105,14 @@ $(document).ready(function() {
 							<label class="col-sm-2 control-label">Status</label>
 							<div class="col-sm-9">
 								<select class="selectpicker" name="status">
+									<option value="{if $data.status==0} Draft 
+									{elseif $data.status==1} Published 
+									{elseif $data.status==2} Unpublished
+									{/if}">
+									{if $data.status==0}Draft 
+									{elseif $data.status==1} Published 
+									{elseif $data.status==2} Unpublished
+									{/if}</option>
 									<option value="0">Draft</option>
 									<option value="1">Publish</option>
 									<option value="2">Unpublish</option>

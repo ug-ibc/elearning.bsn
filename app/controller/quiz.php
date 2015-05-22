@@ -22,8 +22,13 @@ class quiz extends Controller {
 	function index(){
 		$soal = $this->quizHelper->getQuiz(1,1);
        	// pr($soal);
-       	$random = $this->quizHelper->randomJawaban($soal[0]);
-       	pr($random);
+       	if ($soal){
+       		foreach ($soal as $key => $value) {
+       			$acakSoal[] = $this->quizHelper->randomJawaban($value);
+       		}
+       	}
+       	
+       	pr($acakSoal);
 		return $this->loadView('quiz/page_quiz');
     }
 

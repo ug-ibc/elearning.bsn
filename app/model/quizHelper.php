@@ -36,8 +36,6 @@ class quizHelper extends Database {
 
         if (!is_array($soal)) return false;
 
-        $listIndex = array('pilihan1','pilihan2','pilihan3','pilihan4');
-        
         $listNo = "1234";
         $listArray = array();
         

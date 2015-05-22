@@ -52,7 +52,7 @@
 						<li class="list-header">About BSN</li>
 			
 						<!--Menu list item-->
-						<li>
+						<li class={if $page.page eq 'news'}"active-sub"{/if}>
 							<a href="#">
 								<i class="fa fa-newspaper-o"></i>
 								<span class="menu-title">News</span>
@@ -80,15 +80,15 @@
 						<li class="list-header">Course</li>
 			
 						<!--Menu list item-->
-						<li class={if $page.page eq 'course' && $page.function eq 'index'}"active-link"{/if}>
+						<!-- <li class={if $page.page eq 'course' && $page.function eq 'index'}"active-link"{/if}>
 							<a href="{$basedomain}course">
 								<i class="fa fa-briefcase"></i>
 								<span class="menu-title">
 									Course Group
 								</span>
 							</a>
-						</li>
-						<li>
+						</li> -->
+						<li class={if $page.page eq 'course'}"active-sub"{/if}>
 							<a href="#">
 								<i class="fa fa-pencil-square-o"></i>
 								<span class="menu-title">Manage Course</span>
@@ -96,7 +96,8 @@
 							</a>
 			
 							<!--Submenu-->
-							<ul class="collapse {if $page.page eq 'course' && $page.function ne 'index'}in{/if}">
+							<ul class="collapse {if $page.page eq 'course'}in{/if}">
+								<li class={if $page.function eq 'index'}"active-link"{/if}><a href="{$basedomain}course">Course Group</a></li>
 								<li class={if $page.function eq 'courselist' || $page.function eq 'addcourse'}"active-link"{/if}><a href="{$basedomain}course/courselist">Course</a></li>
 								<li class={if $page.function eq 'quiz'}"active-link"{/if}><a href="{$basedomain}article/addarticle">Create Quiz</a></li>
 								<li class={if $page.function eq 'upload' || $page.function eq 'uploadfile'}"active-link"{/if}><a href="{$basedomain}course/upload">Upload Ebook & Video</a></li>
@@ -119,7 +120,7 @@
 							<!--Submenu-->
 							<ul class="collapse {if $page.page eq 'user'}in{/if}">
 								{*}<li><a href="{$basedomain}user/adduser">New User</a></li>{/*}
-								<li class={if $page.function eq 'index'}"active-link"{/if}><a href="{$basedomain}user">User list</a></li>
+								<li class={if $page.page eq 'user' && $page.function eq 'index'}"active-link"{/if}><a href="{$basedomain}user">User list</a></li>
 							</ul>
 						</li>
 					</ul>

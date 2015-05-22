@@ -142,27 +142,16 @@ class user extends Controller {
 	
 	function deleteuser()
 	{
-		global $basedomain;
-		$id = _p('userid');
-		// pr(_p('userid'));
-		// exit;
-		if ($id){
-
-			$errorflag = false;
-			foreach ($id as $key => $value) {
-				// pr($value);
-				$del = $this->userHelper->updateUser($value, $n_status=2);
-				if (!$del) $errorflag = true;
-			}
-			
-			if ($errorflag){
-				// print json_encode(array('status'=>false));
+		$id = intval(_p('id'));
+		pr($_POST);
+		exit;
+		if ($id>0){
+			$del = $this->userHelper->deleteUser($id);
+			if ($del){
+				print json_encode(array('status'=>true));
 			}else{
-				// print json_encode(array('status'=>true));
-				// redirect($basedomain.'user');exit;
+				print json_encode(array('status'=>false));
 			}
-
-			redirect($basedomain.'user');exit;
 		}
 		
 		exit;

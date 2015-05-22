@@ -77,7 +77,7 @@ $(window).on('load', function() {
 		<div id="separator-toolbar" class="table-toolbar-left">&nbsp;</div>
 		
 		<div id="delete-toolbar" class="table-toolbar-left">
-			<button class="btn btn-danger btn-labeled fa fa-times" type="submit">Delete</button>
+			<button id="demo-dt-delete-btn" class="btn btn-danger btn-labeled fa fa-times" type="submit">Delete</button>
 		</div>
 		<div class="panel-body">
 			<table id="newslist" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -97,11 +97,7 @@ $(window).on('load', function() {
 						{$no = 1}
 						{foreach $data as $val}
 							<tr>
-								{if $val.n_status == 2}
-								<td>&nbsp;</td>
-								{else}
 								<td><input type="checkbox" name="userid[]" value="{$val.idUser}" ></td>
-								{/if}
 								<td>{$no++}</td>
 								<td>{$val.username}</td>
 								<td>{$val.email}</td>
@@ -114,9 +110,11 @@ $(window).on('load', function() {
 								</td>
 								{*}
 								{if $val.n_status == 0}
+
 									<td style="color:red">Pending</td>
 								{else if $val.n_status == 2}
 									<td style="color:black">Deleted</td>
+
 								{else}
 									<td style="color:green">Active</td>
 								{/if}

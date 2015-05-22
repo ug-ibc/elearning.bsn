@@ -16,11 +16,14 @@ class quiz extends Controller {
 	
 	function loadmodule()
 	{
-        $this->contentHelper = $this->loadModel('contentHelper');
+        $this->quizHelper = $this->loadModel('quizHelper');
 	}
 	
 	function index(){
-		
+		$soal = $this->quizHelper->getQuiz(1,1);
+       	// pr($soal);
+       	$random = $this->quizHelper->randomJawaban($soal[0]);
+       	pr($random);
 		return $this->loadView('quiz/page_quiz');
     }
 

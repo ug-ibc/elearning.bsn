@@ -107,14 +107,20 @@ $(window).on('load', function() {
 								<td>{$val.email}</td>
 								<td>{$val.institusi}</td>
 								<td>{$val.register_date}</td>
+								<td>
+									<select>
+										<option value="0"><span style="color:red">Pending</span></option>
+									</select>
+								</td>
+								{*}
 								{if $val.n_status == 0}
-									<td style="color:red">Unpublish</td>
+									<td style="color:red">Pending</td>
 								{else if $val.n_status == 2}
 									<td style="color:black">Deleted</td>
 								{else}
-									<td style="color:green">Publish</td>
+									<td style="color:green">Active</td>
 								{/if}
-
+								{/*}
 							</tr>
 						{/foreach}
 					{/if}

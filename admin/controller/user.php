@@ -188,6 +188,8 @@ class user extends Controller {
 			echo "<script>window.location.href='".$CONFIG['admin']['base_url']."'</script>";
 		
 	}
+
+	
 }
 
 ?>

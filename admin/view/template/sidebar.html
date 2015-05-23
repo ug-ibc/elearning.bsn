@@ -96,10 +96,10 @@
 							</a>
 			
 							<!--Submenu-->
-							<ul class="collapse {if $page.page eq 'course'}in{/if}">
-								<li class={if $page.function eq 'index'}"active-link"{/if}><a href="{$basedomain}course">Course Group</a></li>
+							<ul class="collapse {if $page.page eq 'course' || $page.page eq 'quiz'}in{/if}">
+								<li class={if $page.page eq 'course' && $page.function eq 'index'}"active-link"{/if}><a href="{$basedomain}course">Course Group</a></li>
 								<li class={if $page.function eq 'courselist' || $page.function eq 'addcourse'}"active-link"{/if}><a href="{$basedomain}course/courselist">Course</a></li>
-								<li class={if $page.function eq 'quiz'}"active-link"{/if}><a href="{$basedomain}article/addarticle">Create Quiz</a></li>
+								<li class={if $page.page eq 'quiz'}"active-link"{/if}><a href="{$basedomain}quiz">Create Quiz</a></li>
 								<li class={if $page.function eq 'upload' || $page.function eq 'uploadfile'}"active-link"{/if}><a href="{$basedomain}course/upload">Upload Ebook & Video</a></li>
 							</ul>
 						</li>

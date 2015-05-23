@@ -1,6 +1,19 @@
 <script>
 {literal}
 $(window).on('load', function() {
+	// SWITCHERY - CHECKING STATE
+	// =================================================================
+	// Require Switchery
+	// http://abpetkov.github.io/switchery/
+	// =================================================================
+	var changeCheckbox = document.getElementById('statususer'), changeField = document.getElementById('checkstate');
+	new Switchery(changeCheckbox)
+	changeField.innerHTML = "Active";
+	changeCheckbox.onchange = function() {
+		var state;
+		if(changeCheckbox.checked == true) state = "Active"; else state = "Not Active"; 
+		changeField.innerHTML = state;
+	};
 
 	// Datatables
 	// Row selection and deletion (multiple rows)
@@ -103,12 +116,24 @@ $(window).on('load', function() {
 								<td>{$val.email}</td>
 								<td>{$val.institusi}</td>
 								<td>{$val.register_date}</td>
+								<td class="text-center">
+									{*}<select>
+										<option value="0"><span style="color:red">Pending</span></option>
+									</select>{/*}
+									<input id="statususer" type="checkbox" checked>
+									<span id="checkstate" class="label label-info"></span>
+								</td>
+								{*}
 								{if $val.n_status == 0}
-									<td style="color:red">Unpublish</td>
-								{else}
-									<td style="color:green">Publish</td>
-								{/if}
 
+									<td style="color:red">Pending</td>
+								{else if $val.n_status == 2}
+									<td style="color:black">Deleted</td>
+
+								{else}
+									<td style="color:green">Active</td>
+								{/if}
+								{/*}
 							</tr>
 						{/foreach}
 					{/if}

@@ -67,7 +67,7 @@ $(window).on('load', function() {
 			<h3 class="panel-title">Table of News List</h3>
 		</div>
 		<div id="create-toolbar" class="table-toolbar-left">
-			<a class="btn btn-info btn-labeled fa fa-pencil-square-o" href="{$basedomain}gallery/addgallery/?id_album={$data[0]}">Add Photo</a>
+			<a class="btn btn-info btn-labeled fa fa-pencil-square-o" href="{$basedomain}gallery/addgallery/?id_album={$data.id}">Add Photo</a>
 		</div>
 		<div id="separator-toolbar" class="table-toolbar-left">&nbsp;</div>
 		<div class="panel-body">
@@ -75,16 +75,22 @@ $(window).on('load', function() {
 				<thead>
 					<tr>
 						<th>Name</th>
+						<th>Jenis File</th>
 						<th class="min-tablet">Photo</th>
-						<th class="min-tablet">Action</th>
+						<th class="min-tablet">Deskripsi</th>
 					</tr>
 				</thead>
 				<tbody>
-				{foreach $data[1] as $val}
+				{foreach $data.data as $val}
 			<tr>
 			<td>{$val.nm_gallery}</td>
-			<td><img src="../../../public_assets/{$val.path_lokasi}"></td>
-			<td><a id ="demo-dt-delete-btn" class="btn btn-success btn-labeled fa fa-pencil-square-o" href="{$basedomain}gallery/getgallery/?id_album={$val.id_album}">Add Photo</a></td>
+			<td>{$val.jns_file}</td>
+			<td>{if $val.jns_file==Foto} <img src="../../../public_assets/{$val.path_lokasi}" width="500" height="300"> {elseif $val.jns_file==Video}   <video width="600" height="400" controls>
+<source src="../../../public_assets/{$val.path_lokasi}" type="video/flv">
+</video>
+{/if}</td>
+			
+			<td>{$val.deskripsi}</td>
 			</tr>
 			{/foreach}
 				</tbody>

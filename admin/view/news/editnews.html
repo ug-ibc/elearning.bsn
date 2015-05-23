@@ -60,7 +60,7 @@ $(document).ready(function() {
 	
 				<!--Horizontal Form-->
 				<!--===================================================-->
-				<form class="form-horizontal" action="" method="post">
+				<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
 					<div class="panel-body">
 
 						<div class="form-group">
@@ -88,6 +88,14 @@ $(document).ready(function() {
 						</div>
 
 						<div class="form-group">
+							<label class="col-sm-2 control-label">Foto</label>
+							<div class="col-sm-7">
+								<img src="../../../public_assets/{$data.gambar}" width="500" height="300">
+								<br><br><input type="file" name="gambar">
+							</div>
+						</div>
+
+						<div class="form-group">
 							<label class="col-sm-2 control-label">Brief</label>
 							<div class="col-sm-9">
 								<textarea name="brief" id="brief">{$data.brief}</textarea>
@@ -101,22 +109,15 @@ $(document).ready(function() {
 							</div>
 						</div>
 
+					
+
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Status</label>
 							<div class="col-sm-9">
-								<select class="selectpicker" name="status">
-									<option value="{if $data.status==0} Draft 
-									{elseif $data.status==1} Published 
-									{elseif $data.status==2} Unpublished
-									{/if}">
-									{if $data.status==0}Draft 
-									{elseif $data.status==1} Published 
-									{elseif $data.status==2} Unpublished
-									{/if}</option>
-									<option value="0">Draft</option>
-									<option value="1">Publish</option>
-									<option value="2">Unpublish</option>
-								</select>
+								<input type="radio" name="status" value="0" id="status1" {if ($data.status==0)} checked=""{/if}> Unpublish &nbsp &nbsp &nbsp
+
+								<input type="radio" name="status" value="1" id="status1" {if ($data.status==1)} checked=""{/if}> Publish
+
 							</div>
 						</div>
 

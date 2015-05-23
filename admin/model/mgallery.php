@@ -33,12 +33,13 @@ class mgallery extends Database{
 	}
 
 //Fungsi untuk menginput data album ke database
-	function inputgallery($judul,$deskripsi,$namafile,$id_album)
+	function inputgallery($judul,$deskripsi,$namafile,$id_album,$jns_file)
 	{
 
-		$query = "INSERT INTO gallery(id_album,nm_gallery,path_lokasi,deskripsi)
-					VALUES('".$id_album."','".$judul."','".$namafile."','".$deskripsi."')";
+		$query = "INSERT INTO gallery(id_album,nm_gallery,jns_file,path_lokasi,deskripsi)
+					VALUES('".$id_album."','".$judul."','".$jns_file."','".$namafile."','".$deskripsi."')";
 		//eksekusi query
+		logFile($query);
 		$exec = $this->query($query,0);	
 		//kondisi apabila eksekusi berhasil mengembalikan notif 1, jika gagal mencetak query gagal 
 		if($exec) return 1; else pr('query gagal');

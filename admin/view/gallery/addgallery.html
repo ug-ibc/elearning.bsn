@@ -22,7 +22,7 @@ $(document).ready(function() {
   		</style>	
 
 <div id="page-title">
-	<h1 class="page-header text-overflow">Create News</h1>
+	<h1 class="page-header text-overflow">Create Gallery</h1>
 
 	<!--Searchbox-->
 	<div class="searchbox">
@@ -41,7 +41,7 @@ $(document).ready(function() {
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <ol class="breadcrumb">
 	<li><a href="{$basedomain}">Home</a></li>
-	<li class="active">Add News</li>
+	<li class="active">Add Gallery</li>
 </ol>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--End breadcrumb-->
@@ -71,7 +71,19 @@ $(document).ready(function() {
 						</div>
 
 						<div class="form-group">
-							<label class="col-sm-2 control-label">Foto</label>
+							<label class="col-sm-2 control-label">Jenis File</label>
+							<div class="col-sm-7">
+								<label>
+		                			<input type="radio" name="jns_file" id="foto" value="Foto"> Foto
+		                       	</label>&nbsp &nbsp
+		                       	<label>
+		                          	<input type="radio" name="jns_file" id="video" value="Video"> Video
+		                     	</label> 
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Foto / Video</label>
 							<div class="col-sm-7">
 								<input type="file" name="gambar">
 							</div>

@@ -52,7 +52,10 @@ public function getgallery(){
 	$id_album=$_GET['id_album'];
 	$data=$this->models->getgallery($id_album);
 	if ($data){	
-		$vardata=array("$id_album","$data");
+		// $vardata=array("$id_album","$data");
+		$vardata['id'] = $id_album;
+		$vardata['data'] = $data;
+		// pr($vardata);exit;
 		$this->view->assign('data',$vardata);
 	}
 	return $this->loadView('gallery/listgallery');
@@ -70,17 +73,41 @@ public function addgallery(){
 //Fungsi untuk melempar data dari form tambah galeri foto ke model
 public function inputgallery(){
 	global $CONFIG;
-	$id_album=$_GET['id_album'];
-	$judul = $_POST['judul'];
-	$deskripsi = $_POST['deskripsi'];
-	$upload = uploadFile('gambar',false,'image');
-	//pr($judul);exit;
-	$namafile=$upload['full_name'];
-	$data=$this->models->inputgallery($judul,$deskripsi,$namafile,$id_album);
-	if($data == 1){
-		//pr('Sukses masuk');
-		echo "<script>alert('Data berhasil di simpan');window.location.href='".$CONFIG['admin']['base_url']."gallery/getgallery/?id_album=".$id_album."'</script>";
-	}	
+	$jns_file=$_POST['jns_file'];
+
+	// pr($_POST);exit;
+	if ($jns_file == "Foto") {
+		$id_album=$_GET['id_album'];
+		$judul = $_POST['judul'];
+		$deskripsi = $_POST['deskripsi'];
+		$upload = uploadFile('gambar',false,'image');
+		// pr($judul);exit;
+		$namafile=$upload['full_name'];
+		$data=$this->models->inputgallery($judul,$deskripsi,$namafile,$id_album,$jns_file);
+		// exit;
+		if($data == 1){
+			//pr('Sukses masuk');
+			echo "<script>alert('Data berhasil di simpan');window.location.href='".$CONFIG['admin']['base_url']."gallery/getgallery/?id_album=".$id_album."'</script>";
+			exit;
+		}	
+	}
+	elseif ($jns_file == "Video") {
+		$id_album=$_GET['id_album'];
+		$judul = $_POST['judul'];
+		$deskripsi = $_POST['deskripsi'];
+		$upload = uploadFile('gambar',false,'video');
+		pr($upload);
+		// pr($_FILES);exit;
+		$namafile=$upload['full_name'];
+		$data=$this->models->inputgallery($judul,$deskripsi,$namafile,$id_album,$jns_file);
+		//exit;
+		if($data == 1){
+			//pr('Sukses masuk');
+			echo "<script>alert('Data berhasil di simpan');window.location.href='".$CONFIG['admin']['base_url']."gallery/getgallery/?id_album=".$id_album."'</script>";
+			exit;
+		}	
+	}
 }
+
 }
 ?>

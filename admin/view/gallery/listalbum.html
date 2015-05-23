@@ -83,7 +83,7 @@ $(window).on('load', function() {
 				{foreach $data as $val}
 			<tr>
 			<td>{$val.nm_album}</td>
-			<td><img src="../public_assets/{$val.cover_album}"></td>
+			<td><img src="../public_assets/{$val.cover_album}" width="500" height="300"></td>
 			<td><a id ="demo-dt-delete-btn" class="btn btn-success btn-labeled fa fa-pencil-square-o" href="{$basedomain}gallery/getgallery/?id_album={$val.id_album}">View Photo</a></td>
 			</tr>
 			{/foreach}

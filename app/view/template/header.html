@@ -27,11 +27,30 @@
         <h4 class="modal-title" id="myModalLabel">FORM LOGIN</h4>
       </div>
       <div class="modal-body">
-       
+       <form method="POST" action="prosesdaftar.php" class="form-horizontal" onsubmit="return checkBefore()" >
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
+                <div class="col-sm-6">
+                    <div class="input-group">
+                      <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
+                    <input type="text" class="form-control" placeholder="Username..."/>
+                </div>
+                </div>
+              </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-6">
+                    <div class="input-group">
+                      <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
+                    <input type="password" class="form-control" placeholder="Password..."/>
+                </div>
+                </div>
+              </div>
+        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <a href="{$basedomain}register" class="btn btn-default" >Sign Up</a>
+        <button type="button" class="btn btn-primary">Sign In</button>
       </div>
     </div>
   </div>

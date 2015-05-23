@@ -26,7 +26,7 @@ class news extends Controller {
 	public function index(){
 		
 
-		return $this->loadView('news/newslist');
+		return $this->loadView('news/listnews');
 
 	}
 

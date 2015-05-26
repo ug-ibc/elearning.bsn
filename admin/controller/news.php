@@ -8,6 +8,8 @@ var $models = FALSE;
 		parent::__construct();
 		$this->loadmodule();
 		$this->view=$this->setSmarty();
+		$sessionAdmin=New Session();
+		$this->admin=$sessionAdmin->get_session();
 	}
 
 	public function loadmodule()
@@ -18,6 +20,7 @@ var $models = FALSE;
 	//listnews
 	public function index(){
 		//memanggil fungsi getnews pada model
+		//pr($this->admin[idUser]);
 		$data=$this->models->getnews();
 		if ($data){	
 			$this->view->assign('data',$data);
@@ -39,9 +42,10 @@ var $models = FALSE;
 			$namafile=$upload['full_name'];
 			$status = $_POST['status'];
 			//pr($status);exit;
-			//$author = $_POST['author'];
+			$author = $this->admin['idUser'];
+			//pr($author);exit;
 			$isi = $_POST['isi'];
-			$data=$this->models->inputnews($judul,$brief,$namafile,$isi,$publish,$status);
+			$data=$this->models->inputnews($judul,$brief,$namafile,$isi,$author,$publish,$status);
 			//kondisi untuk memberi peringatan proses input berhasil atau tidak
 			if($data == 1){
 				echo "<script>alert('Data berhasil di simpan');window.location.href='".$CONFIG['admin']['base_url']."news'</script>";

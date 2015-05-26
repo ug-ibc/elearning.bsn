@@ -39,7 +39,7 @@
 						<li class="list-header">Home</li>
 
 						<li class="active-link">
-							<a href="{$basedomain}">
+							<a href="{$basedomain/home}">
 								<i class="fa fa-dashboard"></i>
 								<span class="menu-title">
 									Dashboard
@@ -80,7 +80,7 @@
 			
 						<!--Menu list item-->
 						<li>
-							<a href="{$basedomain}course">
+							<a href="index.html">
 								<i class="fa fa-briefcase"></i>
 								<span class="menu-title">
 									Course Group
@@ -96,9 +96,10 @@
 			
 							<!--Submenu-->
 							<ul class="collapse">
-								<li><a href="{$basedomain}course/courselist">Course</a></li>
+								<li><a href="{$basedomain}article/addarticle">Course</a></li>
 								<li><a href="{$basedomain}article/addarticle">Create Quiz</a></li>
-								<li><a href="{$basedomain}course/upload">Upload Ebook & Video</a></li>
+								<li><a href="{$basedomain}home">Upload Ebook</a></li>
+								<li><a href="{$basedomain}home">Upload Video</a></li>
 							</ul>
 						</li>
 
@@ -117,8 +118,8 @@
 			
 							<!--Submenu-->
 							<ul class="collapse">
-								{*}<li><a href="{$basedomain}user/adduser">New User</a></li>{/*}
-								<li><a href="{$basedomain}user">User list</a></li>
+								<li><a href="{$basedomain}article/addarticle">New User</a></li>
+								<li><a href="{$basedomain}article/addarticle">User list</a></li>
 							</ul>
 						</li>
 					</ul>

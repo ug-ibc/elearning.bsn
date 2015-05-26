@@ -13,7 +13,7 @@
 					'<form class="form-horizontal"> ' + '<div class="form-group"> ' +
 					'<label class="col-md-4 control-label" for="name">Group Name</label> ' +
 					'<div class="col-md-4"> ' +
-					'<input id="name" name="name" type="text" placeholder="Enter Group Name" class="form-control input-md"> ' +
+					'<input id="namagrup" name="name" type="text" placeholder="Enter Group Name" class="form-control input-md" required="required"> ' +
 					'</div> ' +
 					'</div> ' + '<div class="form-group"> ' +
 					'<label class="col-md-4 control-label" for="syaratkelulusan">Requirements</label> ' +
@@ -24,16 +24,31 @@
 					label: "Save",
 					className: "btn-info",
 					callback: function() {
-						var name = $('#name').val();
-						var answer = $("#syaratkelulusan").val();
-
+						var namagrup = $('#namagrup').val();
+						var syaratkelulusan = $("#syaratkelulusan").val();
+						//get values
+						// alert(namagrup);
+						// alert(answer);
+						if(namagrup != '' || syaratkelulusan != ''){
+						$.post( basedomain+"course/ajax_insert", { namagrup: namagrup, syaratkelulusan: syaratkelulusan } );
+						
 						$.niftyNoty({
 							type: 'success',
 							icon : 'fa fa-check',
-							message : "Group " + name + ".<br> Successfully created",
+							message : "Group " + namagrup + ".<br> Successfully created",
 							container : 'floating',
 							timer : 4000
 						});
+						setTimeout(
+						  function() 
+						  {
+							location.reload();
+						  }, 5000);
+						
+					}else{
+					
+						alert( "isi Data" );
+					}
 					}
 				}
 			}

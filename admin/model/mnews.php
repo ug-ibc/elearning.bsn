@@ -2,11 +2,12 @@
 class mnews extends Database{
 
 	//fungsi untuk eksekusi penyimpanan data news ke database
-	function inputnews($judul,$brief,$namafile,$isi,$publish,$status)
+	function inputnews($judul,$brief,$namafile,$isi,$author,$publish,$status)
 	{
 		//query insert data
-		$query = "INSERT INTO news (judul,brief,gambar,isi,status,posted)
-					VALUES('".$judul."','".$brief."','".$namafile."','".$isi."','".$status."','".$publish."')";
+		$query = "INSERT INTO news (judul,brief,gambar,author,isi,status,posted)
+					VALUES('".$judul."','".$brief."','".$namafile."','".$author."','".$isi."','".$status."','".$publish."')";
+		//pr($author); exit;
 		//eksekusi query
 		$exec = $this->query($query,0);	
 		//kondisi apabila eksekusi berhasil mengembalikan notif 1, jika gagal mencetak query gagal 
@@ -17,7 +18,10 @@ class mnews extends Database{
 	function getnews()
 	{
 		//query memanggil data
-		$query = "SELECT * FROM news WHERE status in ('0','1') ";
+
+		$query = "SELECT news.id_news, news.judul, news.author, news.posted, news.gambar, news.brief, news.status, user.username from news, user where news.author = user.idUser && news.status in ('0','1')";
+		//pr($query);
+		//$query = "SELECT * FROM news WHERE status in ('0','1') ";
 		//pr($query);
 		//memanggil semua data. Jika hanya memanggil 1 data ->fetch($query,0,0)
 		$result = $this->fetch($query,1,0);

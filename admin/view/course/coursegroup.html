@@ -19,14 +19,25 @@ $(window).on('load', function() {
 	$('#separator-toolbar').appendTo($("div.toolbar"));
 	$('#delete-toolbar').appendTo($("div.toolbar"));
 
-	$('#newslist tbody').on( 'click', 'tr', function () {
-		$(this).toggleClass('selected');
-	} );
-
-	$('#demo-dt-delete-btn').click( function () {
-		rowDeletion.row('.selected').remove().draw( false );
-	} );
+	/*$('#newslist tbody').on( 'click', 'tr', function () {
+		//$(this).toggleClass('selected');
+		var id = $(this).toggleClass('selected');
+		//var ids = rowDeletion.rows('.selected').data().length +' row(s) selected'
+		var ids = rowDeletion.row( 0 ).data();
+		console.log(ids);
+		var id = rowDeletion.cell('.selected', 0).data();
+		alert(id);
+		
+    } );*/
 })	
+	function selectAll(source) {
+			checkboxes = document.getElementsByName('check[]');
+			for(var i in checkboxes){
+				checkboxes[i].checked = source.checked;
+			}
+			return true;
+	}
+	
 </script>
 
 <!--Page Title-->
@@ -77,6 +88,7 @@ $(window).on('load', function() {
 			<table id="newslist" class="table table-striped table-bordered" cellspacing="0" width="100%">
 				<thead>
 					<tr>
+						<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class ="pilihan" id="id_tahun" onClick="return selectAll(this)"/></th>
 						<th>No</th>
 						<th>Group Name</th>
 						<th>Requirement</th>
@@ -89,19 +101,23 @@ $(window).on('load', function() {
 					{$no = 1}
 					{foreach $data as $value}
 					<tr>
-						<td align="center">{$no}</td>
+						<td align="center"><input value="{$value.idGrup_kursus}" type="checkbox" name="check[]" id="check[]"></td>
+						<td align="center" >{$no}</td>
 						<td>{$value.namagrup}</td>
 						<td>{$value.syaratkelulusan}</td>
 						<td>{$value.create_time}</td>
-						<td style="color:green">
-							{if $value.n_status == '1'}
-								{$var = 'Active'}
-								{$var}
-							{else}
-								{$var = 'Non Active'}	
-								{$var}
-							{/if}</td>
-						<td style="color:green">Active</td>
+						{if $value.n_status == '1'}
+							{$var = 'Active'}
+							{$style= 'color:green'}
+						{else}
+							{$var = 'Non Active'}
+							{$style= 'color:red'}
+						{/if}
+						<td style="{$style};" align="center">{$var}</td>
+						<td align="center">
+							<button id="" class="demo-bootbox-custom-h-form-edit btn btn-warning btn-labeled fa fa-pencil" value="{$value.idGrup_kursus}" href="#" >Edit</button>
+							<button id="" class="demo-state-btn btn btn-success btn-labeled fa fa-edit" value="{$value.idGrup_kursus|cat:'_'|cat:$value.n_status}" href="#" >Status</button>
+						</td>
 					</tr>
 					<!--{$no++}-->
 					{/foreach}

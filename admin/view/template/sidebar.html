@@ -31,7 +31,6 @@
 
 		<!--Menu-->
 		<!--================================-->
-		<!-- {pr($page)} -->
 		<div id="mainnav-menu-wrap">
 			<div class="nano">
 				<div class="nano-content">
@@ -39,8 +38,8 @@
 						
 						<li class="list-header">Home</li>
 
-						<li class={if $page.page eq 'home'}"active-link"{/if}>
-							<a href="{$basedomain}">
+						<li class="active-link">
+							<a href="{$basedomain/home}">
 								<i class="fa fa-dashboard"></i>
 								<span class="menu-title">
 									Dashboard
@@ -52,7 +51,7 @@
 						<li class="list-header">About BSN</li>
 			
 						<!--Menu list item-->
-						<li class={if $page.page eq 'news'}"active-sub"{/if}>
+						<li>
 							<a href="#">
 								<i class="fa fa-newspaper-o"></i>
 								<span class="menu-title">News</span>
@@ -60,13 +59,13 @@
 							</a>
 			
 							<!--Submenu-->
-							<ul class="collapse {if $page.page eq 'news'}in{/if}">
-								<li class={if $page.function eq 'addnews'}"active-link"{/if}><a href="{$basedomain}news/addnews">Add News</a></li>
-								<li class={if $page.page eq 'news' && $page.function eq 'index'}"active-link"{/if}><a href="{$basedomain}news">News List</a></li>
+							<ul class="collapse">
+								<li><a href="{$basedomain}news/addnews">Add News</a></li>
+								<li><a href="{$basedomain}news">News List</a></li>
 							</ul>
 						</li>
-						<li class={if $page.page eq 'gallery'}"active-link"{/if}>
-							<a href="index.html">
+						<li>
+							<a href="{$basedomain}gallery">
 								<i class="fa fa-picture-o"></i>
 								<span class="menu-title">
 									Gallery
@@ -80,15 +79,15 @@
 						<li class="list-header">Course</li>
 			
 						<!--Menu list item-->
-						<!-- <li class={if $page.page eq 'course' && $page.function eq 'index'}"active-link"{/if}>
-							<a href="{$basedomain}course">
+						<li>
+							<a href="index.html">
 								<i class="fa fa-briefcase"></i>
 								<span class="menu-title">
 									Course Group
 								</span>
 							</a>
-						</li> -->
-						<li class={if $page.page eq 'course'}"active-sub"{/if}>
+						</li>
+						<li>
 							<a href="#">
 								<i class="fa fa-pencil-square-o"></i>
 								<span class="menu-title">Manage Course</span>
@@ -96,11 +95,11 @@
 							</a>
 			
 							<!--Submenu-->
-							<ul class="collapse {if $page.page eq 'course'}in{/if}">
-								<li class={if $page.function eq 'index'}"active-link"{/if}><a href="{$basedomain}course">Course Group</a></li>
-								<li class={if $page.function eq 'courselist' || $page.function eq 'addcourse'}"active-link"{/if}><a href="{$basedomain}course/courselist">Course</a></li>
-								<li class={if $page.function eq 'quiz'}"active-link"{/if}><a href="{$basedomain}article/addarticle">Create Quiz</a></li>
-								<li class={if $page.function eq 'upload' || $page.function eq 'uploadfile'}"active-link"{/if}><a href="{$basedomain}course/upload">Upload Ebook & Video</a></li>
+							<ul class="collapse">
+								<li><a href="{$basedomain}article/addarticle">Course</a></li>
+								<li><a href="{$basedomain}article/addarticle">Create Quiz</a></li>
+								<li><a href="{$basedomain}home">Upload Ebook</a></li>
+								<li><a href="{$basedomain}home">Upload Video</a></li>
 							</ul>
 						</li>
 
@@ -118,9 +117,9 @@
 							</a>
 			
 							<!--Submenu-->
-							<ul class="collapse {if $page.page eq 'user'}in{/if}">
-								{*}<li><a href="{$basedomain}user/adduser">New User</a></li>{/*}
-								<li class={if $page.page eq 'user' && $page.function eq 'index'}"active-link"{/if}><a href="{$basedomain}user">User list</a></li>
+							<ul class="collapse">
+								<li><a href="{$basedomain}article/addarticle">New User</a></li>
+								<li><a href="{$basedomain}article/addarticle">User list</a></li>
 							</ul>
 						</li>
 					</ul>

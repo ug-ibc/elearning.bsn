@@ -67,7 +67,7 @@ $(window).on('load', function() {
 			<h3 class="panel-title">Table of News List</h3>
 		</div>
 		<div id="create-toolbar" class="table-toolbar-left">
-			<a class="btn btn-info btn-labeled fa fa-pencil-square-o" href="{$basedomain}news/addnews">Create</a>
+			<a class="btn btn-info btn-labeled fa fa-plus" href="{$basedomain}news/addnews">Create</a>
 		</div>
 		<div id="separator-toolbar" class="table-toolbar-left">&nbsp;</div>
 		<div class="panel-body">
@@ -75,9 +75,9 @@ $(window).on('load', function() {
 				<thead>
 					<tr>
 						<th>Title</th>
-						<th>Brief</th>
 						<th class="min-tablet">Author</th>
 						<th class="min-desktop">Posted Date</th>
+						<th>Brief</th>
 						<th class="min-desktop">Status</th>
 						<th class="min-tablet">Action</th>
 					</tr>
@@ -86,10 +86,10 @@ $(window).on('load', function() {
 				{foreach $data as $val}
 			<tr>
 			<td>{$val.judul}</td>
-			<td>{$val.brief}</td>
-			<td>{$val.author}</td>
+			<td>{$val.username}</td>
 			<td>{$val.posted}</td>
-			<td>{if $val.status==0} <font style="color:green">Draft</font> {elseif $val.status==1} <font style="color:blue"> Published </font> {elseif $val.status==2} <font style="color:red">Unpublished</font>{/if}</td>
+			<td>{$val.brief}</td>
+			<td>{if $val.status==0} <font style="color:red">Unpublish </font> {elseif $val.status==1} <font style="color:blue"> Publish </font>{/if}</td>
 			<td>
 			<table> 
 			<tr>

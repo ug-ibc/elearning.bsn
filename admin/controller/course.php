@@ -174,7 +174,11 @@ class course extends Controller {
 		return $this->loadView('course/uploadform');	
 	}
 	
-	
+	public function viewmaterial()
+	{
+
+		return $this->loadView('course/material');
+	}
 	
 }
 

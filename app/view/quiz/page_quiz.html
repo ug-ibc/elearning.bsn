@@ -1,6 +1,27 @@
 
 <style>
+
+.ul-btn li input[type="radio"] {
+    display:none; 
+}
+
+.ul-btn li input[type="radio"]:checked + label { 
+    background-color:#6EC24B;
+	color:#FFFFFF;
+	text-decoration: none;
+}
+
+/*.ul-btn label { 
+	display:inline-block;
+    background-color:#C2C2C2;
+	padding:8px;
+	border-radius:7px;
+	color:#000000;
+	text-decoration: none;
+}*/
+
 .btn-quiz{
+	display:inline-block;
 	background-color:#C2C2C2;
 	padding:8px;
 	border-radius:7px;
@@ -8,14 +29,14 @@
 	text-decoration: none;
 
 }
-.btn-quiz:hover{
+.btn-quiz.active{
 	background-color:#6EC24B;
 	color:#FFFFFF;
 	text-decoration: none;
 
 }
 .ul-btn li{
-
+	list-style-position: outside;
 	padding:11px;
 	list-style: none;
 }
@@ -121,10 +142,27 @@ legend {
 <section class="callaction">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-9">
-				<img src="{$basedomain}assets/img/data/slidequiz.JPG"/>
+			<div class="col-md-8" style="background-color:#AF0096">
+				<div class="row">
+					<div class="col-md-1" style="padding-top:20px">
+						<div style="color:#FFFFFF;background-color:#73496E;padding:10px">
+							<i class="fa fa-file-text fa-3"></i>
+						</div>
+					</div>
+					<div class="col-md-10"  style="color:#FFFFFF">
+						<h1  style="color:#FFFFFF">E-LEARNING STANDARISASI DAN PENILAIAN KESESUAIAN</h1>
+						Petunjuk Kursus : 
+						<ol type="1">
+							<li>Lorem ipsum dolor sit amet, consectetu</li>
+							<li>Lorem ipsum dolor sit amet, consectetu</li>
+							<li>Lorem ipsum dolor sit amet, consectetu</li>
+							<li>Lorem ipsum dolor sit amet, consectetu</li>
+							<li>Lorem ipsum dolor sit amet, consectetu</li>
+						</ol>
+					</div>
+				</div>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-4">
 				<img src="{$basedomain}assets/img/data/waktukuis.JPG"/>
 			</div>
 
@@ -135,36 +173,45 @@ legend {
 	<div class="container">
 		<div class="row">
 			<div class="col-md-9">
+
+				{if $soal}
+				{foreach $soal as $val}
 				<div class="row">
 					<div class="col-md-1"><br/>
-						<span style="background-color:#26CCC6;padding:15px;100px;color:#FFFFFF;font-size:17px;font-weight:bold;">1</span>
+						<span style="background-color:#26CCC6;padding:15px;100px;color:#FFFFFF;font-size:17px;font-weight:bold;">{$val.no}</span>
 					</div>
 
 					<div class="col-md-11" style="padding-top:10px;font-size:18px">
-						<p >Lorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer lacinia</p>
-						<ul class="ul-btn">
+						<p >{$val.soal}</p>
+						<ul class="ul-btn soal_{$val.idSoal}">
+							{foreach $val.acakpilihan as $key => $value}
 							<li>
-								<a href="#" class="btn-quiz">Lorem ipsum dolor sit amet, consectetur it done</a>
+								<input type="radio" name="pilihan_{$val.idSoal}" id="radio_{$val.idSoal}_{$key}" {if $val.jawabanuser==$key}checked{/if}><label for="radio_{$val.idSoal}_{$key}" class="btn-quiz hvr-shutter-out-vertical chooseAnswer " data-pilihan="{$key}" data-soal="{$val.idSoal}" data-kursus="{$val.idKursus}" data-materi="{$val.idMateri}">{$value}</label>
+							</li>
+							{/foreach}
+							{*}
+							<li>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
 							</li>
 							<li>
-								<a href="#" class="btn-quiz">Lorem ipsum dolor sit amet, consectetur it done</a>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
 							</li>
 							<li>
-								<a href="#" class="btn-quiz">Lorem ipsum dolor sit amet, consectetur it done</a>
-							</li>
-							<li>
-								<a href="#" class="btn-quiz">Lorem ipsum dolor sit amet, consectetur it done</a>
-							</li>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
+							</li>{/*}
 						</ul>
 					</div>
 
 				</div>
-
+				
 				<div class="row">
 					<div class="col-md-12">	
 					<hr style="margin-top:-15px;border-bottom:1px solid #444444"/>
 					</div>
 				</div>
+				{/foreach}
+				{/if}
+				{*}
 				<div class="row">
 					<div class="col-md-1"><br/>
 						<span style="background-color:#26CCC6;padding:15px;100px;color:#FFFFFF;font-size:17px;font-weight:bold">2</span>
@@ -174,16 +221,16 @@ legend {
 						<p >Lorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer lacinia</p>
 						<ul class="ul-btn">
 							<li>
-								<a href="#" class="btn-quiz">Lorem ipsum dolor sit amet, consectetur it done</a>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
 							</li>
 							<li>
-								<a href="#" class="btn-quiz">Lorem ipsum dolor sit amet, consectetur it done</a>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
 							</li>
 							<li>
-								<a href="#" class="btn-quiz">Lorem ipsum dolor sit amet, consectetur it done</a>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
 							</li>
 							<li>
-								<a href="#" class="btn-quiz">Lorem ipsum dolor sit amet, consectetur it done</a>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
 							</li>
 						</ul>
 					</div>
@@ -204,16 +251,16 @@ legend {
 						<p >Lorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer lacinia</p>
 						<ul class="ul-btn">
 							<li>
-								<a href="#" class="btn-quiz">Lorem ipsum dolor sit amet, consectetur it done</a>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
 							</li>
 							<li>
-								<a href="#" class="btn-quiz">Lorem ipsum dolor sit amet, consectetur it done</a>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
 							</li>
 							<li>
-								<a href="#" class="btn-quiz">Lorem ipsum dolor sit amet, consectetur it done</a>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
 							</li>
 							<li>
-								<a href="#" class="btn-quiz">Lorem ipsum dolor sit amet, consectetur it done</a>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
 							</li>
 						</ul>
 					</div>
@@ -234,16 +281,16 @@ legend {
 						<p >Lorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer lacinia</p>
 						<ul class="ul-btn">
 							<li>
-								<a href="#" class="btn-quiz">Lorem ipsum dolor sit amet, consectetur it done</a>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
 							</li>
 							<li>
-								<a href="#" class="btn-quiz">Lorem ipsum dolor sit amet, consectetur it done</a>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
 							</li>
 							<li>
-								<a href="#" class="btn-quiz">Lorem ipsum dolor sit amet, consectetur it done</a>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
 							</li>
 							<li>
-								<a href="#" class="btn-quiz">Lorem ipsum dolor sit amet, consectetur it done</a>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
 							</li>
 						</ul>
 					</div>
@@ -264,16 +311,16 @@ legend {
 						<p >Lorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer lacinia</p>
 						<ul class="ul-btn">
 							<li>
-								<a href="#" class="btn-quiz">Lorem ipsum dolor sit amet, consectetur it done</a>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
 							</li>
 							<li>
-								<a href="#" class="btn-quiz">Lorem ipsum dolor sit amet, consectetur it done</a>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
 							</li>
 							<li>
-								<a href="#" class="btn-quiz">Lorem ipsum dolor sit amet, consectetur it done</a>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
 							</li>
 							<li>
-								<a href="#" class="btn-quiz">Lorem ipsum dolor sit amet, consectetur it done</a>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
 							</li>
 						</ul>
 					</div>
@@ -288,15 +335,15 @@ legend {
 
 				<div class="row">
 					<div class="col-md-6">
-						<a href="#" style="background-color:#C50010;color:#FFFFFF;padding:10px 20px;font-size:24px;text-decoration:none;border-radius:10px">SUBMIT</a>
+						<a href="#" class="hvr-float-shadow" style="background-color:#C50010;color:#FFFFFF;padding:10px 20px;font-size:24px;text-decoration:none;border-radius:10px">SUBMIT</a>
 					</div>
 
 					<div class="col-md-6" align="right">
-						<a href="#" style="background-color:#28CAC5;color:#FFFFFF;padding:10px 30px;font-size:24px;text-decoration:none;border-radius:10px">NEXT</a>
+						<a href="#" class="hvr-float-shadow" style="background-color:#28CAC5;color:#FFFFFF;padding:10px 30px;font-size:24px;text-decoration:none;border-radius:10px">NEXT</a>
 					</div>
 
 				</div>
-
+				{/*}
 			</div>
 
 

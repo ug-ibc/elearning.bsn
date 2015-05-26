@@ -1,17 +1,26 @@
 <script>
 $(document).ready(function() {
-	$('#deskripsi').summernote({
+	$('#brief').summernote({
 		height: 200
 	});
-	$('#deskripsi2').summernote({
+	$('#isi').summernote({
 		height: 200
 	});
 })	
-
-
 </script>
 <!--Page Title-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<style>
+	        .form-horizontal .control-label{
+	            text-align: left;
+	        }
+	        .col-sm-2 {
+	            text-align: left;
+	        }
+
+  		</style>	
+
 <div id="page-title">
 	<h1 class="page-header text-overflow">Create News</h1>
 
@@ -46,30 +55,25 @@ $(document).ready(function() {
 	<div class="col-sm-12">
 			<div class="panel">
 				<div class="panel-heading">
-					<h3 class="panel-title">Publish</h3>
+					<h3 class="panel-title">Create Album</h3>
 				</div>
 	
 				<!--Horizontal Form-->
 				<!--===================================================-->
-				<form class="form-horizontal">
+				<form class="form-horizontal" action="{$basedomain}gallery/inputalbum" method="post" enctype="multipart/form-data">
 					<div class="panel-body">
+
 						<div class="form-group">
-							<label class="col-sm-3 control-label">Status</label>
-							<div class="col-sm-9">
-								<select class="selectpicker">
-									<option value="0">Draft</option>
-									<option value="1">Publish</option>
-									<option value="2">Unpublish</option>
-								</select>
+							<label class="col-sm-2 control-label">Nama Album</label>
+							<div class="col-sm-7">
+								<input type="text" name="nm_album" class="form-control">
 							</div>
 						</div>
+						
 						<div class="form-group">
-							<label class="col-sm-3 control-label">Publish</label>
-							<div class="col-sm-9">
-								<div class="input-group date">
-									<input type="text" class="form-control">
-									<span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span>
-								</div>
+							<label class="col-sm-2 control-label">Cover Album</label>
+							<div class="col-sm-7">
+								<input type="file" name="cover_album">
 							</div>
 						</div>
 					</div>
@@ -88,4 +92,3 @@ $(document).ready(function() {
 </div>
 <!--===================================================-->
 <!--End page content-->
-

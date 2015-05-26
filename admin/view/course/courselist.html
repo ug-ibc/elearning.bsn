@@ -87,7 +87,7 @@ $(window).on('load', function() {
 						<th class="min-tablet">Schedule</th>
 						<th class="min-tablet">Quota</th>
 						<th class="min-tablet">Status</th>
-						<th class="min-tablet">Action</th>
+						<th class="min-tablet">Course Material</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -121,13 +121,25 @@ $(window).on('load', function() {
 							<button id="" class="demo-bootbox-custom-h-form-edit btn btn-warning btn-labeled fa fa-pencil" value="{$value.idKursus}" href="#" >Edit</button>
 							<button id="" class="demo-state-btn btn btn-success btn-labeled fa fa-edit" value="{$value.idKursus|cat:'_'|cat:$value.n_status}" href="#" >Status</button>
 						</td>
-						<!--<th>No</th>
+						<th>No</th>
 						<td>Title 1</td>
 						<td>Optional/Required/Hirarki</td>
 						<td>Grup 1</td>
 						<td>2011-04-25</td>
 						<td> N/A </td>
-						<td style="color:green">Active</td>-->
+						<td style="color:green">Active</td>
+						<td class="text-center">
+							<a href="{$basedomain}course/viewmaterial"><button class="btn btn-mint btn-rounded btn-labeled fa fa-book">View</button></a>
+						</td>
+					</tr>
+					<tr>
+						<td>Title 2</td>
+						<td>Optional/Required/Hirarki</td>
+						<td>Grup 2</td>
+						<td>2011-04-25</td>
+						<td>30</td>
+						<td style="color:red">Unactive</td>
+						<td class="text-center"><button class="btn btn-mint btn-rounded btn-labeled fa fa-book">View</button></td>
 					</tr>
 					<!--{$no++}-->
 					{/foreach}

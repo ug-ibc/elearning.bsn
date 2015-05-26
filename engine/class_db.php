@@ -377,7 +377,7 @@ class Database
 				} 
 				
 				
-
+				logFile($sql);
 				
 				if ($debug){
 					if ($debug>1){
@@ -404,6 +404,7 @@ class Database
 				$value = $data['value'];
 
 				$sql = "INSERT INTO {$table} ({$field}) VALUES ({$value})";
+				logFile($sql);
 				if ($debug){
 					if ($debug>1){
 						pr($sql);

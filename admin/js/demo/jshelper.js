@@ -206,12 +206,53 @@
 					});
 				};
 
+
 			});
 			
 		}
 	});
 	
 
+	$('#addmaterial').on('click', function(){
+		bootbox.dialog({
+			title: "Create Course Material",
+			message:'<div class="row"> ' + '<div class="col-md-12"> ' +
+					'<form class="form-horizontal"> ' + '<div class="form-group"> ' +
+					'<label class="col-md-4 control-label" for="order">Material Name</label> ' +
+					'<div class="col-md-4"> ' +
+					'<input id="namagrup" name="name" type="text" placeholder="Enter Material Name" class="form-control input-md" required="required"> ' +
+					'</div> ' +
+					'</div> ' + 
+					'<div class="form-group"> ' +
+					'<label class="col-md-4 control-label" for="order">Sort Order</label> ' +
+					'<div class="col-md-2"> ' +
+					'<input id="namagrup" name="name" type="text" class="form-control input-md" required="required"> ' +
+					'</div> ' +
+					'</div> ' + 
+					'<div class="form-group"> ' +
+					'<label class="col-md-4 control-label" for="syaratkelulusan">Description</label> ' +
+					'<div class="col-md-6"><textarea id="syaratkelulusan" placeholder="Material Description Here" rows="5" class="form-control"></textarea></div>' +
+					'</div> </div>' + '</form> </div> </div><script></script>',
+			buttons: {
+				success: {
+					label: "Save",
+					className: "btn-info",
+					callback: function() {
+						
+						$.niftyNoty({
+							type: 'success',
+							icon : 'fa fa-check',
+							message : "Group " + namagrup + ".<br> Successfully created",
+							container : 'floating',
+							timer : 4000
+						});
+					}
+				}
+			}
+		});
+
+		$(".demo-modal-radio").niftyCheck();
+	});
 	
  })
  

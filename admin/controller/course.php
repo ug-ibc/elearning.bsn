@@ -72,7 +72,11 @@ class course extends Controller {
 		// return $this->loadView('course/index');	
 	}
 	
-	
+	public function viewmaterial()
+	{
+
+		return $this->loadView('course/material');
+	}
 	
 }
 

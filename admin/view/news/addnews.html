@@ -58,7 +58,7 @@ $(document).ready(function() {
 	
 				<!--Horizontal Form-->
 				<!--===================================================-->
-				<form class="form-horizontal" action="{$basedomain}news/inputnews" method="post">
+				<form class="form-horizontal" action="{$basedomain}news/inputnews" method="post" enctype="multipart/form-data">
 					<div class="panel-body">
 
 						<div class="form-group">
@@ -69,19 +69,19 @@ $(document).ready(function() {
 						</div>
 
 						<div class="form-group">
-							<label class="col-sm-2 control-label">Author</label>
-							<div class="col-sm-7">
-								<input type="text" name="author" class="form-control">
-							</div>
-						</div>
-						
-						<div class="form-group">
 							<label class="col-sm-2 control-label">Publish</label>
 							<div class="col-sm-3">
 								<div class="input-group date">
 									<input type="text" class="form-control" name="publish">
 									<span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span>
 								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Foto</label>
+							<div class="col-sm-7">
+								<input type="file" name="gambar">
 							</div>
 						</div>
 
@@ -102,11 +102,8 @@ $(document).ready(function() {
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Status</label>
 							<div class="col-sm-9">
-								<select class="selectpicker" name="status">
-									<option value="0">Draft</option>
-									<option value="1">Publish</option>
-									<option value="2">Unpublish</option>
-								</select>
+								<input type="radio" name="status" id="status1" value="0"> Unpublish &nbsp &nbsp &nbsp
+								<input type="radio" name="status" id="status2" value="1"> Publish
 							</div>
 						</div>
 

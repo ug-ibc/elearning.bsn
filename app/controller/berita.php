@@ -14,16 +14,26 @@ class berita extends Controller {
 		$this->view->assign('basedomain',$basedomain);
     }
 	
-	function loadmodule()
+	public function loadmodule()
 	{
-        $this->contentHelper = $this->loadModel('contentHelper');
+		$this->models=$this->loadModel('mnews');
 	}
 	
-	function index(){
-		
-		return $this->loadView('berita/page_berita');
-    }
 
+	public function index(){
+
+	global $CONFIG;
+	$data=$this->models->getnews();
+	//pr($data);EXIT;
+	if ($data){
+			
+		$this->view->assign('data',$data);
+		
+
+	return $this->loadView('berita/page_berita');
+}
+
+}
 }
 
 ?>

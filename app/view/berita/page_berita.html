@@ -21,162 +21,41 @@
 		</div>
 		<div class="row">
 			<div class="col-md-9">
+				{foreach $data as $val}
+				<div class="row">
+					<div class="col-md-4">
+						
+						<img src="{$basedomain}public_assets/{$val.gambar}" width="250" height="200" />
+					</div>
+
+					<div class="col-md-8">
+						<div class="row">
+							<div class="col-md-2">
+								<div class="col-md-12" align="center"  style="border-radius:50%;background-color:#2E8AD8;min-height:50px;padding:10px;color:#FFFFFF;box-shadow: 2px 2px 5px #888888;">
+			     					{date ("d M", strtotime($val.posted))}
+			     				</div>
+		     				</div>
+		     				<div class="col-md-10">
+							<span style="font-size:25px">{$val.judul}</span><br/>
+							<i class="fa fa-user"></i>  {$val.username} <i class="fa fa-list"></i> Interviews
+			     				
+		     				</div>
+	     				</div>
+						<p align="justify">{$val.brief}</p>
+						<a href="{$basedomain}getnews/selectnews/?id_news={$val.id_news}">Read More</a>
+
+					</div>
+					
+				</div>
 				
-				<div class="row">
-					<div class="col-md-4">
-						
-						<img src="{$basedomain}assets/img/data/berita1.JPG"/>
-					</div>
-
-					<div class="col-md-8">
-						<div class="row">
-							<div class="col-md-2">
-								<div class="col-md-12" align="center"  style="border-radius:50%;background-color:#2E8AD8;min-height:50px;padding:10px;color:#FFFFFF;box-shadow: 2px 2px 5px #888888;">
-			     					21<br/>
-			     					JUN
-			     				</div>
-		     				</div>
-		     				<div class="col-md-10">
-							<span style="font-size:25px">E-LEARNING STANDARISASI</span><br/>
-							<i class="fa fa-user"></i>  Administrator <i class="fa fa-list"></i> Interviews
-			     				
-		     				</div>
-	     				</div>
-						<p align="justify">Lorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer laciniaLorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer laciniaLorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer lacinia</p>
-						<a href="#">Read More</a>
-
-					</div>
 					
-				</div>
+			
 				<div class="row">
 					<div class="col-md-12">	
 					<hr style="margin-top:-15px;border-bottom:2px solid #69BD45"/>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-4">
-						
-						<img src="{$basedomain}assets/img/data/berita2.JPG"/>
-					</div>
-
-					<div class="col-md-8">
-						<div class="row">
-							<div class="col-md-2">
-								<div class="col-md-12" align="center"  style="border-radius:50%;background-color:#2E8AD8;min-height:50px;padding:10px;color:#FFFFFF;box-shadow: 2px 2px 5px #888888;">
-			     					21<br/>
-			     					JUN
-			     				</div>
-		     				</div>
-		     				<div class="col-md-10">
-							<span style="font-size:25px">E-LEARNING STANDARISASI</span><br/>
-							<i class="fa fa-user"></i>  Administrator <i class="fa fa-list"></i> Interviews
-			     				
-		     				</div>
-	     				</div>
-						<p align="justify">Lorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer laciniaLorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer laciniaLorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer lacinia</p>
-						<a href="#">Read More</a>
-
-					</div>
-					
-				</div>
-				<div class="row">
-					<div class="col-md-12">	
-					<hr style="margin-top:-15px;border-bottom:2px solid #69BD45"/>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-4">
-						
-						<img src="{$basedomain}assets/img/data/berita3.JPG"/>
-					</div>
-
-					<div class="col-md-8">
-						<div class="row">
-							<div class="col-md-2">
-								<div class="col-md-12" align="center"  style="border-radius:50%;background-color:#2E8AD8;min-height:50px;padding:10px;color:#FFFFFF;box-shadow: 2px 2px 5px #888888;">
-			     					21<br/>
-			     					JUN
-			     				</div>
-		     				</div>
-		     				<div class="col-md-10">
-							<span style="font-size:25px">E-LEARNING STANDARISASI</span><br/>
-							<i class="fa fa-user"></i>  Administrator <i class="fa fa-list"></i> Interviews
-			     				
-		     				</div>
-	     				</div>
-						<p align="justify">Lorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer laciniaLorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer laciniaLorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer lacinia</p>
-						<a href="#">Read More</a>
-
-					</div>
-					
-				</div>
-				<div class="row">
-					<div class="col-md-12">	
-					<hr style="margin-top:-15px;border-bottom:2px solid #69BD45"/>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-4">
-						
-						<img src="{$basedomain}assets/img/data/berita2.JPG"/>
-					</div>
-
-					<div class="col-md-8">
-						<div class="row">
-							<div class="col-md-2">
-								<div class="col-md-12" align="center"  style="border-radius:50%;background-color:#2E8AD8;min-height:50px;padding:10px;color:#FFFFFF;box-shadow: 2px 2px 5px #888888;">
-			     					21<br/>
-			     					JUN
-			     				</div>
-		     				</div>
-		     				<div class="col-md-10">
-							<span style="font-size:25px">E-LEARNING STANDARISASI</span><br/>
-							<i class="fa fa-user"></i>  Administrator <i class="fa fa-list"></i> Interviews
-			     				
-		     				</div>
-	     				</div>
-						<p align="justify">Lorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer laciniaLorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer laciniaLorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer lacinia</p>
-						<a href="#">Read More</a>
-
-					</div>
-					
-				</div>
-				<div class="row">
-					<div class="col-md-12">	
-					<hr style="margin-top:-15px;border-bottom:2px solid #69BD45"/>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-4">
-						
-						<img src="{$basedomain}assets/img/data/berita1.JPG"/>
-					</div>
-
-					<div class="col-md-8">
-						<div class="row">
-							<div class="col-md-2">
-								<div class="col-md-12" align="center"  style="border-radius:50%;background-color:#2E8AD8;min-height:50px;padding:10px;color:#FFFFFF;box-shadow: 2px 2px 5px #888888;">
-			     					21<br/>
-			     					JUN
-			     				</div>
-		     				</div>
-		     				<div class="col-md-10">
-							<span style="font-size:25px">E-LEARNING STANDARISASI</span><br/>
-							<i class="fa fa-user"></i>  Administrator <i class="fa fa-list"></i> Interviews
-			     				
-		     				</div>
-	     				</div>
-						<p align="justify">Lorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer laciniaLorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer laciniaLorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer lacinia</p>
-						<a href="#">Read More</a>
-
-					</div>
-					
-				</div>
-				<div class="row">
-					<div class="col-md-12">	
-					<hr style="margin-top:-15px;border-bottom:2px solid #69BD45"/>
-					</div>
-				</div>
+				{/foreach}
 			</div>
 			<div class="col-md-3">
 			 	<div class="row" style="background-color:#888888">

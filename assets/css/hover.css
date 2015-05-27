@@ -3011,6 +3011,12 @@
 .hvr-bubble-bottom:hover:before, .hvr-bubble-bottom:focus:before, .hvr-bubble-bottom:active:before {
   -webkit-transform: translateY(10px);
   transform: translateY(10px);
+  border-color: #3276B1 transparent transparent transparent;
+}
+.hvr-bubble-bottom.active{
+   -webkit-transform: translateY(10px);
+  transform: translateY(10px);
+  border-color: #3276B1 transparent transparent transparent;
 }
 
 /* Bubble Left */

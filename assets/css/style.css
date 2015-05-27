@@ -897,9 +897,10 @@ blockquote cite a:visited 				{ color:#555; }
 }
 
 /* --- button --- */
-.btn{text-align: center;
-background: #2FADDE;
-color: #fff;
+.btn{/*text-align: center;*/
+/*background: #2FADDE;*/
+background-color: #E1E1E1;
+color: #000;
 }
 .btn-theme {
 	color: #fff;

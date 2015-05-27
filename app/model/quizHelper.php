@@ -151,9 +151,16 @@ class quizHelper extends Database {
                 $listSoal[] = $value['idSoal'];
             }
             // pr($res);
+
+            $starttolerance = strtotime($this->date) + 3; // Add 1 hour
+            $tolerancetime = date('Y-m-d H:i:s', $starttolerance); // Back to string
+
+            $counttime = strtotime($tolerancetime) + 3600; // Add 1 hour
+            $endtime = date('Y-m-d H:i:s', $counttime); // Back to string
+            
             $soal = serialize($listSoal);
-            $sql = "INSERT IGNORE INTO tbl_generate_soal (idKursus, idMateri, idUser, soal, generate_date, n_status) 
-                    VALUES ({$idKursus}, {$idMateri}, {$idUser}, '{$soal}', '{$this->date}', 1)
+            $sql = "INSERT IGNORE INTO tbl_generate_soal (idKursus, idMateri, idUser, soal, generate_date, start_date, end_date, n_status) 
+                    VALUES ({$idKursus}, {$idMateri}, {$idUser}, '{$soal}', '{$this->date}','{$tolerancetime}','{$endtime}', 1)
                     ";
             // pr($sql);
             // $sql = array(
@@ -163,11 +170,36 @@ class quizHelper extends Database {
             //         );
 
             $resins = $this->query($sql);
-            if ($resins) return true;
+            if ($resins){
+
+                $sql = array(
+                        'table'=>"tbl_generate_soal",
+                        'field'=>"id, start_date, end_date",
+                        'condition' => " idKursus = {$idKursus} AND idMateri = {$idMateri} AND finish = 0 AND idUser = {$idUser} AND n_status = 1 ORDER BY id DESC LIMIT 1",
+                        );
+
+                $result = $this->lazyQuery($sql,$debug);
+                // pr($result);
+                return $result;
+            } 
             
         }else{
 
         } 
+        return false;
+    }
+
+    function updateCountDown($id)
+    {
+        if (!$id) return false;
+        $sql = array(
+                'table'=>"tbl_generate_soal",
+                'field'=>"finish = 1",
+                'condition'=>"id = {$id} AND idUser = '{$this->user['idUser']}' LIMIT 1",
+                );
+
+        $result = $this->lazyQuery($sql,$debug,2);
+        if ($result) return true;
         return false;
     }
 }

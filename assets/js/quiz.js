@@ -1,5 +1,39 @@
 
+function countDown()
+{
+
+	setTimeout(function(){ 
+		$.post(basedomain+'quiz/countDown', {param:true}, function(data){
+
+			if (data.status==true){
+				var minute = data.end_date.minute;
+				var second = data.end_date.second;
+
+				$('#countdown').html( minute + ' menit ' + second + ' detik');
+				countDown();
+			}else{
+				alert('waktu anda sudah selesai');
+				location.reload();
+				$('#countdown').html( 'Habis waktu' );
+			}
+			
+			
+
+		},"JSON")
+	}, 1000);
+}
+
+$(document).ready(function(){
+
+	setTimeout(function(){ 
+		countDown();
+	}, 1000);
+
+	
+})
+
 // send data quiz via ajax script
+
 
 $(document).on('click','.chooseAnswer', function(){
 
@@ -21,3 +55,5 @@ $(document).on('click','.chooseAnswer', function(){
 
 	},"JSON")
 })
+
+

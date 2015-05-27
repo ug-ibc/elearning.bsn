@@ -73,10 +73,14 @@ $(window).on('load', function() {
 		<div id="delete-toolbar" class="table-toolbar-left">
 			<button id="demo-dt-delete-btn" class="btn btn-danger btn-labeled fa fa-times">Delete</button>
 		</div>
+		{pr($data)}
+		{pr($data_listgroup)}
 		<div class="panel-body">
 			<table id="newslist" class="table table-striped table-bordered" cellspacing="0" width="100%">
 				<thead>
 					<tr>
+						<th>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class ="pilihan" id="id_tahun" onClick="return selectAll(this)"/></th>
+						<th>No</th>
 						<th>Course Name</th>
 						<th>Type</th>
 						<th class="min-tablet">Group</th>
@@ -87,7 +91,37 @@ $(window).on('load', function() {
 					</tr>
 				</thead>
 				<tbody>
+					{$no = 1}
+					{foreach $data as $value}
 					<tr>
+						<td align="center"><input value="{$value.idGrup_kursus}" type="checkbox" name="check[]" id="check[]"></td>
+						<td align="center" >{$no}</td>
+						<td>{$value.namakursus}</td>
+						<td>
+						{if $value.jeniskursus == '1'}
+							{$jk = 'optional'}
+						{elseif $value.jeniskursus == '2'}
+							{$jk = 'hirarchy'}
+						{else}
+							{$jk = 'required'}
+						{/if}
+						{$jk}</td>
+						<td>{$value.idGrup_kursus}</td>
+						<td>{$value.start_date}</td>
+						<td>{$value.quota}</td>
+						{if $value.n_status == '1'}
+							{$var = 'Active'}
+							{$style= 'color:green'}
+						{else}
+							{$var = 'Non Active'}
+							{$style= 'color:red'}
+						{/if}
+						<td style="{$style};" align="center">{$var}</td>
+						<td align="center">
+							<button id="" class="demo-bootbox-custom-h-form-edit btn btn-warning btn-labeled fa fa-pencil" value="{$value.idKursus}" href="#" >Edit</button>
+							<button id="" class="demo-state-btn btn btn-success btn-labeled fa fa-edit" value="{$value.idKursus|cat:'_'|cat:$value.n_status}" href="#" >Status</button>
+						</td>
+						<th>No</th>
 						<td>Title 1</td>
 						<td>Optional/Required/Hirarki</td>
 						<td>Grup 1</td>
@@ -107,6 +141,8 @@ $(window).on('load', function() {
 						<td style="color:red">Unactive</td>
 						<td class="text-center"><button class="btn btn-mint btn-rounded btn-labeled fa fa-book">View</button></td>
 					</tr>
+					<!--{$no++}-->
+					{/foreach}
 				</tbody>
 			</table>
 		</div>

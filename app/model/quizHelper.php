@@ -6,7 +6,9 @@ class quizHelper extends Database {
 	var $salt = "";
 	function __construct()
 	{
-		// $this->db = new Database;
+		$loadSession = new Session();
+        $getUserData = $loadSession->get_session();
+        $this->user = $getUserData[0];
 		$this->salt = "ovancop1234";
 		$this->token = str_shuffle('cmsaj23y4ywdni237yeisa');
 		$this->date = date('Y-m-d H:i:s');
@@ -19,15 +21,19 @@ class quizHelper extends Database {
         if (!$idKursus) return false;
         if (!$idMateri) return false;
 
-        $sql = array(
-                'table'=>"banksoal ",
-                'field'=>"*",
-                'condition' => " idKursus = {$idKursus} AND idMateri = {$idMateri} AND n_status = {$n_status} ORDER BY RAND()",
-                'limit' => "LIMIT {$start},{$limit}",
-                );
+        $getSoalUser = $this->getSoalUser($idKursus, $idMateri);
+        if ($getSoalUser){
+            $sql = array(
+                    'table'=>"banksoal",
+                    'field'=>"*",
+                    'condition' => " idKursus = {$idKursus} AND idMateri = {$idMateri} AND n_status = {$n_status} ",
+                    'limit' => "LIMIT {$start},{$limit}",
+                    );
 
-        $res = $this->lazyQuery($sql,$debug);
-        if ($res) return $res;
+            $res = $this->lazyQuery($sql,$debug);
+            if ($res) return $res;
+        }
+        
         return false;
     }
 
@@ -66,7 +72,7 @@ class quizHelper extends Database {
         $goodAnswer = $this->getGoodAnswer($idSoal);
         $jawaban = $goodAnswer[0]['jawaban'];
         $date = date('Y-m-d H:i:s');
-        $idUser = 1;
+        $idUser = $this->user['idUser'];
 
         $sql = "INSERT INTO soal (idSoal, idKursus, idMateri, idUser, jawaban, jawabanuser, attempt_date, n_status) 
                 VALUES ({$idSoal}, {$idKursus}, {$idMateri}, {$idUser}, {$jawaban}, {$jawabanuser}, '{$date}', 1)
@@ -101,7 +107,7 @@ class quizHelper extends Database {
     function getUserAnswer($idKursus, $idMateri, $n_status=1)
     {
 
-        $idUser = 1;
+        $idUser = $this->user['idUser'];
         $sql = array(
                 'table'=>"soal",
                 'field'=>"idSoal, jawabanuser",
@@ -110,6 +116,58 @@ class quizHelper extends Database {
 
         $res = $this->lazyQuery($sql,$debug);
         if ($res) return $res;
+        return false;
+    }
+
+    function getSoalUser($idKursus, $idMateri, $n_status=1)
+    {
+        $idUser = $this->user['idUser'];
+        $sql = array(
+                'table'=>"tbl_generate_soal",
+                'field'=>"soal",
+                'condition' => " idUser = {$idUser} AND idKursus = {$idKursus} AND idMateri = {$idMateri} AND n_status = {$n_status} ORDER BY id DESC LIMIT 1",
+                );
+
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res) return $res;
+        return false;
+    }
+
+    function generateSoal($idKursus, $idMateri, $n_status=1)
+    {
+
+        $idUser = $this->user['idUser'];
+
+        $sql = array(
+                'table'=>"banksoal",
+                'field'=>"idSoal",
+                'condition' => " idKursus = {$idKursus} AND idMateri = {$idMateri} AND n_status = {$n_status} ORDER BY RAND()",
+                );
+
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res){
+
+            foreach ($res as $key => $value) {
+                $listSoal[] = $value['idSoal'];
+            }
+            // pr($res);
+            $soal = serialize($listSoal);
+            $sql = "INSERT IGNORE INTO tbl_generate_soal (idKursus, idMateri, idUser, soal, generate_date, n_status) 
+                    VALUES ({$idKursus}, {$idMateri}, {$idUser}, '{$soal}', '{$this->date}', 1)
+                    ";
+            // pr($sql);
+            // $sql = array(
+            //         'table'=>"tbl_generate_soal",
+            //         'field'=>"idKursus, idMateri, idUser, soal, generate_date, n_status",
+            //         'value' => "{$idKursus}, {$idMateri}, {$idUser}, '{$soal}', '{$this->date}', 1",
+            //         );
+
+            $resins = $this->query($sql);
+            if ($resins) return true;
+            
+        }else{
+
+        } 
         return false;
     }
 }

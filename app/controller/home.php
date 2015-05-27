@@ -17,11 +17,24 @@ class home extends Controller {
 	function loadmodule()
 	{
         $this->contentHelper = $this->loadModel('contentHelper');
+        $this->userHelper = $this->loadModel('userHelper');
 	}
 	
 	function index(){
 		
 		return $this->loadView('home');
+    }
+
+    function logout()
+    {
+    	global $basedomain;
+    	$doLogout = $this->userHelper->logoutUser();
+    	if ($doLogout){
+    		redirect($basedomain.'logout.php');exit;
+    	}else{
+    		redirect($basedomain);
+    		logFile('can not logout user');exit;
+    	}
     }
 
 }

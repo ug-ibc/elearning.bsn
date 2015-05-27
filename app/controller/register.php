@@ -51,10 +51,10 @@ class register extends Controller {
     function signup()
     {
         global $basedomain;
-        // pr($_POST);
+        // pr($_POST);exit;
         if ($_POST['token']){
 
-            $register = $this->userHelper->signUp($_POST);
+            $register = $this->userHelper->createAccount($_POST);
             if ($register) redirect($basedomain.'register/status');
             else redirect($basedomain.'register');
 
@@ -68,7 +68,7 @@ class register extends Controller {
         $getToken = _g('token');
 
         $this->view->assign('msg', 'Silahkan verifikasi email anda');
-        return $this->loadView('register_status');
+        return $this->loadView('akun/register_status');
     }
 
     function login(){

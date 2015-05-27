@@ -12,6 +12,9 @@ class quiz extends Controller {
 		$this->loadmodule();
 		$this->view = $this->setSmarty();
 		$this->view->assign('basedomain',$basedomain);
+		$getUserLogin = $this->isUserOnline();
+		// pr($getUserLogin);
+		$this->user = $getUserLogin[0];
     }
 	
 	function loadmodule()
@@ -22,41 +25,52 @@ class quiz extends Controller {
 	function index(){
 
 		$start = 0;
-		$getQuiz = $this->quizHelper->getQuiz(1,1, $start);
-       	// pr($soal);
 
-       	$getUserAnswer = $this->quizHelper->getUserAnswer(1,1);
-       	// pr($getUserAnswer);
-       	if ($getUserAnswer){
-       		foreach ($getUserAnswer as $key => $value) {
-       			$answerList[$value['idSoal']] = $value['jawabanuser'];
-       			$soalList[] = $value['idSoal'];
-       		}
+		if ($this->user){
 
-       		// pr($answerList);
+			// generate soal cukup 1 kali ketika klik tombol mulai
+			$generateSoal = $this->quizHelper->generateSoal(1,1);
+
+			// pr($generateSoal);
+			$getQuiz = $this->quizHelper->getQuiz(1,1, $start);
+	       	// pr($soal);
+
+	       	$getUserAnswer = $this->quizHelper->getUserAnswer(1,1);
+	       	// pr($getUserAnswer);
+	       	if ($getUserAnswer){
+	       		foreach ($getUserAnswer as $key => $value) {
+	       			$answerList[$value['idSoal']] = $value['jawabanuser'];
+	       			$soalList[] = $value['idSoal'];
+	       		}
+
+	       		// pr($soalList);
+	       	}
+
+
+	       	if ($getQuiz){
+	       		foreach ($getQuiz as $key => $value) {
+	       			$dataSoal[] = $this->quizHelper->randomJawaban($value);
+	       		}
+
+	       		
+	       		
+	   			foreach ($dataSoal as $key => $value) {
+	       			$dataSoal[$key]['no'] = ($start+1);
+	       			
+	       			if ($soalList){
+	       				if (in_array($value['idSoal'], $soalList)) $dataSoal[$key]['jawabanuser'] = $answerList[$value['idSoal']];
+	       				
+	       			}
+	       			$start++;
+	       		}
+	       		
+	       		
+	       	}
+	       	
+	       	// pr($dataSoal);
+	       	$this->view->assign('user', $this->user);
+	       	$this->view->assign('soal', $dataSoal);
        	}
-
-
-       	if ($getQuiz){
-       		foreach ($getQuiz as $key => $value) {
-       			$dataSoal[] = $this->quizHelper->randomJawaban($value);
-       		}
-
-       		
-       		
-   			foreach ($dataSoal as $key => $value) {
-       			$dataSoal[$key]['no'] = ($start+1);
-       			
-
-       			if (in_array($value['idSoal'], $soalList)) $dataSoal[$key]['jawabanuser'] = $answerList[$value['idSoal']];
-       			$start++;
-       		}
-       		
-       		
-       	}
-       	
-       	// pr($dataSoal);
-       	$this->view->assign('soal', $dataSoal);
 		return $this->loadView('quiz/page_quiz');
     }
 

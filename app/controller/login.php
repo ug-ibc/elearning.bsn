@@ -25,10 +25,7 @@ class login extends Controller {
 	
 	function index(){
 
-        $getCity = $this->contentHelper->getCity();
-        // pr($getCity);
-
-        $this->view->assign('city', $getCity);
+        
     	return $this->loadView('register');
     }
     
@@ -36,6 +33,7 @@ class login extends Controller {
     function local()
     {
         // pr($_POST);
+        global $basedomain;
         if (isset($_POST['token'])){
 
             $validateData = $this->loginHelper->local($_POST);
@@ -44,14 +42,14 @@ class login extends Controller {
                 // set session
                 $setSession = $this->loadSession->set_session($validateData);
                 
-                print json_encode(array('status'=>true));
+                redirect($basedomain.'home');exit;
             }else{
-                print json_encode(array('status'=>false));
+                redirect($basedomain);exit;
             }
 
         }
 
-        exit;
+        
     }
 
     

@@ -26,14 +26,15 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">FORM LOGIN</h4>
       </div>
+      <form method="POST" action="{$basedomain}login/local" class="form-horizontal" onsubmit="return checkBefore()" >
       <div class="modal-body">
-       <form method="POST" action="prosesdaftar.php" class="form-horizontal" onsubmit="return checkBefore()" >
+       
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
                 <div class="col-sm-6">
                     <div class="input-group">
                       <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
-                    <input type="text" class="form-control" placeholder="Username..."/>
+                    <input type="text" class="form-control" placeholder="Username..." name="username"/>
                 </div>
                 </div>
               </div>
@@ -42,16 +43,18 @@
                 <div class="col-sm-6">
                     <div class="input-group">
                       <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
-                    <input type="password" class="form-control" placeholder="Password..."/>
+                    <input type="password" class="form-control" placeholder="Password..." name="password"/>
                 </div>
                 </div>
               </div>
-        </form>
+        
       </div>
       <div class="modal-footer">
         <a href="{$basedomain}register" class="btn btn-default" >Sign Up</a>
-        <button type="button" class="btn btn-primary">Sign In</button>
+        <input type="hidden" name="token" value="1"/>
+        <button type="submit" class="btn btn-primary">Sign In</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
@@ -82,7 +85,11 @@
                       <li {$classQuiz}><a href="{$basedomain}quiz">E-LEARNING</a></li>
                         <li><a href="kursus.php">KURSUS</a></li>
                         <li {$classBerita}><a href="{$basedomain}berita">BERITA</a></li>
+                        {if $user}
+                        <li><a href="{$basedomain}home/logout">LOGOUT <i class="fa fa-log-out"></i></a></li>
+                        {else}
                         <li><a href="#" data-toggle="modal" data-target="#myModal">LOGIN <i class="fa fa-sign-in"></i></a></li>
+                        {/if}
                     </ul>
                 </div>
             </div>

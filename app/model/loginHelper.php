@@ -58,22 +58,22 @@ class loginHelper extends Database {
     }
 
 	function local($data=false, $debug=false)
-	{
+	{ 
 		if($data== false) return false;
 		
-	   
+	    
         $username = clean($data['username']);
 
 		// $sql = "SELECT * FROM social_member where username = '{$data['username']}' AND password = '{$password}' LIMIT 1";
 		$sql = array(
-                'table'=>"social_member",
+                'table'=>"user",
                 'field'=>"*",
-                'condition'=>"username = '{$username}'",
+                'condition'=>"username = '{$username}' AND n_status = 1",
                 'limit'=>1,
                 );
 
         $res = $this->lazyQuery($sql,$debug);
-        // pr($res);
+        // pr($res);exit;
         if ($res){
 
             $password = sha1($res[0]['salt'] . $data['password'] . $res[0]['salt']);
@@ -81,9 +81,9 @@ class loginHelper extends Database {
 
                 $login_count = intval($res[0]['login_count']) + 1;
                 $sql = array(
-                        'table'=>"social_member",
-                        'field'=>"login_count = {$login_count}",
-                        'condition'=>"id = '{$res[0]['id']}'",
+                        'table'=>"user",
+                        'field'=>"login_count = {$login_count}, is_online = 1",
+                        'condition'=>"idUser = '{$res[0]['idUser']}'",
                         );
 
                 $result = $this->lazyQuery($sql,$debug,2);

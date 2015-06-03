@@ -202,5 +202,33 @@ class quizHelper extends Database {
         if ($result) return true;
         return false;
     }
+
+    function getKursus($id=false)
+    {
+
+        $sql = array(
+                'table'=>"kursus",
+                'field'=>"*",
+                'condition'=>"idKursus = {$id} AND n_status = 1",
+                );
+
+        $result = $this->lazyQuery($sql,$debug);
+        if ($result) return true;
+        return false;
+    }
+
+    function getMateri($id=false)
+    {
+
+        $sql = array(
+                'table'=>"materi",
+                'field'=>"*",
+                'condition'=>"idMateri = {$id} AND n_status = 1",
+                );
+
+        $result = $this->lazyQuery($sql,$debug);
+        if ($result) return true;
+        return false;
+    }
 }
 ?>

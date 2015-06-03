@@ -102,6 +102,11 @@ class quiz extends Controller {
     	exit;
     }
 
+    function startQuiz()
+    {
+    	
+    }
+    
     function countDown()
     {
 

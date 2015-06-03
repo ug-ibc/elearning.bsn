@@ -5,17 +5,21 @@ function countDown()
 	setTimeout(function(){ 
 		$.post(basedomain+'quiz/countDown', {param:true}, function(data){
 
-			if (data.status==true){
-				var minute = data.end_date.minute;
-				var second = data.end_date.second;
+			if (data){
 
-				$('#countdown').html( minute + ' menit ' + second + ' detik');
-				countDown();
-			}else{
-				alert('waktu anda sudah selesai');
-				location.reload();
-				$('#countdown').html( 'Habis waktu' );
+				if (data.status==true){
+					var minute = data.end_date.minute;
+					var second = data.end_date.second;
+
+					$('#countdown').html( minute + ' menit ' + second + ' detik');
+					countDown();
+				}else{
+					alert('waktu anda sudah selesai');
+					location.reload();
+					$('#countdown').html( 'Habis waktu' );
+				}
 			}
+			
 			
 			
 
@@ -56,4 +60,17 @@ $(document).on('click','.chooseAnswer', function(){
 	},"JSON")
 })
 
+$(document).on('click','#ikutQuiz', function(){
+
+	$.post(basedomain+'quiz/ajax', {param:1}, function(data){
+
+		if (data.status==true){
+			
+			console.log(dataKlik);
+			// $(dataKlik).addClass("active");	
+		}
+		
+
+	},"JSON")
+})
 

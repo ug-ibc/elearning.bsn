@@ -53,7 +53,10 @@ function isNumber(evt) {
 				<div class="panel-heading">
 					<h3 class="panel-title">Input Form</h3>
 				</div>
+				<!--{pr($data_list)}-->
 				<!--{pr($data)}-->
+				<!--{$data_list[0].idKursus}
+				{$data_list[0].namakursus}-->
 				<!--Horizontal Form-->
 				<!--===================================================-->
 				<form class="form-horizontal" method="POST" action="{$basedomain}course/insert_course">
@@ -61,22 +64,43 @@ function isNumber(evt) {
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Course Name</label>
 							<div class="col-sm-4">
-								<input type="text" name="namakursus" class="form-control" required>
+								<input type="text" name="namakursus" class="form-control" 
+								value="{if isset($data_list[0].namakursus)}{$data_list[0].namakursus}{/if}"
+								required>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Course Explanation</label>
 							<div class="col-sm-6">
-								<textarea rows="5" name="keterangan" class="form-control"></textarea> 
+								<textarea rows="5" name="keterangan" class="form-control">{if isset($data_list[0].keterangan)}{$data_list[0].keterangan}{/if}</textarea> 
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Course Type</label>
 							<div class="col-sm-4">
 								<select name ="jeniskursus" class="selectpicker">
-									<option value="1">optional</option>
-									<option value="2">hirarchy</option>
-									<option value="3">required</option>
+								{if isset($data_list[0].jeniskursus)}
+									{if $data_list[0].jeniskursus == 1}
+										{$opt_selected = 'selected'}
+										{$opt_hirarchy = ''}
+										{$opt_required = ''}
+									{elseif $data_list[0].jeniskursus == 2}
+										{$opt_selected = ''}
+										{$opt_hirarchy = 'selected'}
+										{$opt_required = ''}
+									{elseif $data_list[0].jeniskursus == 3}
+										{$opt_selected = ''}
+										{$opt_hirarchy = ''}
+										{$opt_required = 'selected'}		
+									{/if}
+								{else}
+									{$opt_selected = ''}
+									{$opt_hirarchy = ''}
+									{$opt_required = ''}
+								{/if}	
+									<option value="1" {$opt_selected}>optional</option>
+									<option value="2" {$opt_hirarchy}>hirarchy</option>
+									<option value="3" {$opt_required}>required</option>
 								</select> 
 							</div>
 						</div>
@@ -84,7 +108,7 @@ function isNumber(evt) {
 							<label class="col-sm-3 control-label">Start Date</label>
 							<div class="col-sm-4">
 								<div class="input-group date">
-									<input type="text" name="start_date" class="form-control">
+									<input type="text" name="start_date" class="form-control" value="{if isset($data_list[0].start_date)}{$data_list[0].start_date}{/if}">
 									<span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span>
 								</div>
 							</div>
@@ -93,7 +117,7 @@ function isNumber(evt) {
 							<label class="col-sm-3 control-label">End Date</label>
 							<div class="col-sm-4">
 								<div class="input-group date">
-									<input type="text" name="end_date" class="form-control">
+									<input type="text" name="end_date" class="form-control" value="{if isset($data_list[0].end_date)}{$data_list[0].end_date}{/if}">
 									<span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span>
 								</div>
 							</div>
@@ -101,20 +125,31 @@ function isNumber(evt) {
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Quota</label>
 							<div class="col-sm-4">
-								<input type="text" name ="quota" class="form-control" onkeypress="return isNumber(event)" placeholder="number only">
+								<input type="text" name ="quota" class="form-control" onkeypress="return isNumber(event)" placeholder="number only" value="{if isset($data_list[0].quota)}{$data_list[0].quota}{/if}">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Group Course</label>
 							<div class="col-sm-4">
 								<select name ="idGrup_kursus"  class="selectpicker">
+									{if $data}
 									{foreach $data as $value}
-									<option value="{$value.idGrup_kursus}">{$value.namagrup}</option>
+										{if isset($data_list[0].idGrup_kursus)}
+											{if $data_list[0].idGrup_kursus == $value.idGrup_kursus}
+												{$select_group = 'selected'}
+											{else}
+												{$select_group = ''}
+											{/if}	
+										{/if}
+									<option value="{$value.idGrup_kursus}" {$select_group}>{$value.namagrup}</option>
 									{/foreach}
+									{/if}
 								</select> 
 							</div>
 						</div>
-						
+						<!-- input id hidden-->
+							<input type="hidden" name="id" class="form-control" value="{if isset($data_list[0].idKursus)}{$data_list[0].idKursus}{/if}">
+						<!-- input id hidden-->
 					</div>
 					<div class="panel-footer text-right">
 						<button class="btn btn-info" type="submit">Save</button>

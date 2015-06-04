@@ -114,6 +114,21 @@ class course extends Controller {
 		
 	}
 	
+	public function ajax_delete_course_list(){
+		
+		// pr($_POST);
+		// echo masuk;
+		// exit;
+		$id =$_POST['id'];
+		$n_status = 2;
+		if ($id != ''){
+			$insert = $this->mcourse->delete_data_course_list($id,$n_status);
+			// echo json_encode($data);
+		}
+		exit;
+		
+	}
+	
 	//module course
 	public function courselist(){
 		$select_list_course = $this->mcourse->select_data_list_course();
@@ -121,23 +136,42 @@ class course extends Controller {
 		
 		$select_list_group = $this->mcourse->select_data_list_group();
 		$this->view->assign('data_listgroup',$select_list_group);
+		
 		return $this->loadView('course/courselist');	
 	}
-
 	
 	public function addcourse(){
 		global $basedomain;
-		$select = $this->mcourse->select_data_course();
-		// pr($select);
-		$this->view->assign('data',$select);
-		return $this->loadView('course/addcourse');	
+		if(isset($_GET))
+		{
+			
+			$id = form_validation($_GET);
+			$id_course = $id[id];
+			if(isset($id['id']) && count($id)!=0)
+			{	
+				//for edit data
+				$select_list = $this->mcourse->select_data_list_course_condition($id_course);
+				// pr($select_list);
+				$this->view->assign('data_list',$select_list);
+				
+				//for dropdown group course
+				$select = $this->mcourse->select_data_course();
+				// pr($select);
+				$this->view->assign('data',$select);
+				// exit;
+				return $this->loadView('course/addcourse');
+			}else{	
+				$select = $this->mcourse->select_data_course();
+				// pr($select);
+				$this->view->assign('data',$select);
+				return $this->loadView('course/addcourse');
+			}	
+		}
 	}
 	
 	public function insert_course(){
 		global $CONFIG;
 		if(isset($_POST)){
-		 // pr($_POST);
-		 // exit;		
 		 $x = form_validation($_POST);
 		 try
 			   {
@@ -153,9 +187,32 @@ class course extends Controller {
 			   		}
 				   	
 			   }catch (Exception $e){}
-		echo "<script>alert('Course Successfully Created');window.location.href='".$CONFIG['admin']['base_url']."course/courselist'</script>";		
+		if($x['id'] == ''){
+			echo "<script>alert('Course Successfully Created');window.location.href='".$CONFIG['admin']['base_url']."course/courselist'</script>";		
+		}else{
+			echo "<script>alert('Course Successfully Update');window.location.href='".$CONFIG['admin']['base_url']."course/courselist'</script>";		
 		}
+	  }
 		return $this->loadView('insert_course');
+	}
+	
+	//update status course
+	
+	public function ajax_update_status_course(){
+	
+		//add code here
+		// pr($_POST);
+		$id = $_POST['id'];
+		$status =$_POST['status'];
+		if($status == 1){
+			$n_status = 0;
+		}else{
+			$n_status = 1;
+		}
+		if ($id != '' && $status != ''){
+			$update_status = $this->mcourse->update_status_course($id,$n_status);
+		}
+		exit;
 	}
 	
 	public function addgroup()
@@ -164,14 +221,137 @@ class course extends Controller {
 		return $this->loadView('course/addgroup');
 	}
 
-	
-
+	//module upload video/ebook
 	public function upload(){
-		return $this->loadView('course/uploadfile');	
+		global $basedomain;
+		if(isset($_GET))
+		{
+			
+			$id = form_validation($_GET);
+			$id_upload = $id[id];
+			if(isset($id['id']) && count($id)!=0)
+			{	
+				//select data upload
+				$select_list_data_upload= $this->mcourse->select_data_list_upload_condt($id_upload);
+				$this->view->assign('data_list_upload',$select_list_data_upload);
+		
+				//for dropdown list course
+				$select_list_course = $this->mcourse->select_data_list_course();
+				$this->view->assign('data_list_course',$select_list_course);
+				
+				//for dropdown group course
+				$select_list_group = $this->mcourse->select_data_list_group();
+				$this->view->assign('data_group_course',$select_list_group);
+				
+				return $this->loadView('course/uploadform');
+				
+			}else{	
+				//for dropdown list course
+				$select_list_course = $this->mcourse->select_data_list_course();
+				$this->view->assign('data_list_course',$select_list_course);
+				
+				//for dropdown group course
+				$select_list_group = $this->mcourse->select_data_list_group();
+				$this->view->assign('data_group_course',$select_list_group);
+				
+				return $this->loadView('course/uploadform');
+			}	
+		}
+	
+			
 	}
-
+	
+	public function insert_upload(){
+		global $CONFIG;
+		if(isset($_POST)){
+		 $x = form_validation($_POST);
+		 try
+			   {
+			   		if(isset($x) && count($x) != 0)
+			   		{
+						//update or insert
+						$x['action'] = 'insert';
+						if($x['id'] != ''){
+							$x['action'] = 'update';
+						}
+						/*$exp = explode("_",$x['file_hidden']);
+						$encode_name_files = $exp[0]; 
+						$real_name_files = $exp[1];*/ 
+						//upload file
+						if(!empty($_FILES['file_image']['name'])){
+							// echo "masuk files";
+							if($_FILES['file_image']['name'] != ''){
+								if($x['action'] == 'update') deleteFile($x['file_hidden']);
+								$image = uploadFile('file_image',null,'image');
+								// pr($image);
+								// $x['post_image'] = $image['full_name']."_".$image['real_name'];
+								$x['post_image'] = $image['full_name'];
+							}
+						}else{
+						// echo "sini kan";
+							$x['post_image'] = $x['file_hidden'];
+						}
+						// pr($x);
+						$data = $this->mcourse->upload_insert($x);
+					}
+				   	
+			   }catch (Exception $e){}
+		if($x['id'] == ''){
+			echo "<script>alert('Upload Ebook & Video Successfully Created');window.location.href='".$CONFIG['admin']['base_url']."course/uploadfile'</script>";		
+		}else{
+			echo "<script>alert('Upload Ebook & Video Successfully Update');window.location.href='".$CONFIG['admin']['base_url']."course/uploadfile'</script>";		
+		}
+	  }
+		return $this->loadView('insert_upload');
+	}
+	
 	public function uploadfile(){
-		return $this->loadView('course/uploadform');	
+		//select data upload
+		$select_list_data_upload= $this->mcourse->select_data_list_upload();
+		$this->view->assign('data_list_upload',$select_list_data_upload);
+		
+		//for dropdown list course
+		$select_list_course = $this->mcourse->select_data_list_course();
+		$this->view->assign('data_list_course',$select_list_course);
+		
+		//for dropdown group course
+		$select_list_group = $this->mcourse->select_data_list_group();
+		$this->view->assign('data_group_course',$select_list_group);
+		
+		
+		return $this->loadView('course/uploadfile');
+	}
+	
+	public function ajax_update_status_upload(){
+	
+		//add code here
+		// pr($_POST);
+		$id = $_POST['id'];
+		$status =$_POST['status'];
+		if($status == 1){
+			$n_status = 0;
+		}else{
+			$n_status = 1;
+		}
+		if ($id != '' && $status != ''){
+			$update_status = $this->mcourse->update_status_upload($id,$n_status);
+		}
+		exit;
+	}
+	
+	public function ajax_delete_course_upload(){
+		
+		// pr($_POST);
+		// echo masuk;
+		// exit;
+		$id =$_POST['id'];
+		$n_status = 2;
+		if ($id != ''){
+			$insert = $this->mcourse->delete_data_course_upload($id,$n_status);
+			// echo json_encode($data);
+		}
+		exit;
+		
 	}
 	
 	public function viewmaterial()

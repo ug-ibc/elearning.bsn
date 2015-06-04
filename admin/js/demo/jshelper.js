@@ -38,13 +38,13 @@
 							icon : 'fa fa-check',
 							message : "Group " + namagrup + ".<br> Update Successfully",
 							container : 'floating',
-							timer : 4000
+							timer : 3000
 						});
 						setTimeout(
 						  function() 
 						  {
 							location.reload();
-						  }, 5000);
+						  }, 3000);
 						
 					}else{
 					
@@ -102,17 +102,20 @@
 							icon : 'fa fa-check',
 							message : "Group " + namagrup + ".<br> Successfully Created",
 							container : 'floating',
-							timer : 4000
+							timer : 3000
 						});
 						setTimeout(
 						  function() 
 						  {
 							location.reload();
-						  }, 5000);
+						  }, 3000);
 						
 					}else{
 					
-						alert( "isi Data" );
+						//alert( "isi Data" );
+						bootbox.alert("Data Cannot Empty!", function(){
+							//EMPTY
+						});
 					}
 					}
 				}
@@ -152,8 +155,73 @@
 		  }, 3000);
 	});
 
+	$('.update-list-course-btn').on('click', function () {
+		var btn = $(this).button('loading')
+		// alert(btn);
+		// business logic...
+		var idGrup_kursus = $(this).attr("value");
+		// alert(idGrup_kursus);
+		var exp = idGrup_kursus.split("_"); 
+		var id = exp[0];
+		var status = exp[1];
+		
+		$.post( basedomain+"course/ajax_update_status_course", { id: id, status: status } );
+		
+		// alert(exp[0]);
+		var doSomething = setTimeout(function(){
+			clearTimeout(doSomething);
+			btn.button('reset')
+		}, 3000);
+		$.niftyNoty({
+			type: 'success',
+			icon : 'fa fa-check',
+			message : 'Update Status Successfully.',
+			container : 'floating',
+			timer : 3000
+		});
+		setTimeout(
+		  function() 
+		  {
+			location.reload();
+		  }, 3000);
+		  // $('#newslist').DataTable().ajax.reload();
+		  // $('#newslist').dataTable()._fnAjaxUpdate();
+	});
 	
-	$('#demo-dt-delete-btn').click( function () {
+	$('.update-list-upload-btn').on('click', function () {
+		var btn = $(this).button('loading')
+		// alert(btn);
+		// business logic...
+		var idGrup_kursus = $(this).attr("value");
+		// alert(idGrup_kursus);
+		var exp = idGrup_kursus.split("_"); 
+		var id = exp[0];
+		var status = exp[1];
+		
+		$.post( basedomain+"course/ajax_update_status_upload", { id: id, status: status } );
+		
+		// alert(exp[0]);
+		var doSomething = setTimeout(function(){
+			clearTimeout(doSomething);
+			btn.button('reset')
+		}, 3000);
+		$.niftyNoty({
+			type: 'success',
+			icon : 'fa fa-check',
+			message : 'Update Status Successfully.',
+			container : 'floating',
+			timer : 3000
+		});
+		setTimeout(
+		  function() 
+		  {
+			location.reload();
+		  }, 3000);
+		  // $('#newslist').DataTable().ajax.reload();
+		  // $('#newslist').dataTable()._fnAjaxUpdate();
+	});
+	
+	$('#demo-dt-delete-btn-course-group').click( function () {
 		//rowDeletion.row('.selected').remove().draw( false );
 		//var id = rowDeletion.cell('.selected', 2).data();
 		//alert(id);
@@ -212,7 +280,125 @@
 		}
 	});
 	
+	$('#demo-dt-delete-btn-course-list').click( function () {
+		//rowDeletion.row('.selected').remove().draw( false );
+		//var id = rowDeletion.cell('.selected', 2).data();
+		//alert(id);
+		 //console.log = id; 
+	
+		//solusi alternatif
+		var vals = [];  // variable vals initialization as array
+		//get all the checkboxes that are checked in one variable
+		$('input:checkbox[name="check[]"]').each(function() {
+			if (this.checked) {
+				// push the element into array
+				vals.push(this.value);
+			}
+		});
+		var str = vals.join(",");
+		//console.log = vals[0];
+		 //alert(vals[0]);
+		 //alert(str);
+		if (!str) {
+			//alert('Checked First!');
+			bootbox.alert("Checked First!", function(){
+				//EMPTY
+			});
+			return str;
+		}else{
+			
+			//some modification
+			bootbox.confirm("Are you sure want to remove data?", function(result) {
+				if (result) {
+					$.post( basedomain+"course/ajax_delete_course_list", { id: str} );
+					$.niftyNoty({
+						type: 'success',
+						icon : 'fa fa-check',
+						message : 'Remove Data Successfully.',
+						container : 'floating',
+						timer : 3000
+					});
+					setTimeout(
+				   function() 
+				   {
+					location.reload();
+				   }, 3000);
+				}else{
+					$.niftyNoty({
+						type: 'danger',
+						icon : 'fa fa-minus',
+						message : 'Remove Data Failed!',
+						container : 'floating',
+						timer : 3000
+					});
+				};
 
+
+			});
+			
+		}
+	});
+	
+	$('#demo-dt-delete-btn-course-upload').click( function () {
+		//rowDeletion.row('.selected').remove().draw( false );
+		//var id = rowDeletion.cell('.selected', 2).data();
+		//alert(id);
+		 //console.log = id; 
+	
+		//solusi alternatif
+		var vals = [];  // variable vals initialization as array
+		//get all the checkboxes that are checked in one variable
+		$('input:checkbox[name="check[]"]').each(function() {
+			if (this.checked) {
+				// push the element into array
+				vals.push(this.value);
+			}
+		});
+		var str = vals.join(",");
+		//console.log = vals[0];
+		 //alert(vals[0]);
+		 //alert(str);
+		if (!str) {
+			//alert('Checked First!');
+			bootbox.alert("Checked First!", function(){
+				//EMPTY
+			});
+			return str;
+		}else{
+			
+			//some modification
+			bootbox.confirm("Are you sure want to remove data?", function(result) {
+				if (result) {
+					$.post( basedomain+"course/ajax_delete_course_upload", { id: str} );
+					$.niftyNoty({
+						type: 'success',
+						icon : 'fa fa-check',
+						message : 'Remove Data Successfully.',
+						container : 'floating',
+						timer : 3000
+					});
+					setTimeout(
+				   function() 
+				   {
+					location.reload();
+				   }, 3000);
+				}else{
+					$.niftyNoty({
+						type: 'danger',
+						icon : 'fa fa-minus',
+						message : 'Remove Data Failed!',
+						container : 'floating',
+						timer : 3000
+					});
+				};
+
+
+			});
+			
+		}
+	});
+	
+	
 	$('#addmaterial').on('click', function(){
 		bootbox.dialog({
 			title: "Create Course Material",
@@ -253,6 +439,7 @@
 
 		$(".demo-modal-radio").niftyCheck();
 	});
+	
 	
  })
  

@@ -26,8 +26,20 @@ class quiz extends Controller {
 
 	}
 
+	function listquiz()
+	{
+
+		$getQuiz = $this->models->getQuiz(false, '0,1');
+		// pr ($getQuiz);
+		if ($getQuiz){
+			$this->view->assign('getQuiz', $getQuiz);
+		}
+		return $this->loadView('quiz/quizlist');
+	}
+
 	public function inputquiz(){
-		global $CONFIG;
+		global $CONFIG, $basedomain;
+
 		$soal=$_POST['soal'];
 		$pilihan1=$_POST['pilihan1'];
 		$pilihan2=$_POST['pilihan2'];
@@ -39,12 +51,19 @@ class quiz extends Controller {
 		$kursus=$_POST['kursus'];
 		$materi=$_POST['materi'];
 		$groupkursus=$_POST['groupkursus'];
-		$data=$this->models->inputquiz($soal,$pilihan1,$pilihan2,$pilihan3,$pilihan4,$jenissoal,$keterangan,$jawaban,$kursus,$materi,$groupkursus);
+		$quizstatus = $_POST['quizstatus'];
+		$data=$this->models->inputquiz($soal,$pilihan1,$pilihan2,$pilihan3,$pilihan4,$jenissoal,$keterangan,$jawaban,$kursus,$materi,$groupkursus,$quizstatus);
 		
 		if ($data==1){
-			echo "<script>alert('data berhasil disimpan');windows.location.href='".$CONFIG['admin']['base_url']."quiz'</script>";
+			echo "<script>alert('Data berhasil disimpan');</script>";
+			
+		}else{
+			echo "<script>alert('Data gagal disimpan');</script>";
+			
 		}
 
+		redirect($basedomain.'quiz');
+		exit;
 	}
 	
 	public function addquiz(){

@@ -1,10 +1,11 @@
 <script>
+{literal}
 $(window).on('load', function() {
 
 	// Datatables
 	// Row selection and deletion (multiple rows)
 	// -----------------------------------------------------------------
-	var rowDeletion = $('#quizist').DataTable({
+	var rowDeletion = $('#newslist').DataTable({
 		"responsive": true,
 		"language": {
 			"paginate": {
@@ -27,6 +28,7 @@ $(window).on('load', function() {
 		rowDeletion.row('.selected').remove().draw( false );
 	} );
 })	
+{/literal}
 </script>
 
 <!--Page Title-->
@@ -66,45 +68,62 @@ $(window).on('load', function() {
 		<div class="panel-heading">
 			<h3 class="panel-title">Table of Quiz List</h3>
 		</div>
+		{*}
 		<div id="create-toolbar" class="table-toolbar-left">
 			<button class="btn btn-info btn-labeled fa fa-pencil-square-o">Create</button>
-		</div>
+		</div>{/*}
+			
+		<form method="post" action="{$basedomain}user/deletequiz" onsubmit="return checkForm()">
 		<div id="separator-toolbar" class="table-toolbar-left">&nbsp;</div>
+		
 		<div id="delete-toolbar" class="table-toolbar-left">
-			<button id="demo-dt-delete-btn" class="btn btn-danger btn-labeled fa fa-times">Delete</button>
+			<button id="demo-dt-delete-btn" class="btn btn-danger btn-labeled fa fa-times" type="submit">Delete</button>
 		</div>
 		<div class="panel-body">
 			<table id="newslist" class="table table-striped table-bordered" cellspacing="0" width="100%">
 				<thead>
 					<tr>
-						<th>Title</th>
-						<th>Brief</th>
-						<th class="min-tablet">Status</th>
-						<th class="min-tablet">Author</th>
-						<th class="min-desktop">Created Date</th>
-						<th class="min-desktop">Posted Date</th>
+						<th>&nbsp;</th>
+						<th>No</th>
+						<th>Soal</th>
+						<th class="min-tablet">Pilihan A</th>
+						<th class="min-tablet">Pilihan B</th>
+						<th class="min-tablet">Pilihan C</th>
+						<th class="min-tablet">Pilihan D</th>
+						<th class="min-tablet">Jenis Soal</th>
+						<th class="min-desktop">Keterangan</th>
+						<th class="min-desktop">Jawaban</th>
+						<th class="min-desktop">Status</th>
+
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>Title 1</td>
-						<td>System Architect</td>
-						<td style="color:green">Published</td>
-						<td>John Doe</td>
-						<td>2011-04-25</td>
-						<td>2011-04-25</td>
-					</tr>
-					<tr>
-						<td>Title 2</td>
-						<td>Accountant</td>
-						<td style="color:red">Unpublished</td>
-						<td>John Doe</td>
-						<td>2011-07-25</td>
-						<td>2011-07-25</td>
-					</tr>
+					{if $data}
+						{$no = 1}
+						{foreach $data as $val}
+							<tr>
+								<td><input type="checkbox" name="idSoal[]" value="{$val.idSoal}" ></td>
+								<td>{$no++}</td>
+								<td>{$val.soal}</td>
+								<td>{$val.pilihan1}</td>
+								<td>{$val.pilihan2}</td>
+								<td>{$val.pilihan3}</td>
+								<td>{$val.pilihan4}</td>
+								<td>{$val.jenissoal}</td>
+								<td>{$val.keterangan}</td>
+								<td>{$val.jawaban}</td>
+								<td class="text-center">
+									
+								</td>
+								
+							</tr>
+						{/foreach}
+					{/if}
+					
 				</tbody>
 			</table>
 		</div>
+		</form>
 	</div>
 	<!--===================================================-->
 	<!-- End Row selection and deletion (multiple rows) -->
@@ -114,3 +133,20 @@ $(window).on('load', function() {
 <!--===================================================-->
 <!--End page content-->
 
+{literal}
+	<script type="text/javascript">
+
+		function checkForm()
+		{
+
+			var txt;
+			var r = confirm("Anda yakin ingin menghapus data ?");
+			if (r == true) {
+			    // txt = "You pressed OK!";
+			} else {
+			    return false;
+			}
+		}
+	</script>
+
+{/literal}

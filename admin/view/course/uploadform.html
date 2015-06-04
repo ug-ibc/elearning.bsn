@@ -40,29 +40,45 @@ $(document).ready(function() {
 <div id="page-content">
 	
 	<div class="row">
-
+		<!--{pr($data_group_course)}
+		{pr($data_list_course)}-->
 		<div class="col-sm-12">
 			<div class="panel">
 				<div class="panel-heading">
 					<h3 class="panel-title">Input Form</h3>
 				</div>
-	
+				<!--{pr($data_list_upload)}
+				{pr($data_list_course)}
+				{pr($data_group_course)}-->
+				
 				<!--Horizontal Form-->
 				<!--===================================================-->
-				<form class="form-horizontal" action="{$basedomain}/course/insert_data/" enctype = "multipart/form-data">
+				<form class="form-horizontal" method="POST" action="{$basedomain}course/insert_upload/" enctype = "multipart/form-data">
 					<div class="panel-body">
 						<div class="form-group">
 							<label class="col-sm-3 control-label">File Name</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" name="namafile">
+								<input type="text" class="form-control" name="namafile" value="{if isset($data_list_upload[0].namafile)}{$data_list_upload[0].namafile}{/if}">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">File Type</label>
 							<div class="col-sm-4">
 								<select name = "jenisfile" class="selectpicker">
-									<option value="1">ebook</option>
-									<option value="2">video</option>
+								{if isset($data_list_upload[0].jenisfile)}
+									{if $data_list_upload[0].jenisfile == 1}
+										{$opt_ebook = 'selected'}
+										{$opt_video = ''}
+									{elseif $data_list_upload[0].jenisfile == 2}
+										{$opt_ebook = ''}
+										{$opt_video = 'selected'}
+									{/if}
+								{else}
+									{$opt_ebook = ''}
+									{$opt_video = ''}
+								{/if}
+									<option value="1" {$opt_ebook}>ebook</option>
+									<option value="2" {$opt_video}>video</option>
 								</select> 
 							</div>
 						</div>
@@ -70,11 +86,24 @@ $(document).ready(function() {
 							<label class="col-sm-3 control-label">Status File</label>
 							<div class="col-sm-4">
 								<select name = "statusfile" class="selectpicker">
-									<option value="1">login</option>
-									<option value="2">free</option>
+								{if isset($data_list_upload[0].statusfile)}
+									{if $data_list_upload[0].statusfile == 1}
+										{$opt_login = 'selected'}
+										{$opt_free = ''}
+									{elseif $data_list_upload[0].statusfile == 2}
+										{$opt_login = ''}
+										{$opt_free = 'selected'}
+									{/if}
+								{else}
+									{$opt_login = ''}
+									{$opt_free = ''}
+								{/if}
+									<option value="1" {$opt_login}>login</option>
+									<option value="2" {$opt_free}>free</option>
 								</select> 
 							</div>
 						</div>
+						<input type="hidden" name="id" value="{$data_list_upload[0].idFile}">
 						<!--<div class="form-group">
 							<label class="col-sm-3 control-label">Material</label>
 							<div class="col-sm-4">
@@ -85,8 +114,18 @@ $(document).ready(function() {
 							<label class="col-sm-3 control-label">Course Group</label>
 							<div class="col-sm-4">
 								<select name="idGrup_kursus" class="selectpicker">
-									<option>login</option>
-									<option>free</option>
+									{if $data_group_course}
+									{foreach $data_group_course as $value_group}
+										{if isset($data_list_upload[0].idGrup_kursus)}
+											{if $data_list_upload[0].idGrup_kursus == $value_group.idGrup_kursus}
+												{$select_group = 'selected'}
+											{else}
+												{$select_group = ''}
+											{/if}	
+										{/if}
+									<option value="{$value_group.idGrup_kursus}" {$select_group}>{$value_group.namagrup}</option>
+									{/foreach}
+									{/if}
 								</select> 
 							</div>
 						</div>
@@ -94,8 +133,18 @@ $(document).ready(function() {
 							<label class="col-sm-3 control-label">Course Name</label>
 							<div class="col-sm-4">
 								<select name="idKursus" class="selectpicker">
-									<option value="1">php</option>
-									<option value="2">mysql</option>
+									{if $data_list_course}
+									{foreach $data_list_course as $value_list}
+										{if isset($data_list_upload[0].idKursus)}
+											{if $data_list_upload[0].idKursus == $value_list.idKursus}
+												{$select_list = 'selected'}
+											{else}
+												{$select_list = ''}
+											{/if}	
+										{/if}
+									<option value="{$value_list.idKursus}" {$select_list}>{$value_list.namakursus}</option>
+									{/foreach}
+									{/if}
 								</select> 
 							</div>
 						</div>
@@ -103,8 +152,20 @@ $(document).ready(function() {
 							<label class="col-sm-3 control-label">Material</label>
 							<div class="col-sm-4">
 								<select name="idMateri" class="selectpicker">
-									<option value="1">insert</option>
-									<option value="2">update</option>
+								{if isset($data_list_upload[0].idMateri)}
+									{if $data_list_upload[0].idMateri == 1}
+										{$opt_new = 'selected'}
+										{$opt_old = ''}
+									{elseif $data_list_upload[0].idMateri == 2}
+										{$opt_new = ''}
+										{$opt_old = 'selected'}
+									{/if}
+								{else}
+									{$opt_new = ''}
+									{$opt_old = ''}
+								{/if}
+									<option value="1" {$opt_new}>new</option>
+									<option value="2" {$opt_old}>old</option>
 								</select> 
 							</div>
 						</div>
@@ -114,10 +175,10 @@ $(document).ready(function() {
 								<div class="input-group">
 		                			<span class="input-group-btn">
 		                   				<span class="btn btn-primary btn-file">
-		                        		Browse <input type="file" multiple>
+		                        		Browse <input type="file" name="file_image" multiple>
 		                    			</span>
 		                			</span>
-            						<input type="text" class="form-control" readonly>
+									<input type="text" name="file_hidden" class="form-control" value="{$data_list_upload[0].files}" readonly>
         						</div>
 							</div>
 						</div>

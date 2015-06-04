@@ -19,14 +19,21 @@ $(window).on('load', function() {
 	$('#separator-toolbar').appendTo($("div.toolbar"));
 	$('#delete-toolbar').appendTo($("div.toolbar"));
 
-	$('#newslist tbody').on( 'click', 'tr', function () {
+	/*$('#newslist tbody').on( 'click', 'tr', function () {
 		$(this).toggleClass('selected');
 	} );
 
 	$('#demo-dt-delete-btn').click( function () {
 		rowDeletion.row('.selected').remove().draw( false );
-	} );
-})	
+	} );*/
+})
+function selectAll(source) {
+			checkboxes = document.getElementsByName('check[]');
+			for(var i in checkboxes){
+				checkboxes[i].checked = source.checked;
+			}
+			return true;
+	}	
 </script>
 
 <!--Page Title-->
@@ -67,17 +74,18 @@ $(window).on('load', function() {
 			<h3 class="panel-title">Table of Files</h3>
 		</div>
 		<div id="create-toolbar" class="table-toolbar-left">
-			<a href="{$basedomain}course/uploadfile"><button class="btn btn-info btn-labeled fa fa-pencil-square-o">Upload</button></a>
+			<a href="{$basedomain}course/upload"><button class="btn btn-info btn-labeled fa fa-pencil-square-o">Upload</button></a>
 
 		</div>
 		<div id="separator-toolbar" class="table-toolbar-left">&nbsp;</div>
 		<div id="delete-toolbar" class="table-toolbar-left">
-			<button id="demo-dt-delete-btn" class="btn btn-danger btn-labeled fa fa-times">Delete</button>
+			<button id="demo-dt-delete-btn-course-upload" class="btn btn-danger btn-labeled fa fa-times">Delete</button>
 		</div>
 		<div class="panel-body">
 			<table id="newslist" class="table table-striped table-bordered" cellspacing="0" width="100%">
 				<thead>
 					<tr>
+						<th>&nbsp;<input type="checkbox" class ="pilihan" id="id_tahun" onClick="return selectAll(this)"/></th>
 						<th>File Name</th>
 						<th>File Type</th>
 						<th class="min-tablet">Status File</th>
@@ -86,29 +94,67 @@ $(window).on('load', function() {
 						<th class="min-desktop">Course Group</th>
 						<th class="min-desktop">Create Time</th>
 						<th class="min-desktop">Status</th>
+						<th class="min-desktop">Action</th>
 					</tr>
 				</thead>
 				<tbody>
+				{foreach $data_list_upload as $value_upload}
 					<tr>
-						<td>Title 1</td>
-						<td>System Architect</td>
-						<td style="color:green">Published</td>
-						<td>John Doe</td>
-						<td>2011-04-25</td>
-						<td>2011-04-25</td>
-						<td>2011-04-25</td>
-						<td>2011-04-25</td>
+						<td align="center"><input value="{$value_upload.idFile}" type="checkbox" name="check[]" id="check[]"></td>
+						<td>{$value_upload.namafile}</td>
+						<td>{if $value_upload.jenisfile == 1}
+								{$file_type ="ebook"}
+								{$file_type}
+							{else}
+								{$file_type ="video"}
+								{$file_type}
+							{/if}		
+						</td>
+						<td>{if $value_upload.statusfile == 1}
+								{$file_type ="login"}
+								{$file_type}
+							{else}
+								{$file_type ="free"}
+								{$file_type}
+							{/if}	
+						</td>
+						<td>{if $value_upload.idMateri == 1}
+								{$file_type ="new"}
+								{$file_type}
+							{else}
+								{$file_type ="old"}
+								{$file_type}
+							{/if}	
+						</td>
+						<td>{foreach $data_list_course as $value_list}
+							{if $value_upload.idKursus == $value_list.idKursus}
+							{$course_name = $value_list.namakursus}
+							{$course_name}
+							{/if}
+						{/foreach}</td>
+						<td>{foreach $data_group_course as $value_group}
+							{if $value_upload.idGrup_kursus == $value_group.idGrup_kursus}
+							{$course_group = $value_group.namagrup}
+							{$course_group}
+							{/if}
+						{/foreach}</td>
+						<td>{$value_upload.create_time}</td>
+						{if $value_upload.n_status == '1'}
+							{$var = 'Active'}
+							{$style= 'color:green'}
+						{else}
+							{$var = 'Non Active'}
+							{$style= 'color:red'}
+						{/if}
+						<td style="{$style};" align="center">
+						{$var}
+						</td>
+						<td align="center">
+							<a href="{$basedomain}course/upload/?id={$value_upload.idFile}"><button id="" class="btn btn-warning btn-labeled fa fa-pencil" >Edit</button></a><br/><br/>
+							<button id="" class="update-list-upload-btn btn btn-success btn-labeled fa fa-edit"  value="{$value_upload.idFile|cat:'_'|cat:$value_upload.n_status}" href="#" >Status</button>
+						</td>
 					</tr>
-					<tr>
-						<td>Title 2</td>
-						<td>Accountant</td>
-						<td style="color:red">Unpublished</td>
-						<td>John Doe</td>
-						<td>2011-07-25</td>
-						<td>2011-07-25</td>
-						<td>2011-07-25</td>
-						<td>2011-07-25</td>
-					</tr>
+				{/foreach}	
 				</tbody>
 			</table>
 		</div>

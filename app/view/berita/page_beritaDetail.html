@@ -1,49 +1,39 @@
 <?php include"meta.php";?>
 <?php include"header.php";?>
-<section class="callaction">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12" align="center">
-				<img src="{$basedomain}assets/img/data/slideberita.JPG"/>
-			</div>
 
-		</div>
-	</div>
-</section>
 <section class="callaction">
 	<div class="container">
 		
 		<div class="row">
 			<div class="col-md-9">	
-			<h1 style="border-bottom:5px solid #69BD45">BERITA BSN</h1>
-			<hr style="margin-top:-18px;border-bottom:2px solid #000"/>
+				<div class="row"  style="border-bottom:2px solid #69BD45">
+					<div class="col-md-2">
+						<div class="col-md-7" align="center"  style="border-radius:50%;background-color:#2E8AD8;min-height:50px;padding:12px;color:#FFFFFF;box-shadow: 2px 2px 5px #888888;">
+	     					<span style="font-size:20px;">{date ("d", strtotime($data.posted))}</span><br/>
+	     					<span style="text-transform: uppercase;">{date ("M", strtotime($data.posted))}</span>
+	     				</div>
+     				</div>
+     				<div class="col-md-10">
+					<h1 style="margin-left:-50px;">{$data.judul}</h1>
+	     				
+     				</div>
+ 				</div>
 			</div>
-		</div>
+			</div>
 		<div class="row">
 			<div class="col-md-9">
-				{foreach $data as $val}
+				<!-- <i class="fa fa-user"></i>  {$data.username} <i class="fa fa-list"></i> Interviews -->
+		
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-12" align="center">
 						
-						<img src="{$basedomain}public_assets/{$val.gambar}" width="250" height="200" />
+						<img src="{$basedomain}public_assets/{$data.gambar}"/>
 					</div>
 
-					<div class="col-md-8">
-						<div class="row">
-							<div class="col-md-2">
-								<div class="col-md-12" align="center"  style="border-radius:50%;background-color:#2E8AD8;min-height:50px;padding:12px;color:#FFFFFF;box-shadow: 2px 2px 5px #888888;">
-			     					<span style="font-size:20px;">{date ("d", strtotime($val.posted))}</span><br/>
-			     					<span style="text-transform: uppercase;">{date ("M", strtotime($val.posted))}</span>
-			     				</div>
-		     				</div>
-		     				<div class="col-md-10">
-							<span style="font-size:25px">{$val.judul}</span><br/>
-							<i class="fa fa-user"></i>  {$val.username} <i class="fa fa-list"></i> Interviews
-			     				
-		     				</div>
-	     				</div>
-						<p align="justify">{$val.brief}</p>
-						<a href="{$basedomain}berita/detail/?id_news={$val.id_news}">Read More</a>
+					<div class="col-md-12">
+						
+						<p align="justify">{$data.isi}</p>
+						
 
 					</div>
 					
@@ -51,12 +41,8 @@
 				
 					
 			
-				<div class="row">
-					<div class="col-md-12">	
-					<hr style="margin-top:-15px;border-bottom:2px solid #69BD45"/>
-					</div>
-				</div>
-				{/foreach}
+				
+				
 			</div>
 			<div class="col-md-3">
 			 	{*}<div class="row" style="background-color:#888888">

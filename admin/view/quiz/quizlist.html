@@ -118,6 +118,29 @@ $(window).on('load', function() {
 								
 							</tr>
 						{/foreach}
+						<th>Soal</th>
+						<th>Kursus</th>
+						<th class="min-tablet">Materi</th>
+						<th class="min-tablet">Status</th>
+						<th class="min-tablet">Aksi</th>
+					</tr>
+				</thead>
+				<tbody>
+					{if $getQuiz}
+					{foreach $getQuiz as $val}
+					<tr>
+						<td>{$val.soal}</td>
+						<td>{$val.namakursus}</td>
+						<td>{$val.namamateri}</td>
+						{if $val.n_status ==0}
+						<td style="color:red">UnPublished</td>
+						{else}
+						<td style="color:green">Published</td>
+						{/if}
+						
+						<td><a href="javascript:void(0)">Edit</a> | <a href="javascript:void(0)">Delete</a></td>
+					</tr>
+					{/foreach}
 					{/if}
 					
 				</tbody>

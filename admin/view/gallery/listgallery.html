@@ -32,7 +32,7 @@ $(window).on('load', function() {
 <!--Page Title-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <div id="page-title">
-	<h1 class="page-header text-overflow">News List</h1>
+	<h1 class="page-header text-overflow">Gallery</h1>
 
 	<!--Searchbox-->
 	<div class="searchbox">
@@ -51,7 +51,7 @@ $(window).on('load', function() {
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <ol class="breadcrumb">
 	<li><a href="{$basedomain}">Home</a></li>
-	<li class="active">News List</li>
+	<li class="active">Gallery</li>
 </ol>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--End breadcrumb-->
@@ -59,12 +59,11 @@ $(window).on('load', function() {
 <!--Page content-->
 <!--===================================================-->
 <div id="page-content">
-	
 	<!-- Row selection and deletion (multiple rows) -->
 	<!--===================================================-->
 	<div class="panel">
 		<div class="panel-heading">
-			<h3 class="panel-title">Table of News List</h3>
+			<h3 class="panel-title">Table of Gallery</h3>
 		</div>
 		<div id="create-toolbar" class="table-toolbar-left">
 			<a class="btn btn-info btn-labeled fa fa-pencil-square-o" href="{$basedomain}gallery/addgallery/?id_album={$data.id}">Add Photo</a>
@@ -81,6 +80,7 @@ $(window).on('load', function() {
 					</tr>
 				</thead>
 				<tbody>
+				{if !empty($data)}
 				{foreach $data.data as $val}
 			<tr>
 			<td>{$val.nm_gallery}</td>
@@ -93,6 +93,7 @@ $(window).on('load', function() {
 			<td>{$val.deskripsi}</td>
 			</tr>
 			{/foreach}
+			{/if}
 				</tbody>
 			</table>
 		</div>

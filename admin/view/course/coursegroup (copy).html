@@ -29,7 +29,7 @@ $(window).on('load', function() {
 		alert(id);
 		
     } );*/
-})
+})	
 	function selectAll(source) {
 			checkboxes = document.getElementsByName('check[]');
 			for(var i in checkboxes){
@@ -82,14 +82,14 @@ $(window).on('load', function() {
 		</div>
 		<div id="separator-toolbar" class="table-toolbar-left">&nbsp;</div>
 		<div id="delete-toolbar" class="table-toolbar-left">
-			<button id="demo-dt-delete-btn-course-group" class="btn btn-danger btn-labeled fa fa-times">Delete</button>
+			<button id="demo-dt-delete-btn" class="btn btn-danger btn-labeled fa fa-times">Delete</button>
 		</div>
 		<div class="panel-body">
 			<table id="newslist" class="table table-striped table-bordered" cellspacing="0" width="100%">
 				<thead>
 					<tr>
 						<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class ="pilihan" id="id_tahun" onClick="return selectAll(this)"/></th>
-						<!--<th>No</th>-->
+						<th>No</th>
 						<th>Group Name</th>
 						<th>Requirement</th>
 						<th class="min-tablet">Create Time</th>
@@ -102,7 +102,7 @@ $(window).on('load', function() {
 					{foreach $data as $value}
 					<tr>
 						<td align="center"><input value="{$value.idGrup_kursus}" type="checkbox" name="check[]" id="check[]"></td>
-						<!--<td align="center" >{$no}</td>-->
+						<td align="center" >{$no}</td>
 						<td>{$value.namagrup}</td>
 						<td>{$value.syaratkelulusan}</td>
 						<td>{$value.create_time}</td>

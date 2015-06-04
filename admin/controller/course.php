@@ -114,6 +114,8 @@ class course extends Controller {
 		
 	}
 	
+<<<<<<< HEAD
+=======
 	public function ajax_delete_course_list(){
 		
 		// pr($_POST);
@@ -129,6 +131,7 @@ class course extends Controller {
 		
 	}
 	
+>>>>>>> 2f53981d4f09b9934152b2a55f431fd4244c7bdf
 	//module course
 	public function courselist(){
 		$select_list_course = $this->mcourse->select_data_list_course();
@@ -136,6 +139,18 @@ class course extends Controller {
 		
 		$select_list_group = $this->mcourse->select_data_list_group();
 		$this->view->assign('data_listgroup',$select_list_group);
+<<<<<<< HEAD
+		return $this->loadView('course/courselist');	
+	}
+
+	
+	public function addcourse(){
+		global $basedomain;
+		$select = $this->mcourse->select_data_course();
+		// pr($select);
+		$this->view->assign('data',$select);
+		return $this->loadView('course/addcourse');	
+=======
 		
 		return $this->loadView('course/courselist');	
 	}
@@ -167,11 +182,17 @@ class course extends Controller {
 				return $this->loadView('course/addcourse');
 			}	
 		}
+>>>>>>> 2f53981d4f09b9934152b2a55f431fd4244c7bdf
 	}
 	
 	public function insert_course(){
 		global $CONFIG;
 		if(isset($_POST)){
+<<<<<<< HEAD
+		 // pr($_POST);
+		 // exit;		
+=======
+>>>>>>> 2f53981d4f09b9934152b2a55f431fd4244c7bdf
 		 $x = form_validation($_POST);
 		 try
 			   {
@@ -187,6 +208,13 @@ class course extends Controller {
 			   		}
 				   	
 			   }catch (Exception $e){}
+<<<<<<< HEAD
+		echo "<script>alert('Course Successfully Created');window.location.href='".$CONFIG['admin']['base_url']."course/courselist'</script>";		
+		}
+		return $this->loadView('insert_course');
+	}
+	
+=======
 		if($x['id'] == ''){
 			echo "<script>alert('Course Successfully Created');window.location.href='".$CONFIG['admin']['base_url']."course/courselist'</script>";		
 		}else{
@@ -215,12 +243,23 @@ class course extends Controller {
 		exit;
 	}
 	
+>>>>>>> 2f53981d4f09b9934152b2a55f431fd4244c7bdf
 	public function addgroup()
 	{
 
 		return $this->loadView('course/addgroup');
 	}
 
+<<<<<<< HEAD
+	
+
+	public function upload(){
+		return $this->loadView('course/uploadfile');	
+	}
+
+	public function uploadfile(){
+		return $this->loadView('course/uploadform');	
+=======
 	//module upload video/ebook
 	public function upload(){
 		global $basedomain;
@@ -352,6 +391,7 @@ class course extends Controller {
 		}
 		exit;
 		
+>>>>>>> 2f53981d4f09b9934152b2a55f431fd4244c7bdf
 	}
 	
 	public function viewmaterial()

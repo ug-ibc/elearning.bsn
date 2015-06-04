@@ -38,13 +38,21 @@
 							icon : 'fa fa-check',
 							message : "Group " + namagrup + ".<br> Update Successfully",
 							container : 'floating',
+<<<<<<< HEAD
+							timer : 4000
+=======
 							timer : 3000
+>>>>>>> 2f53981d4f09b9934152b2a55f431fd4244c7bdf
 						});
 						setTimeout(
 						  function() 
 						  {
 							location.reload();
+<<<<<<< HEAD
+						  }, 5000);
+=======
 						  }, 3000);
+>>>>>>> 2f53981d4f09b9934152b2a55f431fd4244c7bdf
 						
 					}else{
 					
@@ -102,12 +110,23 @@
 							icon : 'fa fa-check',
 							message : "Group " + namagrup + ".<br> Successfully Created",
 							container : 'floating',
+<<<<<<< HEAD
+							timer : 4000
+=======
 							timer : 3000
+>>>>>>> 2f53981d4f09b9934152b2a55f431fd4244c7bdf
 						});
 						setTimeout(
 						  function() 
 						  {
 							location.reload();
+<<<<<<< HEAD
+						  }, 5000);
+						
+					}else{
+					
+						alert( "isi Data" );
+=======
 						  }, 3000);
 						
 					}else{
@@ -116,6 +135,7 @@
 						bootbox.alert("Data Cannot Empty!", function(){
 							//EMPTY
 						});
+>>>>>>> 2f53981d4f09b9934152b2a55f431fd4244c7bdf
 					}
 					}
 				}
@@ -155,6 +175,10 @@
 		  }, 3000);
 	});
 
+<<<<<<< HEAD
+	
+	$('#demo-dt-delete-btn').click( function () {
+=======
 	$('.update-list-course-btn').on('click', function () {
 		var btn = $(this).button('loading')
 		// alert(btn);
@@ -222,6 +246,7 @@
 	});
 	
 	$('#demo-dt-delete-btn-course-group').click( function () {
+>>>>>>> 2f53981d4f09b9934152b2a55f431fd4244c7bdf
 		//rowDeletion.row('.selected').remove().draw( false );
 		//var id = rowDeletion.cell('.selected', 2).data();
 		//alert(id);
@@ -280,6 +305,9 @@
 		}
 	});
 	
+<<<<<<< HEAD
+
+=======
 	$('#demo-dt-delete-btn-course-list').click( function () {
 		//rowDeletion.row('.selected').remove().draw( false );
 		//var id = rowDeletion.cell('.selected', 2).data();
@@ -399,6 +427,7 @@
 	});
 	
 	
+>>>>>>> 2f53981d4f09b9934152b2a55f431fd4244c7bdf
 	$('#addmaterial').on('click', function(){
 		bootbox.dialog({
 			title: "Create Course Material",
@@ -440,7 +469,10 @@
 		$(".demo-modal-radio").niftyCheck();
 	});
 	
+<<<<<<< HEAD
+=======
 	
+>>>>>>> 2f53981d4f09b9934152b2a55f431fd4244c7bdf
  })
  
 

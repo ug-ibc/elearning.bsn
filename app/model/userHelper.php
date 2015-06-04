@@ -9,7 +9,9 @@ class userHelper extends Database {
         // pr($getSessi);
         $this->user = $getSessi[0];
         $this->salt = $CONFIG['default']['salt'];
-        $this->prefix = "lelang";
+        $this->prefix = "";
+        $this->date = date('Y-m-d H:i:s');
+        $this->token = str_shuffle('1q2w3e4r5t6y7u8i9o0pazsxdcfvgbhnjmkl');
     }
     
     
@@ -115,5 +117,82 @@ class userHelper extends Database {
         return false;
 
     } 
+
+    function createAccount($data,$debug=false)
+    {
+
+        
+        $field = array('name','email','username','tempatlahir','tanggallahir','pendidikan','institusi','jenispekerjaan','hp'); 
+
+        foreach ($data as $key => $value) {
+            
+            if (in_array($key, $field)){
+                $tmpF[] = $key;
+                $tmpV[] = "'".$value."'";
+            }
+        }
+
+        $tmpF[] = "register_date";
+        $tmpF[] = "type";
+        $tmpF[] = "email_token";
+        $tmpF[] = "salt";
+        $tmpF[] = "password";
+
+
+        $pass = sha1($this->salt.$data['password'].$this->salt);
+        $tmpV[] = "'".$this->date."'";
+        $tmpV[] = 2;
+        $tmpV[] = "'".$this->token."'";
+        $tmpV[] = "'".$this->salt."'";
+        $tmpV[] = "'{$pass}'";
+
+
+        // pr($tmpV);
+        $impField = implode(',', $tmpF);
+        $impData = implode(',', $tmpV);
+
+        $sql = "INSERT IGNORE INTO user ({$impField}) VALUES ({$impData})";
+        // pr($sql);
+        // exit;
+        /*
+        $sql = array(
+                'table'=>'user',
+                'field'=>"{$impField}",
+                'value' => "{$impData}",
+                );
+
+        $res = $this->lazyQuery($sql,$debug,1);*/
+        $res = $this->query($sql);
+
+        if ($res){
+
+            // echo 'ada';exit;
+            // $data = array('email'=>$data['email'], 'token'=>$this->token);
+            // $msg = encode(serialize($data));
+            // logFile($msg);
+            // $html = "klik link berikut ini {$basedomain}register/validate/?ref={$msg}";
+            // $send = sendGlobalMail($email,'noreply@pindai.co.id',$html);
+            return true;
+        } 
+
+        
+        return false;
+
+    }
+
+    function logoutUser()
+    {
+
+
+        $sql = array(
+                'table'=>"user",
+                'field'=>"is_online = 0",
+                'condition'=>"idUser = '{$this->user['idUser']}'",
+                );
+
+        $result = $this->lazyQuery($sql,$debug,2);
+        if ($result) return true;
+        return false;
+    }
 }
 ?>

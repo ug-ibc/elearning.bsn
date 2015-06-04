@@ -51,13 +51,13 @@ public function getgallery(){
 	//menangkap parameter id_album dari halaman album
 	$id_album=$_GET['id_album'];
 	$data=$this->models->getgallery($id_album);
-	if ($data){	
+	// if ($data){	
 		// $vardata=array("$id_album","$data");
 		$vardata['id'] = $id_album;
 		$vardata['data'] = $data;
 		// pr($vardata);exit;
 		$this->view->assign('data',$vardata);
-	}
+	// }
 	return $this->loadView('gallery/listgallery');
 }
 

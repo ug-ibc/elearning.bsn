@@ -37,9 +37,9 @@ class berita extends Controller {
 	public function detail(){
 
 		global $CONFIG;
-		pr($_GET);
+		// pr($_GET);
 		$data=$this->models->selectnews($_GET['id_news']);
-		pr($data);
+		// pr($data);
 		if ($data){
 				
 			$this->view->assign('data',$data);

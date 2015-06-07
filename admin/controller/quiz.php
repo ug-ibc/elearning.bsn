@@ -21,25 +21,17 @@ class quiz extends Controller {
 	}
 	
 	public function index(){
-       
+		//memanggil fungsi get_grupkursus pada model
+       $data=$this->models->get_grupkursus();
+		if ($data){	
+			$this->view->assign('data',$data);
+		}
 		return $this->loadView('quiz/quiz');
 
 	}
-
-	function listquiz()
-	{
-
-		$getQuiz = $this->models->getQuiz(false, '0,1');
-		// pr ($getQuiz);
-		if ($getQuiz){
-			$this->view->assign('getQuiz', $getQuiz);
-		}
-		return $this->loadView('quiz/quizlist');
-	}
-
+	//fungsi untuk menginput data quiz dari view
 	public function inputquiz(){
-		global $CONFIG, $basedomain;
-
+		global $CONFIG;
 		$soal=$_POST['soal'];
 		$pilihan1=$_POST['pilihan1'];
 		$pilihan2=$_POST['pilihan2'];
@@ -51,52 +43,75 @@ class quiz extends Controller {
 		$kursus=$_POST['kursus'];
 		$materi=$_POST['materi'];
 		$groupkursus=$_POST['groupkursus'];
-		$quizstatus = $_POST['quizstatus'];
-		$data=$this->models->inputquiz($soal,$pilihan1,$pilihan2,$pilihan3,$pilihan4,$jenissoal,$keterangan,$jawaban,$kursus,$materi,$groupkursus,$quizstatus);
-		
+		$data=$this->models->inputquiz($soal,$pilihan1,$pilihan2,$pilihan3,$pilihan4,$jenissoal,$keterangan,$jawaban,$kursus,$materi,$groupkursus);
+		//kondisi untuk memberi peringatan proses input berhasil atau tidak
 		if ($data==1){
-			echo "<script>alert('Data berhasil disimpan');</script>";
-			
-		}else{
-			echo "<script>alert('Data gagal disimpan');</script>";
-			
+			echo "<script>alert('data berhasil disimpan');windows.location.href='".$CONFIG['admin']['base_url']."quiz'</script>";
 		}
 
-		redirect($basedomain.'quiz');
-		exit;
 	}
 	
+	//fungsi untuk menampilkan form input quiz
 	public function addquiz(){
-		
-		$this->view->assign('active','active');
-
-		if(isset($_GET['id']))
-		{
-			$data = $this->models->get_article_id($_GET['id']);	
-			// pr($data);
-			if ($data){
-				// echo 'ada';
-				$content = unserialize($data['content']);
-				// pr($data['content']);
-				$data['data'] = $content;
-			}
-
-			// pr($data);
-			$this->view->assign('data',$data);
-		} 
-
-		$this->view->assign('admin',$this->admin['admin']);
 		return $this->loadView('quiz/inputquiz');
-	}
+		}	
+
     
 	public function quizlist(){
-		$data = $this->models->get_quizlist();
+		$data = $this->models->getQuiz(false,'0,1');
+		// pr($data);
 		if($data){
-			$this->view->assign('data',$data);
+			$this->view->assign('getQuiz',$data);
 		}	
 		return $this->loadView('quiz/quizlist');
 	}
 
-}
+	//fungsi untuk menghapus data quiz
+	public function deletequiz(){
+		global $CONFIG;
+		//mengambil parameter idSoal dari view
+		$idSoal = $_GET['idSoal'];
+		//melempar idSoal ke fungsi deletequiz yang ada di model
+		$data=$this->models->deletequiz($idSoal);
+		if($data == 1){
+			echo "<script>alert('Data berhasil di hapus');window.location.href='".$CONFIG['admin']['base_url']."quiz'</script>";
+		}
+		else {pr('gagal');}
+	}
 
+
+		//fungsi untuk merubah data quiz
+	public function editquiz(){
+		global $CONFIG;
+		$idSoal = $_GET['idSoal'];
+		//kondisi apabila tidak melakukan perubahan
+		if ($_POST == null){	
+			$data=$this->models->selectquiz($idSoal);
+			if ($data){	
+				$this->view->assign('data',$data);
+			}	
+			return $this->loadView('quiz/editquiz');	
+		}
+		//eksekusi jika melakukan perubahan terhadap data quiz
+		else{
+			$soal=$_POST['soal'];
+			$pilihan1=$_POST['pilihan1'];
+			$pilihan2=$_POST['pilihan2'];
+			$pilihan3=$_POST['pilihan3'];
+			$pilihan4=$_POST['pilihan4'];
+			$jenissoal=$_POST['jenissoal'];
+			$keterangan=$_POST['keterangan'];
+			$jawaban=$_POST['jawaban'];
+			$kursus=$_POST['kursus'];
+			$materi=$_POST['materi'];
+			$groupkursus=$_POST['groupkursus'];
+			$data=$this->models->updatequiz($idSoal,$soal,$pilihan1,$pilihan2,$pilihan3,$pilihan4,$jenissoal,$keterangan,$jawaban,$kursus,$materi,$groupkursus);
+			if($data == 1){
+				echo "<script>alert('Data berhasil di perbarui');window.location.href='".$CONFIG['admin']['base_url']."quiz'</script>";
+			}
+		}
+	}
+
+
+}
 ?>

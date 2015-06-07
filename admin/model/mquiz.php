@@ -37,7 +37,7 @@ class mquiz extends Database {
 	function get_grupkursus()
 
 	{
-		$query = "SELECT namagrup FROM grup_kursus";
+		$query = "SELECT * FROM grup_kursus";
 		//pr($query);
 		$result = $this->fetch($query,1,0);
 		return $result;

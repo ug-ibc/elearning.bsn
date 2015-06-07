@@ -16,7 +16,8 @@ class mquiz extends Database {
 		else return false;
 	}
 	
-	function get_quizlist()
+
+	
 	function getQuiz($id=false, $n_status=1, $start=0, $limit=10, $debug=0)
 	{
 		$sql = array(
@@ -33,13 +34,43 @@ class mquiz extends Database {
         return false;
 	}
 
-	function get_article($type=1)
+	function get_grupkursus()
+
 	{
-		$query = "SELECT * FROM banksoal;";
+		$query = "SELECT namagrup FROM grup_kursus";
 		//pr($query);
 		$result = $this->fetch($query,1,0);
 		return $result;
 		}
+
+	function selectquiz($idSoal)
+	{
+		//pr($id);
+		$query = "SELECT * FROM banksoal WHERE idSoal ='".$idSoal."'";
+
+		$result = $this->fetch($query,0,0);
+		return $result;
+
+	function deletequiz($idSoal)
+	{
+		//query insert data
+		$query = "UPDATE banksoal SET status='2' WHERE idSoal = '".$idSoal."'";
+		//eksekusi query
+		$exec = $this->query($query,0);	
+		//kondisi apabila eksekusi berhasil mengembalikan notif 1, jika gagal mencetak query gagal 
+		if($exec) return 1; else pr('query gagal');
+	}
+
+	function updatequiz($idSoal, $soal,$pilihan1,$pilihan2,$pilihan3,$pilihan4,$jenissoal,$keterangan,$jawaban,$kursus,$materi,$groupkursus)
+	{
+		//query insert data
+		$query = "UPDATE banksoal SET soal='".$soal."', pilihan1='".$pilihan1."', pilihan2='".$pilihan2."', pilihan3='".$pilihan3."', pilihan4='".$pilihan4."',jenissoal='".$jenissoal."',keterangan='".$keterangan."', jawaban='".$jawaban."',kursus='".$kursus."',materi='".$materi."',groupkursus='".$groupkursus."' WHERE idSoal = '".$idSoal."'";
+		//eksekusi query
+		$exec = $this->query($query,0);	
+		//kondisi apabila eksekusi berhasil mengembalikan notif 1, jika gagal mencetak query gagal 
+		if($exec) return 1; else pr('query gagal');
+	}
 		
+}
 }
 ?>

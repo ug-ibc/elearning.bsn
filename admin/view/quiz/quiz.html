@@ -99,9 +99,9 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Group Course</label>
 							<div class="col-sm-4">
-								<select class="selectpicker pilihKursus" name="groupkursus">
+								<select class="selectpicker pilihGrupKursus" name="groupkursus">
 									{foreach $data as $val}
-									<option>{$val.namagrup}</option>
+									<option value="{$val.idGrup_kursus}">{$val.namagrup}</option>
 									{/foreach}
 								</select> 
 							</div>
@@ -110,10 +110,8 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Select Course</label>
 							<div class="col-sm-4">
-								<select class="selectpicker" name="kursus">
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
+								<select class="selectpicker pilihKursus" name="kursus">
+									<option>Silahkan pilih</option>
 								</select> 
 							</div>
 						</div>
@@ -157,28 +155,32 @@
 {literal}
 	<script type="text/javascript">
 
-		$(document).on('change','.pilihKursus', function(){
+		$(document).on('change','.pilihGrupKursus', function(){
 
-			alert("masuk");
-			// var soal = $(this).attr('data-soal');
+			// alert("masuk");
+			var grupid = $(this).val();
+			console.log(grupid);
 			// var pilihan = $(this).attr('data-pilihan');
 			// var materi = $(this).attr('data-materi');
 			// var kursus = $(this).attr('data-kursus');
 			// var dataKlik = this;
 			// $('soal_'+soal).removeClass("li.span.active");
 			
-			/*
-			$.post(basedomain+'quiz/ajax', {soal:soal, pilihan:pilihan, materi:materi, kursus:kursus}, function(data){
+			var html = "";
+			$.post(basedomain+'quiz/ajax', {grupid:grupid,param:1}, function(data){
 
 				if (data.status==true){
 					
-					console.log(dataKlik);
-					// $(dataKlik).addClass("active");	
+					// html += "<select class='selectpicker' name='materi'>";
+					html += "<option>tes aja</option>"
+					// html += "</select>";
+
+					$(".pilihKursus").html(html);	
 				}
 				
 
 			},"JSON")
-			*/
+			
 		})
 
 	</script>

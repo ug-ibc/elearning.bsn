@@ -164,9 +164,12 @@ legend {
 			</div>
 			<div class="col-md-3" align="center" style="color:#FFFFFF;background-color:#D3D3D3;padding-top:10px;margin-left:5px;border-radius:5px;">
 				<img src="{$basedomain}assets/img/data/iconslide.JPG"/><br/><br/>
-				<span style="font-size:24px;color:#252A72">WAKTU TERSISA</span>
+				
+{if $user}
+			<span style="font-size:24px;color:#252A72">WAKTU TERSISA</span>
 				   <div style="border-radius:5px 10px;background-color:#4155D0;width:100%;height:100%;padding:10px 0px;"><a href="#" style="text-decoration:none;color:#FFFFFF;font-size:24px;"><h3 style="color:#FFFFFF"><div id="countdown"></div></h3>
                         </a></div>
+{/if}
 			</div>
 			<div class="col-md-4">
 			<!-- 	<img src="{$basedomain}assets/img/data/waktukuis.JPG"/>

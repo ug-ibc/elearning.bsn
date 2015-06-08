@@ -31,8 +31,9 @@
 					<div class="col-md-8">
 						<div class="row">
 							<div class="col-md-2">
-								<div class="col-md-12" align="center"  style="border-radius:50%;background-color:#2E8AD8;min-height:50px;padding:10px;color:#FFFFFF;box-shadow: 2px 2px 5px #888888;">
-			     					{date ("d", strtotime($val.posted))}<br>{date ("M", strtotime($val.posted))}
+								<div class="col-md-12" align="center"  style="border-radius:50%;background-color:#2E8AD8;min-height:50px;padding:12px;color:#FFFFFF;box-shadow: 2px 2px 5px #888888;">
+			     					<span style="font-size:20px;">{date ("d", strtotime($val.posted))}</span><br/>
+			     					<span style="text-transform: uppercase;">{date ("M", strtotime($val.posted))}</span>
 			     				</div>
 		     				</div>
 		     				<div class="col-md-10">
@@ -42,7 +43,7 @@
 		     				</div>
 	     				</div>
 						<p align="justify">{$val.brief}</p>
-						<a href="{$basedomain}getnews/selectnews/?id_news={$val.id_news}">Read More</a>
+						<a href="{$basedomain}berita/detail/?id_news={$val.id_news}">Read More</a>
 
 					</div>
 					
@@ -58,7 +59,7 @@
 				{/foreach}
 			</div>
 			<div class="col-md-3">
-			 	<div class="row" style="background-color:#888888">
+			 	{*}<div class="row" style="background-color:#888888">
 					<div class="col-md-12">
 						<span style="color:#278ED7">LATEST</span> <span style="color:#FFFFFF">TWEET</span>
 						<div class="row">
@@ -88,7 +89,7 @@
 
 					</div>
 
-			 	</div>
+			 	</div>{/*}
 			 	<div class="row" style="background-color:#888888">
 					<div class="col-md-12">
 						<span style="color:#278ED7">POPULAR</span> <span style="color:#FFFFFF">POST</span>
@@ -141,6 +142,7 @@
 					</div>
 
 			 	</div>
+			 	{*}
 			 	<div class="row" style="background-color:#888888">
 					<div class="col-md-12">
 						<span style="color:#278ED7">SEARCH</span> <span style="color:#FFFFFF">OUR SITE</span>
@@ -151,6 +153,7 @@
 					</div>
 
 			 	</div> 
+			 	{/*}
 			</div>
 
 		</div>

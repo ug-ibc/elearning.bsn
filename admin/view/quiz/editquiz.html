@@ -1,0 +1,178 @@
+<script>
+$(document).ready(function() {
+	$('#brief').summernote({
+		height: 200
+	});
+	$('#isi').summernote({
+		height: 200
+	});
+})	
+</script>
+<!--Page Title-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<style>
+	        .form-horizontal .control-label{
+	            text-align: left;
+	        }
+	        .col-sm-2 {
+	            text-align: left;
+	        }
+
+  		</style>	
+
+<div id="page-title">
+	<h1 class="page-header text-overflow">Create Quiz</h1>
+
+	<!--Searchbox-->
+	<div class="searchbox">
+		<div class="input-group custom-search-form">
+			<input type="text" class="form-control" placeholder="Search..">
+			<span class="input-group-btn">
+				<button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+			</span>
+		</div>
+	</div>
+</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End page title-->
+
+<!--Breadcrumb-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<ol class="breadcrumb">
+	<li><a href="{$basedomain}">Home</a></li>
+	<li class="active">Edit Quiz</li>
+</ol>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End breadcrumb-->
+
+<!--Page content-->
+<!--===================================================-->
+<div id="page-content">
+	
+	<div class="row">
+
+	<div class="col-sm-12">
+			<div class="panel">
+				<div class="panel-heading">
+					<h3 class="panel-title">Publish</h3>
+				</div>
+	
+				<!--Horizontal Form-->
+				<!--===================================================-->
+				<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+					<div class="panel-body">
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Question</label>
+							<div class="col-sm-6">
+								<input type="text" name="soal" class="form-control" placeholder="Enter question here">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Option A</label>
+							<div class="col-sm-4">
+								<input type="text" name="pilihan1" class="form-control">
+							</div>
+							<div class="col-sm-3 pad-ver" style="padding-top:0px;padding-bottom:0px">
+									<label class="form-radio form-icon btn btn-info btn-labeled active"><input type="radio" name="jawaban" value="1"> Mark as right Answer</label>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Option B</label>
+							<div class="col-sm-4">
+								<input type="text" name="pilihan2" class="form-control">
+							</div>
+							<div class="col-sm-3 pad-ver" style="padding-top:0px">
+									<label class="form-radio form-icon btn btn-info btn-labeled active"><input type="radio" name="jawaban" value="2"> Mark as right Answer</label>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Option C</label>
+							<div class="col-sm-4">
+								<input type="text" name="pilihan3" class="form-control">
+							</div>
+							<div class="col-sm-3 pad-ver" style="padding-top:0px">
+									<label class="form-radio form-icon btn btn-info btn-labeled active"><input type="radio" name="jawaban" value="3"> Mark as right Answer</label>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Option D</label>
+							<div class="col-sm-4">
+								<input type="text" name="pilihan4" class="form-control">
+							</div>
+							<div class="col-sm-3 pad-ver" style="padding-top:0px">
+									<label class="form-radio form-icon btn btn-info btn-labeled active"><input type="radio" name="jawaban" value="4"> Mark as right Answer</label>
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Information</label>
+							<div class="col-sm-6">
+								<input type="text" name="keterangan" class="form-control" placeholder="Enter other explanation here">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Group Course</label>
+							<div class="col-sm-4">
+								<select class="selectpicker pilihKursus" name="groupkursus">
+									{foreach $data as $val}
+									<option>{$val.namagrup}</option>
+									{/foreach}
+								</select> 
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Select Course</label>
+							<div class="col-sm-4">
+								<select class="selectpicker" name="kursus">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+								</select> 
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Material Course</label>
+							<div class="col-sm-4">
+								<select class="selectpicker" name="materi">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+								</select> 
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Quiz status</label>
+							<div class="col-sm-4">
+								<select class="selectpicker" name="quizstatus">
+									<option value="0">Unpublish</option>
+									<option value="1">Publish</option>
+								</select> 
+							</div>
+						</div>
+					</div>
+					<div class="panel-footer text-right">
+						<button class="btn btn-info" type="submit">Save</button>
+					</div>
+				</form>
+				<!--===================================================-->
+				<!--End Horizontal Form-->
+	
+			</div>
+		</div>
+		
+	
+	
+</div>
+<!--===================================================-->
+<!--End page content-->
+

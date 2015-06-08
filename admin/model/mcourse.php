@@ -55,9 +55,6 @@ class mcourse extends Database {
 							n_status = '{$n_status}'
 						WHERE
 							idGrup_kursus in ({$id})";
-<<<<<<< HEAD
-		echo $query;					
-=======
 		// echo $query;					
 		$result = $this->query($query);					
 	}
@@ -70,7 +67,6 @@ class mcourse extends Database {
 						WHERE
 								idKursus in ({$id})";
 		// echo $query;					
->>>>>>> 2f53981d4f09b9934152b2a55f431fd4244c7bdf
 		$result = $this->query($query);					
 	}
 	
@@ -90,12 +86,7 @@ class mcourse extends Database {
 		$query = "SELECT idGrup_kursus,namagrup FROM grup_kursus WHERE n_status != '2'";
 		// pr($query);
 		$result = $this->fetch($query,1);
-<<<<<<< HEAD
-		
-=======
-		// pr($result);
->>>>>>> 2f53981d4f09b9934152b2a55f431fd4244c7bdf
-		return $result;
+		// pr($result);		return $result;
 	}
 	
 	function course_insert($x){
@@ -109,8 +100,6 @@ class mcourse extends Database {
 			$result = $this->query($query);	
 		}else{
 			//update here
-<<<<<<< HEAD
-=======
 			$query = "UPDATE kursus
 						SET 
 							namakursus = '{$x[namakursus]}',
@@ -126,7 +115,6 @@ class mcourse extends Database {
 			// exit;				
 			$result = $this->query($query);					
 			
->>>>>>> 2f53981d4f09b9934152b2a55f431fd4244c7bdf
 		}
 	}
 	
@@ -134,8 +122,6 @@ class mcourse extends Database {
 		$query = "SELECT idKursus,namakursus,keterangan,jeniskursus,start_date,end_date,quota,idGrup_kursus,n_status FROM kursus WHERE n_status != '2'";
 		// pr($query);
 		$result = $this->fetch($query,1);
-<<<<<<< HEAD
-=======
 		// pr($result);
 		return $result;
 	}
@@ -145,13 +131,10 @@ class mcourse extends Database {
 				  WHERE n_status != '2' and idKursus='$id'";
 		// pr($query);
 		$result = $this->fetch($query,1);
->>>>>>> 2f53981d4f09b9934152b2a55f431fd4244c7bdf
 		
 		return $result;
 	}
 	
-<<<<<<< HEAD
-=======
 	//update course with ajax with id
 	function update_status_course($id,$n_status){
 		$query = "UPDATE kursus
@@ -164,7 +147,6 @@ class mcourse extends Database {
 		$result = $this->query($query);					
 	}
 	
->>>>>>> 2f53981d4f09b9934152b2a55f431fd4244c7bdf
 	function select_data_list_group(){
 		$query = "SELECT idGrup_kursus,namagrup FROM grup_kursus WHERE n_status != '2'";
 		// pr($query);
@@ -172,9 +154,7 @@ class mcourse extends Database {
 		
 		return $result;
 	}
-	
-<<<<<<< HEAD
-=======
+
 	function upload_insert($x){
 		if($x['action'] == 'insert'){
 			$n_status = '1';
@@ -238,7 +218,6 @@ class mcourse extends Database {
 			
 		$result = $this->query($query);					
 	}
->>>>>>> 2f53981d4f09b9934152b2a55f431fd4244c7bdf
 	
 	
 }

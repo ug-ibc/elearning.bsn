@@ -15,7 +15,7 @@ class quizHelper extends Database {
 
 	}
 
-    function getQuiz($idKursus, $idMateri, $start=0, $limit=5, $n_status=1)
+    function getQuiz($idKursus, $idMateri, $start=0, $limit=5, $n_status=1,$debug=0)
     {
 
         if (!$idKursus) return false;
@@ -64,7 +64,7 @@ class quizHelper extends Database {
         return $soal;
     }
 
-    function userAnswer($idKursus, $idMateri, $idSoal, $jawabanuser)
+    function userAnswer($idKursus, $idMateri, $idSoal, $jawabanuser,$debug=0)
     {
         
         if (!$idKursus or !$idMateri or !$idSoal or !$jawabanuser) return false;
@@ -90,7 +90,7 @@ class quizHelper extends Database {
         return false;
     }
 
-    function getGoodAnswer($idSoal, $n_status=1)
+    function getGoodAnswer($idSoal, $n_status=1,$debug=0)
     {
         $sql = array(
                 'table'=>"banksoal",
@@ -104,7 +104,7 @@ class quizHelper extends Database {
         return false;
     }
 
-    function getUserAnswer($idKursus, $idMateri, $n_status=1)
+    function getUserAnswer($idKursus, $idMateri, $n_status=1,$debug=0)
     {
 
         $idUser = $this->user['idUser'];
@@ -119,7 +119,7 @@ class quizHelper extends Database {
         return false;
     }
 
-    function getSoalUser($idKursus, $idMateri, $n_status=1)
+    function getSoalUser($idKursus, $idMateri, $n_status=1,$debug=0)
     {
         $idUser = $this->user['idUser'];
         $sql = array(
@@ -133,7 +133,7 @@ class quizHelper extends Database {
         return false;
     }
 
-    function generateSoal($idKursus, $idMateri, $n_status=1)
+    function generateSoal($idKursus, $idMateri, $n_status=1, $debug=0)
     {
 
         $idUser = $this->user['idUser'];
@@ -189,7 +189,7 @@ class quizHelper extends Database {
         return false;
     }
 
-    function updateCountDown($id)
+    function updateCountDown($id,$debug=0)
     {
         if (!$id) return false;
         $sql = array(
@@ -203,7 +203,7 @@ class quizHelper extends Database {
         return false;
     }
 
-    function getKursus($id=false)
+    function getKursus($id=false,$debug=0)
     {
 
         $sql = array(
@@ -217,7 +217,7 @@ class quizHelper extends Database {
         return false;
     }
 
-    function getMateri($id=false)
+    function getMateri($id=false,$debug=0)
     {
 
         $sql = array(

@@ -142,11 +142,11 @@ class course extends Controller {
 	
 	public function addcourse(){
 		global $basedomain;
-		if(isset($_GET))
+		if(isset($_GET['id']))
 		{
 			
 			$id = form_validation($_GET);
-			$id_course = $id[id];
+			$id_course = $id['id'];
 			if(isset($id['id']) && count($id)!=0)
 			{	
 				//for edit data
@@ -166,13 +166,20 @@ class course extends Controller {
 				$this->view->assign('data',$select);
 				return $this->loadView('course/addcourse');
 			}	
+		} else {
+			$select = $this->mcourse->select_data_course();
+			// pr($select);
+			$this->view->assign('data',$select);
+			return $this->loadView('course/addcourse');
 		}
+
 	}
 	
 	public function insert_course(){
 		global $CONFIG;
 		if(isset($_POST)){
 		 $x = form_validation($_POST);
+		 // pr($_FILES);exit;
 		 try
 			   {
 			   		if(isset($x) && count($x) != 0)
@@ -183,6 +190,14 @@ class course extends Controller {
 							$x['action'] = 'update';
 						}
 						
+						if($_FILES['gambar']['name']){
+							deleteFile($_POST['hiddenFile']);
+							$upload = uploadFile('gambar',false,'image');
+							$x['image']=$upload['full_name'];
+						} else {
+							$x['image'] = $_POST['hiddenFile'];
+						}
+
 						$data = $this->mcourse->course_insert($x);
 			   		}
 				   	
@@ -224,11 +239,11 @@ class course extends Controller {
 	//module upload video/ebook
 	public function upload(){
 		global $basedomain;
-		if(isset($_GET))
+		if(isset($_GET['id']))
 		{
 			
 			$id = form_validation($_GET);
-			$id_upload = $id[id];
+			$id_upload = $id['id'];
 			if(isset($id['id']) && count($id)!=0)
 			{	
 				//select data upload
@@ -256,6 +271,8 @@ class course extends Controller {
 				
 				return $this->loadView('course/uploadform');
 			}	
+		} else {
+			return $this->loadView('course/uploadform');
 		}
 	
 			
@@ -354,10 +371,129 @@ class course extends Controller {
 		
 	}
 	
-	public function viewmaterial()
-	{
-
+	public function viewmaterial(){
+		$id = form_validation($_GET);
+		$id_course = $id['id'];
+		// pr($id);
+		// echo "id course".$id_course;
+		$this->view->assign('data',$id_course);
+		
+		//select header
+		$select_header_material= $this->mcourse->select_data_header_material($id_course);
+		// pr($select_header_material);
+		$this->view->assign('data_header_material',$select_header_material);
+		
+		//select data upload
+		$select_list_data_material= $this->mcourse->select_data_list_material($id_course);
+		$this->view->assign('data_list_material',$select_list_data_material);
+		
 		return $this->loadView('course/material');
+	}
+	
+	public function ajax_update_material(){
+		
+		// pr($_POST);
+		// echo masuk;
+		// exit;
+		$idMateri = $_POST['idMateri'];
+		$namamateri =$_POST['namamateri'];
+		$idKursus =$_POST['idKursus'];
+		$jenismateri =$_POST['jenismateri'];
+		$idGrup_kursus =$_POST['idGrup_kursus'];
+		$urutan =$_POST['urutan'];
+		$keterangan =$_POST['keterangan'];
+		
+		$syaratkelulusan =$_POST['syaratkelulusan'];
+		if ($namamateri != '' && $urutan != ''){
+			$update = $this->mcourse->update_data_material($idMateri,$namamateri,$idKursus,
+															$jenismateri,$idGrup_kursus,$urutan,$keterangan);
+		}
+		exit;
+		
+	}
+	
+	public function ajax_get_data_material(){
+	
+	// pr($_POST);
+	// echo masuk;
+	// exit;
+	global $basedomain;
+	$idkursus =$_POST['idkursus'];
+	
+	if ($idkursus != ''){
+		$edit = $this->mcourse->get_data($idkursus);
+		echo json_encode($edit);
+	}
+	exit;
+	}
+	
+	public function ajax_get_data_material_edit(){
+	
+	// pr($_POST);
+	// echo masuk;
+	// exit;
+	global $basedomain;
+	$idmateri =$_POST['idmateri'];
+	
+	if ($idmateri != ''){
+		$edit = $this->mcourse->get_data_edit($idmateri);
+		echo json_encode($edit);
+	}
+	exit;
+	}
+	
+	public function ajax_insert_material(){
+		
+		// pr($_POST);
+		// echo masuk;
+		// exit;
+		global $basedomain;
+		$namamateri =$_POST['namamateri'];
+		$idKursus =$_POST['idKursus'];
+		$jenismateri =$_POST['jenismateri'];
+		$idGrup_kursus =$_POST['idGrup_kursus'];
+		$urutan =$_POST['urutan'];
+		$keterangan =$_POST['keterangan'];
+		$n_status = 1;
+		if ($namamateri != '' && $urutan != ''){
+			$insert = $this->mcourse->insert_data_material($namamateri,$idKursus,$jenismateri,$idGrup_kursus,$urutan,$keterangan,$n_status);
+			// echo json_encode($data);
+		}
+		exit;
+	}
+	
+	public function ajax_update_status_material(){
+		
+		// pr($_POST);
+		// echo masuk;
+		// exit;
+		$id = $_POST['id'];
+		$status =$_POST['status'];
+		if($status == 1){
+			$n_status = 0;
+		}else{
+			$n_status = 1;
+		}
+		if ($id != '' && $status != ''){
+			$update_status = $this->mcourse->update_status_material($id,$n_status);
+		}
+		exit;
+		
+	}
+	
+	public function ajax_delete_course_material(){
+		
+		// pr($_POST);
+		// echo masuk;
+		// exit;
+		$id =$_POST['id'];
+		$n_status = 2;
+		if ($id != ''){
+			$insert = $this->mcourse->delete_data_course_material($id,$n_status);
+			// echo json_encode($data);
+		}
+		exit;
+		
 	}
 	
 }

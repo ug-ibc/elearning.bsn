@@ -35,14 +35,14 @@ $(window).on('load', function() {
 	<h1 class="page-header text-overflow">News List</h1>
 
 	<!--Searchbox-->
-	<div class="searchbox">
+	<!-- <div class="searchbox">
 		<div class="input-group custom-search-form">
 			<input type="text" class="form-control" placeholder="Search..">
 			<span class="input-group-btn">
 				<button class="text-muted" type="button"><i class="fa fa-search"></i></button>
 			</span>
 		</div>
-	</div>
+	</div> -->
 </div>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--End page title-->
@@ -85,21 +85,15 @@ $(window).on('load', function() {
 				<tbody>
 				{foreach $data as $val}
 			<tr>
-			<td>{$val.judul}</td>
-			<td>{$val.username}</td>
-			<td>{$val.posted}</td>
-			<td>{$val.brief}</td>
-			<td>{if $val.status==0} <font style="color:red">Unpublish </font> {elseif $val.status==1} <font style="color:blue"> Publish </font>{/if}</td>
-			<td>
-			<table> 
-			<tr>
-			<td>
-				<a id ="demo-dt-delete-btn" class="btn btn-success btn-labeled fa fa-pencil-square-o" href="{$basedomain}news/editnews/?id_news={$val.id_news}">Edit</a></td>
-			<td>	
-				<a id ="demo-dt-delete-btn" class="btn btn-danger btn-labeled fa fa-times" href="{$basedomain}news/deletenews/?id_news={$val.id_news}">Delete</a></td>
-				</tr>
-				</table>
-			</td>	
+				<td>{$val.judul}</td>
+				<td>{$val.username}</td>
+				<td>{$val.posted}</td>
+				<td>{$val.brief}</td>
+				<td>{if $val.status==0} <font style="color:red">Unpublish </font> {elseif $val.status==1} <font style="color:green"> Publish </font>{/if}</td>
+				<td align="center">
+					<a id ="demo-dt-delete-btn" class="btn btn-success btn-labeled fa fa-pencil-square-o" href="{$basedomain}news/editnews/?id_news={$val.id_news}">Edit</a>	
+					<a id ="demo-dt-delete-btn" class="btn btn-danger btn-labeled fa fa-times" href="{$basedomain}news/deletenews/?id_news={$val.id_news}">Delete</a>
+				</td>
 			</tr>
 			{/foreach}
 				</tbody>

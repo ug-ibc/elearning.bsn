@@ -91,9 +91,17 @@ var $models = FALSE;
 			$brief = $_POST['brief'];
 			$publish = $_POST['publish'];
 			$status = $_POST['status'];
-			$upload = uploadFile('gambar',false,'image');
+
+			if($_FILES['gambar']['name']){
+				deleteFile($_POST['hiddenFile']);
+				$upload = uploadFile('gambar',false,'image');
+				$namafile=$upload['full_name'];
+			} else {
+				$namafile = $_POST['hiddenFile'];
+			}
+			
 			// pr($judul);exit;
-			$namafile=$upload['full_name'];
+			
 			//$author = $_POST['author'];
 			$isi = $_POST['isi'];
 			$data=$this->models->updatenews($id_news,$judul,$brief,$namafile,$isi,$publish,$status);

@@ -1,11 +1,10 @@
 <script>
-{literal}
 $(window).on('load', function() {
 
 	// Datatables
 	// Row selection and deletion (multiple rows)
 	// -----------------------------------------------------------------
-	var rowDeletion = $('#quizlist').DataTable({
+	var rowDeletion = $('#newslist').DataTable({
 		"responsive": true,
 		"language": {
 			"paginate": {
@@ -20,7 +19,7 @@ $(window).on('load', function() {
 	$('#separator-toolbar').appendTo($("div.toolbar"));
 	$('#delete-toolbar').appendTo($("div.toolbar"));
 
-	$('#quizlist tbody').on( 'click', 'tr', function () {
+	$('#newslist tbody').on( 'click', 'tr', function () {
 		$(this).toggleClass('selected');
 	} );
 
@@ -28,7 +27,6 @@ $(window).on('load', function() {
 		rowDeletion.row('.selected').remove().draw( false );
 	} );
 })	
-{/literal}
 </script>
 
 <!--Page Title-->
@@ -37,14 +35,14 @@ $(window).on('load', function() {
 	<h1 class="page-header text-overflow">Quiz List</h1>
 
 	<!--Searchbox-->
-	<div class="searchbox">
+	<!-- <div class="searchbox">
 		<div class="input-group custom-search-form">
 			<input type="text" class="form-control" placeholder="Search..">
 			<span class="input-group-btn">
 				<button class="text-muted" type="button"><i class="fa fa-search"></i></button>
 			</span>
 		</div>
-	</div>
+	</div> -->
 </div>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--End page title-->
@@ -69,7 +67,7 @@ $(window).on('load', function() {
 			<h3 class="panel-title">Table of Quiz List</h3>
 		</div>
 		<div id="create-toolbar" class="table-toolbar-left">
-			<a class="btn btn-info btn-labeled fa fa-plus" href="{$basedomain}quiz/inputquiz">Create</a>
+			<a class="btn btn-info btn-labeled fa fa-plus" href="{$basedomain}quiz">Create</a>
 		</div>
 		<div id="separator-toolbar" class="table-toolbar-left">&nbsp;</div>
 		<div class="panel-body">
@@ -96,9 +94,9 @@ $(window).on('load', function() {
 						<td style="color:green">Published</td>
 						{/if}
 						
-						<td><a id ="demo-dt-delete-btn" class="btn btn-success btn-labeled fa fa-pencil-square-o" href="{$basedomain}quiz/editquiz/?idSoal={$val.idSoal}">Edit</a></td>
-
-						<td><a id ="demo-dt-delete-btn" class="btn btn-danger btn-labeled fa fa-times" href="{$basedomain}quiz/deletequiz/?idSoal={$val.idSoal}">Delete</a></td>
+						<td><a id ="demo-dt-delete-btn" class="btn btn-success btn-labeled fa fa-pencil-square-o" href="{$basedomain}quiz/editquiz/?idSoal={$val.idSoal}">Edit</a>
+						<a id ="demo-dt-delete-btn" class="btn btn-danger btn-labeled fa fa-times" href="{$basedomain}quiz/deletequiz/?idSoal={$val.idSoal}">Delete</a>
+						</td>
 
 					</tr>
 					{/foreach}
@@ -107,7 +105,6 @@ $(window).on('load', function() {
 				</tbody>
 			</table>
 		</div>
-		</form>
 	</div>
 	<!--===================================================-->
 	<!-- End Row selection and deletion (multiple rows) -->

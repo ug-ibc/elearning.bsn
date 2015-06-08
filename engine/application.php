@@ -131,6 +131,7 @@ class Application {
 		if (!$this->view) $this->view = $this->setSmarty();
 		
 		$this->view->assign('basedomain',$basedomain);
+		$this->view->assign('app_domain',$app_domain);
         $this->view->assign('rootpath',$rootpath);
 		
 		/* include file view */

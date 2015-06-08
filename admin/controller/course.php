@@ -142,11 +142,11 @@ class course extends Controller {
 	
 	public function addcourse(){
 		global $basedomain;
-		if(isset($_GET))
+		if(isset($_GET['id']))
 		{
 			
 			$id = form_validation($_GET);
-			$id_course = $id[id];
+			$id_course = $id['id'];
 			if(isset($id['id']) && count($id)!=0)
 			{	
 				//for edit data
@@ -166,13 +166,20 @@ class course extends Controller {
 				$this->view->assign('data',$select);
 				return $this->loadView('course/addcourse');
 			}	
+		} else {
+			$select = $this->mcourse->select_data_course();
+			// pr($select);
+			$this->view->assign('data',$select);
+			return $this->loadView('course/addcourse');
 		}
+
 	}
 	
 	public function insert_course(){
 		global $CONFIG;
 		if(isset($_POST)){
 		 $x = form_validation($_POST);
+		 // pr($_FILES);exit;
 		 try
 			   {
 			   		if(isset($x) && count($x) != 0)
@@ -183,6 +190,14 @@ class course extends Controller {
 							$x['action'] = 'update';
 						}
 						
+						if($_FILES['gambar']['name']){
+							deleteFile($_POST['hiddenFile']);
+							$upload = uploadFile('gambar',false,'image');
+							$x['image']=$upload['full_name'];
+						} else {
+							$x['image'] = $_POST['hiddenFile'];
+						}
+
 						$data = $this->mcourse->course_insert($x);
 			   		}
 				   	
@@ -224,11 +239,11 @@ class course extends Controller {
 	//module upload video/ebook
 	public function upload(){
 		global $basedomain;
-		if(isset($_GET))
+		if(isset($_GET['id']))
 		{
 			
 			$id = form_validation($_GET);
-			$id_upload = $id[id];
+			$id_upload = $id['id'];
 			if(isset($id['id']) && count($id)!=0)
 			{	
 				//select data upload
@@ -256,6 +271,8 @@ class course extends Controller {
 				
 				return $this->loadView('course/uploadform');
 			}	
+		} else {
+			return $this->loadView('course/uploadform');
 		}
 	
 			
@@ -356,7 +373,7 @@ class course extends Controller {
 	
 	public function viewmaterial(){
 		$id = form_validation($_GET);
-		$id_course = $id[id];
+		$id_course = $id['id'];
 		// pr($id);
 		// echo "id course".$id_course;
 		$this->view->assign('data',$id_course);

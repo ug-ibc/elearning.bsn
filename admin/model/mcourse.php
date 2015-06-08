@@ -93,9 +93,9 @@ class mcourse extends Database {
 	function course_insert($x){
 		if($x['action'] == 'insert'){
 			$n_status = '1';
-			$query = "INSERT INTO kursus (namakursus,keterangan,jeniskursus,start_date,end_date,quota,idGrup_kursus,n_status)
+			$query = "INSERT INTO kursus (namakursus,keterangan,jeniskursus,start_date,end_date,quota,idGrup_kursus,n_status,image)
 				  VALUES ('$x[namakursus]','$x[keterangan]','$x[jeniskursus]','$x[start_date]','$x[end_date]',
-				  '$x[quota]','$x[idGrup_kursus]',$n_status)";
+				  '$x[quota]','$x[idGrup_kursus]',$n_status,'$x[image]')";
 			// echo $query;
 			// exit;
 			$result = $this->query($query);	
@@ -103,15 +103,16 @@ class mcourse extends Database {
 			//update here
 			$query = "UPDATE kursus
 						SET 
-							namakursus = '{$x[namakursus]}',
-							keterangan = '{$x[keterangan]}',
-							jeniskursus = '{$x[jeniskursus]}',
-							start_date = '{$x[start_date]}',
-							end_date = '{$x[end_date]}',
-							quota = '{$x[quota]}',
-							idGrup_kursus = '{$x[idGrup_kursus]}'
+							namakursus = '{$x["namakursus"]}',
+							keterangan = '{$x["keterangan"]}',
+							jeniskursus = '{$x["jeniskursus"]}',
+							start_date = '{$x["start_date"]}',
+							end_date = '{$x["end_date"]}',
+							quota = '{$x["quota"]}',
+							idGrup_kursus = '{$x["idGrup_kursus"]}',
+							image = '{$x["image"]}'
 						WHERE
-							idKursus = '{$x[id]}'";
+							idKursus = '{$x["id"]}'";
 			// echo $query;				
 			// exit;				
 			$result = $this->query($query);					
@@ -120,7 +121,7 @@ class mcourse extends Database {
 	}
 	
 	function select_data_list_course(){
-		$query = "SELECT idKursus,namakursus,keterangan,jeniskursus,start_date,end_date,quota,idGrup_kursus,n_status FROM kursus WHERE n_status != '2' order by idKursus desc ";
+		$query = "SELECT * FROM kursus WHERE n_status != '2' order by idKursus desc ";
 		// pr($query);
 		$result = $this->fetch($query,1);
 		// pr($result);
@@ -128,7 +129,7 @@ class mcourse extends Database {
 	}
 	
 	function select_data_list_course_condition($id){
-		$query = "SELECT idKursus,namakursus,keterangan,jeniskursus,start_date,end_date,quota,idGrup_kursus,n_status FROM kursus 
+		$query = "SELECT * FROM kursus 
 				  WHERE n_status != '2' and idKursus='$id'";
 		// pr($query);
 		$result = $this->fetch($query,1);

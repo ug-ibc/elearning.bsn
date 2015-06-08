@@ -66,19 +66,10 @@ $(document).ready(function() {
 							<div class="col-sm-4">
 								<select name = "jenisfile" class="selectpicker">
 								{if isset($data_list_upload[0].jenisfile)}
-									{if $data_list_upload[0].jenisfile == 1}
-										{$opt_ebook = 'selected'}
-										{$opt_video = ''}
-									{elseif $data_list_upload[0].jenisfile == 2}
-										{$opt_ebook = ''}
-										{$opt_video = 'selected'}
-									{/if}
-								{else}
-									{$opt_ebook = ''}
-									{$opt_video = ''}
+									
 								{/if}
-									<option value="1" {$opt_ebook}>ebook</option>
-									<option value="2" {$opt_video}>video</option>
+									<option value="1" {if isset($data_list_upload[0].jenisfile)}{if $data_list_upload[0].jenisfile eq '1'}selected{/if}{/if}>ebook</option>
+									<option value="2" {if isset($data_list_upload[0].jenisfile)}{if $data_list_upload[0].jenisfile eq '2'}selected{/if}{/if}>video</option>
 								</select> 
 							</div>
 						</div>
@@ -103,7 +94,7 @@ $(document).ready(function() {
 								</select> 
 							</div>
 						</div>
-						<input type="hidden" name="id" value="{$data_list_upload[0].idFile}">
+						<input type="hidden" name="id" value="{if isset($data_list_upload[0].idFile)}{$data_list_upload[0].idFile}{/if}">
 						<!--<div class="form-group">
 							<label class="col-sm-3 control-label">Material</label>
 							<div class="col-sm-4">
@@ -113,18 +104,12 @@ $(document).ready(function() {
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Course Group</label>
 							<div class="col-sm-4">
-								<select name="idGrup_kursus" class="selectpicker">
-									{if $data_group_course}
-									{foreach $data_group_course as $value_group}
-										{if isset($data_list_upload[0].idGrup_kursus)}
-											{if $data_list_upload[0].idGrup_kursus == $value_group.idGrup_kursus}
-												{$select_group = 'selected'}
-											{else}
-												{$select_group = ''}
-											{/if}	
-										{/if}
-									<option value="{$value_group.idGrup_kursus}" {$select_group}>{$value_group.namagrup}</option>
-									{/foreach}
+								<select name="idGrup_kursus" id="idGrup_kursus" class="selectpicker typeKursus">
+									<option>Select Course group</option>>
+									{if !empty($data_group_course)}
+										{foreach $data_group_course as $val}
+											<option value="{$val.idGrup_kursus}" {if isset($data_list_upload[0].idGrup_kursus)}{if $val.idGrup_kursus eq $data_list_upload[0].idGrup_kursus}selected{/if}{/if}>{$val.namagrup}</option>
+										{/foreach}
 									{/if}
 								</select> 
 							</div>
@@ -132,7 +117,7 @@ $(document).ready(function() {
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Course Name</label>
 							<div class="col-sm-4">
-								<select name="idKursus" class="selectpicker">
+								<select name="idKursus" id="idKursus" class="selectpicker typeMateri">
 									{if $data_list_course}
 									{foreach $data_list_course as $value_list}
 										{if isset($data_list_upload[0].idKursus)}
@@ -151,21 +136,12 @@ $(document).ready(function() {
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Material</label>
 							<div class="col-sm-4">
-								<select name="idMateri" class="selectpicker">
-								{if isset($data_list_upload[0].idMateri)}
-									{if $data_list_upload[0].idMateri == 1}
-										{$opt_new = 'selected'}
-										{$opt_old = ''}
-									{elseif $data_list_upload[0].idMateri == 2}
-										{$opt_new = ''}
-										{$opt_old = 'selected'}
+								<select name="idMateri" id="idMateri" class="selectpicker">
+									{if isset($data_material_course)}
+										{foreach $data_material_course as $val}
+											<option value="{$val.idMateri}" {if isset($data_list_upload[0].idMateri)}{if $val.idMateri eq $data_list_upload[0].idMateri}selected{/if}{/if}>{$val.namamateri}</option>
+										{/foreach}
 									{/if}
-								{else}
-									{$opt_new = ''}
-									{$opt_old = ''}
-								{/if}
-									<option value="1" {$opt_new}>new</option>
-									<option value="2" {$opt_old}>old</option>
 								</select> 
 							</div>
 						</div>
@@ -178,7 +154,7 @@ $(document).ready(function() {
 		                        		Browse <input type="file" name="file_image" multiple>
 		                    			</span>
 		                			</span>
-									<input type="text" name="file_hidden" class="form-control" value="{$data_list_upload[0].files}" readonly>
+									<input type="text" name="file_hidden" class="form-control" value="{if isset($data_list_upload[0].files)}{$data_list_upload[0].files}{/if}" readonly>
         						</div>
 							</div>
 						</div>
@@ -200,3 +176,88 @@ $(document).ready(function() {
 <!--===================================================-->
 <!--End page content-->
 
+{literal}
+	<script type="text/javascript">
+
+	function hierachy(){
+			
+				var i=0;
+				var template = "";
+				var grupid = $("#idGrup_kursus").val();
+				var kursusid = "";
+
+				$.post(basedomain+'course/ajaxchange', {grupid:grupid,kursusid:kursusid}, function(data){
+
+					$('#idKursus')
+					    .find('option')
+					    .remove()
+					    .end()
+					;
+
+					$('#idMateri')
+					    .find('option')
+					    .remove()
+					    .end()
+					;
+
+					if (data){
+						for(i=0;i<data.length;i++){
+							template+='<option value="'+data[i].idKursus+'">'+data[i].namakursus+'</option>';
+						}
+						$("#idKursus").html(template);
+						$("#idKursus").selectpicker('refresh');	
+
+						materi();
+					}
+					
+					// reloadSelect();
+					// $('.pilihKursus').selectpicker('refresh');
+				},"JSON")
+
+				// $("#hiddendiv").show(300);
+	}
+
+	function materi(){
+			
+				var i=0;
+				var template = "";
+				var kursusid = $("#idKursus").val();
+
+				$('#idMateri')
+					    .find('option')
+					    .remove()
+					    .end()
+					;
+
+				$.post(basedomain+'course/ajaxmateri', {kursusid:kursusid}, function(data){
+
+					if (data){
+						for(i=0;i<data.length;i++){
+							template+='<option value="'+data[i].idMateri+'">'+data[i].namamateri+'</option>';
+						}
+						$("#idMateri").html(template);
+						$("#idMateri").selectpicker('refresh');	
+					}
+					
+					// reloadSelect();
+					// $('.pilihKursus').selectpicker('refresh');
+				},"JSON")
+
+				// $("#hiddendiv").show(300);
+	}
+
+		$(document).on('change','.typeKursus', function(){
+
+			hierachy();
+			
+		})
+
+		$(document).on('change','.typeMateri', function(){
+
+			materi();
+			
+		})
+		
+	</script>
+
+{/literal}

@@ -1,8 +1,8 @@
 <script>
 $(document).ready(function() {
-	$('#brief').summernote({
-		height: 200
-	});
+	// $('#brief').summernote({
+	// 	height: 200
+	// });
 	$('#isi').summernote({
 		height: 200
 	});
@@ -25,14 +25,14 @@ $(document).ready(function() {
 	<h1 class="page-header text-overflow">Create News</h1>
 
 	<!--Searchbox-->
-	<div class="searchbox">
+	<!-- <div class="searchbox">
 		<div class="input-group custom-search-form">
 			<input type="text" class="form-control" placeholder="Search..">
 			<span class="input-group-btn">
 				<button class="text-muted" type="button"><i class="fa fa-search"></i></button>
 			</span>
 		</div>
-	</div>
+	</div> -->
 </div>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--End page title-->
@@ -66,39 +66,52 @@ $(document).ready(function() {
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Judul</label>
 							<div class="col-sm-7">
-								<input type="text" name="judul" class="form-control" value="{$data.judul}">
+								<input type="text" name="judul" class="form-control" value="{$data.judul}" required>
 							</div>
 						</div>
 
-						<div class="form-group">
-							<label class="col-sm-2 control-label">Author</label>
-							<div class="col-sm-7">
-								<input type="text" name="author" class="form-control" value="{$data.author}">
-							</div>
-						</div>
+						<input type="hidden" name="author" class="form-control" value="{$data.author}">
 						
 						<div class="form-group">
-							<label class="col-sm-2 control-label">Publish</label>
+							<label class="col-sm-2 control-label">Publish Date</label>
 							<div class="col-sm-3">
 								<div class="input-group date">
-									<input type="text" class="form-control" name="publish" value="{$data.posted}">
+									<input type="text" class="form-control" name="publish" value="{$data.posted}" required>
 									<span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span>
 								</div>
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-sm-2 control-label">Foto</label>
-							<div class="col-sm-7">
-								<img src="../../../public_assets/{$data.gambar}" width="500" height="300">
-								<br><br><input type="file" name="gambar">
+							<label class="col-sm-2 control-label">Upload Image</label>
+							<div class="col-sm-4">
+								<div class="fileupload fileupload-new" data-provides="fileupload">
+								  <div class="fileupload-new thumbnail" style="width: 65%; height: 55%;"><img src="{if !empty($data.gambar)}{$app_domain}public_assets/{$data.gambar}{else}{$app_domain}public_assets/noimage.png{/if}" alt="Placeholder" /></div>
+								  <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+								  <div>
+								    <span class="btn btn-default btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="gambar"/></span>
+								    <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+								  </div>
+								</div>
 							</div>
 						</div>
 
+						<!-- File Hidden -->
+						<input type="hidden" name="hiddenFile" value="{$data.gambar}" />
+
+
+						<!-- <div class="form-group">
+							<label class="col-sm-2 control-label">Upload Image</label>
+							<div class="col-sm-7">
+								<img src="{$app_domain}public_assets/{$data.gambar}" width="500" height="300">
+								<br><br><input type="file" name="gambar">
+							</div>
+						</div> -->
+
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Brief</label>
-							<div class="col-sm-9">
-								<textarea name="brief" id="brief">{$data.brief}</textarea>
+							<div class="col-sm-6">
+								<textarea name="brief" class="form-control" placeholder="Brief of news here" id="brief" required>{$data.brief}</textarea>
 							</div>
 						</div>
 
@@ -114,9 +127,9 @@ $(document).ready(function() {
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Status</label>
 							<div class="col-sm-9">
-								<input type="radio" name="status" value="0" id="status1" {if ($data.status==0)} checked=""{/if}> Unpublish &nbsp &nbsp &nbsp
+								<label class="form-radio form-normal"><input type="radio" name="status" value="0" id="status1" {if ($data.status==0)} checked=""{/if} required></label> Unpublish &nbsp &nbsp &nbsp
 
-								<input type="radio" name="status" value="1" id="status1" {if ($data.status==1)} checked=""{/if}> Publish
+								<label class="form-radio form-normal"><input type="radio" name="status" value="1" id="status1" {if ($data.status==1)} checked=""{/if} required></label> Publish
 
 							</div>
 						</div>

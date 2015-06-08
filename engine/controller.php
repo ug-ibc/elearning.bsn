@@ -32,6 +32,7 @@ class Controller extends Application{
 		
 		$this->view = $CODEKIR['smarty'];
 		$this->view->assign('basedomain',$basedomain);
+		$this->view->assign('app_domain',$app_domain);
         $this->view->assign('rootpath',$rootpath);
 		$this->view->assign('page',$DATA[$this->configkey]);
 		

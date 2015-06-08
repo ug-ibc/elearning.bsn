@@ -167,7 +167,7 @@ legend {
 				
 {if $user}
 			<span style="font-size:24px;color:#252A72">WAKTU TERSISA</span>
-				   <div style="border-radius:5px 10px;background-color:#4155D0;width:100%;height:100%;padding:10px 0px;"><a href="#" style="text-decoration:none;color:#FFFFFF;font-size:24px;"><h3 style="color:#FFFFFF"><div id="countdown"></div></h3>
+				   <div style="border-radius:5px 10px;background-color:#4155D0;width:100%;height:100%;padding:10px 0px;"><a href="{$basedomain}quiz/startQuiz" style="text-decoration:none;color:#FFFFFF;font-size:24px;"><h3 style="color:#FFFFFF"><div id="countdown"></div></h3>
                         </a></div>
 {/if}
 			</div>
@@ -179,15 +179,21 @@ legend {
 		</div>
 	</div>
 	</section>
+	{if $user}
+	{if !$startQuiz}
 	<section class="callaction">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-9">
 				Pilih kursus<br/>
 				 <select style="display: none;" class="pilihKursus selectpicker" data-style="btn-primary" data-width="75%">
-					<option selected="selected" value="1">Jaringan komputer</option>
-					<option value="2">pemrograman web</option>
-					<option value="3">database</option>
+				 	<option value="0">Pilih Kursus</option>
+					{if $kursus}
+					{foreach $kursus as $val}
+					<option value="{$val.idKursus}">{$val.namakursus}</option>
+					{/foreach}
+					{/if}
+					
 				  </select><br/>
 				Pilih materi<br/>
 				 <select style="display: none;" class="pilihMateri selectpicker" data-style="btn-info" data-width="75%">
@@ -200,7 +206,12 @@ legend {
 		</div>
 	</div>
 </section>
-{if $user}
+
+{else}
+	{if !$hiddenStatus}
+	<a href="{$basedomain}quiz/startQuiz" class="btn-quiz hvr-shutter-out-vertical" id="ikutQuiz">Quiz anda sedang berlangsung, Klik disini untuk melanjutkan</a>
+	{/if}
+{/if}
 <section class="callaction">
 	<div class="container">
 		<div class="row">

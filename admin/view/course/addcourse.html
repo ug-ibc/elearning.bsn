@@ -13,6 +13,15 @@ function isNumber(evt) {
     }
     return true;
 	}
+
+function hierarki(item){
+	if($(item).val() == "2"){
+		alert($("#idGrup_kursus").val());
+		$("#hiddendiv").show(300 );
+	} else {
+		$("#hiddendiv").hide(300 );
+	}
+} 	
 </script>
 <!--Page Title-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -20,14 +29,14 @@ function isNumber(evt) {
 	<h1 class="page-header text-overflow">Create Course</h1>
 
 	<!--Searchbox-->
-	<div class="searchbox">
+	<!-- <div class="searchbox">
 		<div class="input-group custom-search-form">
 			<input type="text" class="form-control" placeholder="Search..">
 			<span class="input-group-btn">
 				<button class="text-muted" type="button"><i class="fa fa-search"></i></button>
 			</span>
 		</div>
-	</div>
+	</div> -->
 </div>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--End page title-->
@@ -59,7 +68,7 @@ function isNumber(evt) {
 				{$data_list[0].namakursus}-->
 				<!--Horizontal Form-->
 				<!--===================================================-->
-				<form class="form-horizontal" method="POST" action="{$basedomain}course/insert_course">
+				<form class="form-horizontal" method="POST" action="{$basedomain}course/insert_course" enctype="multipart/form-data">
 					<div class="panel-body">
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Course Name</label>
@@ -75,10 +84,28 @@ function isNumber(evt) {
 								<textarea rows="5" name="keterangan" class="form-control">{if isset($data_list[0].keterangan)}{$data_list[0].keterangan}{/if}</textarea> 
 							</div>
 						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Group Course</label>
+							<div class="col-sm-4">						
+								<select name ="idGrup_kursus" id="idGrup_kursus"  class="selectpicker">
+									{if !empty($data)}
+									{foreach $data as $value}
+										{if $data_list[0].idGrup_kursus == $value.idGrup_kursus}
+											<option value="{$value.idGrup_kursus}" selected>{$value.namagrup}</option>
+										{else}
+											<option value="{$value.idGrup_kursus}">{$value.namagrup}</option>
+										{/if}	
+									{/foreach}
+									{/if}
+								</select> 
+							</div>
+						</div>
+
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Course Type</label>
 							<div class="col-sm-4">
-								<select name ="jeniskursus" class="selectpicker">
+								<select name ="jeniskursus" class="selectpicker" onchange="return hierarki(this)">
 								{if isset($data_list[0].jeniskursus)}
 									{if $data_list[0].jeniskursus == 1}
 										{$opt_selected = 'selected'}
@@ -98,12 +125,41 @@ function isNumber(evt) {
 									{$opt_hirarchy = ''}
 									{$opt_required = ''}
 								{/if}	
-									<option value="1" {$opt_selected}>optional</option>
-									<option value="2" {$opt_hirarchy}>hirarchy</option>
+									<option value="1" {$opt_selected}>Optional</option>
 									<option value="3" {$opt_required}>required</option>
+									<option value="2" {$opt_hirarchy}>Hierachy</option>
 								</select> 
 							</div>
 						</div>
+
+						<div id="hiddendiv" class="form-group" style="display:none">
+							<label class="col-sm-3 control-label">Parent Course</label>
+							<div class="col-sm-4">
+								<select name ="jeniskursus" class="selectpicker">
+									<option value="1" {$opt_selected}>Optional</option>
+									<option value="3" {$opt_required}>required</option>
+									<option value="2" {$opt_hirarchy}>Hierachy</option>
+								</select> 	
+							</div>
+						</div>	
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Course Image</label>
+							<div class="col-sm-4">
+								<div class="fileupload fileupload-new" data-provides="fileupload">
+								  <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="{if !empty($data_list[0].image)}{$app_domain}public_assets/{$data_list[0].image}{else}{$app_domain}public_assets/noimage.png{/if}" alt="Placeholder" /></div>
+								  <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+								  <div>
+								    <span class="btn btn-default btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="gambar"/></span>
+								    <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+								  </div>
+								</div>
+							</div>
+						</div>
+
+						<!-- HIDDEN FILE -->
+						<input type="hidden" name="hiddenFile" value="{if isset($data_list[0].image)}{$data_list[0].image}{else}dummy.jpg{/if}">
+
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Start Date</label>
 							<div class="col-sm-4">
@@ -126,25 +182,6 @@ function isNumber(evt) {
 							<label class="col-sm-3 control-label">Quota</label>
 							<div class="col-sm-4">
 								<input type="text" name ="quota" class="form-control" onkeypress="return isNumber(event)" placeholder="number only" value="{if isset($data_list[0].quota)}{$data_list[0].quota}{/if}">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">Group Course</label>
-							<div class="col-sm-4">
-								<select name ="idGrup_kursus"  class="selectpicker">
-									{if $data}
-									{foreach $data as $value}
-										{if isset($data_list[0].idGrup_kursus)}
-											{if $data_list[0].idGrup_kursus == $value.idGrup_kursus}
-												{$select_group = 'selected'}
-											{else}
-												{$select_group = ''}
-											{/if}	
-										{/if}
-									<option value="{$value.idGrup_kursus}" {$select_group}>{$value.namagrup}</option>
-									{/foreach}
-									{/if}
-								</select> 
 							</div>
 						</div>
 						<!-- input id hidden-->

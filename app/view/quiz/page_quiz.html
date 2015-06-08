@@ -179,15 +179,20 @@ legend {
 		</div>
 	</div>
 	</section>
+	{if $user}
 	<section class="callaction">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-9">
 				Pilih kursus<br/>
 				 <select style="display: none;" class="pilihKursus selectpicker" data-style="btn-primary" data-width="75%">
-					<option selected="selected" value="1">Jaringan komputer</option>
-					<option value="2">pemrograman web</option>
-					<option value="3">database</option>
+				 	<option value="0">Pilih Kursus</option>
+					{if $kursus}
+					{foreach $kursus as $val}
+					<option value="{$val.idKursus}">{$val.namakursus}</option>
+					{/foreach}
+					{/if}
+					
 				  </select><br/>
 				Pilih materi<br/>
 				 <select style="display: none;" class="pilihMateri selectpicker" data-style="btn-info" data-width="75%">
@@ -200,7 +205,7 @@ legend {
 		</div>
 	</div>
 </section>
-{if $user}
+
 <section class="callaction">
 	<div class="container">
 		<div class="row">

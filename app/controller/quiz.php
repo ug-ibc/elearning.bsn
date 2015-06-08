@@ -28,6 +28,9 @@ class quiz extends Controller {
 		// pr($_SESSION);
 		if ($this->user){
 
+			// get Kursus 
+			$getKursus = $this->quizHelper->getKursus();
+
 			// generate soal cukup 1 kali ketika klik tombol mulai
 			$generateSoal = $this->quizHelper->generateSoal(1,1);
 			// pr($generateSoal);
@@ -73,7 +76,7 @@ class quiz extends Controller {
 	       		
 	       	}
 	       	
-	       	// pr($dataSoal);
+	       	$this->view->assign('kursus', $getKursus);
 	       	$this->view->assign('user', $this->user);
 
 	       	if (isset($_SESSION['end_date'])){
@@ -83,6 +86,19 @@ class quiz extends Controller {
 	       	
        	}
 		return $this->loadView('quiz/page_quiz');
+    }
+
+    function getMateri()
+    {
+    	$idKursus = intval(_p('idKursus'));
+
+    	$getMateri = $this->quizHelper->getMateri(false, $idKursus);
+    	if ($getMateri){
+    		print json_encode(array('status'=>true, 'res'=>$getMateri));
+    	}else{
+    		print json_encode(array('status'=>false));
+    	}
+    	exit;
     }
 
     function ajax()

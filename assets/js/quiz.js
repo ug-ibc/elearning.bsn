@@ -74,3 +74,18 @@ $(document).on('click','#ikutQuiz', function(){
 	},"JSON")
 })
 
+$(document).on('change','.pilihKursus', function(){
+
+	var idKursus = $(this).val();
+	$.post(basedomain+'quiz/getMateri', {idKursus:idKursus}, function(data){
+
+		console.log(data);
+		if (data.status==true){
+			
+			
+			// $(dataKlik).addClass("active");	
+		}
+		
+
+	},"JSON")
+})

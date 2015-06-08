@@ -205,29 +205,34 @@ class quizHelper extends Database {
 
     function getKursus($id=false,$debug=0)
     {
+        $filter = "";
+        if ($id) $filter .= "AND idKursus = {$id}";
 
         $sql = array(
                 'table'=>"kursus",
                 'field'=>"*",
-                'condition'=>"idKursus = {$id} AND n_status = 1",
+                'condition'=>"n_status = 1 {$filter}",
                 );
 
         $result = $this->lazyQuery($sql,$debug);
-        if ($result) return true;
+        if ($result) return $result;
         return false;
     }
 
-    function getMateri($id=false,$debug=0)
+    function getMateri($id=false, $idKursus=false, $debug=0)
     {
-
+        $filter = "";
+        if ($id) $filter .= "AND idMateri = {$id}";
+        if ($idKursus) $filter .= "AND idKursus = {$idKursus}";
+        
         $sql = array(
                 'table'=>"materi",
                 'field'=>"*",
-                'condition'=>"idMateri = {$id} AND n_status = 1",
+                'condition'=>"n_status = 1 {$filter}",
                 );
 
         $result = $this->lazyQuery($sql,$debug);
-        if ($result) return true;
+        if ($result) return $result;
         return false;
     }
 }

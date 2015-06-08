@@ -81,14 +81,16 @@ $(document).ready(function() {
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Upload Image</label>
 							<div class="col-sm-4">
-								<div class="input-group">
-		                			<span class="input-group-btn">
-		                   				<span class="btn btn-primary btn-file">
-		                        		Browse <input type="file" name="gambar" required>
-		                    			</span>
-		                			</span>
-									<input type="text" name="file_hidden" class="form-control" readonly>
-        						</div>
+								<div class="col-sm-4">
+									<div class="fileupload fileupload-new" data-provides="fileupload">
+									  <div class="fileupload-new thumbnail" style="width: 65%; height: 55%;"><img src="{$app_domain}public_assets/{$data.gambar}" alt="Placeholder" /></div>
+									  <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+									  <div>
+									    <span class="btn btn-default btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="gambar"/></span>
+									    <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+									  </div>
+									</div>
+								</div>
 							</div>
 						</div>
 

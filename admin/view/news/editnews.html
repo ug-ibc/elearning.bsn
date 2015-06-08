@@ -86,7 +86,7 @@ $(document).ready(function() {
 							<label class="col-sm-2 control-label">Upload Image</label>
 							<div class="col-sm-4">
 								<div class="fileupload fileupload-new" data-provides="fileupload">
-								  <div class="fileupload-new thumbnail" style="width: 65%; height: 55%;"><img src="{$app_domain}public_assets/{$data.gambar}" alt="Placeholder" /></div>
+								  <div class="fileupload-new thumbnail" style="width: 65%; height: 55%;"><img src="{if !empty($data.gambar)}{$app_domain}public_assets/{$data.gambar}{else}{$app_domain}public_assets/noimage.png{/if}" alt="Placeholder" /></div>
 								  <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
 								  <div>
 								    <span class="btn btn-default btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="gambar"/></span>
@@ -95,6 +95,9 @@ $(document).ready(function() {
 								</div>
 							</div>
 						</div>
+
+						<!-- File Hidden -->
+						<input type="hidden" name="hiddenFile" value="{$data.gambar}" />
 
 
 						<!-- <div class="form-group">

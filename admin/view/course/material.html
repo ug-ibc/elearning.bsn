@@ -19,14 +19,23 @@ $(window).on('load', function() {
 	$('#separator-toolbar').appendTo($("div.toolbar"));
 	$('#delete-toolbar').appendTo($("div.toolbar"));
 
-	$('#newslist tbody').on( 'click', 'tr', function () {
+	/*$('#newslist tbody').on( 'click', 'tr', function () {
 		$(this).toggleClass('selected');
 	} );
 
 	$('#demo-dt-delete-btn').click( function () {
 		rowDeletion.row('.selected').remove().draw( false );
-	} );
+	} );*/
 })	
+
+function selectAll(source) {
+			checkboxes = document.getElementsByName('check[]');
+			for(var i in checkboxes){
+				checkboxes[i].checked = source.checked;
+			}
+			return true;
+	}
+	
 </script>
 
 <!--Page Title-->
@@ -65,36 +74,49 @@ $(window).on('load', function() {
 	<!--===================================================-->
 	<div class="panel">
 		<div class="panel-heading">
-			<h3 class="panel-title">Material of ......</h3>
+			<h3 class="panel-title">Material of {$data_header_material[0].namakursus}</h3>
 		</div>
 		<div id="create-toolbar" class="table-toolbar-left">
-			<button id="addmaterial" class="btn btn-info btn-labeled fa fa-pencil-square-o">Create</button>
+			<button id="addmaterial" class="btn btn-info btn-labeled fa fa-pencil-square-o" value="{$data}" >Create</button>
 		</div>
 		<div id="separator-toolbar" class="table-toolbar-left">&nbsp;</div>
 		<div id="delete-toolbar" class="table-toolbar-left">
-			<button id="demo-dt-delete-btn" class="btn btn-danger btn-labeled fa fa-times">Delete</button>
+			<button id="demo-dt-delete-btn-course-material" class="btn btn-danger btn-labeled fa fa-times">Delete</button>
 		</div>
 		<div class="panel-body">
 			<table id="newslist" class="table table-striped table-bordered" cellspacing="0" width="100%">
 				<thead>
 					<tr>
+						<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class ="pilihan" id="id_tahun" onClick="return selectAll(this)"/></th>
 						<th>No. Order</th>
 						<th>Material Name</th>
 						<th class="min-tablet">Create Time</th>
 						<th class="min-tablet">Status</th>
-						<th class="min-tablet">Action</th>
+						<th class="min-tablet" align="center">Action</th>
 					</tr>
 				</thead>
 				<tbody>
+					{foreach $data_list_material as $value}
 					<tr>
-						<td align="center">1</td>
-						<td>Nama Materi</td>
-						<td>2015-05-26</td>
-						<td style="color:green">Active</td>
+						<td align="center"><input value="{$value.idMateri}" type="checkbox" name="check[]" id="check[]"></td>
+						<td align="center">{$value.urutan}</td>
+						<td>{$value.namamateri}</td>
+						<td>{$value.keterangan}</td>
+						{if $value.n_status == '1'}
+							{$var = 'Active'}
+							{$style= 'color:green'}
+						{else}
+							{$var = 'Non Active'}
+							{$style= 'color:red'}
+						{/if}
+						<td style="{$style};" align="center">{$var}</td>
 						<td class="text-center">
-							<button class="btn btn-xs btn-warning btn-labeled fa fa-pencil-square-o">Edit</button>
+							<!--<button class="btn btn-xs btn-warning btn-labeled fa fa-pencil-square-o">Edit</button>-->
+							<button id="" class="editmaterial btn btn-warning btn-labeled fa fa-pencil" value="{$value.idMateri}" href="#" >Edit</button>
+							<button id="" class="demo-state-btn-material btn btn-success btn-labeled fa fa-edit" value="{$value.idMateri|cat:'_'|cat:$value.n_status}" href="#" >Status</button>
 						</td>
 					</tr>
+					{/foreach}
 				</tbody>
 			</table>
 		</div>

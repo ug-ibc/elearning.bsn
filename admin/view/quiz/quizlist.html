@@ -82,7 +82,7 @@ $(window).on('load', function() {
 					</tr>
 				</thead>
 				<tbody>
-					{if $getQuiz}
+					{if !empty($getQuiz)}
 					{foreach $getQuiz as $val}
 					<tr>
 						<td>{$val.soal}</td>

@@ -1,0 +1,148 @@
+<?php include"meta.php";?>
+<?php include"header.php";?>
+
+<section class="callaction">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-md-9">	
+				<div class="row"  style="border-bottom:2px solid #69BD45">
+					<div class="col-md-2">
+						<div class="col-md-7" align="center"  style="border-radius:50%;background-color:#2E8AD8;min-height:50px;padding:12px;color:#FFFFFF;box-shadow: 2px 2px 5px #888888;">
+	     					<span style="font-size:20px;">{date ("d", strtotime($data.posted))}</span><br/>
+	     					<span style="text-transform: uppercase;">{date ("M", strtotime($data.posted))}</span>
+	     				</div>
+     				</div>
+     				<div class="col-md-10">
+					<h1 style="margin-left:-50px;">{$data.judul}</h1>
+	     				
+     				</div>
+ 				</div>
+			</div>
+			</div>
+		<div class="row">
+			<div class="col-md-9">
+				<!-- <i class="fa fa-user"></i>  {$data.username} <i class="fa fa-list"></i> Interviews -->
+		
+				<div class="row">
+					<div class="col-md-12" align="center">
+						
+						<img src="{$basedomain}public_assets/{$data.gambar}"/>
+					</div>
+
+					<div class="col-md-12">
+						
+						<p align="justify">{$data.isi}</p>
+						
+
+					</div>
+					
+				</div>
+				
+					
+			
+				
+				
+			</div>
+			<div class="col-md-3">
+			 	{*}<div class="row" style="background-color:#888888">
+					<div class="col-md-12">
+						<span style="color:#278ED7">LATEST</span> <span style="color:#FFFFFF">TWEET</span>
+						<div class="row">
+							<div class="col-md-2">
+								<img src="{$basedomain}assets/img/data/tweet.JPG"/>
+							</div>
+
+							<div class="col-md-10">
+								<span style="font-size:12px;color:#BDBDBD">Download Our Lorem ipsum dolor sit amet, consectetur consectetur  </span>
+								<span style="font-size:12px;color:#787878">http://localhost/themebsn<br/>
+								#facebook #timeline  </span>
+								<p style="font-size:12px;color:#BDBDBD">April 2, 2015- 16.30</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2">
+								<img src="{$basedomain}assets/img/data/tweet.JPG"/>
+							</div>
+
+							<div class="col-md-10">
+								<span style="font-size:12px;color:#BDBDBD">Download Our Lorem ipsum dolor sit amet, consectetur consectetur  </span>
+								<span style="font-size:12px;color:#787878">http://localhost/themebsn<br/>
+								#facebook #timeline  </span>
+								<p style="font-size:12px;color:#BDBDBD">April 2, 2015- 16.30</p>
+							</div>
+						</div>
+
+					</div>
+
+			 	</div>{/*}
+			 	<div class="row" style="background-color:#888888">
+					<div class="col-md-12">
+						<span style="color:#278ED7">POPULAR</span> <span style="color:#FFFFFF">POST</span>
+						<p>&nbsp;</p>
+						<div class="row">
+							<div class="col-md-5">
+								<img src="{$basedomain}assets/img/data/beritathumbnail1.JPG" style="border:4px solid #5E5D5B"/>
+							</div>
+
+							<div class="col-md-7">
+								<span style="font-size:14px;color:#BDBDBD">Glamour Photograpic of Young Woman</span><br/>
+								<i class="fa fa-comment"></i> 11 Comment
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-5">
+								<img src="{$basedomain}assets/img/data/beritathumbnail2.JPG" style="border:4px solid #5E5D5B"/>
+							</div>
+
+							<div class="col-md-7">
+								<span style="font-size:14px;color:#BDBDBD">Glamour Photograpic of Young Woman</span><br/>
+								<i class="fa fa-comment"></i> 11 Comment
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-5">
+								<img src="{$basedomain}assets/img/data/beritathumbnail3.JPG" style="border:4px solid #5E5D5B"/>
+							</div>
+
+							<div class="col-md-7">
+								<span style="font-size:14px;color:#BDBDBD">Glamour Photograpic of Young Woman</span><br/>
+								<i class="fa fa-comment"></i> 11 Comment
+							</div>
+						</div>
+
+					</div>
+
+			 	</div>
+			 	<div class="row" style="background-color:#888888">
+					<div class="col-md-12">
+						<span style="color:#278ED7">OUR</span> <span style="color:#FFFFFF">CATEGORIES</span>
+						<ul class="link-list" >
+							<li><a href="#" style="color:#FFFFFF">Interviews(5)</a></li>
+							<li><a href="#" style="color:#FFFFFF">Video and Audio(11)</a></li>
+							<li><a href="#" style="color:#FFFFFF">Photography(3)</a></li>
+							<li><a href="#" style="color:#FFFFFF">News From Arround the World(2)</a></li>
+							<li><a href="#" style="color:#FFFFFF">Other Stuff(7)</a></li>
+						</ul>
+
+					</div>
+
+			 	</div>
+			 	{*}
+			 	<div class="row" style="background-color:#888888">
+					<div class="col-md-12">
+						<span style="color:#278ED7">SEARCH</span> <span style="color:#FFFFFF">OUR SITE</span>
+						<div class="input-group">
+						  <input type="text" class="form-control" placeholder="Search...." aria-describedby="basic-addon1" style="background-color:#5D5D5D;color:#FFFFFF"/>
+						  <span class="input-group-addon" id="basic-addon1"><i class="fa fa-search"></i></span>
+						</div>
+					</div>
+
+			 	</div> 
+			 	{/*}
+			</div>
+
+		</div>
+	</div>
+</section>
+<?php include"footer.php";?>

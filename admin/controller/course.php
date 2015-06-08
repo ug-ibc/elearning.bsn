@@ -159,6 +159,10 @@ class course extends Controller {
 				// pr($select);
 				$this->view->assign('data',$select);
 				// exit;
+
+				$grup = $this->mcourse->getGrup($select_list[0]['idGrup_kursus']);
+				$this->view->assign('grup',$grup);
+
 				return $this->loadView('course/addcourse');
 			}else{	
 				$select = $this->mcourse->select_data_course();
@@ -494,6 +498,17 @@ class course extends Controller {
 		}
 		exit;
 		
+	}
+
+	public function ajaxchange(){
+
+		$grupid = $_POST['grupid'];
+		$kursusid = $_POST['kursusid'];
+		$data = $this->mcourse->getGrup($grupid,$kursusid);
+
+		print json_encode($data);
+
+		exit;
 	}
 	
 }

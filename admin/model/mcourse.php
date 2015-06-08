@@ -93,9 +93,9 @@ class mcourse extends Database {
 	function course_insert($x){
 		if($x['action'] == 'insert'){
 			$n_status = '1';
-			$query = "INSERT INTO kursus (namakursus,keterangan,jeniskursus,start_date,end_date,quota,idGrup_kursus,n_status,image)
+			$query = "INSERT INTO kursus (namakursus,keterangan,jeniskursus,start_date,end_date,quota,idGrup_kursus,n_status,image,parentCourse)
 				  VALUES ('$x[namakursus]','$x[keterangan]','$x[jeniskursus]','$x[start_date]','$x[end_date]',
-				  '$x[quota]','$x[idGrup_kursus]',$n_status,'$x[image]')";
+				  '$x[quota]','$x[idGrup_kursus]',$n_status,'$x[image]','$x[parentCourse]')";
 			// echo $query;
 			// exit;
 			$result = $this->query($query);	
@@ -121,7 +121,7 @@ class mcourse extends Database {
 	}
 	
 	function select_data_list_course(){
-		$query = "SELECT * FROM kursus WHERE n_status != '2' order by idKursus desc ";
+		$query = "SELECT *,DATE_FORMAT(start_date,'%d %b %y') as start_date, DATE_FORMAT(end_date,'%d %b %y') as end_date FROM kursus WHERE n_status != '2' order by idKursus desc ";
 		// pr($query);
 		$result = $this->fetch($query,1);
 		// pr($result);
@@ -295,6 +295,14 @@ class mcourse extends Database {
 								idMateri in ({$id})";
 			
 		$result = $this->query($query);					
+	}
+
+	function getGrup($id,$kursusid="")
+	{
+		$query = "SELECT * FROM kursus WHERE idGrup_kursus = '{$id}' AND idKursus != '{$kursusid}'";
+		$result = $this->fetch($query,1);
+		
+		return $result;
 	}
 	
 }

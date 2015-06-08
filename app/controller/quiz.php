@@ -31,62 +31,19 @@ class quiz extends Controller {
 			// get Kursus 
 			$getKursus = $this->quizHelper->getKursus();
 
-			// generate soal cukup 1 kali ketika klik tombol mulai
-			$generateSoal = $this->quizHelper->generateSoal(1,1);
-			// pr($generateSoal);
-			if ($generateSoal){
-				$_SESSION['idcount'] = $generateSoal[0]['id'];
-				$_SESSION['end_date'] = $generateSoal[0]['end_date'];
-			}else{
-				unset($_SESSION['idcount']);
-				unset($_SESSION['end_date']);
-			}
-			
-			
-			$getQuiz = $this->quizHelper->getQuiz(1,1, $start);
-	       	
-	       	$getUserAnswer = $this->quizHelper->getUserAnswer(1,1);
-	       	if ($getUserAnswer){
-	       		foreach ($getUserAnswer as $key => $value) {
-	       			$answerList[$value['idSoal']] = $value['jawabanuser'];
-	       			$soalList[] = $value['idSoal'];
-	       		}
+	       	$generateSoal = $this->quizHelper->isUserStartQuiz();
 
-	       		
-	       	}
+	       	$startQuiz = false;
+	    	if ($generateSoal)$startQuiz = true;
 
-
-	       	if ($getQuiz){
-	       		foreach ($getQuiz as $key => $value) {
-	       			$dataSoal[] = $this->quizHelper->randomJawaban($value);
-	       		}
-
-	       		
-	       		
-	   			foreach ($dataSoal as $key => $value) {
-	       			$dataSoal[$key]['no'] = ($start+1);
-	       			
-	       			if ($soalList){
-	       				if (in_array($value['idSoal'], $soalList)) $dataSoal[$key]['jawabanuser'] = $answerList[$value['idSoal']];
-	       				
-	       			}
-	       			$start++;
-	       		}
-	       		
-	       		
-	       	}
-	       	
 	       	$this->view->assign('kursus', $getKursus);
 	       	$this->view->assign('user', $this->user);
-
-	       	if (isset($_SESSION['end_date'])){
-
-	       		$this->view->assign('soal', $dataSoal);
-	       	}
+	       	$this->view->assign('startQuiz', $startQuiz);
 	       	
        	}
 		return $this->loadView('quiz/page_quiz');
     }
+
 
     function getMateri()
     {
@@ -120,7 +77,67 @@ class quiz extends Controller {
 
     function startQuiz()
     {
-    	
+    	$param = intval(_p('param'));
+
+    	$startQuiz = false;
+
+    	// generate soal cukup 1 kali ketika klik tombol mulai
+    	$generateSoal = $this->quizHelper->generateSoal(1,1);
+
+    	if ($generateSoal){
+			$startQuiz = true;
+			$_SESSION['idcount'] = $generateSoal[0]['id'];
+			$_SESSION['end_date'] = $generateSoal[0]['end_date'];
+		}else{
+			unset($_SESSION['idcount']);
+			unset($_SESSION['end_date']);
+		}
+			
+			
+		$getQuiz = $this->quizHelper->getQuiz(1,1, $start);
+       	
+       	$getUserAnswer = $this->quizHelper->getUserAnswer(1,1);
+       	if ($getUserAnswer){
+       		foreach ($getUserAnswer as $key => $value) {
+       			$answerList[$value['idSoal']] = $value['jawabanuser'];
+       			$soalList[] = $value['idSoal'];
+       		}
+
+       		
+       	}
+
+
+       	if ($getQuiz){
+       		foreach ($getQuiz as $key => $value) {
+       			$dataSoal[] = $this->quizHelper->randomJawaban($value);
+       		}
+
+       		
+       		
+   			foreach ($dataSoal as $key => $value) {
+       			$dataSoal[$key]['no'] = ($start+1);
+       			
+       			if ($soalList){
+       				if (in_array($value['idSoal'], $soalList)) $dataSoal[$key]['jawabanuser'] = $answerList[$value['idSoal']];
+       				
+       			}
+       			$start++;
+       		}
+       		
+       		
+       	}
+       	
+       	$this->view->assign('kursus', $getKursus);
+       	$this->view->assign('user', $this->user);
+       	$this->view->assign('startQuiz', $startQuiz);
+       	$this->view->assign('hiddenStatus', true);
+
+       	if (isset($_SESSION['end_date'])){
+
+       		$this->view->assign('soal', $dataSoal);
+       	}
+
+       	return $this->loadView('quiz/page_quiz');
     }
     
     function countDown()

@@ -235,5 +235,19 @@ class quizHelper extends Database {
         if ($result) return $result;
         return false;
     }
+
+    function isUserStartQuiz()
+    {
+        $idUser = $this->user['idUser'];
+        $sql = array(
+                'table'=>"tbl_generate_soal",
+                'field'=>"id",
+                'condition'=>"n_status = 1 AND idUser = {$idUser}",
+                );
+
+        $result = $this->lazyQuery($sql,$debug);
+        if ($result) return true;
+        return false;
+    }
 }
 ?>

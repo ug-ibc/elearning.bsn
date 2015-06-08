@@ -62,16 +62,7 @@ $(document).on('click','.chooseAnswer', function(){
 
 $(document).on('click','#ikutQuiz', function(){
 
-	$.post(basedomain+'quiz/ajax', {param:1}, function(data){
-
-		if (data.status==true){
-			
-			console.log(dataKlik);
-			// $(dataKlik).addClass("active");	
-		}
-		
-
-	},"JSON")
+	window.location.href=basedomain+"quiz/startQuiz";
 })
 
 $(document).on('change','.pilihKursus', function(){

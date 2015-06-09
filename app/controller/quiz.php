@@ -66,7 +66,9 @@ class quiz extends Controller {
     	$materi = intval(_p('materi'));
     	// pr($dataid);
 
-    	$updateData = $this->quizHelper->userAnswer($kursus, $materi, $soal, $pilihan);
+      $getGenerateSoal = $this->quizHelper->getGenerateSoal();
+      $idsoalGen = $getGenerateSoal[0]['id'];
+    	$updateData = $this->quizHelper->userAnswer($kursus, $materi, $soal, $pilihan, $idsoalGen);
     	if ($updateData){
     		print json_encode(array('status'=>true));
     	}else{
@@ -84,11 +86,15 @@ class quiz extends Controller {
     	// generate soal cukup 1 kali ketika klik tombol mulai
     	$generateSoal = $this->quizHelper->generateSoal(1,1);
 
+      $alreadySubmit = false;
+
     	if ($generateSoal){
 			$startQuiz = true;
 			$_SESSION['idcount'] = $generateSoal[0]['id'];
 			$_SESSION['end_date'] = $generateSoal[0]['end_date'];
 		}else{
+
+      $alreadySubmit = true;
 			unset($_SESSION['idcount']);
 			unset($_SESSION['end_date']);
 		}
@@ -131,6 +137,8 @@ class quiz extends Controller {
        	$this->view->assign('user', $this->user);
        	$this->view->assign('startQuiz', $startQuiz);
        	$this->view->assign('hiddenStatus', true);
+        $this->view->assign('alreadySubmit', $alreadySubmit);
+        $this->view->assign('dataQuiz', $generateSoal[0]);
 
        	if (isset($_SESSION['end_date'])){
 
@@ -165,6 +173,40 @@ class quiz extends Controller {
 		}
 
 		exit;
+    }
+
+    function finishQuiz()
+    {
+        global $basedomain;
+        $userid = _p('userid');
+
+        $userSess = $this->user['idUser'];
+        $quizId = _p('quizId');
+
+        if ($userid == $userSess){
+
+          $finishQuiz = $this->quizHelper->finishQuiz($quizId);
+          if ($finishQuiz){
+            print json_encode(array('status'=>true));
+          }else{
+            print json_encode(array('status'=>false));
+          }
+        }
+
+        exit;
+    }
+
+    function hasil()
+    {
+
+      $correctionAnswer = $this->quizHelper->correctionAnswer();
+      // pr($correctionAnswer);
+
+      if ($correctionAnswer){
+        $this->view->assign('correct', $correctionAnswer['correct']);
+        $this->view->assign('wrong', $correctionAnswer['wrong']);
+      }
+      return $this->loadView('quiz/page_hasil');
     }
 }
 

@@ -110,7 +110,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Select Course</label>
 							<div class="col-sm-4">
-								<select class="selectpicker pilihKursus" name="kursus">
+								<select class="selectpicker" id="pilihKursus" name="kursus">
 									<option>Silahkan pilih</option>
 								</select> 
 							</div>
@@ -119,10 +119,8 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Material Course</label>
 							<div class="col-sm-4">
-								<select class="selectpicker materiKursus" name="materi">
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
+								<select class="selectpicker" id="materiKursus" name="materi">
+									<option>Silahkan pilih</option>
 								</select> 
 							</div>
 						</div>
@@ -158,28 +156,44 @@
 		$(document).on('change','.pilihGrupKursus', function(){
 
 			var grupid = $(this).val();
-			// console.log(grupid);
-			
 			var template = "";
 
-			$(".pilihKursus").html('<option>tes aja</option>').selectpicker('refresh');	
-			return false;
 			$.post(basedomain+'quiz/ajax', {grupid:grupid,param:1}, function(data){
 
 				if (data.status==true){
 					
-					// html += "<select class='selectpicker' name='materi'>";
-					template += "<option>tes aja</option>"
-					// html += "</select>";
+					template += "<option value='0'>Pilih Kursus</option>";
+					$.each(data.result, function(i,e){
 
+						template += "<option value='"+e.idKursus+"'>"+e.namakursus+"</option>"
+					})
 					
-					
+					$('#pilihKursus').html(template).selectpicker('refresh');
 				}
 				
-				// reloadSelect();
-				// $('.pilihKursus').selectpicker('refresh');
 			},"JSON")
 			
+		})
+
+		$(document).on('change','#pilihKursus', function(){
+
+			var grupid = $(this).val();
+			var template = "";
+
+			$.post(basedomain+'quiz/ajax', {grupid:grupid,param:2}, function(data){
+
+				if (data.status==true){
+					
+					template += "<option value='0'>Pilih Materi</option>";
+					$.each(data.result, function(i,e){
+
+						template += "<option value='"+e.idMateri+"'>"+e.namamateri+"</option>"
+					})
+					
+					$('#materiKursus').html(template).selectpicker('refresh');
+				}
+				
+			},"JSON")
 			
 		})
 		

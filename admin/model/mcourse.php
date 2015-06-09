@@ -93,9 +93,9 @@ class mcourse extends Database {
 	function course_insert($x){
 		if($x['action'] == 'insert'){
 			$n_status = '1';
-			$query = "INSERT INTO kursus (namakursus,keterangan,jeniskursus,start_date,end_date,quota,idGrup_kursus,n_status,image)
+			$query = "INSERT INTO kursus (namakursus,keterangan,jeniskursus,start_date,end_date,quota,idGrup_kursus,n_status,image,parentCourse)
 				  VALUES ('$x[namakursus]','$x[keterangan]','$x[jeniskursus]','$x[start_date]','$x[end_date]',
-				  '$x[quota]','$x[idGrup_kursus]',$n_status,'$x[image]')";
+				  '$x[quota]','$x[idGrup_kursus]',$n_status,'$x[image]','$x[parentCourse]')";
 			// echo $query;
 			// exit;
 			$result = $this->query($query);	
@@ -120,8 +120,9 @@ class mcourse extends Database {
 		}
 	}
 	
-	function select_data_list_course(){
-		$query = "SELECT * FROM kursus WHERE n_status != '2' order by idKursus desc ";
+	function select_data_list_course($idgrup=false){
+		if($idgrup) $cond = "AND idGrup_kursus = '{$idgrup}'"; else $cond = "";
+		$query = "SELECT *,DATE_FORMAT(start_date,'%d %b %y') as start_date, DATE_FORMAT(end_date,'%d %b %y') as end_date FROM kursus WHERE n_status != '2' {$cond} order by idKursus desc ";
 		// pr($query);
 		$result = $this->fetch($query,1);
 		// pr($result);
@@ -163,20 +164,21 @@ class mcourse extends Database {
 			$query = "INSERT INTO file (namafile,jenisfile,statusfile,idMateri,idKursus,idGrup_kursus,files,n_status)
 				  VALUES ('$x[namafile]','$x[jenisfile]','$x[statusfile]','$x[idMateri]','$x[idKursus]',
 				  '$x[idGrup_kursus]','$x[post_image]',$n_status)";
+
 			$result = $this->query($query);	
 		}else{
 			//update here
 			$query = "UPDATE file
 						SET 
-							namafile = '{$x[namafile]}',
-							jenisfile = '{$x[jenisfile]}',
-							statusfile = '{$x[statusfile]}',
-							idMateri = '{$x[idMateri]}',
-							idKursus = '{$x[idKursus]}',
-							idGrup_kursus = '{$x[idGrup_kursus]}',
-							files = '{$x[post_image]}'
+							namafile = '{$x["namafile"]}',
+							jenisfile = '{$x["jenisfile"]}',
+							statusfile = '{$x["statusfile"]}',
+							idMateri = '{$x["idMateri"]}',
+							idKursus = '{$x["idKursus"]}',
+							idGrup_kursus = '{$x["idGrup_kursus"]}',
+							files = '{$x["post_image"]}'
 						WHERE
-								idFile = '{$x[id]}'";
+								idFile = '{$x["id"]}'";
 			// exit;				
 			$result = $this->query($query);					
 			
@@ -247,8 +249,9 @@ class mcourse extends Database {
 		// return $result;
 	}
 	
-	function select_data_list_material($id_course){
-		$query = "SELECT * FROM materi WHERE n_status != '2' and idKursus = '{$id_course}' order by idMateri desc";
+	function select_data_list_material($id_course=false){
+		if($id_course) $cond = "and idKursus = '{$id_course}'"; else $cond = "";
+		$query = "SELECT * FROM materi WHERE n_status != '2' {$cond}  order by idMateri desc";
 		// pr($query);
 		$result = $this->fetch($query,1);
 		
@@ -295,6 +298,22 @@ class mcourse extends Database {
 								idMateri in ({$id})";
 			
 		$result = $this->query($query);					
+	}
+
+	function getGrup($id,$kursusid="")
+	{
+		$query = "SELECT * FROM kursus WHERE idGrup_kursus = '{$id}' AND idKursus != '{$kursusid}'";
+		$result = $this->fetch($query,1);
+		
+		return $result;
+	}
+
+	function getMateri($id)
+	{
+		$query = "SELECT * FROM materi WHERE idKursus = '{$id}'";
+		$result = $this->fetch($query,1);
+		
+		return $result;
 	}
 	
 }

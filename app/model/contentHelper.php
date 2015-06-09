@@ -48,5 +48,19 @@ class contentHelper extends Database {
         if ($res) return $res;
         return false;
     }
+
+    function getKursus()
+    {
+        $query = "SELECT * FROM kursus ORDER BY create_time desc LIMIT 4";
+        $result = $this->fetch($query,1);
+
+        foreach ($result as $key => $value) {
+            $query = "SELECT COUNT(*) as total FROM materi WHERE idKursus = '{$value['idKursus']}'";
+            $res = $this->fetch($query);
+            $result[$key]['total'] = $res['total'];
+        }
+
+        return $result;
+    }
 }
 ?>

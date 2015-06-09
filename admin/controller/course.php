@@ -159,6 +159,10 @@ class course extends Controller {
 				// pr($select);
 				$this->view->assign('data',$select);
 				// exit;
+
+				$grup = $this->mcourse->getGrup($select_list[0]['idGrup_kursus']);
+				$this->view->assign('grup',$grup);
+
 				return $this->loadView('course/addcourse');
 			}else{	
 				$select = $this->mcourse->select_data_course();
@@ -249,14 +253,18 @@ class course extends Controller {
 				//select data upload
 				$select_list_data_upload= $this->mcourse->select_data_list_upload_condt($id_upload);
 				$this->view->assign('data_list_upload',$select_list_data_upload);
-		
+
 				//for dropdown list course
-				$select_list_course = $this->mcourse->select_data_list_course();
+				$select_list_course = $this->mcourse->select_data_list_course($select_list_data_upload[0]["idGrup_kursus"]);
 				$this->view->assign('data_list_course',$select_list_course);
 				
 				//for dropdown group course
 				$select_list_group = $this->mcourse->select_data_list_group();
 				$this->view->assign('data_group_course',$select_list_group);
+
+				//for dropdown material course
+				$select_list_material = $this->mcourse->select_data_list_material($select_list_data_upload[0]["idKursus"]);
+				$this->view->assign('data_material_course',$select_list_material);
 				
 				return $this->loadView('course/uploadform');
 				
@@ -272,6 +280,9 @@ class course extends Controller {
 				return $this->loadView('course/uploadform');
 			}	
 		} else {
+			$select_list_group = $this->mcourse->select_data_list_group();
+			$this->view->assign('data_group_course',$select_list_group);
+
 			return $this->loadView('course/uploadform');
 		}
 	
@@ -282,6 +293,7 @@ class course extends Controller {
 		global $CONFIG;
 		if(isset($_POST)){
 		 $x = form_validation($_POST);
+		 // pr($_FILES);exit;
 		 try
 			   {
 			   		if(isset($x) && count($x) != 0)
@@ -296,7 +308,7 @@ class course extends Controller {
 						$real_name_files = $exp[1];*/ 
 						//upload file
 						if(!empty($_FILES['file_image']['name'])){
-							// echo "masuk files";
+							// echo "masuk files";exit;
 							if($_FILES['file_image']['name'] != ''){
 								if($x['action'] == 'update') deleteFile($x['file_hidden']);
 								$image = uploadFile('file_image',null,'image');
@@ -334,6 +346,10 @@ class course extends Controller {
 		//for dropdown group course
 		$select_list_group = $this->mcourse->select_data_list_group();
 		$this->view->assign('data_group_course',$select_list_group);
+
+		//for dropdown material course
+		$select_list_material = $this->mcourse->select_data_list_material();
+		$this->view->assign('data_material_course',$select_list_material);
 		
 		
 		return $this->loadView('course/uploadfile');
@@ -495,7 +511,28 @@ class course extends Controller {
 		exit;
 		
 	}
+
+	public function ajaxchange(){
+
+		$grupid = $_POST['grupid'];
+		$kursusid = $_POST['kursusid'];
+		$data = $this->mcourse->getGrup($grupid,$kursusid);
+
+		print json_encode($data);
+
+		exit;
+	}
 	
+	public function ajaxmateri(){
+
+		$kursusid = $_POST['kursusid'];
+		$data = $this->mcourse->getMateri($kursusid);
+
+		print json_encode($data);
+
+		exit;
+
+	}
 }
 
 ?>

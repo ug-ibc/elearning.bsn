@@ -12,16 +12,7 @@ function isNumber(evt) {
         return false;
     }
     return true;
-	}
-
-function hierarki(item){
-	if($(item).val() == "2"){
-		alert($("#idGrup_kursus").val());
-		$("#hiddendiv").show(300 );
-	} else {
-		$("#hiddendiv").hide(300 );
-	}
-} 	
+	}	
 </script>
 <!--Page Title-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -88,7 +79,7 @@ function hierarki(item){
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Group Course</label>
 							<div class="col-sm-4">						
-								<select name ="idGrup_kursus" id="idGrup_kursus"  class="selectpicker">
+								<select name ="idGrup_kursus" id="idGrup_kursus"  class="selectpicker typeKursus">
 									{if !empty($data)}
 									{foreach $data as $value}
 										{if $data_list[0].idGrup_kursus == $value.idGrup_kursus}
@@ -105,7 +96,7 @@ function hierarki(item){
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Course Type</label>
 							<div class="col-sm-4">
-								<select name ="jeniskursus" class="selectpicker" onchange="return hierarki(this)">
+								<select name ="jeniskursus" id="jeniskursus" class="selectpicker typeKursus">
 								{if isset($data_list[0].jeniskursus)}
 									{if $data_list[0].jeniskursus == 1}
 										{$opt_selected = 'selected'}
@@ -132,13 +123,17 @@ function hierarki(item){
 							</div>
 						</div>
 
-						<div id="hiddendiv" class="form-group" style="display:none">
+						<div id="hiddendiv" class="form-group">
 							<label class="col-sm-3 control-label">Parent Course</label>
 							<div class="col-sm-4">
-								<select name ="jeniskursus" class="selectpicker">
-									<option value="1" {$opt_selected}>Optional</option>
-									<option value="3" {$opt_required}>required</option>
-									<option value="2" {$opt_hirarchy}>Hierachy</option>
+								<select name ="parentCourse" id="parentCourse" class="selectpicker">
+									{if isset($data_list[0].parentCourse)}
+										{foreach $grup as $val}
+											{if $val.idKursus ne $data_list[0].idKursus}
+											<option value="{$val.idKursus}" {if $val.idKursus eq $data_list[0].parentCourse}selected{/if}>{$val.namakursus}</option>
+											{/if}
+										{/foreach}
+									{/if}
 								</select> 	
 							</div>
 						</div>	
@@ -185,7 +180,7 @@ function hierarki(item){
 							</div>
 						</div>
 						<!-- input id hidden-->
-							<input type="hidden" name="id" class="form-control" value="{if isset($data_list[0].idKursus)}{$data_list[0].idKursus}{/if}">
+							<input type="hidden" name="id" id="id" class="form-control" value="{if isset($data_list[0].idKursus)}{$data_list[0].idKursus}{/if}">
 						<!-- input id hidden-->
 					</div>
 					<div class="panel-footer text-right">
@@ -206,3 +201,56 @@ function hierarki(item){
 <!--===================================================-->
 <!--End page content-->
 
+{literal}
+	<script type="text/javascript">
+
+	function hierachy(){
+		var tipe = $("#jeniskursus").val();
+			// console.log(grupid);
+			
+			if(tipe == 2){
+				var i=0;
+				var template = "";
+				var grupid = $("#idGrup_kursus").val();
+				var kursusid = $("#id").val();
+				$.post(basedomain+'course/ajaxchange', {grupid:grupid,kursusid:kursusid}, function(data){
+
+					$('#parentCourse')
+					    .find('option')
+					    .remove()
+					    .end()
+					;
+
+					if (data){
+						for(i=0;i<data.length;i++){
+							template+='<option value="'+data[i].idKursus+'">'+data[i].namakursus+'</option>';
+						}
+						$("#parentCourse").html(template);
+						$("#parentCourse").selectpicker('refresh');	
+					}
+					
+					// reloadSelect();
+					// $('.pilihKursus').selectpicker('refresh');
+				},"JSON")
+
+				// $("#hiddendiv").show(300);
+			} else {	
+				$('#parentCourse')
+					    .find('option')
+					    .remove()
+					    .end()
+					;
+				$("#parentCourse").selectpicker('refresh');
+				// $("#hiddendiv").hide(300);
+			}
+	}
+
+		$(document).on('change','.typeKursus', function(){
+
+			hierachy();
+			
+		})
+		
+	</script>
+
+{/literal}

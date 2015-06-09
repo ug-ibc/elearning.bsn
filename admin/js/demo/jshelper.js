@@ -691,7 +691,6 @@ function isNumber(evt) {
 	});
 	
 	
-	
  })
  
 

@@ -31,7 +31,7 @@ class quiz extends Controller {
 	}
 	//fungsi untuk menginput data quiz dari view
 	public function inputquiz(){
-		global $CONFIG;
+		global $CONFIG, $basedomain;
 		$soal=$_POST['soal'];
 		$pilihan1=$_POST['pilihan1'];
 		$pilihan2=$_POST['pilihan2'];
@@ -43,10 +43,13 @@ class quiz extends Controller {
 		$kursus=$_POST['kursus'];
 		$materi=$_POST['materi'];
 		$groupkursus=$_POST['groupkursus'];
-		$data=$this->models->inputquiz($soal,$pilihan1,$pilihan2,$pilihan3,$pilihan4,$jenissoal,$keterangan,$jawaban,$kursus,$materi,$groupkursus);
+		$n_status=$_POST['quizstatus'];
+		$data=$this->models->inputquiz($soal,$pilihan1,$pilihan2,$pilihan3,$pilihan4,$jenissoal,$keterangan,$jawaban,$kursus,$materi,$groupkursus, $n_status);
 		//kondisi untuk memberi peringatan proses input berhasil atau tidak
+		// pr($data);
 		if ($data==1){
-			echo "<script>alert('data berhasil disimpan');windows.location.href='".$CONFIG['admin']['base_url']."quiz'</script>";
+			echo "<script>alert('data berhasil disimpan');</script>";
+			redirect($basedomain.'quiz/quizlist');
 		}
 
 	}
@@ -119,11 +122,15 @@ class quiz extends Controller {
     	// exit;
     	$grupid = intval(_p('grupid'));
     	
-    	// ambil data ke model untuk data kursus, where grup kursus id = $grupid
-    	// $updateData = $this->quizHelper->userAnswer($kursus, $materi, $soal, $pilihan);
-    	$updateData = true;
-    	if ($updateData){
-    		print json_encode(array('status'=>true, 'result'=>$updateData));
+    	$param = _p('param');
+
+    	if ($param ==1) $cond = "idGrup_kursus = {$grupid}";
+    	if ($param ==2) $cond = "idKursus = {$grupid}";
+
+    	$getDatakursus = $this->models->getDatakursus(false, $param, $cond);
+    	
+    	if ($getDatakursus){
+    		print json_encode(array('status'=>true, 'result'=>$getDatakursus));
     	}else{
     		print json_encode(array('status'=>false));
     	}

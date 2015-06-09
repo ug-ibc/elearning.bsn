@@ -172,9 +172,10 @@
 				if (data.status==true){
 					
 					// html += "<select class='selectpicker' name='materi'>";
-					html += "<option>tes aja</option>"
+					{foreach $updateData as $val}
+					html += "<option value="{$val.idKursus}">{$val.namakursus}</option>"
 					// html += "</select>";
-
+					{/foreach}
 					$(".pilihKursus").html(html);	
 				}
 				

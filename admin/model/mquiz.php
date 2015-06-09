@@ -43,6 +43,15 @@ class mquiz extends Database {
 		return $result;
 		}
 
+	function get_kursus($grupid)
+
+	{
+		$query = "SELECT * FROM kursus WHERE idKursus = $grupid";
+		//pr($query);
+		$result = $this->fetch($query,1,0);
+		return $result;
+		}
+
 	function selectquiz($idSoal)
 	{
 		//pr($id);
@@ -53,7 +62,7 @@ class mquiz extends Database {
 
 	function deletequiz($idSoal)
 	{
-		//query insert data
+		//query delete data
 		$query = "UPDATE banksoal SET status='2' WHERE idSoal = '".$idSoal."'";
 		//eksekusi query
 		$exec = $this->query($query,0);	

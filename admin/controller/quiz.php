@@ -27,6 +27,15 @@ class quiz extends Controller {
 			$this->view->assign('data',$data);
 		}
 		return $this->loadView('quiz/quiz');
+	}
+
+	public function index2(){
+		//memanggil fungsi get_kursus pada model
+       $data=$this->models->get_kursus();
+		if ($data){	
+			$this->view->assign('data',$data);
+		}
+		return $this->loadView('quiz/quiz');
 
 	}
 	//fungsi untuk menginput data quiz dari view
@@ -120,7 +129,7 @@ class quiz extends Controller {
     	$grupid = intval(_p('grupid'));
     	
     	// ambil data ke model untuk data kursus, where grup kursus id = $grupid
-    	// $updateData = $this->quizHelper->userAnswer($kursus, $materi, $soal, $pilihan);
+    	$updateData=$this->models->get_kursus($grupid);
     	$updateData = true;
     	if ($updateData){
     		print json_encode(array('status'=>true, 'result'=>$updateData));

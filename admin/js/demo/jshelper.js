@@ -47,13 +47,13 @@ function isNumber(evt) {
 							icon : 'fa fa-check',
 							message : "Group " + namagrup + ".<br> Successfully Created",
 							container : 'floating',
-							timer : 3000
+							timer : 2000
 						});
 						setTimeout(
 						  function() 
 						  {
 							location.reload();
-						  }, 3000);
+						  }, 2000);
 						
 					}else{
 					
@@ -114,13 +114,13 @@ function isNumber(evt) {
 							icon : 'fa fa-check',
 							message : "Group " + namagrup + ".<br> Update Successfully",
 							container : 'floating',
-							timer : 3000
+							timer : 2000
 						});
 						setTimeout(
 						  function() 
 						  {
 							location.reload();
-						  }, 3000);
+						  }, 2000);
 						
 					}else{
 					
@@ -152,19 +152,19 @@ function isNumber(evt) {
 		var doSomething = setTimeout(function(){
 			clearTimeout(doSomething);
 			btn.button('reset')
-		}, 3000);
+		}, 2000);
 		$.niftyNoty({
 			type: 'success',
 			icon : 'fa fa-check',
 			message : 'Update Status Successfully.',
 			container : 'floating',
-			timer : 3000
+			timer : 2000
 		});
 		setTimeout(
 		  function() 
 		  {
 			location.reload();
-		  }, 3000);
+		  }, 2000);
 	});
 
 	$('.update-list-course-btn').on('click', function () {
@@ -183,19 +183,19 @@ function isNumber(evt) {
 		var doSomething = setTimeout(function(){
 			clearTimeout(doSomething);
 			btn.button('reset')
-		}, 3000);
+		}, 2000);
 		$.niftyNoty({
 			type: 'success',
 			icon : 'fa fa-check',
 			message : 'Update Status Successfully.',
 			container : 'floating',
-			timer : 3000
+			timer : 2000
 		});
 		setTimeout(
 		  function() 
 		  {
 			location.reload();
-		  }, 3000);
+		  }, 2000);
 		  // $('#newslist').DataTable().ajax.reload();
 		  // $('#newslist').dataTable()._fnAjaxUpdate();
 	});
@@ -216,19 +216,19 @@ function isNumber(evt) {
 		var doSomething = setTimeout(function(){
 			clearTimeout(doSomething);
 			btn.button('reset')
-		}, 3000);
+		}, 2000);
 		$.niftyNoty({
 			type: 'success',
 			icon : 'fa fa-check',
 			message : 'Update Status Successfully.',
 			container : 'floating',
-			timer : 3000
+			timer : 2000
 		});
 		setTimeout(
 		  function() 
 		  {
 			location.reload();
-		  }, 3000);
+		  }, 2000);
 		  // $('#newslist').DataTable().ajax.reload();
 		  // $('#newslist').dataTable()._fnAjaxUpdate();
 	});
@@ -269,20 +269,20 @@ function isNumber(evt) {
 						icon : 'fa fa-check',
 						message : 'Remove Data Successfully.',
 						container : 'floating',
-						timer : 3000
+						timer : 2000
 					});
 					setTimeout(
 				   function() 
 				   {
 					location.reload();
-				   }, 3000);
+				   }, 2000);
 				}else{
 					$.niftyNoty({
 						type: 'danger',
 						icon : 'fa fa-minus',
 						message : 'Remove Data Failed!',
 						container : 'floating',
-						timer : 3000
+						timer : 2000
 					});
 				};
 
@@ -328,20 +328,20 @@ function isNumber(evt) {
 						icon : 'fa fa-check',
 						message : 'Remove Data Successfully.',
 						container : 'floating',
-						timer : 3000
+						timer : 2000
 					});
 					setTimeout(
 				   function() 
 				   {
 					location.reload();
-				   }, 3000);
+				   }, 2000);
 				}else{
 					$.niftyNoty({
 						type: 'danger',
 						icon : 'fa fa-minus',
 						message : 'Remove Data Failed!',
 						container : 'floating',
-						timer : 3000
+						timer : 2000
 					});
 				};
 
@@ -387,20 +387,20 @@ function isNumber(evt) {
 						icon : 'fa fa-check',
 						message : 'Remove Data Successfully.',
 						container : 'floating',
-						timer : 3000
+						timer : 2000
 					});
 					setTimeout(
 				   function() 
 				   {
 					location.reload();
-				   }, 3000);
+				   }, 2000);
 				}else{
 					$.niftyNoty({
 						type: 'danger',
 						icon : 'fa fa-minus',
 						message : 'Remove Data Failed!',
 						container : 'floating',
-						timer : 3000
+						timer : 2000
 					});
 				};
 
@@ -446,20 +446,20 @@ function isNumber(evt) {
 						icon : 'fa fa-check',
 						message : 'Remove Data Successfully.',
 						container : 'floating',
-						timer : 3000
+						timer : 2000
 					});
 					setTimeout(
 				   function() 
 				   {
 					location.reload();
-				   }, 3000);
+				   }, 2000);
 				}else{
 					$.niftyNoty({
 						type: 'danger',
 						icon : 'fa fa-minus',
 						message : 'Remove Data Failed!',
 						container : 'floating',
-						timer : 3000
+						timer : 2000
 					});
 				};
 
@@ -537,13 +537,13 @@ function isNumber(evt) {
 							icon : 'fa fa-check',
 							message : "Material " + namamateri + ".<br> Successfully Created",
 							container : 'floating',
-							timer : 3000
+							timer : 2000
 						});
 						setTimeout(
 						  function() 
 						  {
 							location.reload();
-						  }, 3000);
+						  }, 2000);
 						
 					}else{
 					
@@ -576,19 +576,19 @@ function isNumber(evt) {
 		var doSomething = setTimeout(function(){
 			clearTimeout(doSomething);
 			btn.button('reset')
-		}, 3000);
+		}, 2000);
 		$.niftyNoty({
 			type: 'success',
 			icon : 'fa fa-check',
 			message : 'Update Status Successfully.',
 			container : 'floating',
-			timer : 3000
+			timer : 2000
 		});
 		setTimeout(
 		  function() 
 		  {
 			location.reload();
-		  }, 3000);
+		  }, 2000);
 	});
 	
 	$('.editmaterial').on('click', function(){
@@ -666,13 +666,13 @@ function isNumber(evt) {
 							icon : 'fa fa-check',
 							message : "Material " + namamateri + ".<br> Successfully Update",
 							container : 'floating',
-							timer : 3000
+							timer : 2000
 						});
 						setTimeout(
 						  function() 
 						  {
 							location.reload();
-						  }, 3000);
+						  }, 2000);
 						
 					}else{
 					

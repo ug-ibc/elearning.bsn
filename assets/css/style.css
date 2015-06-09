@@ -6,11 +6,12 @@ Do not remove the back-link in this web template
 -------------------------------------------------------*/
 
 @import url('http://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Open+Sans:400,600,700'); 
+@import url('http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext'); 
 @import url('font-awesome.css');  
 @import url('animate.css');
 
 body {
-	font-family:'Open Sans', Arial, sans-serif;
+	font-family:Lato;
 	font-size:12px;
 	font-weight:300;
 	line-height:1.6em;
@@ -26,7 +27,7 @@ a:active {
 }
 
 h1,h2, h3, h4, h5, h6 {
-	font-family:'Open Sans', Arial, sans-serif;
+	font-family:Lato;
 	font-weight:700;
 	line-height:1.1em;
 	color:#333;
@@ -231,11 +232,16 @@ header ul.nav li ul li a {
 	background:none;
 }
 
-.navbar .nav > .active > a,.navbar .nav > .active > a:hover {
+.navbar .nav > .active > a {
 	background:#6EC046;
 	font-weight:300;
+	color:#FFFFFF;
 }
-
+.navbar .nav > .menu:hover > a {
+	background:#050505;
+	font-weight:300;
+	color:#FFFFFF;
+}
 .navbar .nav > .active > a:active,.navbar .nav > .active > a:focus {
 	background:none;
 	outline:0;

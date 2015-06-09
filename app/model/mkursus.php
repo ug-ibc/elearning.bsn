@@ -13,5 +13,10 @@ class mkursus extends Database{
 
 		return $result;
 	}
+
+	function getAllCourse($id)
+	{
+
+	}
 }
 ?>

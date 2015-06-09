@@ -30,6 +30,11 @@ class kursus extends Controller {
 
     function kursusDetail()
     {
+    	$id = $_GET['id'];
+
+    	$data = $this->models->getAllCourse($id);
+		$this->view->assign('allcourse',$data);
+
     	return $this->loadView('kursus/page_kursus');
     }
     function listGroup(){

@@ -24,6 +24,12 @@ class kursus extends Controller {
 		return $this->loadView('kursus/page_kursus');
 
     }
+    function listGroup(){
+		
+		return $this->loadView('kursus/page_listGroup');
+
+    }
+
 
 }
 

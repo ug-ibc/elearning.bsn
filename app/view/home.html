@@ -1,23 +1,15 @@
 <section id="featured">
      
     <!-- Slider -->
-    <section class="callaction" >
-    <div class="container" style="margin-top:-50px">
         <div id="main-slider" class="flexslider">
             <ul class="slides">
+           {foreach $data.data2 as $val}
               <li>
-                <img src="{$basedomain}assets/img/slides/01.jpg" alt="" />
+                <img src="{$basedomain}public_assets/{$val.path_lokasi}" alt="" />
               </li>
-              <li>
-                <img src="{$basedomain}assets/img/slides/02.jpg" alt="" />
-              </li>
-              <li>
-                <img src="{$basedomain}assets/img/slides/03.jpg" alt="" />
-              </li>
+              {/foreach}
             </ul>
         </div>
-    </div>
-</section>
     <!-- end slider -->
  
     </section>
@@ -86,14 +78,17 @@
         </div>
         </div>
         <div class="row">
+
+            {if !empty($kursus)}
+            {foreach $kursus as $val}
             <div class="col-md-3">
                 <div style="border:2px solid #E3E3E3">
-                    <img src="{$basedomain}assets/img/data/phonic.JPG" alt="" width="100%"/>
+                    <img src="{$basedomain}public_assets/{$val.image}" alt="" width="255px" height="250px"/>
                     <div style="padding-left:15px;padding-bottom:20px">
-                        <h4><span>CAKUPAN STANDAR</span></h4>
-                        
-                    <img src="img/data/star.JPG" alt=""/> (3 reviews)<br/><br/>
-                        <i class="fa fa-file-text-o"></i> 5 Materi
+                        <h4><span>{$val.namakursus}</span></h4>
+                        <p class="text-center">{$val.keterangan}</p>
+                    <!-- <img src="img/data/star.JPG" alt=""/> (3 reviews)<br/><br/> -->
+                        <i class="fa fa-file-text-o"></i> {$val.total} Materi
                     </div>
                     <div style="border-top:2px solid #E3E3E3;" align="center">
                         <a href="#" class="hvr-shutter-in-horizontal" style="width:100%;height:100%;padding:10px 0px;text-decoration:none"><i class="fa fa-file-text"></i> <strong>APPLY NOW</strong>
@@ -101,53 +96,8 @@
                       </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div style="border:2px solid #E3E3E3">
-                    <img src="{$basedomain}assets/img/data/health.JPG" alt="" width="100%"/>
-                    <div style="padding-left:15px;padding-bottom:20px">
-                    <h4><span>INFRASTRUKTUR MUTU</span></h4>
-                    <img src="img/data/star.JPG" alt=""/> (3 reviews)<br/><br/>
-            
-                        <i class="fa fa-file-text-o"></i> 3 Materi
-                        </div>
-                    <div style="border-top:2px solid #E3E3E3;" align="center">
-                       <a href="#" class="hvr-shutter-in-horizontal" style="width:100%;height:100%;padding:10px 0px;text-decoration:none"><i class="fa fa-file-text"></i> <strong>APPLY NOW</strong>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div style="border:2px solid #E3E3E3">
-                    <img src="{$basedomain}assets/img/data/writing.JPG" alt="" width="100%"/>
-                    <div style="padding-left:15px;padding-bottom:20px">
-                    <h4><span>PRINSIP PENGEMBANGAN STANDAR</span></h4>
-                    <img src="img/data/star.JPG" alt=""/> (3 reviews)<br/><br/>
-            
-                        <i class="fa fa-file-text-o"></i> 3 Materi
-                    </div>
-                    <div style="border-top:2px solid #E3E3E3;" align="center">
-                        <a href="#" class="hvr-shutter-in-horizontal" style="width:100%;height:100%;padding:10px 0px;text-decoration:none"><i class="fa fa-file-text"></i> <strong>APPLY NOW</strong>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div style="border:2px solid #E3E3E3">
-                    <img src="{$basedomain}assets/img/data/playground.JPG" alt="" width="100%"/>
-                    <div style="padding-left:15px;padding-bottom:20px">
-                    <h4><span>PROSES PENGEMBANGAN STANDAR</span></h4>
-                        <img src="img/data/star.JPG" alt=""/> (3 reviews)<br/><br/>
-            
-                        <i class="fa fa-file-text-o"></i> 3 Materi
-                        </div>
-                    <div style="border-top:2px solid #E3E3E3;" align="center">
-                        <a href="#" class="hvr-shutter-in-horizontal" style="width:100%;height:100%;padding:10px 0px;text-decoration:none"><i class="fa fa-file-text"></i> <strong>APPLY NOW</strong>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            
+            {/foreach}
+            {/if}
         </div>
         
     </div>
@@ -163,45 +113,21 @@
          <div class="row">
             <div class="col-lg-4">
                 <h3 align="center">BERITA</h3>
+                {foreach $data.data as $val}
                 <div class="row">
 
                     <div class="col-md-3">
                         <div class="col-md-12" align="center"  style="border-radius:50%;background-color:#9BDEF1;min-height:50px;padding:10px">
-                            16<br/>
-                            SEP
+                            {date ("d", strtotime($val.posted))}<br/>
+                            {date ("M", strtotime($val.posted))}
                         </div>
                     </div>
                     <div class="col-md-8" >
-                        <p align="justify"> Blan ditiis praesen tium itiis praesen tium volupt atum dele niti atquepra esentium </p>
-                        + <span style="color:#7DA55C">more info</span>
+                        <p align="justify"> {$val.brief} </p>
+                        + <span style="color:#7DA55C"><a href="{$basedomain}berita/detail/?id_news={$val.id_news}">more info</a></span>
                     </div>
                 </div>
-                <div class="row">
-
-                    <div class="col-md-3">
-                        <div class="col-md-12" align="center"  style="border-radius:50%;background-color:#9BDEF1;min-height:50px;padding:10px">
-                            16<br/>
-                            SEP
-                        </div>
-                    </div>
-                    <div class="col-md-8" >
-                        <p align="justify"> Blan ditiis praesen tium itiis praesen tium volupt atum dele niti atquepra esentium </p>
-                        + <span style="color:#7DA55C">more info</span>
-                    </div>
-                </div>
-                <div class="row">
-
-                    <div class="col-md-3">
-                        <div class="col-md-12" align="center"  style="border-radius:50%;background-color:#9BDEF1;min-height:50px;padding:10px">
-                            16<br/>
-                            SEP
-                        </div>
-                    </div>
-                    <div class="col-md-8" >
-                        <p align="justify"> Blan ditiis praesen tium itiis praesen tium volupt atum dele niti atquepra esentium </p>
-                        + <span style="color:#7DA55C">more info</span>
-                    </div>
-                </div>
+            {/foreach}
             </div>
             <div class="col-lg-4" align="center">
                 <h3>QUOTE OF THE DAY</h3>

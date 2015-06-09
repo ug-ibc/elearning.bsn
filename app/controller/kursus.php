@@ -16,13 +16,21 @@ class kursus extends Controller {
 	
 	function loadmodule()
 	{
-        $this->contentHelper = $this->loadModel('contentHelper');
+        $this->models = $this->loadModel('mkursus');
 	}
 	
 	function index(){
 		
-		return $this->loadView('kursus/page_kursus');
+		$data = $this->models->getGrupKursus();
+		$this->view->assign('grup',$data);
 
+		return $this->loadView('kursus/grupkursus');
+
+    }
+
+    function kursusDetail()
+    {
+    	return $this->loadView('kursus/page_kursus');
     }
 
 }

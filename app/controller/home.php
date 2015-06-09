@@ -18,10 +18,24 @@ class home extends Controller {
 	{
         $this->contentHelper = $this->loadModel('contentHelper');
         $this->userHelper = $this->loadModel('userHelper');
+        $this->userGallery=$this->loadModel('mgallery');
+        $this->userNews=$this->loadModel('mnews');
 	}
 	
 	function index(){
-		
+		//$data=$this->userGallery->getgallery();
+		//if ($data){	
+		$vardata['data'] = $this->userNews->getnews2();
+		$vardata['data2'] = $this->userGallery->getgallery();
+
+		$kursus = $this->contentHelper->getKursus();
+		$this->view->assign('kursus',$kursus);
+
+		// pr($vardata);exit;
+		$this->view->assign('data',$vardata);			
+
+		//$this->view->assign('data',$data);
+		//}
 		return $this->loadView('home');
     }
 

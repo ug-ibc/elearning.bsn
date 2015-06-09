@@ -325,7 +325,11 @@ class quizHelper extends Database {
                 else $wrong[] = $value['idSoal_user'];
             }
 
-            
+            $idKursus = $res[0]['idKursus'];
+            $nilai = array('nilai'=>count($correct), 'idKursus'=>$idKursus);
+            $saveToTable = $this->saveNilai($nilai);
+
+
             $data['correct'] = count($correct);
             $data['wrong'] = count($wrong);
             $data['rawdata'] = array('correct'=>$correct, 'wrong'=>$wrong);
@@ -333,6 +337,26 @@ class quizHelper extends Database {
             return $data;
         }
 
+        return false;
+    }
+
+    function saveNilai($data, $debug=0)
+    {   
+        $nilai = $data['nilai'];
+        $statusulang = 0;
+        $statuskelulusan = 0;
+        $create_time = date('Y-m-d H:i:s');
+        $idUser = $this->user['idUser'];
+        $idKursus = $data['idKursus'];
+
+        $sql = array(
+                'table'=>"nilai",
+                'field'=>"nilai, statusulang, statuskelulusan, create_time, idUser, idKursus, n_status",
+                'value' => "{$nilai}, {$statusulang}, {$statuskelulusan}, '{$create_time}', {$idUser}, {$idKursus}, 1",
+                );
+
+        $res = $this->lazyQuery($sql,$debug,1);
+        if ($res) return true;
         return false;
     }
 }

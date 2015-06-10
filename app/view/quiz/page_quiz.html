@@ -139,6 +139,7 @@ legend {
   
 </fieldset>
  -->
+ {if !$alreadySubmit}
 <section class="callaction">
 	<div class="container">
 		<div class="row">
@@ -179,14 +180,19 @@ legend {
 		</div>
 	</div>
 	</section>
+{/if}
 	{if $user}
 
 	{if $alreadySubmit}
 	<section class="callaction">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-9">
-				<h2>Anda sudah mengikuti quiz ini</h2>
+			<div class="col-md-12" align="center">
+				<div style="background-color:#F5F5F5;font-size:18px;padding:20px;border-radius:10px">Anda sudah mengikuti quiz ini
+					<br/>
+					<br/>
+				<a href="{$basedomain}kursus" class="label label-info" style="font-size:15px">Kembali</a>
+				</div>
 			</div>
 		</div>
 	</div>

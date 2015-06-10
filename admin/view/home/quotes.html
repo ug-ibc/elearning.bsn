@@ -1,0 +1,135 @@
+<script>
+$(window).on('load', function() {
+
+	// Datatables
+	// Row selection and deletion (multiple rows)
+	// -----------------------------------------------------------------
+	var rowDeletion = $('#newslist').DataTable({
+		"responsive": true,
+		"language": {
+			"paginate": {
+			  "previous": '<i class="fa fa-angle-left"></i>',
+			  "next": '<i class="fa fa-angle-right"></i>'
+			}
+		},
+		"dom": '<"toolbar">frtip'
+	});
+
+	$('#create-toolbar').appendTo($("div.toolbar"));
+	$('#separator-toolbar').appendTo($("div.toolbar"));
+	$('#delete-toolbar').appendTo($("div.toolbar"));
+
+	/*$('#newslist tbody').on( 'click', 'tr', function () {
+		//$(this).toggleClass('selected');
+		var id = $(this).toggleClass('selected');
+		//var ids = rowDeletion.rows('.selected').data().length +' row(s) selected'
+		var ids = rowDeletion.row( 0 ).data();
+		console.log(ids);
+		var id = rowDeletion.cell('.selected', 0).data();
+		alert(id);
+		
+    } );*/
+})
+	function selectAll(source) {
+			checkboxes = document.getElementsByName('check[]');
+			for(var i in checkboxes){
+				checkboxes[i].checked = source.checked;
+			}
+			return true;
+	}
+	
+</script>
+
+<!--Page Title-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<div id="page-title">
+	<h1 class="page-header text-overflow">Qoute of The Day</h1>
+
+	<!--Searchbox-->
+	<!-- <div class="searchbox">
+		<div class="input-group custom-search-form">
+			<input type="text" class="form-control" placeholder="Search..">
+			<span class="input-group-btn">
+				<button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+			</span>
+		</div>
+	</div> -->
+</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End page title-->
+
+<!--Breadcrumb-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<ol class="breadcrumb">
+	<li><a href="{$basedomain}">Home</a></li>
+	<li class="active">Qoute of The Day</li>
+</ol>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End breadcrumb-->
+
+<!--Page content-->
+<!--===================================================-->
+<div id="page-content">
+	<!--{pr($data)}-->
+	<!-- Row selection and deletion (multiple rows) -->
+	<!--===================================================-->
+	<div class="panel">
+		<div class="panel-heading">
+			<h3 class="panel-title">Table of Qoutes</h3>
+		</div>
+		<div id="create-toolbar" class="table-toolbar-left">
+			<button id="qoutes" class="btn btn-info btn-labeled fa fa-pencil-square-o">Create</button>
+		</div>
+		<div id="separator-toolbar" class="table-toolbar-left">&nbsp;</div>
+		<div id="delete-toolbar" class="table-toolbar-left">
+			<button id="qoutes-delete-btn" class="btn btn-danger btn-labeled fa fa-times">Delete</button>
+		</div>
+		<div class="panel-body">
+			<table id="newslist" class="table table-striped table-bordered" cellspacing="0" width="100%">
+				<thead>
+					<tr>
+						<th><input type="checkbox" class ="pilihan" id="id_tahun" onClick="return selectAll(this)"/></th>
+						<!--<th>No</th>-->
+						<th>Writer</th>
+						<th>Qoutes</th>
+						<th class="min-tablet">Create Time</th>
+						<th class="min-tablet">Status</th>
+						<th class="min-tablet">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{$no = 1}
+					{foreach $data as $value}
+					<tr>
+						<td align="center"><input value="{$value.idCatatan}" type="checkbox" name="check[]" id="check[]"></td>
+						<!--<td align="center" >{$no}</td>-->
+						<td>{$value.judul}</td>
+						<td>{$value.keterangan}</td>
+						<td>{$value.create_time}</td>
+						{if $value.n_status == '1'}
+							{$var = 'Active'}
+							{$style= 'color:green'}
+						{else}
+							{$var = 'Non Active'}
+							{$style= 'color:red'}
+						{/if}
+						<td style="{$style};" align="center">{$var}</td>
+						<td align="center">
+							<button id="" class="qoutes-edit btn btn-warning btn-labeled fa fa-pencil" value="{$value.idCatatan}" href="#" >Edit</button><br/><br/>
+							<button id="" class="glosarium-btn-status btn btn-success btn-labeled fa fa-edit" value="{$value.idCatatan|cat:'_'|cat:$value.n_status}" href="#" >Status</button>
+						</td>
+					</tr>
+					<!--{$no++}-->
+					{/foreach}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!--===================================================-->
+	<!-- End Row selection and deletion (multiple rows) -->
+	
+	
+</div>
+<!--===================================================-->
+<!--End page content-->
+

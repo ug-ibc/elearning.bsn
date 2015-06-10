@@ -319,7 +319,7 @@ class course extends Controller {
 								if($x['action'] == 'update') deleteFile($x['file_hidden']);
 								// $image = uploadFile('file_image',null,'image');
 								$image = uploadFile('file_image',null,'image');
-								pr($image);
+								// pr($image);
 								// $x['post_image'] = $image['full_name']."_".$image['real_name'];
 								$x['post_image'] = $image['full_name'];
 							}

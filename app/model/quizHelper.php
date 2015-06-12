@@ -64,7 +64,7 @@ class quizHelper extends Database {
         return $soal;
     }
 
-    function userAnswer($idKursus, $idMateri, $idSoal, $jawabanuser,$debug=0)
+    function userAnswer($idKursus, $idMateri, $idSoal, $jawabanuser, $idsoalGen=0, $debug=0)
     {
         
         if (!$idKursus or !$idMateri or !$idSoal or !$jawabanuser) return false;
@@ -74,8 +74,8 @@ class quizHelper extends Database {
         $date = date('Y-m-d H:i:s');
         $idUser = $this->user['idUser'];
 
-        $sql = "INSERT INTO soal (idSoal, idKursus, idMateri, idUser, jawaban, jawabanuser, attempt_date, n_status) 
-                VALUES ({$idSoal}, {$idKursus}, {$idMateri}, {$idUser}, {$jawaban}, {$jawabanuser}, '{$date}', 1)
+        $sql = "INSERT INTO soal (idSoal, idKursus, idMateri, idUser, jawaban, jawabanuser, attempt_date, n_status, keterangan, attempt) 
+                VALUES ({$idSoal}, {$idKursus}, {$idMateri}, {$idUser}, '{$jawaban}', '{$jawabanuser}', '{$date}', 1, '{$idsoalGen}', 1)
                 ON DUPLICATE KEY UPDATE jawabanuser = {$jawabanuser}";
         /*
         $sql = array(
@@ -85,6 +85,7 @@ class quizHelper extends Database {
                 );
 
         $res = $this->lazyQuery($sql,$debug,1);*/
+        // pr($sql);
         $res = $this->query($sql);
         if ($res) return $res;
         return false;
@@ -126,6 +127,20 @@ class quizHelper extends Database {
                 'table'=>"tbl_generate_soal",
                 'field'=>"soal",
                 'condition' => " idUser = {$idUser} AND idKursus = {$idKursus} AND idMateri = {$idMateri} AND n_status = {$n_status} ORDER BY id DESC LIMIT 1",
+                );
+
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res) return $res;
+        return false;
+    }
+
+    function getGenerateSoal($n_status=1,$debug=0)
+    {
+        $idUser = $this->user['idUser'];
+        $sql = array(
+                'table'=>"tbl_generate_soal",
+                'field'=>"*",
+                'condition' => " idUser = {$idUser} AND n_status = {$n_status} ORDER BY id DESC LIMIT 1",
                 );
 
         $res = $this->lazyQuery($sql,$debug);
@@ -205,11 +220,44 @@ class quizHelper extends Database {
 
     function getKursus($id=false,$debug=0)
     {
+        $filter = "";
+        if ($id) $filter .= "AND idKursus = {$id}";
 
         $sql = array(
                 'table'=>"kursus",
                 'field'=>"*",
-                'condition'=>"idKursus = {$id} AND n_status = 1",
+                'condition'=>"n_status = 1 {$filter}",
+                );
+
+        $result = $this->lazyQuery($sql,$debug);
+        if ($result) return $result;
+        return false;
+    }
+
+    function getMateri($id=false, $idKursus=false, $debug=0)
+    {
+        $filter = "";
+        if ($id) $filter .= "AND idMateri = {$id}";
+        if ($idKursus) $filter .= "AND idKursus = {$idKursus}";
+        
+        $sql = array(
+                'table'=>"materi",
+                'field'=>"*",
+                'condition'=>"n_status = 1 {$filter}",
+                );
+
+        $result = $this->lazyQuery($sql,$debug);
+        if ($result) return $result;
+        return false;
+    }
+
+    function isUserStartQuiz()
+    {
+        $idUser = $this->user['idUser'];
+        $sql = array(
+                'table'=>"tbl_generate_soal",
+                'field'=>"id",
+                'condition'=>"finish = 0 AND n_status = 1 AND idUser = {$idUser}",
                 );
 
         $result = $this->lazyQuery($sql,$debug);
@@ -217,17 +265,98 @@ class quizHelper extends Database {
         return false;
     }
 
-    function getMateri($id=false,$debug=0)
+    function getDatakursus($id=false, $tabel=0, $cond=false, $n_status= 1, $debug=0)
     {
 
+        if (!$tabel) return false;
+
+        $arrayTabel = array(0=>'grup_kursus', 1=>'kursus', 2=>'materi');
+        $arrayFieldTabel = array(0=>'idGrup_kursus', 1=>'idKursus', 2=>'idMateri');
+
+        $filter = "";
+        if ($id) $filter .= " AND {$arrayFieldTabel[$tabel]} = $id ";
+        if ($cond) $filter .= " AND {$cond}";
+
         $sql = array(
-                'table'=>"materi",
+                'table'=>"{$arrayTabel[$tabel]}",
                 'field'=>"*",
-                'condition'=>"idMateri = {$id} AND n_status = 1",
+                'condition' => " n_status = {$n_status} {$filter} ",
                 );
 
-        $result = $this->lazyQuery($sql,$debug);
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res) return $res;
+    }
+
+    function finishQuiz($id=false,$debug=0)
+    {
+
+        if (!$id) return false;
+        $sql = array(
+                'table'=>"tbl_generate_soal",
+                'field'=>"finish = 1",
+                'condition'=>"id = {$id} AND idUser = '{$this->user['idUser']}' LIMIT 1",
+                );
+
+        $result = $this->lazyQuery($sql,$debug,2);
         if ($result) return true;
+        return false;
+    }
+
+    function correctionAnswer()
+    {
+
+        $idUser = $this->user['idUser'];
+
+        $getGenerateSoal = $this->getGenerateSoal();
+        // pr($getGenerateSoal);
+        $sql = array(
+                'table'=>"soal",
+                'field'=>"*",
+                'condition' => "idUser = {$idUser} AND n_status = 1 AND keterangan = '{$getGenerateSoal[0]['id']}' ",
+                );
+
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res){
+
+            $correct = array();
+            $wrong = array();
+            foreach ($res as $key => $value) {
+                if ($value['jawaban']==$value['jawabanuser']) $correct[] = $value['idSoal_user'];
+                else $wrong[] = $value['idSoal_user'];
+            }
+
+            $idKursus = $res[0]['idKursus'];
+            $nilai = array('nilai'=>count($correct), 'idKursus'=>$idKursus);
+            $saveToTable = $this->saveNilai($nilai);
+
+
+            $data['correct'] = count($correct);
+            $data['wrong'] = count($wrong);
+            $data['rawdata'] = array('correct'=>$correct, 'wrong'=>$wrong);
+
+            return $data;
+        }
+
+        return false;
+    }
+
+    function saveNilai($data, $debug=0)
+    {   
+        $nilai = $data['nilai'];
+        $statusulang = 0;
+        $statuskelulusan = 0;
+        $create_time = date('Y-m-d H:i:s');
+        $idUser = $this->user['idUser'];
+        $idKursus = $data['idKursus'];
+
+        $sql = array(
+                'table'=>"nilai",
+                'field'=>"nilai, statusulang, statuskelulusan, create_time, idUser, idKursus, n_status",
+                'value' => "{$nilai}, {$statusulang}, {$statuskelulusan}, '{$create_time}', {$idUser}, {$idKursus}, 1",
+                );
+
+        $res = $this->lazyQuery($sql,$debug,1);
+        if ($res) return true;
         return false;
     }
 }

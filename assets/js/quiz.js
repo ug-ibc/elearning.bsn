@@ -62,11 +62,18 @@ $(document).on('click','.chooseAnswer', function(){
 
 $(document).on('click','#ikutQuiz', function(){
 
-	$.post(basedomain+'quiz/ajax', {param:1}, function(data){
+	window.location.href=basedomain+"quiz/startQuiz";
+})
 
+$(document).on('change','.pilihKursus', function(){
+
+	var idKursus = $(this).val();
+	$.post(basedomain+'quiz/getMateri', {idKursus:idKursus}, function(data){
+
+		console.log(data);
 		if (data.status==true){
 			
-			console.log(dataKlik);
+			
 			// $(dataKlik).addClass("active");	
 		}
 		
@@ -74,3 +81,41 @@ $(document).on('click','#ikutQuiz', function(){
 	},"JSON")
 })
 
+$(document).on('change','#pilihKursus', function(){
+
+	var grupid = $(this).val();
+	var template = "";
+
+	$.post(basedomain+'quiz/getMateri', {idKursus:grupid,param:2}, function(data){
+
+		if (data.status==true){
+			
+			template += "<option value='0'>Pilih Materi</option>";
+			$.each(data.res, function(i,e){
+
+				template += "<option value='"+e.idMateri+"'>"+e.namamateri+"</option>"
+			})
+			
+			$('#pilihMateri').html(template).selectpicker('refresh');
+		}
+		
+	},"JSON")
+	
+})
+
+$(document).on('click','#finishQuiz', function(){
+
+	var userid = $(this).attr('data-token');
+	var quizId = $(this).attr('data-quiz');
+	var template = "";
+
+	$.post(basedomain+'quiz/finishQuiz', {userid:userid,quizId:quizId}, function(data){
+
+		if (data.status==true){
+			
+			window.location.href=basedomain+'quiz/hasil';	
+		}
+		
+	},"JSON")
+	
+})

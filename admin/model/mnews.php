@@ -19,7 +19,7 @@ class mnews extends Database{
 	{
 		//query memanggil data
 
-		$query = "SELECT news.id_news, news.judul, news.author, news.posted, news.gambar, news.brief, news.status, user.username from news, user where news.author = user.idUser && news.status in ('0','1')";
+		$query = "SELECT news.id_news, news.judul, news.author, DATE_FORMAT(news.posted,'%d %b %y') as posted, news.gambar, news.brief, news.status, user.username from news, user where news.author = user.idUser && news.status in ('0','1')";
 		//pr($query);
 		//$query = "SELECT * FROM news WHERE status in ('0','1') ";
 		//pr($query);
@@ -31,7 +31,7 @@ class mnews extends Database{
 	function selectnews($id_news)
 	{
 		//pr($id);
-		$query = "SELECT * FROM news WHERE id_news ='".$id_news."'";
+		$query = "SELECT *,DATE_FORMAT(posted,'%Y-%m-%d') as posted FROM news WHERE id_news ='".$id_news."'";
 
 		$result = $this->fetch($query,0,0);
 		return $result;

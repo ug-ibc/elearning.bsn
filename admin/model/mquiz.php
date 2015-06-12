@@ -10,7 +10,7 @@ class mquiz extends Database {
 						('".$soal."','".$pilihan1."','".$pilihan2."','".$pilihan3."'
 							,'".$pilihan4."','".$jenissoal."','".$keterangan."','".$jawaban."'
 							,'".$kursus."','".$materi."','".$groupkursus."', {$quizstatus})";
-
+		// pr($query);
 	$exec=$this->query($query,0);
 	if($exec) return 1;
 		else return false;
@@ -59,11 +59,12 @@ class mquiz extends Database {
 
 		$result = $this->fetch($query,0,0);
 		return $result;
+	}
 
 	function deletequiz($idSoal)
 	{
 		//query delete data
-		$query = "UPDATE banksoal SET status='2' WHERE idSoal = '".$idSoal."'";
+		$query = "UPDATE banksoal SET n_status='2' WHERE idSoal = '".$idSoal."'";
 		//eksekusi query
 		$exec = $this->query($query,0);	
 		//kondisi apabila eksekusi berhasil mengembalikan notif 1, jika gagal mencetak query gagal 
@@ -80,6 +81,26 @@ class mquiz extends Database {
 		if($exec) return 1; else pr('query gagal');
 	}
 		
-}
+	function getDatakursus($id=false, $tabel=0, $cond=false, $n_status= 1, $debug=0)
+	{
+
+		if (!$tabel) return false;
+
+		$arrayTabel = array(0=>'grup_kursus', 1=>'kursus', 2=>'materi');
+		$arrayFieldTabel = array(0=>'idGrup_kursus', 1=>'idKursus', 2=>'idMateri');
+
+		$filter = "";
+		if ($id) $filter .= " AND {$arrayFieldTabel[$tabel]} = $id ";
+		if ($cond) $filter .= " AND {$cond}";
+
+		$sql = array(
+                'table'=>"{$arrayTabel[$tabel]}",
+                'field'=>"*",
+                'condition' => " n_status = {$n_status} {$filter} ",
+                );
+
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res) return $res;
+	}
 }
 ?>

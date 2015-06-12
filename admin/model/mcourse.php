@@ -186,7 +186,7 @@ class mcourse extends Database {
 	}
 	
 	function select_data_list_upload(){
-		$query = "SELECT * FROM file WHERE n_status != '2'";
+		$query = "SELECT * FROM file WHERE n_status != '2' order by idFile desc";
 		// pr($query);
 		$result = $this->fetch($query,1);
 		

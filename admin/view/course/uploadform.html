@@ -3,7 +3,18 @@ $(document).ready(function() {
 	$('#deskripsi').summernote({
 		height: 200
 	});
+	
+	$('input[type=file]').change(function () {
+	var val = $(this).val().toLowerCase();
+	//var regex = new RegExp("(.*?)\.(docx|doc|pdf|xml|bmp|ppt|xls|jpg|mp4)$");
+	var regex = new RegExp("(.*?)\.(pdf|mp4)$");
+	 if(!(regex.test(val))) {
+	$(this).val('');
+	alert('Please select correct file format');
+	} });
+	
 })	
+
 
 
 </script>
@@ -58,7 +69,7 @@ $(document).ready(function() {
 						<div class="form-group">
 							<label class="col-sm-3 control-label">File Name</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" name="namafile" value="{if isset($data_list_upload[0].namafile)}{$data_list_upload[0].namafile}{/if}">
+								<input type="text" class="form-control" name="namafile" value="{if isset($data_list_upload[0].namafile)}{$data_list_upload[0].namafile}{/if}" required>
 							</div>
 						</div>
 						<div class="form-group">
@@ -151,11 +162,11 @@ $(document).ready(function() {
 								<div class="input-group">
 		                			<span class="input-group-btn">
 		                   				<span class="btn btn-primary btn-file">
-		                        		Browse <input type="file" name="file_image" multiple>
+		                        		Browse <input type="file" name="file_image">
 		                    			</span>
 		                			</span>
 									<input type="text" name="file_hidden" class="form-control" value="{if isset($data_list_upload[0].files)}{$data_list_upload[0].files}{/if}" readonly>
-        						</div>
+								</div>*)mp4 (Video Format) <br>*)pdf (Ebook Format)
 							</div>
 						</div>
 								

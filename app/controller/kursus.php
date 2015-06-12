@@ -16,14 +16,40 @@ class kursus extends Controller {
 	
 	function loadmodule()
 	{
-        $this->contentHelper = $this->loadModel('contentHelper');
+        $this->models = $this->loadModel('mkursus');
 	}
 	
 	function index(){
 		
-		return $this->loadView('kursus/page_kursus');
+		$data = $this->models->getGrupKursus();
+		$this->view->assign('grup',$data);
+
+		return $this->loadView('kursus/grupkursus');
 
     }
+
+    function kursusDetail()
+    {
+    	$id = $_GET['id'];
+
+    	$data = $this->models->getAllCourse($id);
+		$this->view->assign('allcourse',$data);
+
+    	return $this->loadView('kursus/page_kursus');
+    }
+    function listGroup(){
+		
+		return $this->loadView('kursus/page_listGroup');
+
+    }
+    function viewPdf(){
+		// pr($_GET);
+
+		$this->view->assign('pdf',$_GET['pdf']);
+		return $this->loadView('kursus/viewpdf');
+
+    }
+
 
 }
 

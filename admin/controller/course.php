@@ -243,6 +243,9 @@ class course extends Controller {
 	//module upload video/ebook
 	public function upload(){
 		global $basedomain;
+		// pr($basedomain);
+		global $CONFIG;
+		// pr($CONFIG);
 		if(isset($_GET['id']))
 		{
 			
@@ -280,6 +283,7 @@ class course extends Controller {
 				return $this->loadView('course/uploadform');
 			}	
 		} else {
+			
 			$select_list_group = $this->mcourse->select_data_list_group();
 			$this->view->assign('data_group_course',$select_list_group);
 
@@ -291,9 +295,10 @@ class course extends Controller {
 	
 	public function insert_upload(){
 		global $CONFIG;
+		// pr($CONFIG);
+		 
 		if(isset($_POST)){
 		 $x = form_validation($_POST);
-		 // pr($_FILES);exit;
 		 try
 			   {
 			   		if(isset($x) && count($x) != 0)
@@ -306,11 +311,13 @@ class course extends Controller {
 						/*$exp = explode("_",$x['file_hidden']);
 						$encode_name_files = $exp[0]; 
 						$real_name_files = $exp[1];*/ 
-						//upload file
+						// upload file
+						// pr($_FILES);
 						if(!empty($_FILES['file_image']['name'])){
 							// echo "masuk files";exit;
 							if($_FILES['file_image']['name'] != ''){
 								if($x['action'] == 'update') deleteFile($x['file_hidden']);
+								// $image = uploadFile('file_image',null,'image');
 								$image = uploadFile('file_image',null,'image');
 								// pr($image);
 								// $x['post_image'] = $image['full_name']."_".$image['real_name'];
@@ -320,7 +327,9 @@ class course extends Controller {
 						// echo "sini kan";
 							$x['post_image'] = $x['file_hidden'];
 						}
+						
 						// pr($x);
+						// exit;
 						$data = $this->mcourse->upload_insert($x);
 					}
 				   	

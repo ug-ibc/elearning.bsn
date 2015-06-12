@@ -1,6 +1,79 @@
 <?php
 class marticle extends Database {
 	
+	//insert glosarium 
+	function insert_data($judul,$keterangan,$n_status,$tipe)
+	{
+		$query = "INSERT INTO catatan (judul,keterangan,n_status,tipe)
+				  VALUES ('$judul','$keterangan','$n_status','$tipe')";
+		// echo $query;
+		$result = $this->query($query);
+		// return $result;
+	}
+	
+	//select data glosarium
+	function select_data(){
+		$query = "SELECT idCatatan,judul,keterangan,n_status,create_time FROM catatan WHERE tipe = '1' and n_status !='2' order by idCatatan desc";
+		// pr($query);
+		$result = $this->fetch($query,1);
+		
+		return $result;
+	
+	}
+	
+	//select data glosarium for edit
+	function edit_data($idCatatan){
+		$query = "SELECT idCatatan,judul,keterangan FROM catatan WHERE idCatatan = '$idCatatan' ";
+		// pr($query);
+		$result = $this->fetch($query,1);
+		
+		return $result;
+	
+	}
+	
+	//update glosarium with ajax with id
+	function update_data($id,$judul,$keterangan){
+		$query = "UPDATE catatan
+						SET 
+							judul = '{$judul}',
+							keterangan = '{$keterangan}'
+						WHERE
+							idCatatan = '{$id}'";
+		$result = $this->query($query);					
+	}
+	
+	function update_status($id,$n_status){
+		$query = "UPDATE catatan
+						SET 
+							n_status = '{$n_status}'
+						WHERE
+							idCatatan = '{$id}'";
+		$result = $this->query($query);					
+	}
+	
+	function delete_data($id,$n_status){
+		$query = "UPDATE catatan
+						SET 
+							n_status = '{$n_status}'
+						WHERE
+							idCatatan in ({$id})";
+		// echo $query;					
+		$result = $this->query($query);					
+	}
+	
+	//select data glosarium
+	function select_data_quotes(){
+		$query = "SELECT idCatatan,judul,keterangan,n_status,create_time FROM catatan WHERE tipe = '2' and n_status !='2' order by idCatatan desc";
+		// pr($query);
+		$result = $this->fetch($query,1);
+		
+		return $result;
+	
+	}
+	
+	
+	
+	
 	var $prefix = "lelang";
 	
 

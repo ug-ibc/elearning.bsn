@@ -27,8 +27,8 @@ class quiz extends Controller {
 			$this->view->assign('data',$data);
 		}
 		return $this->loadView('quiz/quiz');
-
 	}
+
 	//fungsi untuk menginput data quiz dari view
 	public function inputquiz(){
 		global $CONFIG, $basedomain;
@@ -90,6 +90,7 @@ class quiz extends Controller {
 		//kondisi apabila tidak melakukan perubahan
 		if ($_POST == null){	
 			$data=$this->models->selectquiz($idSoal);
+			//pr($data);
 			if ($data){	
 				$this->view->assign('data',$data);
 			}	
@@ -108,6 +109,7 @@ class quiz extends Controller {
 			$kursus=$_POST['kursus'];
 			$materi=$_POST['materi'];
 			$groupkursus=$_POST['groupkursus'];
+			$n_status=$_POST['n_status'];
 			$data=$this->models->updatequiz($idSoal,$soal,$pilihan1,$pilihan2,$pilihan3,$pilihan4,$jenissoal,$keterangan,$jawaban,$kursus,$materi,$groupkursus);
 			if($data == 1){
 				echo "<script>alert('Data berhasil di perbarui');window.location.href='".$CONFIG['admin']['base_url']."quiz'</script>";
@@ -131,6 +133,7 @@ class quiz extends Controller {
     	
     	if ($getDatakursus){
     		print json_encode(array('status'=>true, 'result'=>$getDatakursus));
+
     	}else{
     		print json_encode(array('status'=>false));
     	}

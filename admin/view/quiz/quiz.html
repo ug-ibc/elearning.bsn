@@ -162,6 +162,7 @@
 
 				if (data.status==true){
 					
+
 					template += "<option value='0'>Pilih Kursus</option>";
 					$.each(data.result, function(i,e){
 
@@ -169,6 +170,7 @@
 					})
 					
 					$('#pilihKursus').html(template).selectpicker('refresh');
+
 				}
 				
 			},"JSON")

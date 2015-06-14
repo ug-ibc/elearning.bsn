@@ -42,7 +42,12 @@ class login extends Controller {
                 // set session
                 $setSession = $this->loadSession->set_session($validateData);
                 
-                redirect($basedomain.'home');exit;
+                if ($_POST['is_applykursus']==1){
+                    redirect($basedomain.'quiz/startQuiz');
+                }else{
+                    redirect($basedomain.'home');
+                }
+                exit;
             }else{
                 redirect($basedomain);exit;
             }

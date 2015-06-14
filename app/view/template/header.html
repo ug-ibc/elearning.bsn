@@ -50,7 +50,7 @@
 
                       <span class="input-group-addon" id="basic-addon1"><i class="fa fa-lock"></i></span>
                     <input type="password" class="form-control" placeholder="Password..." name="password"/>
-
+                    <input type="hidden" name="is_applykursus" value="" id="is_applykursus">
                 </div>
                 </div>
               </div>
@@ -89,7 +89,7 @@
                     <ul class="nav navbar-nav">
                         <li class="menu {$classHome}"><a href="{$basedomain}">BERANDA</a></li> 
                       <li class="menu {$classProfil}"><a href="{$basedomain}profil">PROFIL</a></li>
-                      <li class="menu {$classQuiz}"><a href="{$basedomain}quiz">E-LEARNING</a></li>
+                      <li class="menu {$classQuiz}"><a href="{$basedomain}">E-LEARNING</a></li>
                         <li class="menu {$classKursus}"><a href="{$basedomain}kursus">KURSUS</a></li>
                         <li class="menu {$classBerita}"><a href="{$basedomain}berita">BERITA</a></li>
                         {if $user}

@@ -139,7 +139,7 @@ legend {
   
 </fieldset>
  -->
- {if !$alreadySubmit}
+{if !$alreadySubmit}
 <section class="callaction">
 	<div class="container">
 		<div class="row">
@@ -255,7 +255,7 @@ legend {
 						<ul class="ul-btn soal_{$val.idSoal}">
 							{foreach $val.acakpilihan as $key => $value}
 							<li>
-								<input type="radio" name="pilihan_{$val.idSoal}" id="radio_{$val.idSoal}_{$key}" {if $val.jawabanuser==$key}checked{/if}><label for="radio_{$val.idSoal}_{$key}" class="btn-quiz hvr-shutter-out-vertical chooseAnswer " data-pilihan="{$key}" data-soal="{$val.idSoal}" data-kursus="{$val.idKursus}" data-materi="{$val.idMateri}">{$value}</label>
+								<input type="radio" name="pilihan_{$val.idSoal}" id="radio_{$val.idSoal}_{$key}" {if $val.jawabanuser==$key}checked{/if}><label for="radio_{$val.idSoal}_{$key}" class="btn-quiz hvr-shutter-out-vertical chooseAnswer " data-pilihan="{$key}" data-soal="{$val.idSoal}" data-kursus="{$val.idKursus}" data-materi="{$val.idMateri}" data-idGrup_kursus="{$val.idGrup_kursus}">{$value}</label>
 							</li>
 							{/foreach}
 							{*}

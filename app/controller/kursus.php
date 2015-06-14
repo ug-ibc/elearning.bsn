@@ -11,6 +11,8 @@ class kursus extends Controller {
 		global $basedomain;
 		$this->loadmodule();
 		$this->view = $this->setSmarty();
+		$getUserLogin = $this->isUserOnline();
+		$this->user = $getUserLogin[0];
 		$this->view->assign('basedomain',$basedomain);
     }
 	
@@ -33,8 +35,11 @@ class kursus extends Controller {
     	$id = $_GET['id'];
 
     	$data = $this->models->getAllCourse($id);
+    	// pr($data);
 		$this->view->assign('allcourse',$data);
-
+		$this->view->assign('user', $this->user);
+		$this->view->assign('kursusid', $id);
+		$this->view->assign('havequiz', count($data['course']));
     	return $this->loadView('kursus/page_kursus');
     }
     function listGroup(){

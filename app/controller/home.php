@@ -23,6 +23,8 @@ class home extends Controller {
 	}
 	
 	function index(){
+
+
 		//$data=$this->userGallery->getgallery();
 		//if ($data){	
 		$vardata['data'] = $this->userNews->getnews2();

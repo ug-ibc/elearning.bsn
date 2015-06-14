@@ -15,21 +15,28 @@ class quizHelper extends Database {
 
 	}
 
-    function getQuiz($idKursus, $idMateri, $start=0, $limit=5, $n_status=1,$debug=0)
+    function getQuiz($idKursus, $idMateri=1, $start=0, $limit=5, $n_status=1,$debug=0)
     {
 
         if (!$idKursus) return false;
-        if (!$idMateri) return false;
+        // if (!$idMateri) return false;
 
-        $getSoalUser = $this->getSoalUser($idKursus, $idMateri);
+        $getSoalUser = $this->getSoalUser($idKursus, $idMateri=1);
         if ($getSoalUser){
+            /*
             $sql = array(
                     'table'=>"banksoal",
                     'field'=>"*",
                     'condition' => " idKursus = {$idKursus} AND idMateri = {$idMateri} AND n_status = {$n_status} ",
                     'limit' => "LIMIT {$start},{$limit}",
                     );
-
+            */
+            $sql = array(
+                    'table'=>"banksoal",
+                    'field'=>"*",
+                    'condition' => " idGrup_kursus = {$idKursus} AND n_status = {$n_status} ",
+                    'limit' => "LIMIT {$start},{$limit}",
+                    );
             $res = $this->lazyQuery($sql,$debug);
             if ($res) return $res;
         }
@@ -37,21 +44,29 @@ class quizHelper extends Database {
         return false;
     }
 
-    function randomJawaban($soal=array())
+    function randomJawaban($soal=array(), $random=true)
     {
 
         if (!is_array($soal)) return false;
 
-        $listNo = "1234";
+        $listNo = array('1234');
         $listArray = array();
-        
-        do {
-            $leter = substr(str_shuffle($listNo), 0, 1);
-            if (!in_array($leter, $listArray)) $listArray[] = $leter;
-            $countArray = count($listArray);
-            
-        } while ($countArray <= 3);
 
+        if ($random){
+
+            do {
+                $leter = substr(str_shuffle($listNo), 0, 1);
+                if (!in_array($leter, $listArray)) $listArray[] = $leter;
+                $countArray = count($listArray);
+                
+            } while ($countArray <= 3);
+
+        }else{
+
+            $listArray = array(1,2,3,4);
+        }
+        
+        
         $dataArrSoal = array();
 
         if ($listArray){
@@ -60,23 +75,24 @@ class quizHelper extends Database {
                 $soal['acakpilihan'][$value] = $soal['pilihan'.$value]; 
             }
         }
-
+        
         return $soal;
     }
 
-    function userAnswer($idKursus, $idMateri, $idSoal, $jawabanuser, $idsoalGen=0, $debug=0)
+    function userAnswer($idKursus, $idMateri=0, $idSoal, $jawabanuser, $idsoalGen=0, $idGrup_kursus=0, $debug=0)
     {
         
-        if (!$idKursus or !$idMateri or !$idSoal or !$jawabanuser) return false;
+        if (!$idKursus or !$idSoal or !$jawabanuser) return false;
 
         $goodAnswer = $this->getGoodAnswer($idSoal);
         $jawaban = $goodAnswer[0]['jawaban'];
         $date = date('Y-m-d H:i:s');
         $idUser = $this->user['idUser'];
+        $idsoalGen = serialize(array('id_generate_soal'=>$idsoalGen));
 
-        $sql = "INSERT INTO soal (idSoal, idKursus, idMateri, idUser, jawaban, jawabanuser, attempt_date, n_status, keterangan, attempt) 
-                VALUES ({$idSoal}, {$idKursus}, {$idMateri}, {$idUser}, '{$jawaban}', '{$jawabanuser}', '{$date}', 1, '{$idsoalGen}', 1)
-                ON DUPLICATE KEY UPDATE jawabanuser = {$jawabanuser}";
+        $sql = "INSERT INTO soal (idSoal, idKursus, idMateri, idUser, jawaban, jawabanuser, attempt_date, n_status, keterangan, attempt, idGrup_kursus) 
+                VALUES ({$idSoal}, {$idKursus}, {$idMateri}, {$idUser}, '{$jawaban}', '{$jawabanuser}', '{$date}', 1, '{$idsoalGen}', 1, $idGrup_kursus)
+                ON DUPLICATE KEY UPDATE jawabanuser = {$jawabanuser}, keterangan = '{$idsoalGen}'";
         /*
         $sql = array(
                 'table'=>"soal ",
@@ -105,14 +121,14 @@ class quizHelper extends Database {
         return false;
     }
 
-    function getUserAnswer($idKursus, $idMateri, $n_status=1,$debug=0)
+    function getUserAnswer($idKursus, $idMateri=1, $n_status=1,$debug=0)
     {
 
         $idUser = $this->user['idUser'];
         $sql = array(
                 'table'=>"soal",
                 'field'=>"idSoal, jawabanuser",
-                'condition' => " idUser = {$idUser} AND idKursus = {$idKursus} AND idMateri = {$idMateri} AND n_status = {$n_status}",
+                'condition' => " idUser = {$idUser} AND idGrup_kursus = {$idKursus} AND n_status = {$n_status}",
                 );
 
         $res = $this->lazyQuery($sql,$debug);
@@ -126,7 +142,7 @@ class quizHelper extends Database {
         $sql = array(
                 'table'=>"tbl_generate_soal",
                 'field'=>"soal",
-                'condition' => " idUser = {$idUser} AND idKursus = {$idKursus} AND idMateri = {$idMateri} AND n_status = {$n_status} ORDER BY id DESC LIMIT 1",
+                'condition' => " idUser = {$idUser} AND idGrupKursus = {$idKursus} AND n_status = {$n_status} ORDER BY id DESC LIMIT 1",
                 );
 
         $res = $this->lazyQuery($sql,$debug);
@@ -148,15 +164,22 @@ class quizHelper extends Database {
         return false;
     }
 
-    function generateSoal($idKursus, $idMateri, $n_status=1, $debug=0)
+    function generateSoal($idKursus, $idMateri=1, $n_status=1, $debug=0)
     {
 
         $idUser = $this->user['idUser'];
 
+        /*
         $sql = array(
                 'table'=>"banksoal",
                 'field'=>"idSoal",
                 'condition' => " idKursus = {$idKursus} AND idMateri = {$idMateri} AND n_status = {$n_status} ORDER BY RAND()",
+                );
+        */
+        $sql = array(
+                'table'=>"banksoal",
+                'field'=>"idSoal",
+                'condition' => " idGrup_kursus = {$idKursus} AND n_status = {$n_status} ORDER BY RAND()",
                 );
 
         $res = $this->lazyQuery($sql,$debug);
@@ -174,9 +197,16 @@ class quizHelper extends Database {
             $endtime = date('Y-m-d H:i:s', $counttime); // Back to string
             
             $soal = serialize($listSoal);
+            /*
             $sql = "INSERT IGNORE INTO tbl_generate_soal (idKursus, idMateri, idUser, soal, generate_date, start_date, end_date, n_status) 
                     VALUES ({$idKursus}, {$idMateri}, {$idUser}, '{$soal}', '{$this->date}','{$tolerancetime}','{$endtime}', 1)
                     ";
+            */
+            $sql = "INSERT IGNORE INTO tbl_generate_soal (idGrupKursus, idUser, soal, generate_date, start_date, end_date, n_status) 
+                    VALUES ({$idKursus}, {$idUser}, '{$soal}', '{$this->date}','{$tolerancetime}','{$endtime}', 1)
+                    ";
+
+                    
             // pr($sql);
             // $sql = array(
             //         'table'=>"tbl_generate_soal",
@@ -186,13 +216,18 @@ class quizHelper extends Database {
 
             $resins = $this->query($sql);
             if ($resins){
-
+                /*
                 $sql = array(
                         'table'=>"tbl_generate_soal",
                         'field'=>"id, start_date, end_date",
                         'condition' => " idKursus = {$idKursus} AND idMateri = {$idMateri} AND finish = 0 AND idUser = {$idUser} AND n_status = 1 ORDER BY id DESC LIMIT 1",
                         );
-
+                */
+                $sql = array(
+                        'table'=>"tbl_generate_soal",
+                        'field'=>"id, start_date, end_date",
+                        'condition' => " idGrupKursus = {$idKursus} AND finish = 0 AND idUser = {$idUser} AND n_status = 1 ORDER BY id DESC LIMIT 1",
+                        );
                 $result = $this->lazyQuery($sql,$debug);
                 // pr($result);
                 return $result;

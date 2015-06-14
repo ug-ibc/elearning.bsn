@@ -208,6 +208,8 @@ class quiz extends Controller {
       if ($correctionAnswer){
         $this->view->assign('correct', $correctionAnswer['correct']);
         $this->view->assign('wrong', $correctionAnswer['wrong']);
+
+        
       }
       return $this->loadView('quiz/page_hasil');
     }

@@ -88,10 +88,10 @@ class quizHelper extends Database {
         $jawaban = $goodAnswer[0]['jawaban'];
         $date = date('Y-m-d H:i:s');
         $idUser = $this->user['idUser'];
-        $idsoalGen = serialize(array('id_generate_soal'=>$idsoalGen));
+        $idsoalGenSerial = serialize(array('id_generate_soal'=>$idsoalGen));
 
-        $sql = "INSERT INTO soal (idSoal, idKursus, idMateri, idUser, jawaban, jawabanuser, attempt_date, n_status, keterangan, attempt, idGrup_kursus) 
-                VALUES ({$idSoal}, {$idKursus}, {$idMateri}, {$idUser}, '{$jawaban}', '{$jawabanuser}', '{$date}', 1, '{$idsoalGen}', 1, $idGrup_kursus)
+        $sql = "INSERT INTO soal (idSoal, idKursus, idMateri, idUser, jawaban, jawabanuser, attempt_date, n_status, keterangan, attempt, idGrup_kursus, soal) 
+                VALUES ({$idSoal}, {$idKursus}, {$idMateri}, {$idUser}, '{$jawaban}', '{$jawabanuser}', '{$date}', 1, '{$idsoalGenSerial}', 1, $idGrup_kursus, {$idsoalGen})
                 ON DUPLICATE KEY UPDATE jawabanuser = {$jawabanuser}, keterangan = '{$idsoalGen}'";
         /*
         $sql = array(
@@ -347,7 +347,7 @@ class quizHelper extends Database {
         $sql = array(
                 'table'=>"soal",
                 'field'=>"*",
-                'condition' => "idUser = {$idUser} AND n_status = 1 AND keterangan = '{$getGenerateSoal[0]['id']}' ",
+                'condition' => "idUser = {$idUser} AND n_status = 1 AND soal = '{$getGenerateSoal[0]['id']}' ",
                 );
 
         $res = $this->lazyQuery($sql,$debug);
@@ -361,7 +361,7 @@ class quizHelper extends Database {
             }
 
             $idKursus = $res[0]['idKursus'];
-            $nilai = array('nilai'=>count($correct), 'idKursus'=>$idKursus);
+            $nilai = array('benar'=>count($correct), 'idKursus'=>$idKursus, 'salah'=>count($wrong));
             $saveToTable = $this->saveNilai($nilai);
 
 
@@ -377,20 +377,27 @@ class quizHelper extends Database {
 
     function saveNilai($data, $debug=0)
     {   
-        $nilai = $data['nilai'];
+        $benar = $data['benar'];
+        $salah = $data['salah'];
+        $nilai = floor(($benar/($benar+$salah))*100);
         $statusulang = 0;
         $statuskelulusan = 0;
         $create_time = date('Y-m-d H:i:s');
         $idUser = $this->user['idUser'];
         $idKursus = $data['idKursus'];
-
+        
+        $sql = "INSERT INTO nilai (nilai, benar, salah, statusulang, statuskelulusan, create_time, idUser, idKursus, n_status) 
+                VALUES ({$nilai}, {$benar}, {$salah}, {$statusulang}, {$statuskelulusan}, '{$create_time}', {$idUser}, {$idKursus}, 1)
+                ON DUPLICATE KEY UPDATE nilai = {$nilai}, benar = '{$benar}', salah = '{$salah}'";
+        
+        /*
         $sql = array(
                 'table'=>"nilai",
-                'field'=>"nilai, statusulang, statuskelulusan, create_time, idUser, idKursus, n_status",
-                'value' => "{$nilai}, {$statusulang}, {$statuskelulusan}, '{$create_time}', {$idUser}, {$idKursus}, 1",
+                'field'=>"nilai, benar, salah, statusulang, statuskelulusan, create_time, idUser, idKursus, n_status",
+                'value' => "{$nilai}, {$benar}, {$salah}, {$statusulang}, {$statuskelulusan}, '{$create_time}', {$idUser}, {$idKursus}, 1",
                 );
-
-        $res = $this->lazyQuery($sql,$debug,1);
+        */
+        $res = $this->query($sql);
         if ($res) return true;
         return false;
     }

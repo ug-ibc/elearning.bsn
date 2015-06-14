@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 14, 2015 at 04:03 PM
+-- Generation Time: Jun 14, 2015 at 04:29 PM
 -- Server version: 5.5.40-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.5
 
@@ -81,6 +81,7 @@ CREATE TABLE IF NOT EXISTS `file` (
   `idKursus` int(11) DEFAULT NULL,
   `idGrup_kursus` int(11) DEFAULT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `downloadCount` int(11) NOT NULL DEFAULT '0',
   `n_status` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idFile`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

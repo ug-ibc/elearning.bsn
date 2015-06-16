@@ -24,7 +24,7 @@ class home extends Controller {
 	
 	function index(){
 
-		$this->log('surf', 'liat-liat');
+		$this->log($aksi='surf', $activity='landing home bsn');
 		//$data=$this->userGallery->getgallery();
 		//if ($data){	
 		$vardata['data'] = $this->userNews->getnews2();

@@ -76,6 +76,16 @@
 <script src="{$basedomain}plugin/video-js/video.js"></script>
 <script src="{$basedomain}assets/js/turn.js"></script>
 <script src="{$basedomain}assets/js/pdf.js"></script>
+<script src="{$basedomain}assets/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+{literal}
+$(function(){
+            $('#datepicker').datepicker({
+                format: 'yyyy-dd-mm'
+            });
+        })
+{/literal}
+</script>
 
 </body>
 </html>

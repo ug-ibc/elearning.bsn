@@ -1,3 +1,11 @@
+<script type="text/javascript">
+{literal}
+$('.datepicker').datepicker({
+    format: 'mm/dd/yyyy',
+    startDate: '-3d'
+})
+{/literal}
+</script>
 <section class="callaction">
 	<div class="container">
 		<div class="row">
@@ -92,7 +100,7 @@
 				    <div class="col-sm-6">
 				    	<div class="input-group">
 						  <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
-				    	<input type="text" class="form-control" placeholder="YYYY-MM-DD" name="tanggallahir" required/>
+				    	<input type="text" class="form-control" id="datepicker" placeholder="YYYY-MM-DD" name="tanggallahir" required/>
 				    </div>
 				    </div>
 				  </div>

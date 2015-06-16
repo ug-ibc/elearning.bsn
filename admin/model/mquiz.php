@@ -55,7 +55,11 @@ class mquiz extends Database {
 	function selectquiz($idSoal)
 	{
 		//pr($id);
-		$query = "SELECT * FROM banksoal WHERE idSoal ='".$idSoal."'";
+		// SELECT column_name(s)
+		// FROM table1
+		// JOIN table2
+		// ON table1.column_name=table2.column_name;
+		$query = "SELECT * FROM banksoal JOIN grup_kursus on banksoal.idGrup_kursus=grup_kursus.idGrup_kursus  WHERE idSoal ='".$idSoal."'";
 
 		$result = $this->fetch($query,0,0);
 		return $result;

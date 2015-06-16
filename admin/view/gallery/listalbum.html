@@ -87,7 +87,18 @@ $(window).on('load', function() {
 			<td><img src="../public_assets/{$val.cover_album}" width="50%" height="50%"></td>
 			<td>{$val.nm_album}</td>
 			<td>{$val.create_date}</td>
-			<td><a id ="demo-dt-delete-btn" class="btn btn-success btn-labeled fa fa-pencil-square-o" href="{$basedomain}gallery/getgallery/?id_album={$val.id_album}">View Photo</a></td>
+			<td>
+			<table>
+					<tr>
+					<td><a id ="demo-dt-delete-btn" class="btn btn-primary btn-labeled fa fa-pencil-square-o" href="{$basedomain}gallery/getgallery/?id_album={$val.id_album}">View Photo</a></td>
+					<td><a id ="demo-dt-delete-btn" class="btn btn-success btn-labeled fa fa-pencil-square-o" href="{$basedomain}gallery/editalbum/?id_album={$val.id_album}">Edit</a></td>	
+					<td><a id ="demo-dt-delete-btn" class="btn btn-danger btn-labeled fa fa-times" href="{$basedomain}gallery/deletealbum/?id_album={$val.id_album}" onclick="return confirm('Apakah anda yakin akan menghapus album ini?')">Delete</a></td>
+					</tr>
+				</table>
+
+
+
+			</td>
 			</tr>
 			{/foreach}
 			{/if}

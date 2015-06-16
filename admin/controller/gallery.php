@@ -46,6 +46,68 @@ public function inputalbum(){
 	
 }
 
+
+//fungsi untuk merubah data news
+	public function editalbum(){
+		global $CONFIG;
+		$id_album = $_GET['id_album'];
+		//kondisi apabila tidak melakukan perubahan
+		if ($_POST == null){	
+			$data=$this->models->selectalbum($id_album);
+			if ($data){	
+				$this->view->assign('data',$data);
+			}	
+			return $this->loadView('gallery/editalbum');	
+		}
+		//eksekusi jika melakukan perubahan terhadap data news
+		else{
+			//pr ($_FILES['cover_album']);exit;
+
+				if (empty($_FILES['cover_album']['name'])){
+					$id_album=$_GET['id_album'];
+					$judul = $_POST['nm_album'];
+					$data=$this->models->updatealbum2($id_album,$judul);
+					if($data == 1){
+						echo "<script>alert('Data berhasil di perbarui');window.location.href='".$CONFIG['admin']['base_url']."gallery'</script>";
+					}
+				}		
+				elseif (!empty($_FILES['cover_album']['name'])){
+					$id_album=$_GET['id_album'];
+					$judul = $_POST['nm_album'];
+					$upload = uploadFile('cover_album',false,'image');
+					// pr($_POST['hiddenFile'];);exit;
+					$namafile=$upload['full_name'];
+					//pr($namafile);exit;
+					//$author = $_POST['author'];
+					//$foto = $_POST['hiddenFile'];
+					//unlink('localhost/elearning.bsn/public_assets/'.$foto);
+					//pr($foto); exit;
+					$data=$this->models->updatealbum($id_album,$judul,$namafile);
+					if($data == 1){
+						echo "<script>alert('Data berhasil di perbarui');window.location.href='".$CONFIG['admin']['base_url']."gallery'</script>";
+					}
+					
+				}
+			
+			}
+	}
+
+		//fungsi untuk menghapus data news
+	public function deletealbum(){
+		global $CONFIG;
+		//mengambil parameter id_news dari view
+		$id_album = $_GET['id_album'];
+		//melempar id_news ke fungsi deletenews yang ada di model
+		$data=$this->models->deletealbum($id_album);
+		$data2=$this->models->deletefoto($id_album);
+		if($data == 1 && $data2 == 1){
+			echo "<script>alert('Data berhasil di hapus');window.location.href='".$CONFIG['admin']['base_url']."gallery'</script>";
+		}
+		else {pr('gagal');}
+	}
+
+
+
 //Menampilkan halaman galeri foto sesuai dengan album yang dipilih
 public function getgallery(){
 	//menangkap parameter id_album dari halaman album
@@ -108,6 +170,67 @@ public function inputgallery(){
 		}	
 	}
 }
+
+//fungsi untuk merubah data news
+	public function editgallery(){
+		global $CONFIG;
+		$id_gallery = $_GET['id_gallery'];
+		//kondisi apabila tidak melakukan perubahan
+		if ($_POST == null){	
+			$data=$this->models->selectgallery($id_gallery);
+			if ($data){	
+				$this->view->assign('data',$data);
+			}	
+			return $this->loadView('gallery/editgallery');	
+		}
+		//eksekusi jika melakukan perubahan terhadap data news
+		else{
+			//pr ($_FILES['gambar']);exit;
+
+				if (empty($_FILES['gambar']['name'])){
+					$id_gallery=$_GET['id_gallery'];
+					$judul = $_POST['judul'];
+					$deskripsi = $_POST['deskripsi'];
+					$data=$this->models->updategallery2($id_gallery,$judul,$deskripsi);
+					if($data == 1){
+						echo "<script>alert('Data berhasil di perbarui');window.location.href='".$CONFIG['admin']['base_url']."gallery'</script>";
+					}
+				}		
+				elseif (!empty($_FILES['gambar']['name'])){
+					$id_gallery=$_GET['id_gallery'];
+					$judul = $_POST['judul'];
+					$deskripsi = $_POST['deskripsi'];
+					$upload = uploadFile('gambar',false,'image');
+					// pr($_POST['hiddenFile'];);exit;
+					$namafile=$upload['full_name'];
+					//pr($namafile);exit;
+					//$author = $_POST['author'];
+					//$foto = $_POST['hiddenFile'];
+					//unlink('localhost/elearning.bsn/public_assets/'.$foto);
+					//pr($foto); exit;
+					$data=$this->models->updategallery($id_gallery,$judul,$deskripsi,$namafile);
+					if($data == 1){
+						echo "<script>alert('Data berhasil di perbarui');window.location.href='".$CONFIG['admin']['base_url']."gallery'</script>";
+					}
+					
+				}
+			
+			}
+	}
+
+		//fungsi untuk menghapus data news
+	public function deletegallery(){
+		global $CONFIG;
+		//mengambil parameter id_news dari view
+		$id_gallery = $_GET['id_gallery'];
+		//melempar id_news ke fungsi deletenews yang ada di model
+		$data=$this->models->deletegallery($id_gallery);
+		if($data == 1){
+			echo "<script>alert('Data berhasil di hapus');window.location.href='".$CONFIG['admin']['base_url']."gallery'</script>";
+		}
+		else {pr('gagal');}
+	}
+
 
 }
 ?>

@@ -6,7 +6,7 @@ class mnews extends Database{
 	{
 		//query memanggil home
 		$query = "SELECT news.id_news, news.judul, news.author, news.posted, news.gambar, news.brief, user.username from news, user where news.author = user.idUser && news.status = 1 limit 3";
-		//pr($query);
+		// pr($query);
 		//memanggil semua data. Jika hanya memanggil 1 data ->fetch($query,0,0)
 		$result = $this->fetch($query,1,0);
 		return $result;

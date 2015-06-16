@@ -111,6 +111,7 @@ class Database
 		global $dbConfig, $CONFIG;
 		$this->keyconfig = $this->setAppKey();
 		
+		logFile($data);
 		$this->open_connection($dbuse);
                 // cek server database yang dipakai
 		switch ($dbConfig[$dbuse]['server'])

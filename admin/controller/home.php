@@ -20,7 +20,7 @@ class home extends Controller {
 	public function loadmodule()
 	{
 		
-		$this->marticle = $this->loadModel('marticle');
+		$this->contentHelper = $this->loadModel('contentHelper');
 	}
 	
 	public function index(){
@@ -28,10 +28,15 @@ class home extends Controller {
 		// uploadFile($data,$path=null,$ext){
 		
 
-		$data1 = 1;
-		$vardata = array("coba data","array 2");
-		// pr($vardata);
-		$this->view->assign('data',$vardata);
+		$register = $this->contentHelper->getRegistrant();
+		$course = $this->contentHelper->getCourse();
+		$online = $this->contentHelper->getOnlineUser();
+		$download = $this->contentHelper->getDownloadEbook();
+		// pr($download);
+		$this->view->assign('register',$register[0]['total']);
+		$this->view->assign('course',$course[0]['total']);
+		$this->view->assign('online',$online[0]['total']);
+		$this->view->assign('download',intval($download[0]['total']));
 
 		return $this->loadView('home/home');
 

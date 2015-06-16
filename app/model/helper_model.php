@@ -135,23 +135,24 @@ class helper_model extends Database {
     
     function logActivity($action='surf', $comment=null)
     {
-    	$sql = "SELECT id FROM code_activity WHERE activityValue = '{$action}' LIMIT 1 ";
-    	$res = $this->fetch($sql,0,1);
-    	if ($res){
+        // $sql = "SELECT id FROM code_activity WHERE activityValue = '{$action}' LIMIT 1 ";
+        // $res = $this->fetch($sql,0,1);
+        // if ($res){
 
-    		$date = date('Y-m-d H:i:s'); 
-    		$source = $_SERVER['REMOTE_ADDR'];
-    		$comment = htmlentities($comment, ENT_QUOTES);
-    		
-    		$ins = "INSERT INTO code_activity_log (userid, activityId, activityDesc, source, datetimes, n_status)
-    				VALUES ({$this->user['id']}, {$res['id']}, '{$comment}', '{$source}', '{$date}',1)";
-    		$result = $this->query($ins,1);
+            $date = date('Y-m-d H:i:s'); 
+            $source = $_SERVER['REMOTE_ADDR'];
+            $comment = htmlentities($comment, ENT_QUOTES);
+            if ($this->user['id']) $userid = $this->user['id'];
+            else $userid = 0;
+            $ins = "INSERT INTO tbl_activity_log (userID, activity, description, source, datetimes)
+                    VALUES ({$userid}, '{$action}', '{$comment}', '{$source}', '{$date}')";
+            $result = $this->query($ins);
+            // db();
+            if ($result) return true;
+            return false;
+        // }
 
-    		if ($result) return true;
-    		return false;
-    	}
-
-    	return false;
+        // return false;
     }
 }
 ?>

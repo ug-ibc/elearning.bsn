@@ -64,11 +64,12 @@ class quiz extends Controller {
     	$soal = intval(_p('soal'));
     	$kursus = intval(_p('kursus'));
     	$materi = intval(_p('materi'));
+      $idGrup_kursus = intval(_p('idGrup_kursus'));
     	// pr($dataid);
 
       $getGenerateSoal = $this->quizHelper->getGenerateSoal();
       $idsoalGen = $getGenerateSoal[0]['id'];
-    	$updateData = $this->quizHelper->userAnswer($kursus, $materi, $soal, $pilihan, $idsoalGen);
+    	$updateData = $this->quizHelper->userAnswer($kursus, $materi, $soal, $pilihan, $idsoalGen, $idGrup_kursus);
     	if ($updateData){
     		print json_encode(array('status'=>true));
     	}else{
@@ -84,8 +85,10 @@ class quiz extends Controller {
     	$startQuiz = false;
 
     	// generate soal cukup 1 kali ketika klik tombol mulai
-    	$generateSoal = $this->quizHelper->generateSoal(1,1);
 
+      $groupKursus = _g('id');
+    	$generateSoal = $this->quizHelper->generateSoal($groupKursus);
+      
       $alreadySubmit = false;
 
     	if ($generateSoal){
@@ -100,9 +103,9 @@ class quiz extends Controller {
 		}
 			
 			
-		$getQuiz = $this->quizHelper->getQuiz(1,1, $start);
+		$getQuiz = $this->quizHelper->getQuiz($groupKursus);
        	
-       	$getUserAnswer = $this->quizHelper->getUserAnswer(1,1);
+       	$getUserAnswer = $this->quizHelper->getUserAnswer($groupKursus);
        	if ($getUserAnswer){
        		foreach ($getUserAnswer as $key => $value) {
        			$answerList[$value['idSoal']] = $value['jawabanuser'];
@@ -115,11 +118,11 @@ class quiz extends Controller {
 
        	if ($getQuiz){
        		foreach ($getQuiz as $key => $value) {
-       			$dataSoal[] = $this->quizHelper->randomJawaban($value);
+       			$dataSoal[] = $this->quizHelper->randomJawaban($value, false);
        		}
 
        		
-       		
+       	// pr($dataSoal);
    			foreach ($dataSoal as $key => $value) {
        			$dataSoal[$key]['no'] = ($start+1);
        			
@@ -205,6 +208,8 @@ class quiz extends Controller {
       if ($correctionAnswer){
         $this->view->assign('correct', $correctionAnswer['correct']);
         $this->view->assign('wrong', $correctionAnswer['wrong']);
+
+        
       }
       return $this->loadView('quiz/page_hasil');
     }

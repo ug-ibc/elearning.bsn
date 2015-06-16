@@ -45,10 +45,12 @@ $(document).on('click','.chooseAnswer', function(){
 	var pilihan = $(this).attr('data-pilihan');
 	var materi = $(this).attr('data-materi');
 	var kursus = $(this).attr('data-kursus');
+	var idGrup_kursus = $(this).attr('data-idGrup_kursus');
+	
 	var dataKlik = this;
 	// $('soal_'+soal).removeClass("li.span.active");
 	
-	$.post(basedomain+'quiz/ajax', {soal:soal, pilihan:pilihan, materi:materi, kursus:kursus}, function(data){
+	$.post(basedomain+'quiz/ajax', {soal:soal, pilihan:pilihan, materi:materi, kursus:kursus, idGrup_kursus:idGrup_kursus}, function(data){
 
 		if (data.status==true){
 			
@@ -63,6 +65,11 @@ $(document).on('click','.chooseAnswer', function(){
 $(document).on('click','#ikutQuiz', function(){
 
 	window.location.href=basedomain+"quiz/startQuiz";
+})
+
+$(document).on('click','.applykursus', function(){
+
+	$('#is_applykursus').val('1');
 })
 
 $(document).on('change','.pilihKursus', function(){

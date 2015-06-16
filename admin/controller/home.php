@@ -21,6 +21,7 @@ class home extends Controller {
 	{
 		
 		$this->contentHelper = $this->loadModel('contentHelper');
+		$this->marticle = $this->loadModel('marticle');
 	}
 	
 	public function index(){

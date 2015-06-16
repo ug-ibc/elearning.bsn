@@ -53,6 +53,16 @@ function error_code($code=000)
 	pr($msg);
 }
 
+function debug($var=false)
+{
+	if ($var) pr($var);
+	else pr('masuk');
+	exit;
+}
 
+function db($var=false)
+{
+	debug($var);
+}
 
 ?>

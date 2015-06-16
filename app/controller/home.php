@@ -4,7 +4,7 @@ class home extends Controller {
 	
 	var $models = FALSE;
 	var $view;
-
+	var $reportHelper;
 	
 	function __construct()
 	{
@@ -24,7 +24,7 @@ class home extends Controller {
 	
 	function index(){
 
-
+		$this->log('surf', 'liat-liat');
 		//$data=$this->userGallery->getgallery();
 		//if ($data){	
 		$vardata['data'] = $this->userNews->getnews2();
@@ -51,6 +51,16 @@ class home extends Controller {
     		redirect($basedomain);
     		logFile('can not logout user');exit;
     	}
+    }
+
+    function cetak()
+    {
+
+    	$this->reportHelper =$this->loadModel('reportHelper');
+
+    	$html = "<h1>Its works</h1>";
+
+    	$generate = $this->reportHelper->loadMpdf($html, 'namafileotput');
     }
 
 }

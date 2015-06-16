@@ -23,9 +23,8 @@ class kursus extends Controller {
 	
 	function index(){
 		
-		$data = $this->models->getGrupKursus();
+		$data = $this->models->getGrupKursus($this->user);
 		$this->view->assign('grup',$data);
-
 		return $this->loadView('kursus/grupkursus');
 
     }

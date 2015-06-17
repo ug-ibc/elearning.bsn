@@ -55,12 +55,98 @@ class home extends Controller {
 
     function cetak()
     {
+		global $basedomain;
+		$background_certificate =  $basedomain."assets/img/certificate/bg.jpg";
+		$this->reportHelper =$this->loadModel('reportHelper');
+		$html = "<style>
+					body {
+					  background: rgb(204,204,204);
+					  background-image:  url(\"$background_certificate\");
+					  width: 21cm;
+					  height: 29.7cm;
+					  display: block;
+					  margin: 0 auto;
+					  margin-bottom: 0.5cm;
+					  box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);  
+					}
+					#spacePage{
+						height:10cm;
+					}
+					.bpmTopnTailC td, .bpmTopnTailC th  {	border-top: 1px solid #FFFFFF; text-align : center}
+					.headerrow td, .headerrow th { background-gradient: linear #b7cebd #f5f8f5 0 1 0 0.2;  }
+					.evenrow td, .evenrow th { background-color: #f5f8f5; } 
+					.oddrow td, .oddrow th { background-color: #e3ece4; } 
 
-    	$this->reportHelper =$this->loadModel('reportHelper');
+							
+					</style>
+					<page >
+						<div id=\"spacePage\">&nbsp;</div>
+						<div style=\"width: ; text-align: center;\">
+							<h5>diberikan kepada</h5>
 
-    	$html = "<h1>Its works</h1>";
+							<h1 style=\"font-family: Monotype Corsiva; font-style: italic\">Eddy S. Siradj</h1>
 
-    	$generate = $this->reportHelper->loadMpdf($html, 'namafileotput');
+							<h5>telah mengikuti</h5>
+
+							<h1>Grup Kursus : Standardisasi</h1>
+
+							<h5>Tanggal ................ di website http://elearning.bsn.go.id</h5>
+
+							<h5>sebagai</h5>
+
+							<h1 style=\"font-family: Monotype Corsiva; font-style: italic\">Peserta</h1>
+
+							<h5>dengan Predikat </h5>
+
+							<h1 style=\"font-family: Monotype Corsiva; font-style: italic\">Baik / Sangat Baik</h1>
+
+							Kepala Pusat Pendidikan dan <br/>
+							Pemasyarakatan Standardisasi
+
+							<h5>Metrawinda Tunus</h5>
+						</div>
+						<div id=\"spacePage\">&nbsp;</div>
+						<div style=\"width: ; text-align: center;\">
+						<h4>Daftar Kursus : </h4>
+								<table align=\"center\" class=\"bpmTopnTailC\"><thead>
+									<tr class=\"headerrow\" ><th>No.</th>
+										<td>
+											<p>Judul</p>
+										</td>
+										<td>Durasi</td>
+									</tr>
+								</thead><tbody>
+									<tr class=\"oddrow\"><th>1</th>
+										<td>Pengantar (sejarah, filosofi, jenis dan cakupan standar)</td>
+										<td>45 menit</td>
+									</tr>
+									<tr class=\"evenrow\"><th>2</th>
+										<td>
+										<p>Infrastruktur Mutu</p>
+										</td>
+										<td>
+										<p>45 menit</p>
+										</td>
+									</tr>
+									<tr class=\"oddrow\"><th>3</th>
+										<td>Pengantar (sejarah, filosofi, jenis dan cakupan standar)</td>
+										<td>45 menit</td>
+									</tr>
+									<tr class=\"evenrow\"><th>4</th>
+										<td>
+										<p>Infrastruktur Mutu</p>
+										</td>
+										<td>
+										<p>45 menit</p>
+										</td>
+									</tr>
+								</tbody></table>
+						</div>
+					</page>";
+
+		// echo $html;
+		// exit;
+    	$generate = $this->reportHelper->loadMpdf($html, 'certificate');
     }
 
 }

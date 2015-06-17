@@ -80,6 +80,7 @@ class quiz extends Controller {
 
     function startQuiz()
     {
+      $start = 0;
     	$param = intval(_p('param'));
 
     	$startQuiz = false;

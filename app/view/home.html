@@ -134,16 +134,20 @@
             </div>
             <div class="col-lg-4" align="center">
                 <h3>QUOTE OF THE DAY</h3>
-                <p><i>&quot;Who ever rules standards, rules industries&quot;</i></p>
-                <strong style="color:#7DA55C"><i>William Edward Deming</i></strong>
+                {foreach $data.quotes as $val}
+                <p><i>&quot;{$val.keterangan}&quot;</i>
+                <strong style="color:#7DA55C"><i>{$val.judul}</i></strong></p>
+                {/foreach}
             </div>
             <div class="col-lg-4">
                 <h3 align="center">GLOSARIUM</h3> 
-                <p>Standardisasi adalah proses merencanakan, merumuskan, menetapkan, menerapkan, memberlakukan, memelihara, dan mengawasi Standar yang dilaksanakan secara tertib dan bekerja sama dengan semua Pemangku Kepentingan 
+                {*}<p>Standardisasi adalah proses merencanakan, merumuskan, menetapkan, menerapkan, memberlakukan, memelihara, dan mengawasi Standar yang dilaksanakan secara tertib dan bekerja sama dengan semua Pemangku Kepentingan 
+                </p>{/*}
+                {foreach $data.glosarium as $val}
+                <p style="padding-left:15px"><span style="color:#7DA55C">{$val.judul}</span><br/>
+                    {$val.keterangan}
                 </p>
-                <p style="padding-left:15px"><span style="color:#7DA55C">STANDARISASI</span><br/>
-                    Standar adalah persyaratan teknis atau sesuatu yang dibakukan, termasuk tata cara dan metode yang disusun berdasarkan konsensus semua pihak/Pemerintah/ keputusan internasional yang terkait dengan memperhatikan syarat keselamatan, keamanan, kesehatan, lingkungan hidup, perkembangan ilmu pengetahuan dan teknologi, pengalaman, serta perkembangan masa kini dan masa depan untuk memperoleh manfaat yang sebesar-besarnya.
-                </p>
+                {/foreach}
             </div>
          </div>
     </div>

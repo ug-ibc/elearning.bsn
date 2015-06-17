@@ -22,7 +22,8 @@ function vd($data)
 
 function _p($data)
 {
-	return clean($_POST[$data]);
+
+	if (isset($_POST[$data]))return clean($_POST[$data]);
 }
 
 function _g($data)

@@ -23,19 +23,24 @@ class reportHelper extends Database {
 
     function loadMpdf($html, $output=null)
     {
-
+		// echo "masuk";
+		// echo $output;
+		// exit;
         global $CONFIG;
         $mpdfEngine = LIBS . 'mpdf/mpdf' . $CONFIG[$this->configkey]['php_ext'];
 
         if (is_file($mpdfEngine)){
             
             require_once ($mpdfEngine);
+            $mpdf=new mPDF('c','A4','','',32,25,27,25,16,13); 
+			$mpdf->SetDisplayMode('fullpage');
             
-            $mpdf=new mPDF('','','','',15,15,16,16,9,9,'P');
+			/*$mpdf=new mPDF('','','','',15,15,16,16,9,9,'P');
             $mpdf->AddPage('L','','','','',15,15,16,16,9,9);
-            $mpdf->setFooter('{PAGENO}') ;
-            $mpdf->WriteHTML($html);
-            $mpdf->Output($output . '-' . date(ymdhis) . $pdf_ext,'D');
+            $mpdf->setFooter('{PAGENO}') ;*/
+			
+			$mpdf->WriteHTML($html);
+			$mpdf->Output($output . '-' . date(ymdhis) . $pdf_ext,'D');
             
             logFile('load excel success');
         }else{

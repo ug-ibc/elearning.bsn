@@ -48,7 +48,7 @@ var $models = FALSE;
 			$data=$this->models->inputnews($judul,$brief,$namafile,$isi,$author,$publish,$status);
 			//kondisi untuk memberi peringatan proses input berhasil atau tidak
 			if($data == 1){
-				echo "<script>alert('Data berhasil di simpan');window.location.href='".$CONFIG['admin']['base_url']."news'</script>";
+				echo "<script>alert('News Successfully Created');window.location.href='".$CONFIG['admin']['base_url']."news'</script>";
 			}
 		}
 		//eksekusi jika validasi form tidak sesuai
@@ -68,7 +68,7 @@ var $models = FALSE;
 		//melempar id_news ke fungsi deletenews yang ada di model
 		$data=$this->models->deletenews($id_news);
 		if($data == 1){
-			echo "<script>alert('Data berhasil di hapus');window.location.href='".$CONFIG['admin']['base_url']."news'</script>";
+			echo "<script>alert('News Successfully Delete');window.location.href='".$CONFIG['admin']['base_url']."news'</script>";
 		}
 		else {pr('gagal');}
 	}
@@ -106,7 +106,7 @@ var $models = FALSE;
 			$isi = $_POST['isi'];
 			$data=$this->models->updatenews($id_news,$judul,$brief,$namafile,$isi,$publish,$status);
 			if($data == 1){
-				echo "<script>alert('Data berhasil di perbarui');window.location.href='".$CONFIG['admin']['base_url']."news'</script>";
+				echo "<script>alert('News Successfully Update');window.location.href='".$CONFIG['admin']['base_url']."news'</script>";
 			}
 		}
 	}

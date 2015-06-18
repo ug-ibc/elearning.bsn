@@ -10,8 +10,8 @@ class mcourse extends Database {
 	function insert_data($namagrup,$syaratkelulusan,$n_status)
 	{
 		$query = "INSERT INTO grup_kursus (namagrup,syaratkelulusan,n_status)
-				  VALUES ('$namagrup','$syaratkelulusan','$n_status')";
-		// echo $query;
+				  VALUES ('$namagrup','".addslashes(html_entity_decode($syaratkelulusan))."','$n_status')";
+		// echo $query;'".addslashes(html_entity_decode($syaratkelulusan))."'
 		$result = $this->query($query);
 		// return $result;
 	}
@@ -32,7 +32,7 @@ class mcourse extends Database {
 		$query = "UPDATE grup_kursus
 						SET 
 							namagrup = '{$namagrup}',
-							syaratkelulusan = '{$syaratkelulusan}'
+							syaratkelulusan = '".addslashes(html_entity_decode($syaratkelulusan))."'
 						WHERE
 							idGrup_kursus = '{$id}'";
 		$result = $this->query($query);					
@@ -94,7 +94,7 @@ class mcourse extends Database {
 		if($x['action'] == 'insert'){
 			$n_status = '1';
 			$query = "INSERT INTO kursus (namakursus,keterangan,jeniskursus,start_date,end_date,quota,idGrup_kursus,n_status,image,parentCourse)
-				  VALUES ('$x[namakursus]','$x[keterangan]','$x[jeniskursus]','$x[start_date]','$x[end_date]',
+				  VALUES ('$x[namakursus]','".addslashes(html_entity_decode($x[keterangan]))."','$x[jeniskursus]','$x[start_date]','$x[end_date]',
 				  '$x[quota]','$x[idGrup_kursus]',$n_status,'$x[image]','$x[parentCourse]')";
 			// echo $query;
 			// exit;
@@ -104,7 +104,7 @@ class mcourse extends Database {
 			$query = "UPDATE kursus
 						SET 
 							namakursus = '{$x["namakursus"]}',
-							keterangan = '{$x["keterangan"]}',
+							keterangan = '".addslashes(html_entity_decode($x[keterangan]))."',
 							jeniskursus = '{$x["jeniskursus"]}',
 							start_date = '{$x["start_date"]}',
 							end_date = '{$x["end_date"]}',
@@ -243,8 +243,7 @@ class mcourse extends Database {
 	function insert_data_material($namamateri,$idKursus,$jenismateri,$idGrup_kursus,$urutan,$keterangan,$n_status)
 	{
 		$query = "INSERT INTO materi (namamateri,idKursus,jenismateri,idGrup_kursus,urutan,keterangan,n_status)
-				  VALUES ('$namamateri','$idKursus','$jenismateri','$idGrup_kursus','$urutan','$keterangan','$n_status')";
-		// echo $query;
+				  VALUES ('$namamateri','$idKursus','$jenismateri','$idGrup_kursus','$urutan','".addslashes(html_entity_decode($keterangan))."','$n_status')";
 		$result = $this->query($query);
 		// return $result;
 	}
@@ -284,9 +283,11 @@ class mcourse extends Database {
 							jenismateri = '{$jenismateri}',
 							idGrup_kursus = '{$idGrup_kursus}',
 							urutan = '{$urutan}',
-							keterangan = '{$keterangan}'
+							keterangan = '".addslashes(html_entity_decode($keterangan))."'
 						WHERE
 							idMateri = '{$idMateri}'";
+		// echo $query; 
+		// exit;
 		$result = $this->query($query);					
 	}
 	

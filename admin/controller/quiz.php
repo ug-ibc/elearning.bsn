@@ -44,6 +44,7 @@ class quiz extends Controller {
 		$groupkursus=$_POST['groupkursus'];
 		$n_status=$_POST['quizstatus'];
 
+
 		// pr($_POST);
 		$data=$this->models->inputquiz($soal,$pilihan1,$pilihan2,$pilihan3,$pilihan4,$jenissoal,$keterangan,$jawaban,$kursus,$materi,$groupkursus, $n_status);
 		//kondisi untuk memberi peringatan proses input berhasil atau tidak

@@ -42,8 +42,9 @@ class login extends Controller {
                 // set session
                 $setSession = $this->loadSession->set_session($validateData);
                 
-                if ($_POST['is_applykursus']==1){
-                    redirect($basedomain.'quiz/startQuiz');
+                if ($_POST['is_applykursus']){
+                    $id = $_POST['is_applykursus'];
+                    redirect($basedomain."quiz/startQuiz/?id={$id}");
                 }else{
                     redirect($basedomain.'home');
                 }

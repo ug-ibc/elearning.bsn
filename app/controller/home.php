@@ -29,6 +29,8 @@ class home extends Controller {
 		//if ($data){	
 		$vardata['data'] = $this->userNews->getnews2();
 		$vardata['data2'] = $this->userGallery->getgallery();
+		$vardata['quotes'] = $this->contentHelper->getCatatan(2);
+		$vardata['glosarium'] = $this->contentHelper->getCatatan(1);
 
 		$kursus = $this->contentHelper->getKursus();
 		$this->view->assign('kursus',$kursus);

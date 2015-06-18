@@ -62,5 +62,14 @@ class contentHelper extends Database {
 
         return $result;
     }
+
+    function getCatatan($tipe=1)
+    {
+        $query = "SELECT * FROM catatan WHERE tipe = {$tipe} AND n_status = 1";
+
+        $result = $this->fetch($query,1);
+
+        return $result;
+    }
 }
 ?>

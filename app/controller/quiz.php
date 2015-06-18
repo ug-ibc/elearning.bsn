@@ -80,6 +80,7 @@ class quiz extends Controller {
 
     function startQuiz()
     {
+      $start = 0;
     	$param = intval(_p('param'));
 
     	$startQuiz = false;
@@ -102,7 +103,8 @@ class quiz extends Controller {
 			unset($_SESSION['end_date']);
 		}
 			
-			
+		$soalList = array();
+    $getKursus = array();
 		$getQuiz = $this->quizHelper->getQuiz($groupKursus);
        	
        	$getUserAnswer = $this->quizHelper->getUserAnswer($groupKursus);
@@ -142,6 +144,8 @@ class quiz extends Controller {
        	$this->view->assign('hiddenStatus', true);
         $this->view->assign('alreadySubmit', $alreadySubmit);
         $this->view->assign('dataQuiz', $generateSoal[0]);
+
+        $this->view->assign('soal', false);
 
        	if (isset($_SESSION['end_date'])){
 

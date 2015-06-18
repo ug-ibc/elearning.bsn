@@ -38,7 +38,7 @@
 						
 						<li class="list-header">Home</li>
 
-						<li class="{if $page.page eq 'home'}active-link{/if}">
+						<li class="{if $page.page eq 'home' && $page.function eq 'index'}active-link{/if}">
 							<a href="{$basedomain/home}">
 								<i class="fa fa-dashboard"></i>
 								<span class="menu-title">
@@ -72,13 +72,13 @@
 								</span>
 							</a>
 						</li>
-						<li class="">
+						<li class="{if $page.page eq 'home' && $page.function eq 'glosariumlist'}active-link{/if}">
 							<a href="{$basedomain}home/glosariumlist">
 								<i class="fa fa-book"></i>
 								<span class="menu-title">Glosarium</span>
 							</a>
 						</li>
-						<li class="">
+						<li class="{if $page.page eq 'home' && $page.function eq 'quoteslist'}active-link{/if}">
 							<a href="{$basedomain}home/quoteslist">
 								<i class="fa fa-quote-left"></i>
 								<span class="menu-title">Quotes of The Day</span>

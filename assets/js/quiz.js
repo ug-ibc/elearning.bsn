@@ -69,7 +69,8 @@ $(document).on('click','#ikutQuiz', function(){
 
 $(document).on('click','.applykursus', function(){
 
-	$('#is_applykursus').val('1');
+	$('#is_applykursus').val($(this).attr('data-kursus'));
+
 })
 
 $(document).on('change','.pilihKursus', function(){

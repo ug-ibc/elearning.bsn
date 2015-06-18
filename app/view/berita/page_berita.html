@@ -13,19 +13,18 @@
 <section class="callaction">
 	<div class="container">
 		
-		<div class="row">
-			<div class="col-md-9">	
-			<h1 style="border-bottom:5px solid #69BD45">BERITA BSN</h1>
-			<hr style="margin-top:-18px;border-bottom:2px solid #000"/>
-			</div>
-		</div>
+		<div class="col-md-12" align="left" style="border-bottom:2px solid #F5F5F5;margin-bottom:50px;padding-bottom:3px">
+	        <span style="font-size:23px;border-bottom:2px solid #69BD45;">BERITA BSN</span>
+	        
+	        <!-- <p>Lorem ipsum dolor sit amet, consectetur consectetur  adipiscing elit donec mer lacinia.</p> -->
+	    </div><br/>
 		<div class="row">
 			<div class="col-md-9">
 				{foreach $data as $val}
 				<div class="row">
 					<div class="col-md-4">
 						
-						<img src="{$basedomain}public_assets/{$val.gambar}" width="250" height="200" />
+						<img src="{$basedomain}public_assets/{$val.gambar}" width="200" height="200" />
 					</div>
 
 					<div class="col-md-8">
@@ -38,10 +37,11 @@
 		     				</div>
 		     				<div class="col-md-10">
 							<span style="font-size:25px">{$val.judul}</span><br/>
-							<i class="fa fa-user"></i>  {$val.username} <i class="fa fa-list"></i> Interviews
+							<i class="fa fa-user"></i>  <span style="padding:10px;color:#2E8AD8;">{$val.username}</span> {*}<i class="fa fa-list"></i> Interviews{/*}
 			     				
 		     				</div>
 	     				</div>
+	     				<div class="col-md-12" align="left" style="border-bottom:2px solid #F5F5F5;margin-bottom:5px;margin-top:-15px;padding-bottom:0px"></div>
 						<p align="justify">{$val.brief}</p>
 						<a href="{$basedomain}berita/detail/?id_news={$val.id_news}">Read More</a>
 

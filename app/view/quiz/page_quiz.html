@@ -243,19 +243,19 @@ legend {
 		<div class="row">
 			<div class="col-md-9">
 
-				{if $soal}
+				{if !empty($soal)}
 				{foreach $soal as $val}
 				<div class="row">
 					<div class="col-md-1"><br/>
 						<span style="background-color:#26CCC6;padding:15px;100px;color:#FFFFFF;font-size:17px;font-weight:bold;">{$val.no}</span>
 					</div>
 
-					<div class="col-md-11" style="padding-top:10px;font-size:18px">
+					<div class="col-md-11" style="padding-top:10px;font-size:14px">
 						<p >{$val.soal}</p>
 						<ul class="ul-btn soal_{$val.idSoal}">
 							{foreach $val.acakpilihan as $key => $value}
 							<li>
-								<input type="radio" name="pilihan_{$val.idSoal}" id="radio_{$val.idSoal}_{$key}" {if $val.jawabanuser==$key}checked{/if}><label for="radio_{$val.idSoal}_{$key}" class="btn-quiz hvr-shutter-out-vertical chooseAnswer " data-pilihan="{$key}" data-soal="{$val.idSoal}" data-kursus="{$val.idKursus}" data-materi="{$val.idMateri}" data-idGrup_kursus="{$val.idGrup_kursus}">{$value}</label>
+								<input type="radio" name="pilihan_{$val.idSoal}" id="radio_{$val.idSoal}_{$key}" {if isset($val.jawabanuser)}{if $val.jawabanuser==$key}checked{/if}{/if}><label for="radio_{$val.idSoal}_{$key}" class="btn-quiz hvr-shutter-out-vertical chooseAnswer " data-pilihan="{$key}" data-soal="{$val.idSoal}" data-kursus="{$val.idKursus}" data-materi="{$val.idMateri}" data-idGrup_kursus="{$val.idGrup_kursus}">{$value}</label>
 							</li>
 							{/foreach}
 							{*}

@@ -94,6 +94,7 @@ class quiz extends Controller {
 			$data=$this->models->selectquiz($idSoal);
 			// pr($data);
 			$dataGrup=$this->models->get_grupkursus();
+			// pr($dataGrup);
 			if ($dataGrup){	
 				$this->view->assign('grup',$dataGrup);
 			}

@@ -39,7 +39,7 @@
 	
 				<!--Horizontal Form-->
 				<!--===================================================-->
-				<form class="form-horizontal" action="{$basedomain}quiz/inputquiz" method="post">
+				<form class="form-horizontal" action="{$basedomain}quiz/editquiz" method="post">
 					<div class="panel-body">
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Question</label>
@@ -54,7 +54,7 @@
 								<input type="text" name="pilihan1" value="{$data.pilihan1}" class="form-control">
 							</div>
 							<div class="col-sm-3 pad-ver" style="padding-top:0px;padding-bottom:0px">
-									<label class="form-radio form-icon btn btn-info btn-labeled active"><input type="radio" name="jawaban" {if $data.jawaban eq '1'}checked{/if}> Mark as right Answer</label>
+									<label class="form-radio form-icon btn btn-info btn-labeled active"><input type="radio" name="jawaban" {if $data.jawaban eq '1'}checked{/if} value="1"> Mark as right Answer</label>
 							</div>
 						</div>
 
@@ -64,7 +64,7 @@
 								<input type="text" name="pilihan2" value="{$data.pilihan2}" class="form-control">
 							</div>
 							<div class="col-sm-3 pad-ver" style="padding-top:0px">
-									<label class="form-radio form-icon btn btn-info btn-labeled active"><input type="radio" name="jawaban" {if $data.jawaban eq '2'}checked{/if}> Mark as right Answer</label>
+									<label class="form-radio form-icon btn btn-info btn-labeled active"><input type="radio" name="jawaban" {if $data.jawaban eq '2'}checked{/if} value="2"> Mark as right Answer</label>
 							</div>
 						</div>
 
@@ -74,7 +74,7 @@
 								<input type="text" name="pilihan3" value="{$data.pilihan3}" class="form-control">
 							</div>
 							<div class="col-sm-3 pad-ver" style="padding-top:0px">
-									<label class="form-radio form-icon btn btn-info btn-labeled active"><input type="radio" name="jawaban" {if $data.jawaban eq '3'}checked{/if}> Mark as right Answer</label>
+									<label class="form-radio form-icon btn btn-info btn-labeled active"><input type="radio" name="jawaban" {if $data.jawaban eq '3'}checked{/if} value="3"> Mark as right Answer</label>
 							</div>
 						</div>
 
@@ -84,7 +84,7 @@
 								<input type="text" name="pilihan4" value="{$data.pilihan4}" class="form-control">
 							</div>
 							<div class="col-sm-3 pad-ver" style="padding-top:0px">
-									<label class="form-radio form-icon btn btn-info btn-labeled active"><input type="radio" name="jawaban" {if $data.jawaban eq '4'}checked{/if} > Mark as right Answer</label>
+									<label class="form-radio form-icon btn btn-info btn-labeled active"><input type="radio" name="jawaban" {if $data.jawaban eq '4'}checked{/if} value="4"> Mark as right Answer</label>
 							</div>
 						</div>
 
@@ -110,7 +110,12 @@
 							<label class="col-sm-3 control-label">Select Course</label>
 							<div class="col-sm-4">
 								<select class="selectpicker" id="pilihKursus" name="kursus" value="{$data.kursus}">
+									{if $data.idKursus}
+									<option value="{$data.idKursus}">{$data.namakursus}</option>
+									{else}
 									<option>Silahkan pilih</option>
+									{/if}
+									
 								</select> 
 							</div>
 						</div>
@@ -119,7 +124,7 @@
 							<label class="col-sm-3 control-label">Material Course</label>
 							<div class="col-sm-4">
 								<select class="selectpicker" id="materiKursus" name="materi" value="{$data.materi}">
-									<option>Silahkan pilih</option>
+									<option value="0">Silahkan pilih</option>
 								</select> 
 							</div>
 						</div>
@@ -127,13 +132,14 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Quiz status</label>
 							<div class="col-sm-4">
-								<select class="selectpicker" name="status">
+								<select class="selectpicker" name="n_status">
 									<option value="0" id="n_status" {if ($data.n_status==0)} selected="" =""{/if}>Unpublish</option>
 									<option value="1" id="n_status" {if ($data.n_status==1)} selected="" =""{/if}>Publish</option>
 								</select> 
 							</div>
 					</div>
 					<div class="panel-footer text-right">
+						<input type="hidden" name="idSoal" value="{$data.idSoal}">
 						<button class="btn btn-info" type="submit">Update</button>
 					</div>
 				</form>

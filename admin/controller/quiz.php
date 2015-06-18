@@ -43,6 +43,9 @@ class quiz extends Controller {
 		$materi=$_POST['materi'];
 		$groupkursus=$_POST['groupkursus'];
 		$n_status=$_POST['quizstatus'];
+
+
+		// pr($_POST);
 		$data=$this->models->inputquiz($soal,$pilihan1,$pilihan2,$pilihan3,$pilihan4,$jenissoal,$keterangan,$jawaban,$kursus,$materi,$groupkursus, $n_status);
 		//kondisi untuk memberi peringatan proses input berhasil atau tidak
 		// pr($data);
@@ -76,7 +79,7 @@ class quiz extends Controller {
 		//melempar idSoal ke fungsi deletequiz yang ada di model
 		$data=$this->models->deletequiz($idSoal);
 		if($data == 1){
-			echo "<script>alert('Data berhasil di hapus');window.location.href='".$CONFIG['admin']['base_url']."quiz'</script>";
+			echo "<script>alert('Data berhasil di hapus');window.location.href='".$CONFIG['admin']['base_url']."quiz/quizlist'</script>";
 		}
 		else {pr('gagal');}
 	}
@@ -89,7 +92,7 @@ class quiz extends Controller {
 		//kondisi apabila tidak melakukan perubahan
 		if ($_POST == null){	
 			$data=$this->models->selectquiz($idSoal);
-			//pr($data);
+			// pr($data);
 			if ($data){	
 				$this->view->assign('data',$data);
 			}	
@@ -97,6 +100,8 @@ class quiz extends Controller {
 		}
 		//eksekusi jika melakukan perubahan terhadap data quiz
 		else{
+
+			// pr($_POST);exit;
 			$soal=$_POST['soal'];
 			$pilihan1=$_POST['pilihan1'];
 			$pilihan2=$_POST['pilihan2'];
@@ -109,9 +114,11 @@ class quiz extends Controller {
 			$materi=$_POST['materi'];
 			$groupkursus=$_POST['groupkursus'];
 			$n_status=$_POST['n_status'];
-			$data=$this->models->updatequiz($idSoal,$soal,$pilihan1,$pilihan2,$pilihan3,$pilihan4,$jenissoal,$keterangan,$jawaban,$kursus,$materi,$groupkursus);
+			$idSoal = $_POST['idSoal'];
+			$data=$this->models->updatequiz($idSoal,$soal,$pilihan1,$pilihan2,$pilihan3,$pilihan4,$jenissoal,$keterangan,$jawaban,$kursus,$materi,$groupkursus, $n_status);
 			if($data == 1){
-				echo "<script>alert('Data berhasil di perbarui');window.location.href='".$CONFIG['admin']['base_url']."quiz'</script>";
+				// echo 'adad';
+				echo "<script>alert('Data berhasil di perbarui');window.location.href='".$CONFIG['admin']['base_url']."quiz/quizlist'</script>";
 			}
 		}
 	}

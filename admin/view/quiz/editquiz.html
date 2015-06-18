@@ -100,8 +100,11 @@
 							<label class="col-sm-3 control-label">Group Course</label>
 							<div class="col-sm-4">
 								<select class="selectpicker pilihGrupKursus" name="groupkursus">
-									<option value="0" id="idGrup_kursus" {if ($data.idGrup_kursus==0)} selected="" =""{/if}>{$data.namagrup}</option>
-									<option value="1" id="idGrup_kursus" {if ($data.idGrup_kursus==1)} selected="" =""{/if}>{$data.namagrup}</option>
+									<option>Silahkan pilih</option>
+									{foreach $grup as $val}
+									<option value="{$val.idGrup_kursus}" {if $val.idGrup_kursus == $data.idGrup_kursus}selected{/if}>{$val.namagrup}</option>
+									{/foreach}
+									
 								</select> 
 							</div>
 						</div>
@@ -164,7 +167,7 @@
 			var template = "";
 
 			$.post(basedomain+'quiz/ajax', {grupid:grupid,param:1}, function(data){
-
+				// console.log(data);
 				if (data.status==true){
 					
 
@@ -175,7 +178,7 @@
 					})
 					
 					$('#pilihKursus').html(template).selectpicker('refresh');
-
+					
 				}
 				
 			},"JSON")
@@ -188,7 +191,7 @@
 			var template = "";
 
 			$.post(basedomain+'quiz/ajax', {grupid:grupid,param:2}, function(data){
-
+				
 				if (data.status==true){
 					
 					template += "<option value='0'>Pilih Materi</option>";

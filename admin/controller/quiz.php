@@ -92,6 +92,11 @@ class quiz extends Controller {
 		if ($_POST == null){	
 			$data=$this->models->selectquiz($idSoal);
 			// pr($data);
+			$dataGrup=$this->models->get_grupkursus();
+			if ($dataGrup){	
+				$this->view->assign('grup',$dataGrup);
+			}
+
 			if ($data){	
 				$this->view->assign('data',$data);
 			}	

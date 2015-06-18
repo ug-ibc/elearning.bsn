@@ -59,9 +59,10 @@ class mquiz extends Database {
 		// FROM table1
 		// JOIN table2
 		// ON table1.column_name=table2.column_name;
-		$query = "SELECT * FROM banksoal JOIN grup_kursus on banksoal.idGrup_kursus=grup_kursus.idGrup_kursus  WHERE idSoal ='".$idSoal."'";
+		$query = "SELECT b.*, gk.namagrup, gk.syaratkelulusan, gk.create_time, k.namakursus FROM banksoal AS b LEFT JOIN grup_kursus AS gk ON b.idGrup_kursus=gk.idGrup_kursus 
+				 LEFT JOIN kursus AS k ON b.idKursus = k.idKursus WHERE b.idSoal ='".$idSoal."'";
 
-		$result = $this->fetch($query,0,0);
+		$result = $this->fetch($query,0);
 		return $result;
 	}
 
@@ -75,11 +76,12 @@ class mquiz extends Database {
 		if($exec) return 1; else pr('query gagal');
 	}
 
-	function updatequiz($idSoal, $soal,$pilihan1,$pilihan2,$pilihan3,$pilihan4,$jenissoal,$keterangan,$jawaban,$kursus,$materi,$groupkursus)
+	function updatequiz($idSoal, $soal,$pilihan1,$pilihan2,$pilihan3,$pilihan4,$jenissoal,$keterangan,$jawaban,$kursus,$materi,$groupkursus,$n_status)
 	{
 		//query insert data
-		$query = "UPDATE banksoal SET soal='".$soal."', pilihan1='".$pilihan1."', pilihan2='".$pilihan2."', pilihan3='".$pilihan3."', pilihan4='".$pilihan4."',jenissoal='".$jenissoal."',keterangan='".$keterangan."', jawaban='".$jawaban."',kursus='".$kursus."',materi='".$materi."',groupkursus='".$groupkursus."' WHERE idSoal = '".$idSoal."'";
+		$query = "UPDATE banksoal SET soal='".$soal."', pilihan1='".$pilihan1."', pilihan2='".$pilihan2."', pilihan3='".$pilihan3."', pilihan4='".$pilihan4."',jenissoal='".$jenissoal."',keterangan='".$keterangan."', jawaban='".$jawaban."',idKursus='".$kursus."',idMateri='".$materi."',idGrup_kursus='".$groupkursus."', n_status = {$n_status} WHERE idSoal = '".$idSoal."'";
 		//eksekusi query
+		// pr($query);
 		$exec = $this->query($query,0);	
 		//kondisi apabila eksekusi berhasil mengembalikan notif 1, jika gagal mencetak query gagal 
 		if($exec) return 1; else pr('query gagal');

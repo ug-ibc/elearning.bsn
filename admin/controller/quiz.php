@@ -78,7 +78,7 @@ class quiz extends Controller {
 		//melempar idSoal ke fungsi deletequiz yang ada di model
 		$data=$this->models->deletequiz($idSoal);
 		if($data == 1){
-			echo "<script>alert('Data berhasil di hapus');window.location.href='".$CONFIG['admin']['base_url']."quiz'</script>";
+			echo "<script>alert('Data berhasil di hapus');window.location.href='".$CONFIG['admin']['base_url']."quiz/quizlist'</script>";
 		}
 		else {pr('gagal');}
 	}

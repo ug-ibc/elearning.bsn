@@ -866,5 +866,30 @@ function ImageCreateFromBMP($filename)
 	return $res;
 }
 
+function array2flat($data=array(), $acceptVar=array())
+{
 
+	$filed = array();
+	$filed = array();
+
+	if ($data){
+		foreach ($data as $key => $val) {
+			if (in_array($key, $acceptVar)){
+				$filed[] = $key;
+				$value[] = "'" . $val . "'";
+
+				$fieldFlat[] = "{$key} = '{$val}'";
+			}	
+			
+		}
+
+		$impField = implode(',', $filed);
+		$impValue = implode(',', $value);
+		$impValueFlat = implode(',', $fieldFlat);
+
+		return array('field'=>$impField, 'value'=>$impValue, 'flat'=>$impValueFlat);
+	}
+
+	return false;
+}
 ?>

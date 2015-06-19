@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 27, 2015 at 09:53 AM
+-- Generation Time: Jun 18, 2015 at 05:18 PM
 -- Server version: 5.5.40-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.5
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `db_elearningbsn`
+-- Database: `bsn`
 --
 
 -- --------------------------------------------------------
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `soal` (
   `pilihan3` tinytext,
   `pilihan4` tinytext,
   `jenissoal` tinyint(1) DEFAULT NULL,
-  `keterangan` varchar(45) DEFAULT NULL,
+  `keterangan` varchar(255) DEFAULT NULL,
   `jawaban` text,
   `jawabanuser` text,
   `idSoal` int(11) DEFAULT NULL,
@@ -46,18 +46,8 @@ CREATE TABLE IF NOT EXISTS `soal` (
   `attempt_date` datetime DEFAULT NULL,
   `n_status` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idSoal_user`),
-  UNIQUE KEY `idSoal` (`idSoal`,`idMateri`,`idUser`,`n_status`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
-
---
--- Dumping data for table `soal`
---
-
-INSERT INTO `soal` (`idSoal_user`, `soal`, `pilihan1`, `pilihan2`, `pilihan3`, `pilihan4`, `jenissoal`, `keterangan`, `jawaban`, `jawabanuser`, `idSoal`, `idMateri`, `idGrup_kursus`, `idUser`, `idKursus`, `attempt`, `attempt_date`, `n_status`) VALUES
-(1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '4', 1, 1, NULL, 1, 1, NULL, '2015-05-26 13:30:00', 1),
-(5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '3', 2, 1, NULL, 1, 1, NULL, '2015-05-26 13:30:52', 1),
-(14, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '3', '3', 3, 1, NULL, 1, 1, NULL, '2015-05-27 08:39:10', 1),
-(15, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '3', '2', 3, 1, NULL, 3, 1, NULL, '2015-05-27 08:40:17', 1);
+  UNIQUE KEY `idSoal` (`idSoal`,`idGrup_kursus`,`idUser`,`n_status`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

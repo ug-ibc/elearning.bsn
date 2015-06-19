@@ -253,10 +253,26 @@ class quizHelper extends Database {
         return false;
     }
 
-    function getKursus($id=false,$debug=0)
+    function getBankSoal($id=false, $idKursus=false, $debug=false){
+
+        $filter = "";
+        if ($id) $filter .= " AND idSoal = $id ";
+        if ($idKursus) $filter .= " AND idKursus = {$idKursus}";
+
+        $sql = array(
+                'table'=>"banksoal",
+                'field'=>"*",
+                'condition' => " n_status = 1 {$filter} ",
+                );
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res) return $res;
+    }
+
+    function getKursus($id=false, $idGroupKursus=false, $debug=0)
     {
         $filter = "";
         if ($id) $filter .= "AND idKursus = {$id}";
+        if ($idGroupKursus) $filter .= "AND idGrup_kursus = {$idGroupKursus}";
 
         $sql = array(
                 'table'=>"kursus",
@@ -399,6 +415,110 @@ class quizHelper extends Database {
         */
         $res = $this->query($sql);
         if ($res) return true;
+        return false;
+    }
+
+    function getQuizSetting($idGroupKursus=false)
+    {
+
+        $sql = array(
+                'table'=>"tbl_quiz_setting",
+                'field'=>"*",
+                'condition' => " idGroupKursus = {$idGroupKursus}",
+                );
+
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res) return $res;
+        return false;
+    }
+
+    function getGrupKursus($idUser){
+
+        $query = "SELECT * FROM grup_kursus WHERE n_status = '1'";
+        $result = $this->fetch($query,1);
+        foreach ($result as $key => $value) {
+            $query = "SELECT COUNT(*) as total FROM kursus WHERE idGrup_kursus = '{$value['idGrup_kursus']}'";
+            $res = $this->fetch($query);
+            $result[$key]['total'] = $res['total'];
+        }
+        
+        foreach ($result as $key => $value) {
+            $query = "SELECT * FROM nilai WHERE idKursus = '{$value['idGrup_kursus']}' AND idUser = '{$idUser['idUser']}'";
+            $res = $this->fetch($query);
+            if($res){
+            // pr($res['nilai']);
+
+            $result[$key]['nilai'] = $res['nilai'];
+            }
+        }
+        return $result;
+    }
+
+
+    function isCourseReady($idGroupKursus=false)
+    {
+
+
+        if ($idGroupKursus){
+
+            $getKursus = $this->getKursus(false,$idGroupKursus);
+            $countKursus = count($getKursus);
+        
+            $groupID = array($idGroupKursus);
+        }else{
+            $getGrupKursus = $this->getGrupKursus($this->user['id']);
+            if ($getGrupKursus){
+                foreach ($getGrupKursus as $key => $value) {
+                    $idGrup_kursus[] = $value['idGrup_kursus'];
+                    $getKursusTmp = $this->getKursus(false,$value['idGrup_kursus']);
+                    if ($getKursusTmp) $getKursusArr[] = $getKursusTmp; 
+                }
+
+                if ($getKursusArr){
+                    foreach ($getKursusArr as $key => $value) {
+
+                        foreach ($value as $keys => $val) {
+                            $getKursus[] = $val;
+                        }
+                        
+                    }
+                }
+                
+            }
+
+            $countKursus = count($getKursus);
+            $groupID = $idGrup_kursus;
+        }
+        
+        // db($getKursus);
+        foreach ($getKursus as $key => $value) {
+            $getBankSoal = $this->getBankSoal(false, $value['idKursus']);
+            $getKursus[$key]['jumlahsoal'] = count($getBankSoal);
+        }
+        
+        foreach ($groupID as $key => $value) {
+            $getQuizSetting = $this->getQuizSetting($value);
+            // db($getQuizSetting);
+            if ($getQuizSetting){
+
+                foreach ($getQuizSetting as $key => $val) {
+                    $maxSoal = $val['maxSoal'];
+                    // pr($maxSoal);
+                    // pr($countKursus);
+                    $div = ($maxSoal / $countKursus);
+
+                    foreach ($getKursus as $key => $value1) {
+                        if ($value1['jumlahsoal'] <= $div){
+                            $notAvailable[] = $value;
+                        } 
+                    }
+                }
+                
+            }
+        }
+        $notAvailableCourse = array_unique($notAvailable);
+        // pr($notAvailableCourse);
+        if ($notAvailableCourse)return $notAvailableCourse;
         return false;
     }
 }

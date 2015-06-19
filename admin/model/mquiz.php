@@ -21,12 +21,12 @@ class mquiz extends Database {
 	function getQuiz($id=false, $n_status=1, $start=0, $limit=10, $debug=0)
 	{
 		$sql = array(
-                'table'=>"banksoal AS b, kursus AS k, materi AS m",
-                'field'=>"b.*, k.namakursus, m.namamateri",
+                'table'=>"banksoal AS b, kursus AS k, materi AS m, grup_kursus AS gk",
+                'field'=>"b.*, k.namakursus, m.namamateri, gk.namagrup",
                 'condition' => " b.n_status IN ({$n_status}) ",
                 'limit' => "LIMIT {$start},{$limit}",
                 'joinmethod' => 'LEFT JOIN',
-                'join' => "b.idKursus = k.idKursus, b.idMateri = m.idMateri"
+                'join' => "b.idKursus = k.idKursus, b.idMateri = m.idMateri, b.idGrup_kursus = gk.idGrup_kursus"
                 );
 
         $res = $this->lazyQuery($sql,$debug);
@@ -59,9 +59,10 @@ class mquiz extends Database {
 		// FROM table1
 		// JOIN table2
 		// ON table1.column_name=table2.column_name;
-		$query = "SELECT * FROM banksoal JOIN grup_kursus on banksoal.idGrup_kursus=grup_kursus.idGrup_kursus  WHERE idSoal ='".$idSoal."'";
+		$query = "SELECT b.*, gk.namagrup, gk.syaratkelulusan, gk.create_time, k.namakursus FROM banksoal AS b LEFT JOIN grup_kursus AS gk ON b.idGrup_kursus=gk.idGrup_kursus 
+				 LEFT JOIN kursus AS k ON b.idKursus = k.idKursus WHERE b.idSoal ='".$idSoal."'";
 
-		$result = $this->fetch($query,0,0);
+		$result = $this->fetch($query,0);
 		return $result;
 	}
 
@@ -75,11 +76,12 @@ class mquiz extends Database {
 		if($exec) return 1; else pr('query gagal');
 	}
 
-	function updatequiz($idSoal, $soal,$pilihan1,$pilihan2,$pilihan3,$pilihan4,$jenissoal,$keterangan,$jawaban,$kursus,$materi,$groupkursus)
+	function updatequiz($idSoal, $soal,$pilihan1,$pilihan2,$pilihan3,$pilihan4,$jenissoal,$keterangan,$jawaban,$kursus,$materi,$groupkursus,$n_status)
 	{
 		//query insert data
-		$query = "UPDATE banksoal SET soal='".$soal."', pilihan1='".$pilihan1."', pilihan2='".$pilihan2."', pilihan3='".$pilihan3."', pilihan4='".$pilihan4."',jenissoal='".$jenissoal."',keterangan='".$keterangan."', jawaban='".$jawaban."',kursus='".$kursus."',materi='".$materi."',groupkursus='".$groupkursus."' WHERE idSoal = '".$idSoal."'";
+		$query = "UPDATE banksoal SET soal='".$soal."', pilihan1='".$pilihan1."', pilihan2='".$pilihan2."', pilihan3='".$pilihan3."', pilihan4='".$pilihan4."',jenissoal='".$jenissoal."',keterangan='".$keterangan."', jawaban='".$jawaban."',idKursus='".$kursus."',idMateri='".$materi."',idGrup_kursus='".$groupkursus."', n_status = {$n_status} WHERE idSoal = '".$idSoal."'";
 		//eksekusi query
+		// pr($query);
 		$exec = $this->query($query,0);	
 		//kondisi apabila eksekusi berhasil mengembalikan notif 1, jika gagal mencetak query gagal 
 		if($exec) return 1; else pr('query gagal');
@@ -105,6 +107,50 @@ class mquiz extends Database {
 
         $res = $this->lazyQuery($sql,$debug);
         if ($res) return $res;
+	}
+
+	function saveSetting($data=array(), $debug=false)
+	{
+
+		$acceptVar = array('maxSoal','kategoriBaik','kategoriCukup','kategoriKurang','waktu','idGroupKursus');
+
+		if ($data){
+			$convert = array2flat($data, $acceptVar);
+
+			
+			$sql = "INSERT INTO tbl_quiz_setting ({$convert['field']}) 
+                	VALUES ({$convert['value']})
+                	ON DUPLICATE KEY UPDATE {$convert['flat']}";
+            // db($sql);
+
+			// $sql = array(
+	  //               'table'=>"tbl_quiz_setting",
+	  //               'field'=>"{$convert['field']}",
+	  //               'value'=>"{$convert['value']}"
+	  //               );
+
+	        $res = $this->query($sql);
+	        if ($res) return true;
+
+		}
+
+
+		return false;
+		
+	}
+
+	function getQuizSetting($idGroupKursus=false)
+	{
+
+		$sql = array(
+                'table'=>"tbl_quiz_setting",
+                'field'=>"*",
+                'condition' => " idGroupKursus = {$idGroupKursus}",
+                );
+
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res) return $res;
+        return false;
 	}
 }
 ?>

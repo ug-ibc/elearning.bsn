@@ -5,7 +5,7 @@ class marticle extends Database {
 	function insert_data($judul,$keterangan,$n_status,$tipe)
 	{
 		$query = "INSERT INTO catatan (judul,keterangan,n_status,tipe)
-				  VALUES ('$judul','$keterangan','$n_status','$tipe')";
+				  VALUES ('$judul','".addslashes(html_entity_decode($keterangan))."','$n_status','$tipe')";
 		// echo $query;
 		$result = $this->query($query);
 		// return $result;
@@ -36,7 +36,7 @@ class marticle extends Database {
 		$query = "UPDATE catatan
 						SET 
 							judul = '{$judul}',
-							keterangan = '{$keterangan}'
+							keterangan = '".addslashes(html_entity_decode($keterangan))."'
 						WHERE
 							idCatatan = '{$id}'";
 		$result = $this->query($query);					

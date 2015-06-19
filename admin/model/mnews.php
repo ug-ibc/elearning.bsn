@@ -6,7 +6,7 @@ class mnews extends Database{
 	{
 		//query insert data
 		$query = "INSERT INTO news (judul,brief,gambar,author,isi,status,posted)
-					VALUES('".$judul."','".$brief."','".$namafile."','".$author."','".$isi."','".$status."','".$publish."')";
+					VALUES('".$judul."','".addslashes(html_entity_decode($brief))."','".$namafile."','".$author."','".addslashes(html_entity_decode($isi))."','".$status."','".$publish."')";
 		//pr($author); exit;
 		//eksekusi query
 		$exec = $this->query($query,0);	
@@ -51,7 +51,7 @@ class mnews extends Database{
 	function updatenews($id_news, $judul,$brief,$namafile,$isi,$publish,$status)
 	{
 		//query insert data
-		$query = "UPDATE news SET judul='".$judul."', brief='".$brief."', gambar='".$namafile."', isi='".$isi."', posted='".$publish."',status='".$status."' WHERE id_news = '".$id_news."'";
+		$query = "UPDATE news SET judul='".$judul."', brief='".addslashes(html_entity_decode($brief))."', gambar='".$namafile."', isi='".addslashes(html_entity_decode($isi))."', posted='".$publish."',status='".$status."' WHERE id_news = '".$id_news."'";
 		//eksekusi query
 		$exec = $this->query($query,0);	
 		//kondisi apabila eksekusi berhasil mengembalikan notif 1, jika gagal mencetak query gagal 

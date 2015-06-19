@@ -108,5 +108,49 @@ class mquiz extends Database {
         $res = $this->lazyQuery($sql,$debug);
         if ($res) return $res;
 	}
+
+	function saveSetting($data=array(), $debug=false)
+	{
+
+		$acceptVar = array('maxSoal','kategoriBaik','kategoriCukup','kategoriKurang','waktu','idGroupKursus');
+
+		if ($data){
+			$convert = array2flat($data, $acceptVar);
+
+			
+			$sql = "INSERT INTO tbl_quiz_setting ({$convert['field']}) 
+                	VALUES ({$convert['value']})
+                	ON DUPLICATE KEY UPDATE {$convert['flat']}";
+            // db($sql);
+
+			// $sql = array(
+	  //               'table'=>"tbl_quiz_setting",
+	  //               'field'=>"{$convert['field']}",
+	  //               'value'=>"{$convert['value']}"
+	  //               );
+
+	        $res = $this->query($sql);
+	        if ($res) return true;
+
+		}
+
+
+		return false;
+		
+	}
+
+	function getQuizSetting($idGroupKursus=false)
+	{
+
+		$sql = array(
+                'table'=>"tbl_quiz_setting",
+                'field'=>"*",
+                'condition' => " idGroupKursus = {$idGroupKursus}",
+                );
+
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res) return $res;
+        return false;
+	}
 }
 ?>

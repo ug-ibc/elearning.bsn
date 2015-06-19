@@ -151,5 +151,37 @@ class quiz extends Controller {
     	}
     	exit;
     }
+
+    function setting()
+    {
+
+    	// pr($_POST);
+    	if (isset($_POST['save'])){
+
+    		// pr($_POST);
+    		$saveSetting = $this->models->saveSetting($_POST);
+    	}
+
+    	$dataGrup=$this->models->get_grupkursus();
+		if ($dataGrup){	
+			$this->view->assign('grup',$dataGrup);
+		}
+
+    	return $this->loadView('quiz/setting');	
+    }
+
+    function ajaxQuizSetting()
+    {
+    	$grupid = intval(_p('grupid'));
+    	$getDatakursus = $this->models->getQuizSetting($grupid);
+    	// pr($getDatakursus);
+    	if ($getDatakursus){
+    		print json_encode(array('status'=>true, 'result'=>$getDatakursus[0]));
+
+    	}else{
+    		print json_encode(array('status'=>false));
+    	}
+    	exit;
+    }
 }
 ?>

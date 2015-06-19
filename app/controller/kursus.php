@@ -19,12 +19,26 @@ class kursus extends Controller {
 	function loadmodule()
 	{
         $this->models = $this->loadModel('mkursus');
+        $this->quizHelper = $this->loadModel('quizHelper');
 	}
 	
 	function index(){
 		global $basedomain;
-		$data = $this->models->getGrupKursus($this->user);
-		$this->view->assign('grup',$data);
+
+		$isCourseReady = $this->quizHelper->isCourseReady();
+		if ($isCourseReady){
+			$data = $this->models->getGrupKursus($this->user);
+			// pr($data);
+			// pr($isCourseReady);
+			if ($data){
+				foreach ($data as $key => $value) {
+					if (!in_array($value['idGrup_kursus'], $isCourseReady)) $available[] = $value;
+				}
+			}
+			// pr($available);
+			$this->view->assign('grup',$available);
+		}
+		
 		return $this->loadView('kursus/grupkursus');
 
     }

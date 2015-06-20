@@ -67,7 +67,13 @@ class kursus extends Controller {
 		return $this->loadView('kursus/viewpdf');
 
     }
+     function search(){
+		// pr($_GET);
 
+		$this->view->assign('pdf',$_GET['pdf']);
+		return $this->loadView('kursus/page_search');
+
+    }
 
 }
 

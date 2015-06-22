@@ -167,6 +167,8 @@ class quizHelper extends Database {
     function generateSoal($idKursus, $idMateri=1, $n_status=1, $debug=0)
     {
 
+        $isCourseReady = $this->isCourseReady();
+
         $idUser = $this->user['idUser'];
 
         /*
@@ -176,16 +178,40 @@ class quizHelper extends Database {
                 'condition' => " idKursus = {$idKursus} AND idMateri = {$idMateri} AND n_status = {$n_status} ORDER BY RAND()",
                 );
         */
-        $sql = array(
-                'table'=>"banksoal",
-                'field'=>"idSoal",
-                'condition' => " idGrup_kursus = {$idKursus} AND n_status = {$n_status} ORDER BY RAND()",
-                );
 
-        $res = $this->lazyQuery($sql,$debug);
-        if ($res){
+        $quizLimit = intval($isCourseReady[$idKursus]['jumlahpembagian']);
+        $whatCourse = $isCourseReady[$idKursus]['soalkursus'];
+        $timeCourse = ($isCourseReady[$idKursus]['waktu'] * 60);
+
+        // pr($whatCourse);
+        if ($whatCourse){
+
+            foreach ($whatCourse as $key => $value) {
+                
+                $sql = array(
+                        'table'=>"banksoal",
+                        'field'=>"idSoal",
+                        'condition' => " idGrup_kursus = {$value['idGrup_kursus']} AND idKursus = {$value['idKursus']} AND n_status = {$n_status} ORDER BY RAND() LIMIT {$quizLimit}",
+                        );
+
+                $res[] = $this->lazyQuery($sql,$debug);
+            }
 
             foreach ($res as $key => $value) {
+                
+                foreach ($value as $key => $val) {
+                    
+                    $newRes[] = $val;
+                }
+            }
+        }
+        
+
+        // db($newRes);
+
+        if ($newRes){
+
+            foreach ($newRes as $key => $value) {
                 $listSoal[] = $value['idSoal'];
             }
             // pr($res);
@@ -193,7 +219,7 @@ class quizHelper extends Database {
             $starttolerance = strtotime($this->date) + 3; // Add 1 hour
             $tolerancetime = date('Y-m-d H:i:s', $starttolerance); // Back to string
 
-            $counttime = strtotime($tolerancetime) + 3600; // Add 1 hour
+            $counttime = strtotime($tolerancetime) + $timeCourse; // Add 1 hour
             $endtime = date('Y-m-d H:i:s', $counttime); // Back to string
             
             $soal = serialize($listSoal);
@@ -377,7 +403,8 @@ class quizHelper extends Database {
             }
 
             $idKursus = $res[0]['idKursus'];
-            $nilai = array('benar'=>count($correct), 'idKursus'=>$idKursus, 'salah'=>count($wrong));
+            $idGroupKursus = $res[0]['idGrup_kursus'];
+            $nilai = array('benar'=>count($correct), 'idGroupKursus'=>$idGroupKursus, 'idKursus'=>$idKursus, 'salah'=>count($wrong));
             $saveToTable = $this->saveNilai($nilai);
 
 
@@ -401,9 +428,10 @@ class quizHelper extends Database {
         $create_time = date('Y-m-d H:i:s');
         $idUser = $this->user['idUser'];
         $idKursus = $data['idKursus'];
+        $idGroupKursus = $data['idGroupKursus'];
         
-        $sql = "INSERT INTO nilai (nilai, benar, salah, statusulang, statuskelulusan, create_time, idUser, idKursus, n_status) 
-                VALUES ({$nilai}, {$benar}, {$salah}, {$statusulang}, {$statuskelulusan}, '{$create_time}', {$idUser}, {$idKursus}, 1)
+        $sql = "INSERT INTO nilai (nilai, benar, salah, statusulang, statuskelulusan, create_time, idUser, idKursus, idGroupKursus, n_status) 
+                VALUES ({$nilai}, {$benar}, {$salah}, {$statusulang}, {$statuskelulusan}, '{$create_time}', {$idUser}, {$idKursus}, {$idGroupKursus}, 1)
                 ON DUPLICATE KEY UPDATE nilai = {$nilai}, benar = '{$benar}', salah = '{$salah}'";
         
         /*

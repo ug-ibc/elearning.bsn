@@ -40,7 +40,7 @@ class kursus extends Controller {
 					}
 				}
 			}
-			// pr($courseReady);
+			// db($courseReady);
 			$this->view->assign('grup',$courseReady);
 		}
 		

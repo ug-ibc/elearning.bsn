@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 22, 2015 at 10:24 AM
+-- Generation Time: Jun 22, 2015 at 12:48 PM
 -- Server version: 5.5.40-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.5
 
@@ -37,6 +37,8 @@ CREATE TABLE IF NOT EXISTS `nilai` (
   `idUser` int(11) DEFAULT NULL,
   `idGroupKursus` int(11) NOT NULL DEFAULT '0',
   `idKursus` int(11) DEFAULT NULL,
+  `kodeSertifikat` varchar(50) DEFAULT NULL,
+  `data` varchar(255) DEFAULT NULL,
   `n_status` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idNilai`),
   UNIQUE KEY `idUser` (`idUser`,`idKursus`,`n_status`)

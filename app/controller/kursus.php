@@ -19,12 +19,31 @@ class kursus extends Controller {
 	function loadmodule()
 	{
         $this->models = $this->loadModel('mkursus');
+        $this->quizHelper = $this->loadModel('quizHelper');
 	}
 	
 	function index(){
 		global $basedomain;
-		$data = $this->models->getGrupKursus($this->user);
-		$this->view->assign('grup',$data);
+
+		$isCourseReady = $this->quizHelper->isCourseReady();
+		// pr($isCourseReady);
+
+
+		if ($isCourseReady){
+			$data = $this->models->getGrupKursus($this->user);
+			// pr($data);
+			// db($data);
+			if ($data){
+				foreach ($data as $key => $value) {
+					if ($isCourseReady[$value['idGrup_kursus']]['courseready'] == 1){
+						$courseReady[] = $value;
+					}
+				}
+			}
+			// db($courseReady);
+			$this->view->assign('grup',$courseReady);
+		}
+		
 		return $this->loadView('kursus/grupkursus');
 
     }
@@ -53,7 +72,13 @@ class kursus extends Controller {
 		return $this->loadView('kursus/viewpdf');
 
     }
+     function search(){
+		// pr($_GET);
 
+		$this->view->assign('pdf',$_GET['pdf']);
+		return $this->loadView('kursus/page_search');
+
+    }
 
 }
 

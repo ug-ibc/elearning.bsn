@@ -167,6 +167,8 @@ class quizHelper extends Database {
     function generateSoal($idKursus, $idMateri=1, $n_status=1, $debug=0)
     {
 
+        $isCourseReady = $this->isCourseReady();
+
         $idUser = $this->user['idUser'];
 
         /*
@@ -176,16 +178,40 @@ class quizHelper extends Database {
                 'condition' => " idKursus = {$idKursus} AND idMateri = {$idMateri} AND n_status = {$n_status} ORDER BY RAND()",
                 );
         */
-        $sql = array(
-                'table'=>"banksoal",
-                'field'=>"idSoal",
-                'condition' => " idGrup_kursus = {$idKursus} AND n_status = {$n_status} ORDER BY RAND()",
-                );
 
-        $res = $this->lazyQuery($sql,$debug);
-        if ($res){
+        $quizLimit = intval($isCourseReady[$idKursus]['jumlahpembagian']);
+        $whatCourse = $isCourseReady[$idKursus]['soalkursus'];
+        $timeCourse = ($isCourseReady[$idKursus]['waktu'] * 60);
+
+        // pr($whatCourse);
+        if ($whatCourse){
+
+            foreach ($whatCourse as $key => $value) {
+                
+                $sql = array(
+                        'table'=>"banksoal",
+                        'field'=>"idSoal",
+                        'condition' => " idGrup_kursus = {$value['idGrup_kursus']} AND idKursus = {$value['idKursus']} AND n_status = {$n_status} ORDER BY RAND() LIMIT {$quizLimit}",
+                        );
+
+                $res[] = $this->lazyQuery($sql,$debug);
+            }
 
             foreach ($res as $key => $value) {
+                
+                foreach ($value as $key => $val) {
+                    
+                    $newRes[] = $val;
+                }
+            }
+        }
+        
+
+        // db($newRes);
+
+        if ($newRes){
+
+            foreach ($newRes as $key => $value) {
                 $listSoal[] = $value['idSoal'];
             }
             // pr($res);
@@ -193,7 +219,7 @@ class quizHelper extends Database {
             $starttolerance = strtotime($this->date) + 3; // Add 1 hour
             $tolerancetime = date('Y-m-d H:i:s', $starttolerance); // Back to string
 
-            $counttime = strtotime($tolerancetime) + 3600; // Add 1 hour
+            $counttime = strtotime($tolerancetime) + $timeCourse; // Add 1 hour
             $endtime = date('Y-m-d H:i:s', $counttime); // Back to string
             
             $soal = serialize($listSoal);
@@ -253,10 +279,26 @@ class quizHelper extends Database {
         return false;
     }
 
-    function getKursus($id=false,$debug=0)
+    function getBankSoal($id=false, $idKursus=false, $debug=false){
+
+        $filter = "";
+        if ($id) $filter .= " AND idSoal = $id ";
+        if ($idKursus) $filter .= " AND idKursus = {$idKursus}";
+
+        $sql = array(
+                'table'=>"banksoal",
+                'field'=>"*",
+                'condition' => " n_status = 1 {$filter} ",
+                );
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res) return $res;
+    }
+
+    function getKursus($id=false, $idGroupKursus=false, $debug=0)
     {
         $filter = "";
         if ($id) $filter .= "AND idKursus = {$id}";
+        if ($idGroupKursus) $filter .= "AND idGrup_kursus = {$idGroupKursus}";
 
         $sql = array(
                 'table'=>"kursus",
@@ -361,7 +403,8 @@ class quizHelper extends Database {
             }
 
             $idKursus = $res[0]['idKursus'];
-            $nilai = array('benar'=>count($correct), 'idKursus'=>$idKursus, 'salah'=>count($wrong));
+            $idGroupKursus = $res[0]['idGrup_kursus'];
+            $nilai = array('benar'=>count($correct), 'idGroupKursus'=>$idGroupKursus, 'idKursus'=>$idKursus, 'salah'=>count($wrong));
             $saveToTable = $this->saveNilai($nilai);
 
 
@@ -385,9 +428,10 @@ class quizHelper extends Database {
         $create_time = date('Y-m-d H:i:s');
         $idUser = $this->user['idUser'];
         $idKursus = $data['idKursus'];
+        $idGroupKursus = $data['idGroupKursus'];
         
-        $sql = "INSERT INTO nilai (nilai, benar, salah, statusulang, statuskelulusan, create_time, idUser, idKursus, n_status) 
-                VALUES ({$nilai}, {$benar}, {$salah}, {$statusulang}, {$statuskelulusan}, '{$create_time}', {$idUser}, {$idKursus}, 1)
+        $sql = "INSERT INTO nilai (nilai, benar, salah, statusulang, statuskelulusan, create_time, idUser, idKursus, idGroupKursus, n_status) 
+                VALUES ({$nilai}, {$benar}, {$salah}, {$statusulang}, {$statuskelulusan}, '{$create_time}', {$idUser}, {$idKursus}, {$idGroupKursus}, 1)
                 ON DUPLICATE KEY UPDATE nilai = {$nilai}, benar = '{$benar}', salah = '{$salah}'";
         
         /*
@@ -399,6 +443,163 @@ class quizHelper extends Database {
         */
         $res = $this->query($sql);
         if ($res) return true;
+        return false;
+    }
+
+    function getQuizSetting($idGroupKursus=false)
+    {
+
+        $sql = array(
+                'table'=>"tbl_quiz_setting",
+                'field'=>"*",
+                'condition' => " idGroupKursus = {$idGroupKursus} AND n_status = 1",
+                );
+
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res) return $res;
+        return false;
+    }
+
+    function getGrupKursus($idUser){
+
+        $query = "SELECT * FROM grup_kursus WHERE n_status = '1'";
+        $result = $this->fetch($query,1);
+        foreach ($result as $key => $value) {
+            $query = "SELECT COUNT(*) as total FROM kursus WHERE idGrup_kursus = '{$value['idGrup_kursus']}'";
+            $res = $this->fetch($query);
+            $result[$key]['total'] = $res['total'];
+        }
+        
+        foreach ($result as $key => $value) {
+            $query = "SELECT * FROM nilai WHERE idKursus = '{$value['idGrup_kursus']}' AND idUser = '{$idUser['idUser']}'";
+            $res = $this->fetch($query);
+            if($res){
+            // pr($res['nilai']);
+
+            $result[$key]['nilai'] = $res['nilai'];
+            }
+        }
+        return $result;
+    }
+
+    function isCourseReady($idGroupKursus=false)
+    {
+
+        // SELECT count(*) as jumlah, `idGrup_kursus`, `idKursus` FROM `banksoal` group by idKursus order by idGrup_kursus 
+        
+        $sql = array(
+                'table'=>"banksoal",
+                'field'=>"COUNT(*) AS jumlahsoal, idGrup_kursus, idKursus",
+                'condition' => " n_status = 1 GROUP BY idKursus ORDER BY idGrup_kursus ASC",
+                );
+
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res){
+
+            foreach ($res as $key => $value) {
+                $data[$value['idGrup_kursus']][] = $value;
+            }
+
+            foreach ($data as $key => $value) {
+                $tmp = $this->getQuizSetting($key);
+                if ($tmp) $getQuizSetting[] = $tmp;
+            }
+
+            if ($getQuizSetting){
+                foreach ($getQuizSetting as $key => $value) {
+                    
+                    $dataSetting[$value[0]['idGroupKursus']] = $value[0];
+                }
+            }
+            // pr($data);
+            if ($dataSetting){
+                foreach ($dataSetting as $key => $value) {
+                    $dataSetting[$key]['soalkursus'] = $data[$key];
+                    $dataSetting[$key]['jumlahpembagian'] = $value['maxSoal'] / count($data[$key]);
+                    
+                    $notready = array();
+                    foreach ($data[$key] as $keys => $val) {
+                        if ($val['jumlahsoal'] < $value['maxSoal'] / count($data[$key])) $notready[] = 1;
+                    }
+
+                    if ( count($notready) > 0) $dataSetting[$key]['courseready'] = false;
+                    else $dataSetting[$key]['courseready'] = true;
+                }
+            }
+
+
+            // db($dataSetting);
+            return $dataSetting;
+        }
+        return false;
+    }
+
+    function isCourseReady_old($idGroupKursus=false)
+    {
+
+
+        if ($idGroupKursus){
+
+            $getKursus = $this->getKursus(false,$idGroupKursus);
+            $countKursus = count($getKursus);
+        
+            $groupID = array($idGroupKursus);
+        
+        }else{
+
+            $getGrupKursus = $this->getGrupKursus($this->user['id']);
+            if ($getGrupKursus){
+                foreach ($getGrupKursus as $key => $value) {
+                    $idGrup_kursus[] = $value['idGrup_kursus'];
+                    $getKursusTmp = $this->getKursus(false,$value['idGrup_kursus']);
+                    if ($getKursusTmp) $getKursusArr[] = $getKursusTmp; 
+                }
+
+                if ($getKursusArr){
+                    foreach ($getKursusArr as $key => $value) {
+
+                        foreach ($value as $keys => $val) {
+                            $getKursus[] = $val;
+                        }
+                        
+                    }
+                }
+                
+            }
+
+            $countKursus = count($getKursus);
+            $groupID = $idGrup_kursus;
+        }
+        
+        // db($getKursus);
+        foreach ($getKursus as $key => $value) {
+            $getBankSoal = $this->getBankSoal(false, $value['idKursus']);
+            $getKursus[$key]['jumlahsoal'] = count($getBankSoal);
+        }
+        
+        foreach ($groupID as $key => $value) {
+            $getQuizSetting = $this->getQuizSetting($value);
+            // db($getQuizSetting);
+            if ($getQuizSetting){
+
+                foreach ($getQuizSetting as $key => $val) {
+                    $maxSoal = $val['maxSoal'];
+                    // pr($maxSoal);
+                    // pr($countKursus);
+                    $div = ($maxSoal / $countKursus);
+
+                    foreach ($getKursus as $key => $value1) {
+                        if ($value1['jumlahsoal'] <= $div){
+                            $notAvailable[] = $value;
+                        } 
+                    }
+                }
+                
+            }
+        }
+        $notAvailableCourse = array_unique($notAvailable);
+        // pr($notAvailableCourse);
+        if ($notAvailableCourse)return $notAvailableCourse;
         return false;
     }
 }

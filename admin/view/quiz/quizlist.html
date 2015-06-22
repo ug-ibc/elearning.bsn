@@ -75,7 +75,7 @@ $(window).on('load', function() {
 				<thead>
 					<tr>
 						<th>Soal</th>
-						<th>Kursus</th>
+						<th>Grup Kursus</th>
 						<th class="min-tablet">Materi</th>
 						<th class="min-tablet">Status</th>
 						<th class="min-tablet">Aksi</th>
@@ -86,7 +86,7 @@ $(window).on('load', function() {
 					{foreach $getQuiz as $val}
 					<tr>
 						<td>{$val.soal}</td>
-						<td>{$val.namakursus}</td>
+						<td>{$val.namagrup}</td>
 						<td>{$val.namamateri}</td>
 						{if $val.n_status ==0}
 						<td style="color:red">UnPublished</td>

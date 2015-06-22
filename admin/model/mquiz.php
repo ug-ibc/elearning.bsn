@@ -21,12 +21,12 @@ class mquiz extends Database {
 	function getQuiz($id=false, $n_status=1, $start=0, $limit=10, $debug=0)
 	{
 		$sql = array(
-                'table'=>"banksoal AS b, kursus AS k, materi AS m",
-                'field'=>"b.*, k.namakursus, m.namamateri",
+                'table'=>"banksoal AS b, kursus AS k, materi AS m, grup_kursus AS gk",
+                'field'=>"b.*, k.namakursus, m.namamateri, gk.namagrup",
                 'condition' => " b.n_status IN ({$n_status}) ",
                 'limit' => "LIMIT {$start},{$limit}",
                 'joinmethod' => 'LEFT JOIN',
-                'join' => "b.idKursus = k.idKursus, b.idMateri = m.idMateri"
+                'join' => "b.idKursus = k.idKursus, b.idMateri = m.idMateri, b.idGrup_kursus = gk.idGrup_kursus"
                 );
 
         $res = $this->lazyQuery($sql,$debug);
@@ -107,6 +107,50 @@ class mquiz extends Database {
 
         $res = $this->lazyQuery($sql,$debug);
         if ($res) return $res;
+	}
+
+	function saveSetting($data=array(), $debug=false)
+	{
+
+		$acceptVar = array('maxSoal','kategoriBaik','kategoriCukup','kategoriKurang','waktu','idGroupKursus');
+
+		if ($data){
+			$convert = array2flat($data, $acceptVar);
+
+			
+			$sql = "INSERT INTO tbl_quiz_setting ({$convert['field']}) 
+                	VALUES ({$convert['value']})
+                	ON DUPLICATE KEY UPDATE {$convert['flat']}";
+            // db($sql);
+
+			// $sql = array(
+	  //               'table'=>"tbl_quiz_setting",
+	  //               'field'=>"{$convert['field']}",
+	  //               'value'=>"{$convert['value']}"
+	  //               );
+
+	        $res = $this->query($sql);
+	        if ($res) return true;
+
+		}
+
+
+		return false;
+		
+	}
+
+	function getQuizSetting($idGroupKursus=false)
+	{
+
+		$sql = array(
+                'table'=>"tbl_quiz_setting",
+                'field'=>"*",
+                'condition' => " idGroupKursus = {$idGroupKursus}",
+                );
+
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res) return $res;
+        return false;
 	}
 }
 ?>

@@ -424,6 +424,19 @@ class quizHelper extends Database {
         return false;
     }
 
+    function getSertificateCode()
+    {
+        $sql = array(
+                'table'=>"nilai",
+                'field'=>"*",
+                'condition' => " n_status = 1 ORDER BY idNilai DESC LIMIT 1",
+                );
+
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res) return $res;
+        return false;
+    }
+
     function saveNilai($data, $debug=0)
     {   
         $benar = $data['benar'];
@@ -435,9 +448,27 @@ class quizHelper extends Database {
         $idUser = $this->user['idUser'];
         $idKursus = $data['idKursus'];
         $idGroupKursus = $data['idGroupKursus'];
+
+        $arrayTahun = array('2015'=>'XV', '2016'=>'XVI', '2017'=>'XVII', '2018'=>'XVIII');
+        $tahun = date('Y');
+
+        $urut = 1;
+        $getLastCode = $this->getSertificateCode();
+        if ($getLastCode){
+            $explodeCode = explode('/', $getLastCode[0]['kodeSertifikat']);
+            $newCode = $explodeCode[1]+1;
+            $generateCodeSertifikat = "ELS/{$newCode}/{$arrayTahun[$tahun]}";
+        }else{
+            $generateCodeSertifikat = "ELS/{$urut}/{$arrayTahun[$tahun]}";
+        }
         
-        $sql = "INSERT INTO nilai (nilai, benar, salah, statusulang, statuskelulusan, create_time, idUser, idKursus, idGroupKursus, n_status) 
-                VALUES ({$nilai}, {$benar}, {$salah}, {$statusulang}, {$statuskelulusan}, '{$create_time}', {$idUser}, {$idKursus}, {$idGroupKursus}, 1)
+        
+
+
+        $codeSertifikat = "ELS/1/{$arrayTahun[$tahun]}";
+        
+        $sql = "INSERT INTO nilai (nilai, benar, salah, statusulang, statuskelulusan, create_time, idUser, idKursus, idGroupKursus, kodeSertifikat, n_status) 
+                VALUES ({$nilai}, {$benar}, {$salah}, {$statusulang}, {$statuskelulusan}, '{$create_time}', {$idUser}, {$idKursus}, {$idGroupKursus}, '{$generateCodeSertifikat}', 1)
                 ON DUPLICATE KEY UPDATE nilai = {$nilai}, benar = '{$benar}', salah = '{$salah}'";
         
         /*

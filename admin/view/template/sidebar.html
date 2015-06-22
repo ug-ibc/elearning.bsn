@@ -103,7 +103,7 @@
 								<li class="{if $page.page eq 'course' && ($page.function eq 'courselist' || $page.function eq 'addcourse' || $page.function eq 'viewmaterial')}active-link{/if}"><a href="{$basedomain}course/courselist">Course</a></li>
 								<li class="{if $page.page eq 'quiz' && ($page.function eq 'quizlist' || $page.function eq 'index' || $page.function eq 'editquiz')}active-link{/if}"><a href="{$basedomain}quiz/quizlist">Quiz</a>
 								</li>
-								<li class="{if $page.page eq 'course' && $page.function eq 'index'}active-link{/if}"><a href="{$basedomain}quiz/setting">Setting</a></li>
+								<li class="{if $page.page eq 'quiz' && $page.function eq 'setting'}active-link{/if}"><a href="{$basedomain}quiz/setting">Setting</a></li>
 								<li class="{if $page.page eq 'course' && ($page.function eq 'uploadfile' || $page.function eq 'upload')}active-link{/if}"><a href="{$basedomain}course/uploadfile">Upload Ebook & Video</a></li>
 							</ul>
 						</li>

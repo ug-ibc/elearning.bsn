@@ -106,7 +106,7 @@ class quiz extends Controller {
 		$soalList = array();
     $getKursus = array();
 		$getQuiz = $this->quizHelper->getQuiz($groupKursus);
-       	
+    // db($getQuiz);
        	$getUserAnswer = $this->quizHelper->getUserAnswer($groupKursus);
        	if ($getUserAnswer){
        		foreach ($getUserAnswer as $key => $value) {
@@ -138,6 +138,7 @@ class quiz extends Controller {
        		
        	}
        	
+        // db($dataSoal);
        	$this->view->assign('kursus', $getKursus);
        	$this->view->assign('user', $this->user);
        	$this->view->assign('startQuiz', $startQuiz);

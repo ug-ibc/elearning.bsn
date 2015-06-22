@@ -22,6 +22,7 @@ class quizHelper extends Database {
         // if (!$idMateri) return false;
 
         $getSoalUser = $this->getSoalUser($idKursus, $idMateri=1);
+        
         if ($getSoalUser){
             /*
             $sql = array(
@@ -31,10 +32,13 @@ class quizHelper extends Database {
                     'limit' => "LIMIT {$start},{$limit}",
                     );
             */
+            
+            $soal = unserialize($getSoalUser[0]['soal']);
+            $implodeID = implode(',', $soal);
             $sql = array(
                     'table'=>"banksoal",
                     'field'=>"*",
-                    'condition' => " idGrup_kursus = {$idKursus} AND n_status = {$n_status} ",
+                    'condition' => " idGrup_kursus = {$idKursus} AND idSoal IN ({$implodeID}) AND n_status = {$n_status} ",
                     'limit' => "LIMIT {$start},{$limit}",
                     );
             $res = $this->lazyQuery($sql,$debug);
@@ -183,7 +187,8 @@ class quizHelper extends Database {
         $whatCourse = $isCourseReady[$idKursus]['soalkursus'];
         $timeCourse = ($isCourseReady[$idKursus]['waktu'] * 60);
 
-        // pr($whatCourse);
+        // pr($isCourseReady);
+        // db($whatCourse);
         if ($whatCourse){
 
             foreach ($whatCourse as $key => $value) {
@@ -197,6 +202,7 @@ class quizHelper extends Database {
                 $res[] = $this->lazyQuery($sql,$debug);
             }
 
+            // pr($res);
             foreach ($res as $key => $value) {
                 
                 foreach ($value as $key => $val) {
@@ -214,7 +220,7 @@ class quizHelper extends Database {
             foreach ($newRes as $key => $value) {
                 $listSoal[] = $value['idSoal'];
             }
-            // pr($res);
+            // db($listSoal);
 
             $starttolerance = strtotime($this->date) + 3; // Add 1 hour
             $tolerancetime = date('Y-m-d H:i:s', $starttolerance); // Back to string

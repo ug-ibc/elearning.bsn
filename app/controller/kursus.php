@@ -26,17 +26,22 @@ class kursus extends Controller {
 		global $basedomain;
 
 		$isCourseReady = $this->quizHelper->isCourseReady();
+		// pr($isCourseReady);
+
+
 		if ($isCourseReady){
 			$data = $this->models->getGrupKursus($this->user);
 			// pr($data);
-			// pr($isCourseReady);
+			// db($data);
 			if ($data){
 				foreach ($data as $key => $value) {
-					if (!in_array($value['idGrup_kursus'], $isCourseReady)) $available[] = $value;
+					if ($isCourseReady[$value['idGrup_kursus']]['courseready'] == 1){
+						$courseReady[] = $value;
+					}
 				}
 			}
-			// pr($available);
-			$this->view->assign('grup',$available);
+			// pr($courseReady);
+			$this->view->assign('grup',$courseReady);
 		}
 		
 		return $this->loadView('kursus/grupkursus');

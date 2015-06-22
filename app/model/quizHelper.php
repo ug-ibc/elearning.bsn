@@ -424,7 +424,7 @@ class quizHelper extends Database {
         $sql = array(
                 'table'=>"tbl_quiz_setting",
                 'field'=>"*",
-                'condition' => " idGroupKursus = {$idGroupKursus}",
+                'condition' => " idGroupKursus = {$idGroupKursus} AND n_status = 1",
                 );
 
         $res = $this->lazyQuery($sql,$debug);
@@ -454,8 +454,59 @@ class quizHelper extends Database {
         return $result;
     }
 
-
     function isCourseReady($idGroupKursus=false)
+    {
+
+        // SELECT count(*) as jumlah, `idGrup_kursus`, `idKursus` FROM `banksoal` group by idKursus order by idGrup_kursus 
+        
+        $sql = array(
+                'table'=>"banksoal",
+                'field'=>"COUNT(*) AS jumlahsoal, idGrup_kursus, idKursus",
+                'condition' => " n_status = 1 GROUP BY idKursus ORDER BY idGrup_kursus ASC",
+                );
+
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res){
+
+            foreach ($res as $key => $value) {
+                $data[$value['idGrup_kursus']][] = $value;
+            }
+
+            foreach ($data as $key => $value) {
+                $tmp = $this->getQuizSetting($key);
+                if ($tmp) $getQuizSetting[] = $tmp;
+            }
+
+            if ($getQuizSetting){
+                foreach ($getQuizSetting as $key => $value) {
+                    
+                    $dataSetting[$value[0]['idGroupKursus']] = $value[0];
+                }
+            }
+            // pr($data);
+            if ($dataSetting){
+                foreach ($dataSetting as $key => $value) {
+                    $dataSetting[$key]['soalkursus'] = $data[$key];
+                    $dataSetting[$key]['jumlahpembagian'] = $value['maxSoal'] / count($data[$key]);
+                    
+                    $notready = array();
+                    foreach ($data[$key] as $keys => $val) {
+                        if ($val['jumlahsoal'] < $value['maxSoal'] / count($data[$key])) $notready[] = 1;
+                    }
+
+                    if ( count($notready) > 0) $dataSetting[$key]['courseready'] = false;
+                    else $dataSetting[$key]['courseready'] = true;
+                }
+            }
+
+
+            // db($dataSetting);
+            return $dataSetting;
+        }
+        return false;
+    }
+
+    function isCourseReady_old($idGroupKursus=false)
     {
 
 
@@ -465,7 +516,9 @@ class quizHelper extends Database {
             $countKursus = count($getKursus);
         
             $groupID = array($idGroupKursus);
+        
         }else{
+
             $getGrupKursus = $this->getGrupKursus($this->user['id']);
             if ($getGrupKursus){
                 foreach ($getGrupKursus as $key => $value) {

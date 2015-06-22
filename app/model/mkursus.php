@@ -1,7 +1,7 @@
 <?php
 class mkursus extends Database{
 
-	function getGrupKursus($idUser){
+	function getGrupKursus($idUser=false){
 		$query = "SELECT * FROM grup_kursus WHERE n_status = '1'";
 		$result = $this->fetch($query,1);
 // pr($result);

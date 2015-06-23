@@ -183,5 +183,29 @@ class quiz extends Controller {
     	}
     	exit;
     }
+
+    function nilaiUser()
+    {
+    	$getNilai = $this->models->getNilai();
+    	// pr($getNilai);
+
+    	$this->view->assign('nilai',$getNilai);
+    	return $this->loadView('quiz/quizlistnilai');	
+    }
+
+    function resetNilai()
+    {
+    	global $basedomain;
+    	
+    	$id = _g('id');
+    	$resetNilai = $this->models->resetNilai($id);
+    	if ($resetNilai){
+    		echo "<script>alert('Berhasil')</script>";
+    	}else{
+			echo "<script>alert('Gagal')</script>";
+    	}
+    	redirect($basedomain.'quiz/nilaiUser');
+    	exit;
+    }
 }
 ?>

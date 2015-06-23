@@ -152,5 +152,60 @@ class mquiz extends Database {
         if ($res) return $res;
         return false;
 	}
+
+	function getNilai($idNilai=false)
+	{
+
+		$filter = "";
+
+		if ($id) $filter .= " AND n.id = {$idNilai}";
+		
+		$sql = array(
+                'table'=>"nilai AS n, user AS u, grup_kursus AS g",
+                'field'=>"n.*, u.name, u.email, g.namagrup",
+                'condition' => " n.n_status = 1 {$filter}",
+                'joinmethod' => 'LEFT JOIN',
+                'join' => "n.idUser = u.idUser, n.idGroupKursus = g.idGrup_kursus"
+                );
+
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res) return $res;
+        return false;
+	}
+
+	function resetNilai($id=false)
+	{
+
+		$getNilai = $this->getNilai($id);
+		if ($getNilai){
+
+			$sql = array(
+	                'table'=>"nilai",
+	                'field'=>"n_status = idNilai+1",
+	                'condition' => " idNilai = {$id} LIMIT 1",
+	                );
+
+	        $res = $this->lazyQuery($sql,$debug,2);
+	        $sql = array(
+	                'table'=>"tbl_generate_soal",
+	                'field'=>"n_status = id+1",
+	                'condition' => " idUser = {$getNilai[0]['idUser']} AND idGrupKursus = {$getNilai[0]['idGroupKursus']} LIMIT 1",
+	                );
+
+	        $res = $this->lazyQuery($sql,$debug,2);
+
+	        $sql = array(
+	                'table'=>"soal",
+	                'field'=>"n_status = idSoal_user+1",
+	                'condition' => " idUser = {$getNilai[0]['idUser']} AND idGrup_kursus = {$getNilai[0]['idGroupKursus']}",
+	                );
+
+	        $res = $this->lazyQuery($sql,$debug,2);
+		}
+		
+
+        if ($res) return $res;
+        return false;
+	}
 }
 ?>

@@ -11,6 +11,7 @@ $ROUTES = array(
                 'quiz',
                 'profil',
                 'kursus',
+                'search',
 		'register',
                 'recovery',
                 'kontak',

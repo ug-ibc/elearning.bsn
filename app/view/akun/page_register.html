@@ -69,9 +69,9 @@ $('.datepicker').datepicker({
 				    <div class="col-sm-6">
 				    	<div class="input-group">
 						  <span class="input-group-addon" id="basic-addon1"><i class="fa fa-envelope"></i></span>
-				    	<input type="text" class="form-control" placeholder="Email..." name="email" required/>
+				    	<input type="text" class="form-control" placeholder="Email..." name="email" required id="register-email"/>
 				    </div>
-				    </div>
+				    </div><span id="email-error"></span>
 				  </div>
 				 <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">Password</label>
@@ -105,7 +105,7 @@ $('.datepicker').datepicker({
 				    <div class="col-sm-6">
 				    	<div class="input-group">
 						  <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
-				    	<input type="text" class="form-control" id="datepicker" placeholder="YYYY-MM-DD" name="tanggallahir" required/>
+				    	<input type="text" class="form-control" id="datepicker" placeholder="YYYY-MM-DD" name="tanggallahir" required />
 				    </div>
 				    </div>
 				  </div>
@@ -144,7 +144,7 @@ $('.datepicker').datepicker({
 				    <div class="col-sm-6">
 				    	<div class="input-group">
 						  <span class="input-group-addon" id="basic-addon1"><i class="fa fa-phone"></i></span>
-				    	<input type="text" class="form-control" placeholder="Handphone..." name="hp" required/>
+				    	<input type="text" class="form-control" placeholder="Handphone..." name="hp" required onkeypress='return event.charCode <= 57'/>
 				    </div>
 				    </div>
 				  </div>

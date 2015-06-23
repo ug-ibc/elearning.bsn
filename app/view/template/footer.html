@@ -84,6 +84,39 @@ $(function(){
                 format: 'yyyy-dd-mm'
             });
         })
+
+    $(document).on('blur','#register-email', function(){
+
+        //Validate Email
+        var email = $(this).val();
+        var validate = IsEmail(email);
+        if (validate==false){
+            $('input#register-email').css('border','1px dotted red');
+            $('#email-error').html('Email tidak valid');
+            $('#email-error').css('color','red');
+
+        }else{
+
+            $.post(basedomain+'user/ajax',{token:true, email:email}, function(data){
+
+                var html = "";
+
+                if (data.status==true){
+                    $('input#register-email').css('border','1px dotted red')
+                    $('#email-error').html('Email sudah terdaftar');
+                    $('#email-error').css('color','red');
+
+                }else{
+                    $('#email-error').html('');
+                    $('#email-error').css('color','white');
+                }
+            }, "JSON")
+
+            
+        }
+        console.log(validate);
+        
+    })
 {/literal}
 </script>
 

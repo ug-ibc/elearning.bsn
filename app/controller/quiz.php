@@ -193,6 +193,8 @@ class quiz extends Controller {
 
         if ($userid == $userSess){
 
+          
+
           $finishQuiz = $this->quizHelper->finishQuiz($quizId);
           if ($finishQuiz){
             print json_encode(array('status'=>true));
@@ -207,15 +209,30 @@ class quiz extends Controller {
     function hasil()
     {
 
-      $correctionAnswer = $this->quizHelper->correctionAnswer();
-      // pr($correctionAnswer);
+      global $basedomain;
+      
+      if (isset($_POST['submit'])){
+        // pr($_POST);
+        $save = $this->quizHelper->saveTestimoni($_POST);
+        if ($save){
+          echo "<script>alert('Terima kasih atas testimoni anda');</script>";
+          redirect($basedomain.'kursus');
+          exit;
+        }
+      }
 
+      $correctionAnswer = $this->quizHelper->correctionAnswer();
+      
+      $getNilai = $this->quizHelper->getNilai();
+      // pr($getNilai);
       if ($correctionAnswer){
         $this->view->assign('correct', $correctionAnswer['correct']);
         $this->view->assign('wrong', $correctionAnswer['wrong']);
 
         
       }
+
+      $this->view->assign('nilai', $getNilai[0]);
       return $this->loadView('quiz/page_hasil');
     }
 }

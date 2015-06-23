@@ -639,5 +639,40 @@ class quizHelper extends Database {
         if ($notAvailableCourse)return $notAvailableCourse;
         return false;
     }
+
+    function saveTestimoni($data=array())
+    {
+
+        $dataArr = array();
+
+        $dataArr['testimoni'] = $data['testimoni'];
+
+        $serialData = serialize($dataArr);
+        $sql = array(
+                'table'=>"nilai",
+                'field'=>"data = '{$serialData}'",
+                'condition' => " idUser = {$data['idUser']} AND idNilai = {$data['idNilai']} LIMIT 1",
+                );
+
+        $res = $this->lazyQuery($sql,$debug,2);
+        if ($res) return $res;
+        return false;
+    }
+
+    function getNilai($id=false, $debug=false)
+    {
+
+        $userid = $this->user['idUser'];
+        // pr($this->user);
+        $sql = array(
+                'table'=>"nilai",
+                'field'=>"*",
+                'condition' => " n_status = 1 AND idUser = {$userid} ORDER BY idNilai DESC LIMIT 1",
+                );
+
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res) return $res;
+        return false;
+    }
 }
 ?>

@@ -45,7 +45,7 @@ $('.datepicker').datepicker({
 	    </div><br/>
 		<div class="row">
 			<div class="col-md-9">
-				<form method="POST" action="{$basedomain}register/signup" class="form-horizontal" onsubmit="return checkBefore()">
+				<form method="POST" action="{$basedomain}register/signup" class="form-horizontal" onsubmit="return validatePassword()">
 				<div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
 				    <div class="col-sm-6">
@@ -78,7 +78,7 @@ $('.datepicker').datepicker({
 				    <div class="col-sm-6">
 				    	<div class="input-group">
 						  <span class="input-group-addon" id="basic-addon1"><i class="fa fa-lock"></i></span>
-				    	<input type="password" class="form-control" placeholder="Password..." name="password" required/>
+				    	<input type="password" class="form-control" placeholder="Password..." name="password" required id="register-password"/>
 				    </div>
 				    </div>
 				  </div>
@@ -87,10 +87,11 @@ $('.datepicker').datepicker({
 				    <div class="col-sm-6">
 				    	<div class="input-group">
 						  <span class="input-group-addon" id="basic-addon1"><i class="fa fa-lock"></i></span>
-				    	<input type="password" class="form-control" placeholder="Confirm Password..." name="repassword" required/>
+				    	<input type="password" class="form-control" placeholder="Confirm Password..." name="repassword" required id="register-rePassword"/>
 				    </div>
 				    </div>
 				  </div>
+				  <span id="password-error"></span>
 				<div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">Tempat Lahir</label>
 				    <div class="col-sm-6">

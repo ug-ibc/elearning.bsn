@@ -121,6 +121,7 @@ class userHelper extends Database {
     function createAccount($data,$debug=false)
     {
 
+        if ($data['password'] !== $data['repassword']) return false;
         
         $field = array('name','email','username','tempatlahir','tanggallahir','pendidikan','institusi','jenispekerjaan','hp'); 
 

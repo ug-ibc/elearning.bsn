@@ -117,6 +117,25 @@ $(function(){
         console.log(validate);
         
     })
+
+    function validatePassword()
+        {
+            // console.log('ada');
+            
+            var pass1 = $('#register-password').val();
+            var pass2 = $('#register-rePassword').val();
+
+            var validate = compare(pass1, pass2);
+            // log('data ='+validate);
+            // return false;
+            if (validate==false){
+                $('input#register-rePassword').css('border','1px dotted red')
+                $('#password-error').html('Password tidak sama');
+                $('#password-error').css('color','red');
+                return false;
+
+            }
+        }
 {/literal}
 </script>
 

@@ -1,3 +1,27 @@
+<script type="text/javascript">
+{literal}
+    $(window).load(function(){
+        $('#linkLuar').modal('show');
+    });
+{/literal}
+</script>
+<div class="modal fade" id="linkLuar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog video">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">link Luar</h4>
+      </div>
+      
+      <div class="modal-body">
+       
+          <a href="#">Gunadarma.ac.id</a><br/>
+          <a href="#">Gunadarma.ac.id</a><br/>
+          <a href="#">Gunadarma.ac.id</a><br/>
+      </div>
+    </div>
+  </div>
+</div>
 
 <section class="callaction">
 	<div class="container">
@@ -39,12 +63,25 @@
         </div>
     </div>
     <div class="row" >
-      <form method="post" action="">
-      Testimoni : <textarea name="testimoni"></textarea>
-      <input type="hidden" name="idNilai" value="{$nilai.idNilai}">
-      <input type="hidden" name="idUser" value="{$nilai.idUser}">
-      <input type="submit" name="submit" value="Submit">
-      </form>
+      <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-12" align="left" style="border-bottom:2px solid #F5F5F5;padding-bottom:3px">
+          <span style="font-size:23px;border-bottom:2px solid #69BD45;">TESTIMONIAL</span>
+          
+          <!-- <p>Lorem ipsum dolor sit amet, consectetur consectetur  adipiscing elit donec mer lacinia.</p> -->
+      </div><br/>
+    </div>
+  </div>
+    <div class="row" >
+      <div class="col-md-10 col-md-offset-1">
+        <form method="post" action="">
+        
+        <textarea name="testimoni" class="form-control"></textarea><br/>
+        <input type="hidden" name="idNilai" value="{$nilai.idNilai}">
+        <input type="hidden" name="idUser" value="{$nilai.idUser}">
+        <input type="submit" name="submit" class="btn btn-primary" value="Submit">
+        </form>
+      </div>
+    </div>
     </div>
 		<!-- <div class="row">
 			<div class="col-md-8" style="background-color:#AF0096">

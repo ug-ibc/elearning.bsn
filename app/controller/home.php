@@ -47,7 +47,7 @@ class home extends Controller {
     {
     	global $basedomain;
 
-    	$updateStatusNilai = $this->quizHelper->updateStatusNilai();
+    	// $updateStatusNilai = $this->quizHelper->updateStatusNilai();
     	
     	$doLogout = $this->userHelper->logoutUser();
     	if ($doLogout){

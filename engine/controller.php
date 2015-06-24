@@ -70,7 +70,7 @@ class Controller extends Application{
 			}
 
 			if ($this->configkey == 'default'){
-				if ($DATA[$this->configkey]['page']=='login'){
+				if ($DATA[$this->configkey]['page']=='register'){
 
 					/* remove session if user exist in same browser */
 					$ignoreFunc = array('validate','accountValid','doLogin','local');

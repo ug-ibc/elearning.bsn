@@ -584,36 +584,27 @@ class course extends Controller {
 		
 		// exit;
 		$this->reportHelper =$this->loadModel('reportHelper');
-		$html = "<style>
-					
-					#spacePage{
-						height:10cm;
-					}
-					.bpmTopnTailC td, .bpmTopnTailC th  {	border-top: 1px solid #FFFFFF; text-align : center}
-					.headerrow td, .headerrow th { background-gradient: linear #b7cebd #f5f8f5 0 1 0 0.2;  }
-					.evenrow td, .evenrow th { background-color: #f5f8f5; } 
-					.oddrow td, .oddrow th { background-color: #e3ece4; } 
+		$html = "<div style=\"width: ; text-align: center;\">
+					<h4>List User : </h4>
+					 <table style=\"text-align: center; border-collapse: collapse; margin-left: auto; margin-right: auto; width: 100%;\" border=\"1\" cellpadding=\"0\" cellspacing=\"0\">
+						<thead>
+							<tr class=\"\" >
+								<td>registered users</td>
+								<td>users who already <br>received a certificate</td>
+								<td>users who just browse the web <br>without login</td>
+							</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td align=\"center\">$user_register</td>
+									<td align=\"center\">$user_sertificate</td>
+									<td align=\"center\">$user_visitor</td>	
+								</tr>
+							</tbody>
+						</table>
+					</div>";
 
-					</style>
-						<div style=\"width: ; text-align: center;\">
-						<h4>List User : </h4>
-								<table border = \"1\" style=\"border=\"0\" cellpadding=\"0\" cellspacing=\"0\  border-collapse: collapse;\" align=\"center\" class=\"\"><thead>
-									<tr class=\"oddrow\" >
-										<th>registered users</th>
-										<th>users who already received a certificate</th>
-										<th>users who just browse the web without login</th>
-									</tr>
-								</thead><tbody>
-									<tr class=\"\"><th>$user_register</th>
-										<th>$user_sertificate</td>
-										<th>$user_visitor</td>
-									</tr>
-								</tbody></table>
-						</div>";
-
-		// echo $html;
-		// exit;
-    	$generate = $this->reportHelper->loadMpdf($html, 'visitor');
+		$generate = $this->reportHelper->loadMpdf($html, 'visitor');
     }
 		
 }

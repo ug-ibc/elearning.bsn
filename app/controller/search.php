@@ -24,10 +24,32 @@ class search extends Controller {
 	
 	
      function index(){
-		// pr($_GET);
-
-		$this->view->assign('pdf',$_GET['pdf']);
-		return $this->loadView('kursus/page_search');
+		
+		if(isset($_POST['cari'])){
+			$certificate = $_POST['cari'];
+			$group_course = $this->models->get_group_by_certificate($certificate);
+			$id_group = $group_course['idGrup_kursus'];
+			// pr($group_course);
+			if($id_group != ''){
+				$list_course = $this->models->get_list_course_by_certificate($id_group);
+				// pr($list_course);
+				$nilai = $this->models->get_value_by_certificate($id_group);
+				// pr($nilai);
+				$this->view->assign('group_course',$group_course);
+				$this->view->assign('list_course',$list_course);
+				$this->view->assign('nilai',$nilai);
+				$this->view->assign('keyword',$certificate);
+				return $this->loadView('kursus/page_search');
+			}else{
+				return $this->loadView('kursus/page_search');
+			}
+			
+		}else{
+			// echo "no post";
+			return $this->loadView('kursus/page_search');
+		
+		}
+		
 
     }
 

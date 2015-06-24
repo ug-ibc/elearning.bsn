@@ -56,5 +56,33 @@ class mkursus extends Database{
 		
 		return $dataArr;
 	}
+	
+	
+	function get_group_by_certificate($certificate){
+		$query = "SELECT g.idGrup_kursus,g.namagrup FROM grup_kursus as g, nilai as n
+					where n.idGroupKursus = g.idGrup_kursus 
+					and n.n_status = 1 and g.n_status = 1 and n.kodeSertifikat = '{$certificate}'";	
+		$result = $this->fetch($query);
+		return $result;
+	}
+	
+	function get_list_course_by_certificate($id_group){
+		$query = "SELECT namamateri FROM materi
+					where n_status = 1 and idGrup_kursus  ={$id_group}";
+		$result = $this->fetch($query,1);
+		return $result;
+	}
+	
+	function get_value_by_certificate($id_group){
+		$query = "SELECT n.nilai,n.idUser,n.kodeSertifikat,n.create_time,
+					t.kategoriBaik,t.kategoriCukup,t.kategoriKurang,
+					u.name
+					FROM nilai as n
+					join tbl_quiz_setting as t on t.idGroupKursus = n.idGroupKursus
+					join user as u on u.idUser = n.idUser
+					where n.idGroupKursus  ={$id_group}";
+		$result = $this->fetch($query);
+		return $result;
+	}
 }
 ?>

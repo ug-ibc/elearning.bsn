@@ -107,69 +107,64 @@ table tr:hover td{
 <section class="callaction">
 	<div class="container">
 		<div class="row">
-			<form  role="search">
+			<form  role="search" method="POST" action="{$basedomain}search/">
 			<div class="col-md-9 col-md-offset-1" align="center">
 				
 			        <div class="form-group">
 			        	
 			        	<div class="input-group">
 	  						<span class="input-group-addon" id="sizing-addon1"><i class="fa fa-search"></i></span> 
-				          <input type="text" class="form-control" placeholder="Search">
+				         {if $keyword}
+								{$key_value = "$keyword"}
+							{else}
+								{$key_value = ""}	
+							{/if}
+						  <input type="text" class="form-control" placeholder="Search"  value = "{$key_value}" name="cari">
 			        	</div>
 			        </div>
 			</div>
 
 			<div class="col-md-1" align="center">
-
-			        <button type="submit" class="btn btn-info">Search</button>
-
+					<button type="submit" class="btn btn-info" >Search</button>
 			</div>
 
 			</form>
-
 		</div>
+			<div class="col-md-1" align="center">
+			
+			</div>
+		
 	</div>
 </section>
 
+{if $group_course}	
+<!--{pr($group_course)}	
+{pr($list_course)}	
+{pr($nilai)}-->	
 <section class="callaction">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-1" align="center">
-				
-			        
+				  
 <table width="100%"> 
 	<tr>
 		<th align="center" >GROUP KURSUS</th>
 	</tr>
     
 <tr>
-	<td>WEB PROGRAMMING</td>
+	<td>{$group_course.namagrup}</td>
 </tr>
 
 	<tr>
 		<th align="center" >LIST MATERI</th>
 	</tr>
+	{if $list_course}
+	{foreach $list_course as $val_list}
 	<tr class='even'>
-		<td>PHP</td>
+		<td>{$val_list.namamateri}</td>
 	</tr>
-
-	<tr>
-		<td>HTML</td>
-	</tr>
-	<tr class='even'>
-		<td>CSS</td>
-	</tr>
-	
-    <tr>
-    	<td>AJAX</td>
-    </tr>
-	<tr class='even'>
-		<td>XML</td>
-	</tr>
-
-	<tr>
-		<td>JSON</td>
-	</tr>
+	{/foreach}
+	{/if}
 </table>
 			</div>
 			<div class="col-md-3" align="center">
@@ -177,7 +172,7 @@ table tr:hover td{
                  <div  align="center">
 
                   <div style="padding-top:70px;padding-bottom:50px;">
-                   <span style="font-size:90px">100</span>
+                   <span style="font-size:90px">{$nilai.nilai}</span>
                  </div>
                    <h5>SKOR</h5>
                 </div>
@@ -192,3 +187,4 @@ table tr:hover td{
 		</div>
 	</div>
 </section>
+{/if}

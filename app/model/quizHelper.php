@@ -437,17 +437,8 @@ class quizHelper extends Database {
         return false;
     }
 
-    function saveNilai($data, $debug=0)
-    {   
-        $benar = $data['benar'];
-        $salah = $data['salah'];
-        $nilai = floor(($benar/($benar+$salah))*100);
-        $statusulang = 0;
-        $statuskelulusan = 0;
-        $create_time = date('Y-m-d H:i:s');
-        $idUser = $this->user['idUser'];
-        $idKursus = $data['idKursus'];
-        $idGroupKursus = $data['idGroupKursus'];
+    function generateSertifikat()
+    {
 
         $arrayTahun = array('2015'=>'XV', '2016'=>'XVI', '2017'=>'XVII', '2018'=>'XVIII');
         $tahun = date('Y');
@@ -461,12 +452,24 @@ class quizHelper extends Database {
         }else{
             $generateCodeSertifikat = "ELS/{$urut}/{$arrayTahun[$tahun]}";
         }
-        
-        
 
+        return $generateCodeSertifikat;
+    }
 
-        $codeSertifikat = "ELS/1/{$arrayTahun[$tahun]}";
-        
+    function saveNilai($data, $debug=0)
+    {   
+        $benar = $data['benar'];
+        $salah = $data['salah'];
+        $nilai = floor(($benar/($benar+$salah))*100);
+        $statusulang = 0;
+        $statuskelulusan = 0;
+        $create_time = date('Y-m-d H:i:s');
+        $idUser = $this->user['idUser'];
+        $idKursus = $data['idKursus'];
+        $idGroupKursus = $data['idGroupKursus'];
+
+        $generateCodeSertifikat = $this->generateSertifikat();
+
         $sql = "INSERT INTO nilai (nilai, benar, salah, statusulang, statuskelulusan, create_time, idUser, idKursus, idGroupKursus, kodeSertifikat, n_status) 
                 VALUES ({$nilai}, {$benar}, {$salah}, {$statusulang}, {$statuskelulusan}, '{$create_time}', {$idUser}, {$idKursus}, {$idGroupKursus}, '{$generateCodeSertifikat}', 1)
                 ON DUPLICATE KEY UPDATE nilai = {$nilai}, benar = '{$benar}', salah = '{$salah}'";
@@ -674,5 +677,24 @@ class quizHelper extends Database {
         if ($res) return $res;
         return false;
     }
+
+    function updateStatusNilai()
+    {
+
+        $getNilai = $this->getNilai();
+
+        $userid = $this->user['idUser'];
+
+        $sql = array(
+                'table'=>"nilai",
+                'field'=>"n_status = 1",
+                'condition' => " idNilai = {$getNilai[0]['idNilai']} AND idUser = {$userid} LIMIT 1",
+                );
+
+        $res = $this->lazyQuery($sql,$debug, 2);
+        if ($res) return $res;
+        return false;
+    }
+
 }
 ?>

@@ -46,6 +46,9 @@ class home extends Controller {
     function logout()
     {
     	global $basedomain;
+
+    	// $updateStatusNilai = $this->quizHelper->updateStatusNilai();
+    	
     	$doLogout = $this->userHelper->logoutUser();
     	if ($doLogout){
     		redirect($basedomain.'logout.php');exit;

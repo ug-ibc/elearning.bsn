@@ -13,7 +13,7 @@ class mkursus extends Database{
 		}
 		
 		foreach ($result as $key => $value) {
-			$query = "SELECT * FROM nilai WHERE idGroupKursus = '{$value['idGrup_kursus']}' AND idUser = '{$idUser['idUser']}'";
+			$query = "SELECT * FROM nilai WHERE idGroupKursus = '{$value['idGrup_kursus']}' AND idUser = '{$idUser['idUser']}' ";
 			// pr($query);
 			$res = $this->fetch($query);
 			if($res){

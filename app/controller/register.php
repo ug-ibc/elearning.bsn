@@ -55,7 +55,20 @@ class register extends Controller {
         if ($_POST['token']){
 
             $register = $this->userHelper->createAccount($_POST);
-            if ($register) redirect($basedomain.'register/status');
+            if ($register){
+
+                $this->view->assign('email', $register['email']);
+                $this->view->assign('name', $register['name']);
+                $this->view->assign('encode', $register['encode']);
+                
+                $html = $this->loadView('akun/emailTemplate');
+                // db($register);
+                // logFile($msg);
+                // $html = "klik link berikut ini {$basedomain}register/validate/?ref={$msg}";
+                $send = sendGlobalMail($register['email'],false,$html);
+
+                redirect($basedomain.'register/status');
+            } 
             else redirect($basedomain.'register');
 
             exit;
@@ -84,121 +97,52 @@ class register extends Controller {
     	return $this->loadView('user/register');
     }
     
-    function register_step1(){
-        global $basedomain;
-        if ($_POST){
-            // pr($_POST);
+    function validate()
+    {
 
-            $save = $this->contentHelper->createAccount($_POST);
-            if ($save){
-                
-                redirect($basedomain.'user/register_step2');
-            }
-        }
-    	return $this->loadView('user/register_step1');
-    }
-    
-    function register_step2(){
-        global $basedomain;
-
+        $data = _g('ref');
         
-        $isUserSet = $_SESSION['newuser']['email'];
-        if ($isUserSet=="") {redirect($basedomain.'user/register_step1');exit;}
+        // db('ada');
+        logFile($data);
+        if ($data){
 
-        $getNomenklatur = $this->contentHelper->getNomenklatur();
-        // pr($getNomenklatur);
-        if ($_POST){
-            // pr($_POST);
+            $decode = unserialize(decode($data));
+            // pr($decode);
+            // check if token is valid
+           
+            $salt = "register";
+            $userMail = $decode['email'];
+            $origToken = sha1($salt.$userMail);
 
-            $save = $this->contentHelper->updateBiodata($_POST);
-            if ($save){
-                
-                redirect($basedomain.'user/register_step3');
-            }else{
-                redirect($basedomain.'user/register_step2');exit;
-            }
-        }
+            // pr($decode);
+            $getToken = $this->userHelper->getEmailToken($decode['email'], true);
 
-        $this->view->assign('rumpun',$getNomenklatur);
-    	return $this->loadView('user/register_step2');
-    }
-    
-    function register_step3(){
-
-        global $basedomain;
-
-        $isUserSet = $_SESSION['newuser']['email'];
-        if ($isUserSet=="") {redirect($basedomain.'user/register_step1');exit;}
-
-
-        if ($_POST){
-            // pr($_POST);
-
-            $save = $this->contentHelper->updateRiwayat($_POST);
-            // pr($save);
-            if ($save){
-                $keberhasilan = $this->contentHelper->updateKeberhasilan($_POST);
-                if ($keberhasilan){
-                    redirect($basedomain.'user/register_step4');
-                }else{
-                    redirect($basedomain.'user/register_step3');exit;
-                } 
-            }else{
-                redirect($basedomain.'user/register_step3');exit;
-            }
-        }
-
-    	return $this->loadView('user/register_step3');
-    }
-    
-    function register_step4(){
-
-        
-        global $basedomain;
-        $isUserSet = $_SESSION['newuser']['email'];
-        if ($isUserSet=="") {redirect($basedomain.'user/register_step1');exit;}
-
-        if ($_POST){
-            // pr($_POST);
-
-            if(!empty($_FILES)){
-                if($_FILES['file_image']['name'] != ''){
-                    
-                    $image = uploadFile('file_image',null,'image');
-                    $x['image'] = $image['full_name'];
-
-                    if ($image){
-                        $save = $this->contentHelper->updatePersetujuan($image);
-                        if ($save){
-                            
-                            redirect($basedomain.'user/register_step5');
-                        }
-                    }else{
-                        redirect($basedomain.'user/register_step4');exit;
-                    }
-
-                }
-
-                
-                
-            }else{
-                redirect($basedomain.'user/register_step4');exit;
-            }
-
-            exit;
             
+            // db($getToken);
+            if ($getToken['email_token']==$decode['token']){
+
+                $updateStatusUser = $this->userHelper->updateStatusUser($decode['email']);
+
+                // is valid, then create account and set status to validate
+                $this->view->assign('validate','Validate account Success');
+                $this->view->assign('status',true);
+                $this->view->assign('email',$userMail);
+
+            }else{
+
+                // invalid token
+                $this->view->assign('validate','Validate account error');
+                $this->view->assign('status',false);
+                logFile('token mismatch');
+            }
+
+            
+
         }
-    	return $this->loadView('user/register_step4');
-    }
+        
 
-    function register_step5(){
-
-        global $basedomain;
-
-        $isUserSet = $_SESSION['newuser']['email'];
-        if ($isUserSet=="") {redirect($basedomain.'user/register_step1');exit;}
-
-        return $this->loadView('user/register_step5');
+        return $this->loadView('akun/activate-account');
+        
     }
 
     function ajax()

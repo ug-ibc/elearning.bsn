@@ -183,6 +183,8 @@ class course extends Controller {
 		global $CONFIG;
 		if(isset($_POST)){
 		 $x = form_validation($_POST);
+		 // pr($_POST);
+		 // exit;
 		 // pr($_FILES);exit;
 		 try
 			   {
@@ -296,7 +298,9 @@ class course extends Controller {
 	public function insert_upload(){
 		global $CONFIG;
 		// pr($CONFIG);
-		 
+		// pr($_FILES);
+		// pr($_POST);
+		 // exit;
 		if(isset($_POST)){
 		 $x = form_validation($_POST);
 		 try
@@ -308,9 +312,6 @@ class course extends Controller {
 						if($x['id'] != ''){
 							$x['action'] = 'update';
 						}
-						/*$exp = explode("_",$x['file_hidden']);
-						$encode_name_files = $exp[0]; 
-						$real_name_files = $exp[1];*/ 
 						// upload file
 						// pr($_FILES);
 						if(!empty($_FILES['file_image']['name'])){
@@ -325,7 +326,14 @@ class course extends Controller {
 							}
 						}else{
 						// echo "sini kan";
-							$x['post_image'] = $x['file_hidden'];
+							// if(empty($_FILES['file_image']['name']) || $x['post_image'] != ""){	
+							if(empty($_FILES['file_image']['name']) && $x['file_image'] != ""){	
+								echo "file kosong";
+								$x['post_image'] = $x['file_image'];
+							}else{
+								echo "file isi";
+								$x['post_image'] = $x['file_hidden'];
+							}
 						}
 						
 						// pr($x);
@@ -542,6 +550,72 @@ class course extends Controller {
 		exit;
 
 	}
+
+	public function viewvisitor(){
+		
+		//register user
+		$register_user= $this->mcourse->select_data_register_user();
+		$this->view->assign('register_user',$register_user);
+		//register  get sertificate
+		$sertificate_user= $this->mcourse->select_data_sertificate_user();
+		$this->view->assign('sertificate_user',$sertificate_user);
+		
+		//visitor
+		$visitor_user= $this->mcourse->select_data_visitor_user();
+		$this->view->assign('visitor_user',$visitor_user);
+		
+		return $this->loadView('course/statistic');
+	}
+	
+	function cetak()
+    {
+		global $basedomain;
+		//register user
+		$register_user= $this->mcourse->select_data_register_user();
+		$user_register = $register_user[0]['total'];
+		
+		//register  get sertificate
+		$sertificate_user= $this->mcourse->select_data_sertificate_user();
+		$user_sertificate = $sertificate_user[0]['total'];
+		
+		//visitor
+		$visitor_user= $this->mcourse->select_data_visitor_user();
+		$user_visitor = $visitor_user[0]['total'];
+		
+		// exit;
+		$this->reportHelper =$this->loadModel('reportHelper');
+		$html = "<style>
+					
+					#spacePage{
+						height:10cm;
+					}
+					.bpmTopnTailC td, .bpmTopnTailC th  {	border-top: 1px solid #FFFFFF; text-align : center}
+					.headerrow td, .headerrow th { background-gradient: linear #b7cebd #f5f8f5 0 1 0 0.2;  }
+					.evenrow td, .evenrow th { background-color: #f5f8f5; } 
+					.oddrow td, .oddrow th { background-color: #e3ece4; } 
+
+					</style>
+						<div style=\"width: ; text-align: center;\">
+						<h4>List User : </h4>
+								<table border = \"1\" style=\"border=\"0\" cellpadding=\"0\" cellspacing=\"0\  border-collapse: collapse;\" align=\"center\" class=\"\"><thead>
+									<tr class=\"oddrow\" >
+										<th>registered users</th>
+										<th>users who already received a certificate</th>
+										<th>users who just browse the web without login</th>
+									</tr>
+								</thead><tbody>
+									<tr class=\"\"><th>$user_register</th>
+										<th>$user_sertificate</td>
+										<th>$user_visitor</td>
+									</tr>
+								</tbody></table>
+						</div>";
+
+		// echo $html;
+		// exit;
+    	$generate = $this->reportHelper->loadMpdf($html, 'visitor');
+    }
+		
 }
 
 ?>

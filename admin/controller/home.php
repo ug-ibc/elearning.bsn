@@ -163,6 +163,20 @@ class home extends Controller {
 		exit;
 		
 	}
+
+	function cetak()
+	{
+		
+		global $basedomain;
+		$background_certificate =  $basedomain."assets/img/certificate/bg.jpg";
+		$this->reportHelper =$this->loadModel('reportHelper');
+		$html = "<h1>hello world</h1>";
+
+		// echo $html;
+		// exit;
+    	$generate = $this->reportHelper->loadMpdf($html, 'certificate');
+    
+	}
 	
 }
 

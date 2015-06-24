@@ -179,6 +179,7 @@ class mcourse extends Database {
 							files = '{$x["post_image"]}'
 						WHERE
 								idFile = '{$x["id"]}'";
+			// echo $query;
 			// exit;				
 			$result = $this->query($query);					
 			
@@ -317,5 +318,28 @@ class mcourse extends Database {
 		return $result;
 	}
 	
+	function select_data_register_user()
+	{
+		$query = "SELECT COUNT(1) AS total FROM user WHERE  n_status IN (1)";
+		$result = $this->fetch($query,1);
+		
+		return $result;
+	}
+	
+	function select_data_sertificate_user()
+	{
+		$query = "SELECT COUNT(1) AS total FROM nilai WHERE kodeSertifikat is not null and n_status IN (1) ";
+		$result = $this->fetch($query,1);
+		
+		return $result;
+	}
+	
+		function select_data_visitor_user()
+	{
+		$query = "SELECT COUNT(1) AS total FROM tbl_activity_log WHERE userID = 0 and n_status IN (1) ";
+		$result = $this->fetch($query,1);
+		
+		return $result;
+	}
 }
 ?>

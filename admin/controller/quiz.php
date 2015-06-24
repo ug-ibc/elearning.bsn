@@ -207,5 +207,7 @@ class quiz extends Controller {
     	redirect($basedomain.'quiz/nilaiUser');
     	exit;
     }
+
+    
 }
 ?>

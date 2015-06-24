@@ -14,9 +14,17 @@ function countDown()
 					$('#countdown').html( minute + ' menit ' + second + ' detik');
 					countDown();
 				}else{
-					alert('waktu anda sudah selesai');
-					location.reload();
-					$('#countdown').html( 'Habis waktu' );
+
+					$.post(basedomain+'quiz/updateNilaiOnLogout', {param:true}, function(data){
+
+						if (data.status==true){
+							alert('waktu anda sudah selesai');
+							window.location.href = basedomain+'kursus';
+						}
+					}, "JSON")
+					
+					// location.reload();
+					// $('#countdown').html( 'Habis waktu' );
 				}
 			}
 			
@@ -27,14 +35,7 @@ function countDown()
 	}, 1000);
 }
 
-$(document).ready(function(){
 
-	setTimeout(function(){ 
-		countDown();
-	}, 1000);
-
-	
-})
 
 // send data quiz via ajax script
 
@@ -54,7 +55,7 @@ $(document).on('click','.chooseAnswer', function(){
 
 		if (data.status==true){
 			
-			console.log(dataKlik);
+			// console.log(dataKlik);
 			// $(dataKlik).addClass("active");	
 		}
 		

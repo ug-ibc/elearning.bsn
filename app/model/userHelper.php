@@ -167,13 +167,16 @@ class userHelper extends Database {
 
         if ($res){
 
-            // echo 'ada';exit;
-            // $data = array('email'=>$data['email'], 'token'=>$this->token);
-            // $msg = encode(serialize($data));
-            // logFile($msg);
+            
+            $dataencode = array('email'=>$data['email'], 'token'=>$this->token);
+            $dataArr['encode'] = encode(serialize($dataencode));
+            $dataArr['email'] = $data['email'];
+            $dataArr['name'] = $data['name'];
+            
+            logFile($dataArr['encode']);
             // $html = "klik link berikut ini {$basedomain}register/validate/?ref={$msg}";
             // $send = sendGlobalMail($email,'noreply@pindai.co.id',$html);
-            return true;
+            return $dataArr;
         } 
 
         
@@ -194,6 +197,38 @@ class userHelper extends Database {
         $result = $this->lazyQuery($sql,$debug,2);
         if ($result) return true;
         return false;
+    }
+
+    function getEmailToken($email=false, $all=false)
+    {
+
+        $filter = "";
+
+        if($email==false) return false;
+        
+        if($all) $filter = " * ";
+        else $filter = " email_token ";
+
+        $sql = "SELECT {$filter} FROM user WHERE `email` = '".$email."' LIMIT 1";
+        // logFile($sql);
+        $res = $this->fetch($sql);
+        if ($res) return $res;
+        return false;
+    }
+
+    function updateStatusUser($email=false)
+    {
+
+        $sql = array(
+                'table'=>'user',
+                'field'=>"n_status = 1",
+                'condition' => "email = '{$email}'",
+                );
+
+        $res = $this->lazyQuery($sql,$debug,2);
+        if ($res) return true;
+        return false;
+
     }
 }
 ?>

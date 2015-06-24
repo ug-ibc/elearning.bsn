@@ -27,7 +27,8 @@
 		</div>
 		<!--================================-->
 		<!--End shortcut buttons-->
-
+		<!--{pr($page.function)}
+		{pr($page.page)}-->
 
 		<!--Menu-->
 		<!--================================-->
@@ -51,6 +52,13 @@
 						<li class="list-header">About BSN</li>
 			
 						<!--Menu list item-->
+						<li class="{if $page.page eq 'course' && $page.function eq 'viewvisitor'}active-link{/if}">
+							<a href="{$basedomain}course/viewvisitor">
+								<i class="fa fa-eye"></i>
+								<span class="menu-title">Report Statistic Visitor </span>
+							</a>
+			
+						</li>
 						<li>
 							<a href="#">
 								<i class="fa fa-newspaper-o"></i>

@@ -67,16 +67,14 @@ class quiz extends Controller {
       $idGrup_kursus = intval(_p('idGrup_kursus'));
     	// pr($dataid);
 
-      $countDown = $this->countDown();
+      $countDown = $this->countDown(true);
       // pr($countDown);
-      $jsonDecode = json_decode($countDown);
+      // $jsonDecode = json_decode($countDown);
       // pr($jsonDecode);
 
       // echo 'ada';
       // exit;
-      if ($jsonDecode['minute'] == "00" AND $jsonDecode['second'] == "00"){
-        return false;
-      }
+      if (!$countDown['status']){print json_encode(array('status'=>false));exit;}
 
       $getGenerateSoal = $this->quizHelper->getGenerateSoal();
       $idsoalGen = $getGenerateSoal[0]['id'];
@@ -167,7 +165,7 @@ class quiz extends Controller {
        	return $this->loadView('quiz/page_quiz');
     }
     
-    function countDown()
+    function countDown($returnArr=false)
     {
 
     	$end_date = $_SESSION['end_date'];
@@ -183,12 +181,25 @@ class quiz extends Controller {
 		    $date['minute'] = $countMin;
 		    $date['second'] = $countSec;
 			
-			print json_encode(array('status'=>true, 'end_date'=>$date));
+      if ($returnArr){
+        return array('status'=>true, 'end_date'=>$date);
+      }else{
+        print json_encode(array('status'=>true, 'end_date'=>$date));
+      }
+			
 		} else {
 			
 			$idcount = $_SESSION['idcount'];
 			$finish = $this->quizHelper->updateCountDown($idcount);
-			if ($finish)print json_encode(array('status'=>false));
+			if ($finish){
+
+        if ($returnArr){
+          return array('status'=>false);
+        }else{
+          print json_encode(array('status'=>false));
+        }
+        
+      }
 		}
 
 		exit;
@@ -245,6 +256,21 @@ class quiz extends Controller {
 
       $this->view->assign('nilai', $getNilai[0]);
       return $this->loadView('quiz/page_hasil');
+    }
+
+    function updateNilaiOnLogout()
+    {
+      
+      global $basedomain;
+
+      $correctionAnswer = $this->quizHelper->correctionAnswer();
+      
+      if ($correctionAnswer){
+        print json_encode(array('status'=>true));
+      }else{
+        print json_encode(array('status'=>false));
+      }
+      exit;
     }
 }
 

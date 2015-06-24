@@ -14,8 +14,15 @@ function countDown()
 					$('#countdown').html( minute + ' menit ' + second + ' detik');
 					countDown();
 				}else{
-					alert('waktu anda sudah selesai');
-					window.location.href = basedomain+'kursus';
+
+					$.post(basedomain+'quiz/updateNilaiOnLogout', {param:true}, function(data){
+
+						if (data.status==true){
+							alert('waktu anda sudah selesai');
+							window.location.href = basedomain+'kursus';
+						}
+					}, "JSON")
+					
 					// location.reload();
 					// $('#countdown').html( 'Habis waktu' );
 				}

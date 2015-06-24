@@ -15,8 +15,9 @@ function countDown()
 					countDown();
 				}else{
 					alert('waktu anda sudah selesai');
-					location.reload();
-					$('#countdown').html( 'Habis waktu' );
+					window.location.href = basedomain+'kursus';
+					// location.reload();
+					// $('#countdown').html( 'Habis waktu' );
 				}
 			}
 			
@@ -27,14 +28,7 @@ function countDown()
 	}, 1000);
 }
 
-$(document).ready(function(){
 
-	setTimeout(function(){ 
-		countDown();
-	}, 1000);
-
-	
-})
 
 // send data quiz via ajax script
 
@@ -54,7 +48,7 @@ $(document).on('click','.chooseAnswer', function(){
 
 		if (data.status==true){
 			
-			console.log(dataKlik);
+			// console.log(dataKlik);
 			// $(dataKlik).addClass("active");	
 		}
 		

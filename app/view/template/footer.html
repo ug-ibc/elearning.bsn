@@ -136,8 +136,29 @@ $(function(){
 
             }
         }
+
+        
+
 {/literal}
+
+
 </script>
 
+{if $page.page=='quiz'}
+    <script>
+    {literal}
+    
+        $(document).ready(function(){
+
+            setTimeout(function(){ 
+                countDown();
+            }, 1000);
+
+            
+        })
+    {/literal}
+    </script>
+
+{/if}
 </body>
 </html>

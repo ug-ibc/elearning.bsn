@@ -67,6 +67,17 @@ class quiz extends Controller {
       $idGrup_kursus = intval(_p('idGrup_kursus'));
     	// pr($dataid);
 
+      $countDown = $this->countDown();
+      // pr($countDown);
+      $jsonDecode = json_decode($countDown);
+      // pr($jsonDecode);
+
+      // echo 'ada';
+      // exit;
+      if ($jsonDecode['minute'] == "00" AND $jsonDecode['second'] == "00"){
+        return false;
+      }
+
       $getGenerateSoal = $this->quizHelper->getGenerateSoal();
       $idsoalGen = $getGenerateSoal[0]['id'];
     	$updateData = $this->quizHelper->userAnswer($kursus, $materi, $soal, $pilihan, $idsoalGen, $idGrup_kursus);

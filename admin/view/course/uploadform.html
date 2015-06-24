@@ -16,7 +16,7 @@ $(document).ready(function() {
 	 var ceckLink = $( "#link" ).val();
 	 if(ceckLink != ""){
 		document.getElementById("file_image").disabled=true;
-	 }else{
+	}else{
 		document.getElementById("file_image").disabled=false;
 	 }
 })	
@@ -28,14 +28,17 @@ function checkURL() {
 		if (urlregex.test(value)) {
 			//alert('valid')
 			document.getElementById("file_image").disabled=true;
+			document.getElementById("save").disabled=false;
 			return (true);
 		}else{
 			alert('url not valid');
 			document.getElementById("file_image").disabled=true;
+			document.getElementById("save").disabled=true;
 		   return (false);
 		}
     }else{
 		document.getElementById("file_image").disabled=false;
+		document.getElementById("save").disabled=false;
 	}
 }
 
@@ -214,7 +217,7 @@ function checkURL() {
 								
 					</div>
 					<div class="panel-footer text-right">
-						<button class="btn btn-info" type="submit">Save</button>
+						<button class="btn btn-info" type="submit" id="save">Save</button>
 					</div>
 				</form>
 				<!--===================================================-->

@@ -297,10 +297,6 @@ class course extends Controller {
 	
 	public function insert_upload(){
 		global $CONFIG;
-		// pr($CONFIG);
-		// pr($_FILES);
-		// pr($_POST);
-		 // exit;
 		if(isset($_POST)){
 		 $x = form_validation($_POST);
 		 try
@@ -318,26 +314,17 @@ class course extends Controller {
 							// echo "masuk files";exit;
 							if($_FILES['file_image']['name'] != ''){
 								if($x['action'] == 'update') deleteFile($x['file_hidden']);
-								// $image = uploadFile('file_image',null,'image');
 								$image = uploadFile('file_image',null,'image');
-								// pr($image);
-								// $x['post_image'] = $image['full_name']."_".$image['real_name'];
 								$x['post_image'] = $image['full_name'];
 							}
 						}else{
-						// echo "sini kan";
-							// if(empty($_FILES['file_image']['name']) || $x['post_image'] != ""){	
 							if(empty($_FILES['file_image']['name']) && $x['file_image'] != ""){	
-								echo "file kosong";
 								$x['post_image'] = $x['file_image'];
 							}else{
 								echo "file isi";
 								$x['post_image'] = $x['file_hidden'];
 							}
 						}
-						
-						// pr($x);
-						// exit;
 						$data = $this->mcourse->upload_insert($x);
 					}
 				   	

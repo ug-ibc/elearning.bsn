@@ -1,6 +1,9 @@
 <?php
 class marticle extends Database {
 	
+	var $prefix = "lelang";
+
+
 	//insert glosarium 
 	function insert_data($judul,$keterangan,$n_status,$tipe)
 	{
@@ -71,12 +74,15 @@ class marticle extends Database {
 	
 	}
 	
+	function select_data_link(){
+		$query = "SELECT idCatatan,judul,keterangan,n_status,create_time FROM catatan WHERE tipe = '3' order by idCatatan desc";
+		// pr($query);
+		$result = $this->fetch($query,1);
+		
+		return $result;
 	
+	}
 	
-	
-	var $prefix = "lelang";
-	
-
 	function testModel()
 	{
 

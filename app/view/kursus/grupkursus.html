@@ -24,7 +24,7 @@
                         <p>{$val.syaratkelulusan}</p>
                     <!-- <img src="img/data/star.JPG" alt=""/> (3 reviews)<br/><br/> -->
                         <i class="fa fa-file-text-o"></i> {$val.total} Kursus
-                        {if isset($val.nilai)}<br/><br/><a href="{$basedomain}home/cetak" class="label label-success" style="font-size:13px;"><i class="fa fa-print"></i> Print Sertifikat</a>
+                        {if isset($val.nilai)}<br/><br/><a href="{$basedomain}home/cetak/?id_usr={$user}&id_grp={$val.idGrup_kursus}" class="label label-success" style="font-size:13px;"><i class="fa fa-print"></i> Print Sertifikat</a>
                         {/if}
                     </div>
                     <div style="border-top:1px solid #E3E3E3;" align="center">

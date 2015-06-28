@@ -140,7 +140,9 @@ table tr:hover td{
 {if $group_course}	
 <!--{pr($group_course)}	
 {pr($list_course)}	
-{pr($nilai)}-->	
+{pr($group_course)}
+{pr($nilai)}-->
+	
 <section class="callaction">
 	<div class="container">
 		<div class="row">
@@ -177,7 +179,7 @@ table tr:hover td{
                    <h5>SKOR</h5>
                 </div>
             </div>
-            <a href="#">
+            <a href="{$basedomain}search/cetak/?id_crtfkt={$nilai.kodeSertifikat}&id_grp={$group_course.idGrup_kursus}&id_usr={$nilai.idUser}">
             <div class="col-md-12 nilai hvr-grow-shadow" style="margin-top:20px;background-color:#39B3D7;color:white;font-size:19px;padding-top:20px;padding-bottom:20px" >
             	<i class="fa fa-file-pdf-o"></i> Download Sertifikat
        		 </div>

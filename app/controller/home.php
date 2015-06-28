@@ -61,6 +61,26 @@ class home extends Controller {
     function cetak()
     {
 		global $basedomain;
+		
+		$id_usr = $_GET['id_usr'];
+		$id_grp = $_GET['id_grp'];
+		
+		$criteria = $this->contentHelper->get_criteria($id_grp);
+		
+		$certificate = $this->contentHelper->get_certificate($id_usr,$id_grp);
+		
+		$ex1 = explode('-',$certificate[create_time]);
+		$ex2 = explode(' ',$ex1[2]);
+		$tanggal = $ex2[0].'/'.$ex1[1].'/'.$ex1[0];
+		
+		if($certificate[nilai] >= $criteria[kategoriBaik]){
+			$kategori = "Baik";
+		}elseif($certificate[nilai] >= $criteria[kategoriCukup] && $certificate[nilai] < $criteria[kategoriBaik]){
+			$kategori = "Cukup";
+		}else{
+			$kategori = "Kurang";
+		}
+		
 		$background_certificate =  $basedomain."assets/img/certificate/bg.jpg";
 		$this->reportHelper =$this->loadModel('reportHelper');
 		$html = "<style>
@@ -77,25 +97,19 @@ class home extends Controller {
 					#spacePage{
 						height:10cm;
 					}
-					.bpmTopnTailC td, .bpmTopnTailC th  {	border-top: 1px solid #FFFFFF; text-align : center}
-					.headerrow td, .headerrow th { background-gradient: linear #b7cebd #f5f8f5 0 1 0 0.2;  }
-					.evenrow td, .evenrow th { background-color: #f5f8f5; } 
-					.oddrow td, .oddrow th { background-color: #e3ece4; } 
-
-							
 					</style>
 					<page >
 						<div id=\"spacePage\">&nbsp;</div>
 						<div style=\"width: ; text-align: center;\">
 							<h5>diberikan kepada</h5>
 
-							<h1 style=\"font-family: Monotype Corsiva; font-style: italic\">Eddy S. Siradj</h1>
+							<h1 style=\"font-family: Monotype Corsiva; font-style: italic\">$certificate[name]</h1>
 
 							<h5>telah mengikuti</h5>
 
-							<h1>Grup Kursus : Standardisasi</h1>
+							<h1>Grup Kursus : $certificate[namagrup]</h1>
 
-							<h5>Tanggal ................ di website http://elearning.bsn.go.id</h5>
+							<h5>Tanggal $tanggal di website http://elearning.bsn.go.id</h5>
 
 							<h5>sebagai</h5>
 
@@ -103,49 +117,12 @@ class home extends Controller {
 
 							<h5>dengan Predikat </h5>
 
-							<h1 style=\"font-family: Monotype Corsiva; font-style: italic\">Baik / Sangat Baik</h1>
+							<h1 style=\"font-family: Monotype Corsiva; font-style: italic\">$kategori</h1>
 
 							Kepala Pusat Pendidikan dan <br/>
 							Pemasyarakatan Standardisasi
 
 							<h5>Metrawinda Tunus</h5>
-						</div>
-						<div id=\"spacePage\">&nbsp;</div>
-						<div style=\"width: ; text-align: center;\">
-						<h4>Daftar Kursus : </h4>
-								<table align=\"center\" class=\"bpmTopnTailC\"><thead>
-									<tr class=\"headerrow\" ><th>No.</th>
-										<td>
-											<p>Judul</p>
-										</td>
-										<td>Durasi</td>
-									</tr>
-								</thead><tbody>
-									<tr class=\"oddrow\"><th>1</th>
-										<td>Pengantar (sejarah, filosofi, jenis dan cakupan standar)</td>
-										<td>45 menit</td>
-									</tr>
-									<tr class=\"evenrow\"><th>2</th>
-										<td>
-										<p>Infrastruktur Mutu</p>
-										</td>
-										<td>
-										<p>45 menit</p>
-										</td>
-									</tr>
-									<tr class=\"oddrow\"><th>3</th>
-										<td>Pengantar (sejarah, filosofi, jenis dan cakupan standar)</td>
-										<td>45 menit</td>
-									</tr>
-									<tr class=\"evenrow\"><th>4</th>
-										<td>
-										<p>Infrastruktur Mutu</p>
-										</td>
-										<td>
-										<p>45 menit</p>
-										</td>
-									</tr>
-								</tbody></table>
 						</div>
 					</page>";
 

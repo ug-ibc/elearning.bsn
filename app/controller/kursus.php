@@ -28,7 +28,8 @@ class kursus extends Controller {
 		$isCourseReady = $this->quizHelper->isCourseReady();
 		// pr($isCourseReady);
 
-
+		// pr($this->user);
+		// echo $this->user[idUser];
 		if ($isCourseReady){
 			$data = $this->models->getGrupKursus($this->user);
 			// pr($data);
@@ -42,6 +43,7 @@ class kursus extends Controller {
 			}
 			// db($courseReady);
 			$this->view->assign('grup',$courseReady);
+			$this->view->assign('user',$this->user[idUser]);
 		}
 		
 		return $this->loadView('kursus/grupkursus');

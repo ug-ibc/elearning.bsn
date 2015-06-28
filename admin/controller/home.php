@@ -145,17 +145,26 @@ class home extends Controller {
 		return $this->loadView('home/quotes');
 
 	}
+
+	public function externalLink(){
+		// echo "masukk ajaa";
+		$select = $this->marticle->select_data_link();
+		// pr($select);
+		$this->view->assign('data',$select);
+		
+		return $this->loadView('home/link');
+
+	}
 	
 	public function ajax_insert_quotes(){
 		
-		// pr($_POST);
-		// echo masuk;
-		// exit;
 		global $basedomain;
 		$judul =$_POST['judul'];
 		$keterangan =$_POST['keterangan'];
 		$n_status = 1;
-		$tipe = 2;
+		$typedata = _p('type');
+		if ($typedata) $tipe = 3;
+		else $tipe = 2;
 		if ($judul != '' && $keterangan != ''){
 			$insert = $this->marticle->insert_data($judul,$keterangan,$n_status,$tipe);
 			// echo json_encode($data);

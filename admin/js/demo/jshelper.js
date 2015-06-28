@@ -228,6 +228,62 @@ function isNumber(evt) {
 	
 	
 	//insert ajax qoutes
+	$('#link').on('click', function(){
+		bootbox.dialog({
+			title: "Create link",
+			message:'<div class="row"> ' + '<div class="col-md-12"> ' +
+					'<form class="form-horizontal"> ' + '<div class="form-group"> ' +
+					'<label class="col-md-4 control-label" for="name">Writer</label> ' +
+					'<div class="col-md-4"> ' +
+					'<input id="judul" name="judul" type="text" placeholder="Enter Writer" class="form-control input-md" required="required"> ' +
+					'</div> ' +
+					'</div> ' + '<div class="form-group"> ' +
+					'<label class="col-md-4 control-label" for="syaratkelulusan">Qoutes</label> ' +
+					'<div class="col-md-6"><textarea id="keterangan" placeholder="Qoutes Here" rows="5" class="form-control"></textarea></div>' +
+					'</div> </div>' + '</form> </div> </div><script></script>',
+			buttons: {
+				success: {
+					label: "Save",
+					className: "btn-info",
+					callback: function() {
+						var judul = $('#judul').val();
+						var keterangan = $("#keterangan").val();
+						//get values
+						// alert(namagrup);
+						// alert(answer);
+						if(judul != '' && keterangan != ''){
+						$.post( basedomain+"home/ajax_insert_quotes", { judul: judul, keterangan: keterangan, type:3 } );
+						
+						$.niftyNoty({
+							type: 'success',
+							icon : 'fa fa-check',
+							message : "Qoutes : " + judul + ".<br> Successfully Created",
+							container : 'floating',
+							timer : 2000
+						});
+						setTimeout(
+						  function() 
+						  {
+							location.reload();
+						  }, 2000);
+						
+					}else{
+					
+						//alert( "isi Data" );
+						bootbox.alert("Data Cannot Empty!", function(){
+							//EMPTY
+						});
+					}
+					}
+				}
+			}
+		});
+
+		$(".demo-modal-radio").niftyCheck();
+	});
+
+
+	//insert ajax qoutes
 	$('#qoutes').on('click', function(){
 		bootbox.dialog({
 			title: "Create Qoutes",
@@ -282,6 +338,7 @@ function isNumber(evt) {
 		$(".demo-modal-radio").niftyCheck();
 	});
 	
+
 	//edit ajax glosarium
 	$('.qoutes-edit').on('click', function(){
 		var idCatatan = $(this).attr("value");

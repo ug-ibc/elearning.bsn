@@ -26,7 +26,6 @@ class search extends Controller {
 	
 	
      function index(){
-		
 		if(isset($_POST['cari'])){
 			$certificate = $_POST['cari'];
 			$group_course = $this->models->get_group_by_certificate($certificate);
@@ -41,6 +40,7 @@ class search extends Controller {
 				$this->view->assign('list_course',$list_course);
 				$this->view->assign('nilai',$nilai);
 				$this->view->assign('keyword',$certificate);
+				$this->view->assign('user',$this->user);
 				return $this->loadView('kursus/page_search');
 			}else{
 				return $this->loadView('kursus/page_search');
@@ -48,6 +48,7 @@ class search extends Controller {
 			
 		}else{
 			// echo "no post";
+			// pr($this->user);
 			return $this->loadView('kursus/page_search');
 		
 		}
@@ -90,12 +91,13 @@ class search extends Controller {
 					  box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);  
 					}
 					#spacePage{
-						height:10cm;
+						height:8cm;
 					}
 					</style>
 					<page >
 						<div id=\"spacePage\">&nbsp;</div>
 						<div style=\"width: ; text-align: center;\">
+							<div>No : $certificate[kodeSertifikat]</div>
 							<h5>diberikan kepada</h5>
 
 							<h1 style=\"font-family: Monotype Corsiva; font-style: italic\">$certificate[name]</h1>

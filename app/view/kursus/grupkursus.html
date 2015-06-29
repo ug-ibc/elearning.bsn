@@ -8,7 +8,7 @@
 		<div class="row">
 			{if !empty($grup)}
 			{foreach $grup as $val}
-			 <div class="col-md-3">
+			<div class="col-md-3">
                 <div style="border:1px solid #E3E3E3;border-radius:10px 10px 0px 0px">
                     <!-- <img src="{$basedomain}assets/img/data/phonic.JPG" alt="" width="100%"/> -->
                     <div style="border-radius:10px 10px 0px 0px;padding:10px 15px;font-size:17px;border-bottom:1px solid #E3E3E3;background-color:#F5F5F5;" align="left">
@@ -25,7 +25,7 @@
                     <!-- <img src="img/data/star.JPG" alt=""/> (3 reviews)<br/><br/> -->
                         <i class="fa fa-file-text-o"></i> {$val.total} Kursus
                         {if $val.status_nilai == 1}<br/><br/><a href="{$basedomain}home/cetak/?id_usr={$user}&id_grp={$val.idGrup_kursus}" class="label label-success" style="font-size:13px;"><i class="fa fa-print"></i> Print Sertifikat</a>
-                        {/if}
+						{/if}
                     </div>
                     <div style="border-top:1px solid #E3E3E3;" align="center">
                         {if $val.status_nilai !=1}

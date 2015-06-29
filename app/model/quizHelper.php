@@ -696,5 +696,23 @@ class quizHelper extends Database {
         return false;
     }
 
+    function isQuizRunning($idGroupKursus=false)
+    {
+
+        
+        $userid = $this->user['idUser'];
+        if (!$userid) return false;
+        // pr($this->user);
+        $sql = array(
+                'table'=>"tbl_generate_soal",
+                'field'=>"*",
+                'condition' => " n_status = 1 AND idUser = {$userid} AND idGrupKursus = {$idGroupKursus} AND finish = 0 ORDER BY id DESC LIMIT 1",
+                );
+
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res) return $res;
+        return false;
+    }
+
 }
 ?>

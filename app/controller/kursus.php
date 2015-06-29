@@ -48,8 +48,12 @@ class kursus extends Controller {
 
     function kursusDetail()
     {
+    	global $basedomain;
     	$id = $_GET['id'];
 
+    	$isQuizRunning = $this->quizHelper->isQuizRunning($id);
+    	// pr($isQuizRunning);
+    	if ($isQuizRunning){ redirect($basedomain.'quiz/startQuiz/?id='.$id); exit;}
     	$data = $this->models->getAllCourse($id);
     	// pr($data);
 		$this->view->assign('allcourse',$data);

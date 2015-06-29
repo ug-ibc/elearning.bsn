@@ -11,12 +11,18 @@ class mkursus extends Database{
 		}
 		
 		foreach ($result as $key => $value) {
-			$query = "SELECT * FROM nilai WHERE idGroupKursus = '{$value['idGrup_kursus']}' AND idUser = '{$idUser['idUser']}' ";
+
+			$query = "SELECT * FROM nilai WHERE idGroupKursus = '{$value['idGrup_kursus']}' AND idUser = '{$idUser['idUser']}' ORDER BY idNilai DESC LIMIT 1";
+			// pr($query);
 			$res = $this->fetch($query);
 			// exit;
 			if($res){
 				$result[$key]['nilai'] = intval($res['nilai']);
 				$result[$key]['kodeSertifikat'] = $res['kodeSertifikat'];
+				$result[$key]['status_nilai'] = intval($res['n_status']);
+			}else{
+				$result[$key]['nilai'] = 0;
+				$result[$key]['status_nilai'] = 0;
 			}
 		}
 		return $result;

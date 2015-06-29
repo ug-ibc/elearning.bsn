@@ -98,19 +98,19 @@ class quiz extends Controller {
 
       $groupKursus = _g('id');
     	$generateSoal = $this->quizHelper->generateSoal($groupKursus);
-      
+      // pr($generateSoal);
       $alreadySubmit = false;
 
     	if ($generateSoal){
-			$startQuiz = true;
-			$_SESSION['idcount'] = $generateSoal[0]['id'];
-			$_SESSION['end_date'] = $generateSoal[0]['end_date'];
-		}else{
+  			$startQuiz = true;
+  			$_SESSION['idcount'] = $generateSoal[0]['id'];
+  			$_SESSION['end_date'] = $generateSoal[0]['end_date'];
+  		}else{
 
-      $alreadySubmit = true;
-			unset($_SESSION['idcount']);
-			unset($_SESSION['end_date']);
-		}
+        $alreadySubmit = true;
+  			unset($_SESSION['idcount']);
+  			unset($_SESSION['end_date']);
+  		}
 			
 		$soalList = array();
     $getKursus = array();

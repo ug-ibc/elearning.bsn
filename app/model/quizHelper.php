@@ -337,6 +337,7 @@ class quizHelper extends Database {
     function isUserStartQuiz()
     {
         $idUser = $this->user['idUser'];
+        if (!$idUser) return false;
         $sql = array(
                 'table'=>"tbl_generate_soal",
                 'field'=>"id",
@@ -389,7 +390,7 @@ class quizHelper extends Database {
     {
 
         $idUser = $this->user['idUser'];
-
+        if (!$idUser) return false;
         $getGenerateSoal = $this->getGenerateSoal();
         // pr($getGenerateSoal);
         $sql = array(
@@ -666,6 +667,7 @@ class quizHelper extends Database {
     {
 
         $userid = $this->user['idUser'];
+        if (!$userid) return false;
         // pr($this->user);
         $sql = array(
                 'table'=>"nilai",
@@ -684,7 +686,7 @@ class quizHelper extends Database {
         $getNilai = $this->getNilai();
 
         $userid = $this->user['idUser'];
-
+        if (!$userid) return false;
         $sql = array(
                 'table'=>"nilai",
                 'field'=>"n_status = 1",

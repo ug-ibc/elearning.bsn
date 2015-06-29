@@ -198,7 +198,8 @@ class quiz extends Controller {
     	global $basedomain;
     	
     	$id = _g('id');
-    	$resetNilai = $this->models->resetNilai($id);
+    	$grupid = _g('grupid');
+    	$resetNilai = $this->models->resetNilai($id, $grupid);
     	if ($resetNilai){
     		echo "<script>alert('Berhasil')</script>";
     	}else{

@@ -88,7 +88,7 @@ $(window).on('load', function() {
 						<td>{$val.nilai}</td>
 						<td>{$val.namagrup}</td>
 						
-						<td><a id ="demo-dt-delete-btn" class="btn btn-success btn-labeled fa fa-pencil-square-o" href="{$basedomain}quiz/resetNilai/?id={$val.idNilai}">Reset</a>
+						<td><a id ="demo-dt-delete-btn" class="btn btn-success btn-labeled fa fa-pencil-square-o" href="{$basedomain}quiz/resetNilai/?id={$val.idNilai}&grupid={$val.idGroupKursus}">Reset</a>
 						{*}<a id ="demo-dt-delete-btn" class="btn btn-danger btn-labeled fa fa-times" href="{$basedomain}quiz/deletequiz/?idSoal={$val.idSoal}">Delete</a>{/*}
 						</td>
 

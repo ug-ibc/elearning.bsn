@@ -699,7 +699,9 @@ class quizHelper extends Database {
     function isQuizRunning($idGroupKursus=false)
     {
 
+        
         $userid = $this->user['idUser'];
+        if (!$userid) return false;
         // pr($this->user);
         $sql = array(
                 'table'=>"tbl_generate_soal",

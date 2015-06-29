@@ -19,7 +19,8 @@ $ROUTES = array(
                 'kepakaran',
                 'paket',
                 'login',
-                'user'
+                'user',
+                'tutorial'
         );
 ?>
 

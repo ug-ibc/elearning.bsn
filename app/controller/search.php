@@ -26,7 +26,6 @@ class search extends Controller {
 	
 	
      function index(){
-		
 		if(isset($_POST['cari'])){
 			$certificate = $_POST['cari'];
 			$group_course = $this->models->get_group_by_certificate($certificate);
@@ -41,6 +40,7 @@ class search extends Controller {
 				$this->view->assign('list_course',$list_course);
 				$this->view->assign('nilai',$nilai);
 				$this->view->assign('keyword',$certificate);
+				$this->view->assign('user',$this->user);
 				return $this->loadView('kursus/page_search');
 			}else{
 				return $this->loadView('kursus/page_search');
@@ -48,6 +48,7 @@ class search extends Controller {
 			
 		}else{
 			// echo "no post";
+			// pr($this->user);
 			return $this->loadView('kursus/page_search');
 		
 		}

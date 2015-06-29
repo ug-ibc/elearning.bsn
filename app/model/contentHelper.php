@@ -76,7 +76,8 @@ class contentHelper extends Database {
 		$query = "SELECT u.name,g.namagrup,n.nilai,n.create_time,n.idUser,n.kodeSertifikat FROM grup_kursus as g
 				  join nilai as n on n.idGroupKursus = g.idGrup_kursus
 				  join user as u on u.idUser = n.idUser
-				  where n.idUser = {$id_usr} and n.idGroupKursus = {$id_grp}";
+				  where n.idUser = {$id_usr} and n.idGroupKursus = {$id_grp}
+				  order by n.nilai desc limit 1";
 		$result = $this->fetch($query);
 
         return $result;
@@ -97,7 +98,8 @@ class contentHelper extends Database {
 		$query = "SELECT u.name,g.namagrup,n.nilai,n.create_time,n.idUser,n.kodeSertifikat FROM grup_kursus as g
 				  join nilai as n on n.idGroupKursus = g.idGrup_kursus
 				  join user as u on u.idUser = n.idUser
-				  where n.idUser = {$id_usr} and n.idGroupKursus = {$id_grp} and kodeSertifikat = '{$id_crtfkt}'";
+				  where n.idUser = {$id_usr} and n.idGroupKursus = {$id_grp} and kodeSertifikat = '{$id_crtfkt}'
+				  order by n.nilai desc limit 1";
 		$result = $this->fetch($query);
 
         return $result;

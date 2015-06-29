@@ -68,7 +68,6 @@ class home extends Controller {
 		$criteria = $this->contentHelper->get_criteria($id_grp);
 		
 		$certificate = $this->contentHelper->get_certificate($id_usr,$id_grp);
-		//pr($certificate);
 		$ex1 = explode('-',$certificate[create_time]);
 		$ex2 = explode(' ',$ex1[2]);
 		$tanggal = $ex2[0].'/'.$ex1[1].'/'.$ex1[0];

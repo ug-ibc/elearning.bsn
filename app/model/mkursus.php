@@ -82,7 +82,7 @@ class mkursus extends Database{
 					FROM nilai as n
 					join tbl_quiz_setting as t on t.idGroupKursus = n.idGroupKursus
 					join user as u on u.idUser = n.idUser
-					where n.idGroupKursus  ={$id_group}";
+					where n.idGroupKursus  ={$id_group} order by n.nilai desc limit 1";
 		$result = $this->fetch($query);
 		return $result;
 	}

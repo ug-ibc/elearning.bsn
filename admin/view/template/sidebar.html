@@ -40,7 +40,7 @@
 						<li class="list-header">Home</li>
 
 						<li class="{if $page.page eq 'home' && $page.function eq 'index'}active-link{/if}">
-							<a href="{$basedomain/home}">
+							<a href="{$basedomain}home">
 								<i class="fa fa-dashboard"></i>
 								<span class="menu-title">
 									Dashboard
@@ -48,10 +48,6 @@
 							</a>
 						</li>
 
-						<!--Category name-->
-						<li class="list-header">About BSN</li>
-			
-						<!--Menu list item-->
 						<li class="{if $page.page eq 'course' && $page.function eq 'viewvisitor'}active-link{/if}">
 							<a href="{$basedomain}course/viewvisitor">
 								<i class="fa fa-eye"></i>
@@ -59,6 +55,10 @@
 							</a>
 			
 						</li>
+						<!--Category name-->
+						<li class="list-header">About BSN</li>
+			
+						<!--Menu list item-->
 						<li>
 							<a href="#">
 								<i class="fa fa-newspaper-o"></i>
@@ -92,12 +92,12 @@
 								<span class="menu-title">Quotes of The Day</span>
 							</a>
 						</li>
-						<li class="{if $page.page eq 'home' && $page.function eq 'externalLink'}active-link{/if}">
+						{*}<li class="{if $page.page eq 'home' && $page.function eq 'externalLink'}active-link{/if}">
 							<a href="{$basedomain}home/externalLink">
 								<i class="fa fa-quote-left"></i>
 								<span class="menu-title">External Link</span>
 							</a>
-						</li>
+						</li>{/*}
 						<li class="list-divider"></li>
 			
 						<!--Category name-->

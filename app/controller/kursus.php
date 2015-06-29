@@ -32,8 +32,6 @@ class kursus extends Controller {
 		// echo $this->user[idUser];
 		if ($isCourseReady){
 			$data = $this->models->getGrupKursus($this->user);
-			// pr($data);
-			// db($data);
 			if ($data){
 				foreach ($data as $key => $value) {
 					if ($isCourseReady[$value['idGrup_kursus']]['courseready'] == 1){
@@ -41,11 +39,9 @@ class kursus extends Controller {
 					}
 				}
 			}
-			// db($courseReady);
 			$this->view->assign('grup',$courseReady);
 			$this->view->assign('user',$this->user[idUser]);
 		}
-		
 		return $this->loadView('kursus/grupkursus');
 
     }

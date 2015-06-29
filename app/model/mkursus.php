@@ -4,8 +4,6 @@ class mkursus extends Database{
 	function getGrupKursus($idUser=false){
 		$query = "SELECT * FROM grup_kursus WHERE n_status = '1'";
 		$result = $this->fetch($query,1);
-// pr($result);
-		// pr($idUser);
 		foreach ($result as $key => $value) {
 			$query = "SELECT COUNT(*) as total FROM kursus WHERE idGrup_kursus = '{$value['idGrup_kursus']}'";
 			$res = $this->fetch($query);
@@ -14,15 +12,13 @@ class mkursus extends Database{
 		
 		foreach ($result as $key => $value) {
 			$query = "SELECT * FROM nilai WHERE idGroupKursus = '{$value['idGrup_kursus']}' AND idUser = '{$idUser['idUser']}' ";
-			// pr($query);
 			$res = $this->fetch($query);
+			// exit;
 			if($res){
-			// pr($res['nilai']);
-
-			$result[$key]['nilai'] = intval($res['nilai']);
+				$result[$key]['nilai'] = intval($res['nilai']);
+				$result[$key]['kodeSertifikat'] = $res['kodeSertifikat'];
 			}
 		}
-// pr($result);
 		return $result;
 	}
 

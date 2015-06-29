@@ -68,7 +68,7 @@ class home extends Controller {
 		$criteria = $this->contentHelper->get_criteria($id_grp);
 		
 		$certificate = $this->contentHelper->get_certificate($id_usr,$id_grp);
-		
+		//pr($certificate);
 		$ex1 = explode('-',$certificate[create_time]);
 		$ex2 = explode(' ',$ex1[2]);
 		$tanggal = $ex2[0].'/'.$ex1[1].'/'.$ex1[0];
@@ -95,12 +95,14 @@ class home extends Controller {
 					  box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);  
 					}
 					#spacePage{
-						height:10cm;
+						height:8cm;
 					}
 					</style>
 					<page >
+						
 						<div id=\"spacePage\">&nbsp;</div>
 						<div style=\"width: ; text-align: center;\">
+							<div>No : $certificate[kodeSertifikat]</div>
 							<h5>diberikan kepada</h5>
 
 							<h1 style=\"font-family: Monotype Corsiva; font-style: italic\">$certificate[name]</h1>

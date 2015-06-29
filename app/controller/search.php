@@ -90,12 +90,13 @@ class search extends Controller {
 					  box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);  
 					}
 					#spacePage{
-						height:10cm;
+						height:8cm;
 					}
 					</style>
 					<page >
 						<div id=\"spacePage\">&nbsp;</div>
 						<div style=\"width: ; text-align: center;\">
+							<div>No : $certificate[kodeSertifikat]</div>
 							<h5>diberikan kepada</h5>
 
 							<h1 style=\"font-family: Monotype Corsiva; font-style: italic\">$certificate[name]</h1>

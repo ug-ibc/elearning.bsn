@@ -11,6 +11,9 @@
 {if $page.page=='berita'}
     {$classBerita='active'}
 {/if}
+{if $page.page=='tutorial'}
+    {$classTutorial='active'}
+{/if}
 {if $page.page=='profil'}
     {$classProfil='active'}
 {/if}
@@ -101,6 +104,7 @@
                       {*}<li class="menu {$classQuiz}"><a href="{$basedomain}">E-LEARNING</a></li>{/*}
                         <li class="menu {$classKursus}"><a href="{$basedomain}kursus">KURSUS</a></li>
                         <li class="menu {$classBerita}"><a href="{$basedomain}berita">BERITA</a></li>
+                        <li class="menu {$classTutorial}"><a href="{$basedomain}tutorial">TUTORIAL</a></li>
                         {if $user}
                         <li class="menu"><a href="{$basedomain}home/logout">LOGOUT <i class="fa fa-log-out"></i></a></li>
                         {else}

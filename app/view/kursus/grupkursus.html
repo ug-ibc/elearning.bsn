@@ -8,7 +8,7 @@
 		<div class="row">
 			{if !empty($grup)}
 			{foreach $grup as $val}
-			 <div class="col-md-3">
+			<div class="col-md-3">
                 <div style="border:1px solid #E3E3E3;border-radius:10px 10px 0px 0px">
                     <!-- <img src="{$basedomain}assets/img/data/phonic.JPG" alt="" width="100%"/> -->
                     <div style="border-radius:10px 10px 0px 0px;padding:10px 15px;font-size:17px;border-bottom:1px solid #E3E3E3;background-color:#F5F5F5;" align="left">
@@ -17,18 +17,18 @@
                         </div>
                     </div>
                     <div  style="padding-left:15px;padding-top:10px;padding-bottom:20px">
-                        {if isset($val.nilai)}<div align="center" style="width:70px;background-color:#39B3D7;padding-top:15px;padding-bottom:15px;border-radius:50px;margin-top:-45px;margin-right:5px;float:right;color:#FFFFFF;box-shadow: 2px 2px 5px #7E7E7E;">
+                        {if $val.status_nilai ==1}<div align="center" style="width:70px;background-color:#39B3D7;padding-top:15px;padding-bottom:15px;border-radius:50px;margin-top:-45px;margin-right:5px;float:right;color:#FFFFFF;box-shadow: 2px 2px 5px #7E7E7E;">
                             SCORE<br/>
                             <span style="font-size:29px;">{$val.nilai}</span>
                         </div>{/if}
                         <p>{$val.syaratkelulusan}</p>
                     <!-- <img src="img/data/star.JPG" alt=""/> (3 reviews)<br/><br/> -->
                         <i class="fa fa-file-text-o"></i> {$val.total} Kursus
-                        {if isset($val.nilai)}<br/><br/><a href="{$basedomain}home/cetak/?id_usr={$user}&id_grp={$val.idGrup_kursus}" class="label label-success" style="font-size:13px;"><i class="fa fa-print"></i> Print Sertifikat</a>
-                        {/if}
+                        {if $val.status_nilai == 1}<br/><br/><a href="{$basedomain}home/cetak/?id_usr={$user}&id_grp={$val.idGrup_kursus}" class="label label-success" style="font-size:13px;"><i class="fa fa-print"></i> Print Sertifikat</a>
+						{/if}
                     </div>
                     <div style="border-top:1px solid #E3E3E3;" align="center">
-                        {if !isset($val.nilai)}
+                        {if $val.status_nilai !=1}
                         <a href="{$basedomain}kursus/kursusDetail/?id={$val.idGrup_kursus}" class="hvr-shutter-in-horizontal" style="width:100%;height:100%;padding:10px 0px;text-decoration:none"></i> <strong>APPLY NOW</strong>
                         </a>
                         {else}

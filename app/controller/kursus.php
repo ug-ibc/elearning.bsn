@@ -32,8 +32,6 @@ class kursus extends Controller {
 		// echo $this->user[idUser];
 		if ($isCourseReady){
 			$data = $this->models->getGrupKursus($this->user);
-			// pr($data);
-			// db($data);
 			if ($data){
 				foreach ($data as $key => $value) {
 					if ($isCourseReady[$value['idGrup_kursus']]['courseready'] == 1){
@@ -41,19 +39,21 @@ class kursus extends Controller {
 					}
 				}
 			}
-			// db($courseReady);
 			$this->view->assign('grup',$courseReady);
 			$this->view->assign('user',$this->user[idUser]);
 		}
-		
 		return $this->loadView('kursus/grupkursus');
 
     }
 
     function kursusDetail()
     {
+    	global $basedomain;
     	$id = $_GET['id'];
 
+    	$isQuizRunning = $this->quizHelper->isQuizRunning($id);
+    	// pr($isQuizRunning);
+    	if ($isQuizRunning){ redirect($basedomain.'quiz/startQuiz/?id='.$id); exit;}
     	$data = $this->models->getAllCourse($id);
     	// pr($data);
 		$this->view->assign('allcourse',$data);

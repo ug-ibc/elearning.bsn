@@ -4,8 +4,6 @@ class mkursus extends Database{
 	function getGrupKursus($idUser=false){
 		$query = "SELECT * FROM grup_kursus WHERE n_status = '1'";
 		$result = $this->fetch($query,1);
-// pr($result);
-		// pr($idUser);
 		foreach ($result as $key => $value) {
 			$query = "SELECT COUNT(*) as total FROM kursus WHERE idGrup_kursus = '{$value['idGrup_kursus']}'";
 			$res = $this->fetch($query);
@@ -13,16 +11,20 @@ class mkursus extends Database{
 		}
 		
 		foreach ($result as $key => $value) {
-			$query = "SELECT * FROM nilai WHERE idGroupKursus = '{$value['idGrup_kursus']}' AND idUser = '{$idUser['idUser']}' ";
+
+			$query = "SELECT * FROM nilai WHERE idGroupKursus = '{$value['idGrup_kursus']}' AND idUser = '{$idUser['idUser']}' ORDER BY idNilai DESC LIMIT 1";
 			// pr($query);
 			$res = $this->fetch($query);
+			// exit;
 			if($res){
-			// pr($res['nilai']);
-
-			$result[$key]['nilai'] = intval($res['nilai']);
+				$result[$key]['nilai'] = intval($res['nilai']);
+				$result[$key]['kodeSertifikat'] = $res['kodeSertifikat'];
+				$result[$key]['status_nilai'] = intval($res['n_status']);
+			}else{
+				$result[$key]['nilai'] = 0;
+				$result[$key]['status_nilai'] = 0;
 			}
 		}
-// pr($result);
 		return $result;
 	}
 
@@ -80,7 +82,7 @@ class mkursus extends Database{
 					FROM nilai as n
 					join tbl_quiz_setting as t on t.idGroupKursus = n.idGroupKursus
 					join user as u on u.idUser = n.idUser
-					where n.idGroupKursus  ={$id_group}";
+					where n.idGroupKursus  ={$id_group} order by n.nilai desc limit 1";
 		$result = $this->fetch($query);
 		return $result;
 	}

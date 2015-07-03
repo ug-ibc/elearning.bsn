@@ -123,10 +123,11 @@
                 <div class="row">
 
                     <div class="col-md-3">
-                        <div class="col-md-12" align="center"  style="border-radius:50%;background-color:#9BDEF1;min-height:50px;padding:10px">
-                            {date ("d", strtotime($val.posted))}<br/>
-                            {date ("M", strtotime($val.posted))}
-                        </div>
+                        <!-- <div class="col-md-12" align="center"  style="border-radius:50%;background-color:#9BDEF1;min-height:50px;padding:10px"> -->
+                           {*} {date ("d", strtotime($val.posted))}<br/>
+                            {date ("M", strtotime($val.posted))}{/*}
+                            <img src="{$basedomain}public_assets/{$val.gambar}" width="100%"/>
+                        <!-- </div> -->
                     </div>
                     <div class="col-md-8" >
                         <p align="justify"> {$val.brief} </p>

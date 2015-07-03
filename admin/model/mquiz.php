@@ -173,7 +173,7 @@ class mquiz extends Database {
         return false;
 	}
 
-	function resetNilai($id=false)
+	function resetNilai($id=false, $idGrupKursus=false)
 	{
 
 		$getNilai = $this->getNilai($id);
@@ -189,7 +189,7 @@ class mquiz extends Database {
 	        $sql = array(
 	                'table'=>"tbl_generate_soal",
 	                'field'=>"n_status = id+1",
-	                'condition' => " idUser = {$getNilai[0]['idUser']} AND idGrupKursus = {$getNilai[0]['idGroupKursus']} LIMIT 1",
+	                'condition' => " idUser = {$getNilai[0]['idUser']} AND idGrupKursus = {$idGrupKursus} LIMIT 1",
 	                );
 
 	        $res = $this->lazyQuery($sql,$debug,2);
@@ -197,7 +197,7 @@ class mquiz extends Database {
 	        $sql = array(
 	                'table'=>"soal",
 	                'field'=>"n_status = idSoal_user+1",
-	                'condition' => " idUser = {$getNilai[0]['idUser']} AND idGrup_kursus = {$getNilai[0]['idGroupKursus']}",
+	                'condition' => " idUser = {$getNilai[0]['idUser']} AND idGrup_kursus = {$idGrupKursus}",
 	                );
 
 	        $res = $this->lazyQuery($sql,$debug,2);

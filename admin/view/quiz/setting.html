@@ -1,3 +1,22 @@
+<script>
+	function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+	}
+	
+	jQuery(function($){
+	   $(".kategoriBaik").mask("99");
+	   $(".kategoriCukup").mask("99");
+	   $(".kategoriKurang").mask("99");
+	});
+	
+</script>
+
+
 <!--Page Title-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <div id="page-title">
@@ -56,7 +75,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Maksimal Soal / Quiz</label>
 							<div class="col-sm-4">
-								<input type="text" name="maxSoal" value="{$data.maxSoal}" class="form-control maxSoal" placeholder="Jumlah soal">
+								<input type="text" name="maxSoal" value="{$data.maxSoal}" class="form-control maxSoal" placeholder="Jumlah soal" onkeypress="return isNumber(event)">
 							</div>
 						</div>
 
@@ -84,7 +103,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Waktu</label>
 							<div class="col-sm-4">
-								<input type="text" name="waktu" value="{$data.waktu}" class="form-control waktu" placeholder="Waktu dalam menit">
+								<input type="text" name="waktu" value="{$data.waktu}" class="form-control waktu" placeholder="Waktu dalam menit" onkeypress="return isNumber(event)">
 							</div>
 							
 						</div>

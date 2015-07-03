@@ -1,6 +1,18 @@
 <?php
 class mcourse extends Database {
 	
+		
+	function getTest($monthid,$yearid)
+	{
+		// $query = "SELECT COUNT(1) AS total FROM tbl_activity_log WHERE  datetimes > '{$dateid}' ";
+		$query = "SELECT COUNT(1) AS total FROM tbl_activity_log WHERE   YEAR(datetimes) = {$yearid} AND MONTH(datetimes) = {$monthid} ";
+		// echo $query; 
+		$result = $this->fetch($query);
+		
+		return $result;
+	}
+	
+	
 	function asd()
 	{
 

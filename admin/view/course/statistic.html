@@ -1,6 +1,6 @@
 <script>
 $(window).on('load', function() {
-
+	//document.getElementById('coba').innerHTML = 'your tip has been submitted!';
 	// Datatables
 	// Row selection and deletion (multiple rows)
 	// -----------------------------------------------------------------
@@ -27,7 +27,19 @@ $(window).on('load', function() {
 		rowDeletion.row('.selected').remove().draw( false );
 	} );*/
 })	
-	
+$('.selectpicker').selectpicker();
+
+function isEmpty() {
+ //   alert("The form was submitted");	
+ var month = document.getElementById("monthid").value;
+ var year = document.getElementById("yearid").value;
+ 
+	 if(month == '' && year == ''){
+		 alert('Choose month and year first!');
+		return false;
+	 }
+}
+
 </script>
 
 <!--Page Title-->
@@ -68,9 +80,40 @@ $(window).on('load', function() {
 		<div class="panel-heading">
 			<h3 class="panel-title">Report Statistic Visitor</h3>
 		</div>
-		<div id="delete-toolbar" class="table-toolbar-left">
-			<a href="{$basedomain}course/cetak"><button id="" class="btn btn-info btn-labeled fa fa-print">Download</button></a>
-		</div>
+		
+			<div id="delete-toolbar" class="table-toolbar-left">
+			<form class="form-horizontal" method="POST" action="{$basedomain}course/cetak" onsubmit="return isEmpty()">	
+				<!--<a href="{$basedomain}course/cetak"><button id="" class="btn btn-info btn-labeled fa fa-print">Download</button></a>
+				<!--<div class="input-group date">
+				<input type="text" name="start_date" id="dateid" class="form-control" value="">
+				<span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span>
+				</div>-->
+				 <select id="monthid" class="selectpicker" data-live-search="true" name="month" >
+					<option value=''>Choose one of the month</option>
+					<option value='1'>January</option>
+					<option value='2'>February</option>
+					<option value='3'>March</option>
+					<option value='4'>April</option>
+					<option value='5'>May</option>
+					<option value='6'>June</option>
+					<option value='7'>July</option>
+					<option value='8'>August</option>
+					<option value='9'>September</option>
+					<option value='10'>October</option>
+					<option value='11'>November</option>
+					<option value='12'>December</option>
+				</select>
+				<select id="yearid" class="selectpicker" data-live-search="true" name="year" >
+					<option value=''>Choose one of the year</option>
+					<option value='{date(Y) - 1}'>{date(Y) - 1}</option>
+					<option value='{date(Y)}'>{date(Y)}</option>
+				</select>
+				<button id="" type="submit" name="type" value="1" class="btn btn-danger btn-labeled fa fa-print">Download pdf</button>
+				<button id="" type="submit" name="type" value="2" class="btn btn-success btn-labeled fa fa-print">Download xls</button>
+			</form>	
+			</div>
+			
+		
 		<div class="panel-body">
 			<table id="newslist" class="table table-striped table-bordered" cellspacing="0" width="100%">
 				<thead>
@@ -78,6 +121,8 @@ $(window).on('load', function() {
 						<th>registered users</th>
 						<th>users who already received a certificate</th>
 						<th>users who just browse the web without login</th>
+						<!--<th><input type="text" name="start_date" id="coba" class="form-control" value="" readonly></th>-->
+						<th>month</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -85,6 +130,7 @@ $(window).on('load', function() {
 						<td align="center">{$register_user['0']['total']}</td>
 						<td align="center">{$sertificate_user['0']['total']}</td>
 						<td align="center">{$visitor_user['0']['total']}</td>
+						<td align="center"><label id="message">{$statistic}</label></td>
 					</tr>
 				</tbody>
 			</table>
@@ -98,3 +144,17 @@ $(window).on('load', function() {
 <!--===================================================-->
 <!--End page content-->
 
+{literal}
+<script type="text/javascript">
+$('#monthid,#yearid').on('change', function(){
+		var monthid = $('#monthid').val();
+		var yearid = $('#yearid').val();
+		if(monthid != '' && yearid != ''){
+				$.post(basedomain+"course/test", {monthid:monthid, yearid:yearid}, function(data){
+								$('#message').text(data.total);
+								},"JSON");
+			}		
+		});
+		
+</script>	
+{/literal}

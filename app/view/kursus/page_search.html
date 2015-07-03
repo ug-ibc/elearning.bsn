@@ -130,9 +130,11 @@ table tr:hover td{
 
 			</form>
 		</div>
-			<div class="col-md-1" align="center">
-			
-			</div>
+			 {if $message}
+				<div class="col-md-5" align="center">
+				<h3>{$message}</h3>
+				</div>
+			{/if}
 		
 	</div>
 </section>
@@ -178,16 +180,17 @@ table tr:hover td{
                    <h5>SKOR</h5>
                 </div>
             </div>
-			{if isset($user)}
+			{if isset($user) && $kategori != 'Kurang'}
             <a href="{$basedomain}search/cetak/?id_crtfkt={$nilai.kodeSertifikat}&id_grp={$group_course.idGrup_kursus}&id_usr={$nilai.idUser}">
             <div class="col-md-12 nilai hvr-grow-shadow" style="margin-top:20px;background-color:#39B3D7;color:white;font-size:19px;padding-top:20px;padding-bottom:20px" >
             	<i class="fa fa-file-pdf-o"></i> Download Sertifikat
        		 </div>
        		 </a>
 			 {/if}
+			 {/if}
 			</div>
-
 		</div>
+		
+		
 	</div>
 </section>
-{/if}

@@ -34,15 +34,29 @@ class search extends Controller {
 			if($id_group != ''){
 				$list_course = $this->models->get_list_course_by_certificate($id_group);
 				// pr($list_course);
+				$criteria = $this->contentHelper->get_criteria($id_group);
 				$nilai = $this->models->get_value_by_certificate($id_group);
-				// pr($nilai);
+				
+				if($nilai[nilai] >= $criteria[kategoriBaik]){
+					$kategori = "Baik";
+				}elseif($nilai[nilai] >= $criteria[kategoriCukup] && $nilai[nilai] < $criteria[kategoriBaik]){
+					$kategori = "Cukup";
+				}else{
+					$kategori = "Kurang";
+				}
+				
 				$this->view->assign('group_course',$group_course);
 				$this->view->assign('list_course',$list_course);
 				$this->view->assign('nilai',$nilai);
 				$this->view->assign('keyword',$certificate);
 				$this->view->assign('user',$this->user);
+				$this->view->assign('kategori',$kategori);
+				
 				return $this->loadView('kursus/page_search');
 			}else{
+				$this->view->assign('keyword',$certificate);
+				$message = "Data Tidak Ditemukan";
+				$this->view->assign('message',$message);
 				return $this->loadView('kursus/page_search');
 			}
 			

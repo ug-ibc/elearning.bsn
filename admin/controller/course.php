@@ -537,12 +537,25 @@ class course extends Controller {
 		exit;
 
 	}
+	
+	public function test(){
+
+		$monthid = $_POST['monthid'];
+		$yearid = $_POST['yearid'];
+		$data = $this->mcourse->getTest($monthid,$yearid);
+		// pr($data);
+		print json_encode($data);
+
+		exit;
+
+	}
 
 	public function viewvisitor(){
 		
 		//register user
 		$register_user= $this->mcourse->select_data_register_user();
 		$this->view->assign('register_user',$register_user);
+		
 		//register  get sertificate
 		$sertificate_user= $this->mcourse->select_data_sertificate_user();
 		$this->view->assign('sertificate_user',$sertificate_user);
@@ -551,49 +564,94 @@ class course extends Controller {
 		$visitor_user= $this->mcourse->select_data_visitor_user();
 		$this->view->assign('visitor_user',$visitor_user);
 		
+		$month = date('m');
+		$year = date('Y');
+		$statistic_month = $this->mcourse->getTest($month,$year);
+		$statistic = $statistic_month['total'];
+		$this->view->assign('statistic',$statistic);
+		
 		return $this->loadView('course/statistic');
 	}
 	
 	function cetak()
     {
 		global $basedomain;
-		//register user
-		$register_user= $this->mcourse->select_data_register_user();
-		$user_register = $register_user[0]['total'];
-		
-		//register  get sertificate
-		$sertificate_user= $this->mcourse->select_data_sertificate_user();
-		$user_sertificate = $sertificate_user[0]['total'];
-		
-		//visitor
-		$visitor_user= $this->mcourse->select_data_visitor_user();
-		$user_visitor = $visitor_user[0]['total'];
-		
+		// pr($_POST);
 		// exit;
-		$this->reportHelper =$this->loadModel('reportHelper');
-		$html = "<div style=\"width: ; text-align: center;\">
-					<h4>List User : </h4>
-					 <table style=\"text-align: center; border-collapse: collapse; margin-left: auto; margin-right: auto; width: 100%;\" border=\"1\" cellpadding=\"0\" cellspacing=\"0\">
-						<thead>
-							<tr class=\"\" >
-								<td>registered users</td>
-								<td>users who already <br>received a certificate</td>
-								<td>users who just browse the web <br>without login</td>
-							</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td align=\"center\">$user_register</td>
-									<td align=\"center\">$user_sertificate</td>
-									<td align=\"center\">$user_visitor</td>	
+			//register user
+			$month = $_POST['month'];
+			$year = $_POST['year'];
+			
+			$statistic_month = $this->mcourse->getTest($month,$year);
+			$statistic = $statistic_month['total'];
+			
+			$register_user= $this->mcourse->select_data_register_user();
+			$user_register = $register_user[0]['total'];
+			
+			//register  get sertificate
+			$sertificate_user= $this->mcourse->select_data_sertificate_user();
+			$user_sertificate = $sertificate_user[0]['total'];
+			
+			//visitor
+			$visitor_user= $this->mcourse->select_data_visitor_user();
+			$user_visitor = $visitor_user[0]['total'];
+			
+		if($_POST['type'] == 1){
+			// exit;
+			$this->reportHelper =$this->loadModel('reportHelper');
+			$html = "<div style=\"width: ; text-align: center;\">
+						<h4>List User : </h4>
+						 <table style=\"text-align: center; border-collapse: collapse; margin-left: auto; margin-right: auto; width: 100%;\" border=\"1\" cellpadding=\"0\" cellspacing=\"0\">
+							<thead>
+								<tr class=\"\" >
+									<td>registered users</td>
+									<td>users who already <br>received a certificate</td>
+									<td>users who just browse the web <br>without login</td>
+									<td>month</td>
 								</tr>
-							</tbody>
-						</table>
-					</div>";
+								</thead>
+								<tbody>
+									<tr>
+										<td align=\"center\">$user_register</td>
+										<td align=\"center\">$user_sertificate</td>
+										<td align=\"center\">$user_visitor</td>	
+										<td align=\"center\">$statistic</td>	
+									</tr>
+								</tbody>
+							</table>
+						</div>";
 
-		$generate = $this->reportHelper->loadMpdf($html, 'visitor');
-    }
-		
+			$generate = $this->reportHelper->loadMpdf($html, 'visitor');
+		}else{
+			$waktu=date("d-m-y_h:i:s");
+			$filename ="visitor_$waktu.xls";
+			header('Content-type: application/ms-excel');
+			header('Content-Disposition: attachment; filename='.$filename);
+			$html = "<div style=\"width: ; text-align: center;\">
+						<h4>List User : </h4>
+						 <table style=\"text-align: center; border-collapse: collapse; margin-left: auto; margin-right: auto; width: 100%;\" border=\"1\" cellpadding=\"0\" cellspacing=\"0\">
+							<thead>
+								<tr class=\"center\" >
+									<td align=\"center\">registered users</td>
+									<td align=\"center\">users who already <br>received a certificate</td>
+									<td align=\"center\">users who just browse the web <br>without login</td>
+									<td align=\"center\">month</td>
+								</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td align=\"center\">$user_register</td>
+										<td align=\"center\">$user_sertificate</td>
+										<td align=\"center\">$user_visitor</td>	
+										<td align=\"center\">$statistic</td>	
+									</tr>
+								</tbody>
+							</table>
+						</div>";
+			echo $html;
+			exit;
+		}
+	}
 }
 
 ?>

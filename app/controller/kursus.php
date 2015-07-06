@@ -20,6 +20,7 @@ class kursus extends Controller {
 	{
         $this->models = $this->loadModel('mkursus');
         $this->quizHelper = $this->loadModel('quizHelper');
+		$this->contentHelper = $this->loadModel('contentHelper');
 	}
 	
 	function index(){

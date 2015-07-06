@@ -9,17 +9,20 @@ class mkursus extends Database{
 			$res = $this->fetch($query);
 			$result[$key]['total'] = $res['total'];
 		}
-		
 		foreach ($result as $key => $value) {
 
-			$query = "SELECT * FROM nilai WHERE idGroupKursus = '{$value['idGrup_kursus']}' AND idUser = '{$idUser['idUser']}' ORDER BY idNilai DESC LIMIT 1";
-			// pr($query);
+			$query = "SELECT n.*,st.kategoriBaik,st.kategoriCukup,st.kategoriKurang FROM nilai as n 
+					join tbl_quiz_setting as st on st.idGroupKursus = n.idGroupKursus
+					WHERE n.idGroupKursus = '{$value['idGrup_kursus']}' AND n.idUser = '{$idUser['idUser']}' ORDER BY n.idNilai DESC LIMIT 1";
 			$res = $this->fetch($query);
-			// exit;
 			if($res){
-				$result[$key]['nilai'] = intval($res['nilai']);
+				$result[$key]['nilai'] 			= intval($res['nilai']);
 				$result[$key]['kodeSertifikat'] = $res['kodeSertifikat'];
-				$result[$key]['status_nilai'] = intval($res['n_status']);
+				$result[$key]['status_nilai'] 	= intval($res['n_status']);
+				$result[$key]['kategoriBaik'] 	= intval($res['kategoriBaik']);
+				$result[$key]['kategoriCukup'] 	= intval($res['kategoriCukup']);
+				$result[$key]['kategoriKurang'] = intval($res['kategoriKurang']);
+				
 			}else{
 				$result[$key]['nilai'] = 0;
 				$result[$key]['status_nilai'] = 0;

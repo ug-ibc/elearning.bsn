@@ -121,28 +121,19 @@ class contentHelper extends Database {
 		return false;
 	}
 
-	function getLaporanKemasan($data, $debug=false)
+	function quizStatistic()
 	{
-		$id = $data['id'];
-		$n_status = $data['n_status'];
-
-		$filter = "";
-		
-		if ($id) $filter = " AND k.id = {$id}";
-
 		$sql = array(
-                'table'=>"{$this->prefix}_pelaporan_kemasan AS k, {$this->prefix}_industri AS i , {$this->prefix}_product AS p, {$this->prefix}_industri_pabrik AS ip",
-                'field'=>"k.*, i.namaIndustri, i.noTelepon, i.noFax, i.namaPimpinan, p.merek, ip.noNPPBKC, ip.namaJalan",
-                'condition' => "k.pabrikID != 0 AND k.n_status IN ({$n_status}) {$filter}",
-                'limit' => '100',
-                'joinmethod' => 'LEFT JOIN',
-                'join' => 'k.industriID = i.id, k.merek = p.id, k.pabrikID = ip.id'
+                'table'=>"nilai AS n, grup_kursus AS gk",
+                'field'=>"COUNT(n.idUser) AS total, gk.namagrup",
+                'joinmethod'=>'LEFT JOIN',
+                'join'=>'n.idGroupKursus = gk.idGrup_kursus',
+                'condition' => "n.n_status = 1 {$filter}"
                 );
 
         $res = $this->lazyQuery($sql,$debug);
         if ($res) return $res;
-		return false;
-
+        return false;
 	}
 
 	

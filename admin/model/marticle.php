@@ -5,11 +5,21 @@ class marticle extends Database {
 
 
 	//insert glosarium 
-	function insert_data($judul,$keterangan,$n_status,$tipe)
+	function insert_data($judul,$keterangan,$n_status,$tipe, $wilayah=false)
 	{
-		$query = "INSERT INTO catatan (judul,keterangan,n_status,tipe)
+
+		if ($wilayah){
+			$date = date('Y-m-d H:i:s');
+
+			$query = "INSERT INTO wilayah (kode_wilayah,nama_wilayah,parent,n_status,createDate)
+				  VALUES ('$judul','".addslashes(html_entity_decode($keterangan))."', 0,'$n_status', '$date')";
+			// echo $query;exit;
+		}else{
+			$query = "INSERT INTO catatan (judul,keterangan,n_status,tipe)
 				  VALUES ('$judul','".addslashes(html_entity_decode($keterangan))."','$n_status','$tipe')";
-		// echo $query;
+			// echo $query;
+		}
+		
 		$result = $this->query($query);
 		// return $result;
 	}
@@ -25,8 +35,15 @@ class marticle extends Database {
 	}
 	
 	//select data glosarium for edit
-	function edit_data($idCatatan){
-		$query = "SELECT idCatatan,judul,keterangan FROM catatan WHERE idCatatan = '$idCatatan' ";
+	function edit_data($idCatatan, $wilayah=false){
+
+		if ($wilayah){
+			$query = "SELECT kode_wilayah,nama_wilayah FROM wilayah WHERE kode_wilayah = '$idCatatan' ";
+		
+		}else{
+			$query = "SELECT idCatatan,judul,keterangan FROM catatan WHERE idCatatan = '$idCatatan' ";
+			
+		}
 		// pr($query);
 		$result = $this->fetch($query,1);
 		
@@ -35,31 +52,54 @@ class marticle extends Database {
 	}
 	
 	//update glosarium with ajax with id
-	function update_data($id,$judul,$keterangan){
-		$query = "UPDATE catatan
+	function update_data($id,$judul,$keterangan, $wilayah=false){
+		
+		if ($wilayah){
+			$query = "UPDATE wilayah
+						SET 
+							kode_wilayah = '{$judul}',
+							nama_wilayah = '".addslashes(html_entity_decode($keterangan))."'
+						WHERE
+							kode_wilayah = '{$id}'";
+		}else{
+			$query = "UPDATE catatan
 						SET 
 							judul = '{$judul}',
 							keterangan = '".addslashes(html_entity_decode($keterangan))."'
 						WHERE
 							idCatatan = '{$id}'";
+		}
+		
 		$result = $this->query($query);					
 	}
 	
-	function update_status($id,$n_status){
-		$query = "UPDATE catatan
+	function update_status($id,$n_status,$wilayah){
+
+		if ($wilayah){
+			$query = "UPDATE wilayah
+						SET 
+							n_status = '{$n_status}'
+						WHERE
+							kode_wilayah = '{$id}'";
+		}else{
+			$query = "UPDATE catatan
 						SET 
 							n_status = '{$n_status}'
 						WHERE
 							idCatatan = '{$id}'";
+		}
+		
 		$result = $this->query($query);					
 	}
 	
-	function delete_data($id,$n_status){
-		$query = "UPDATE catatan
-						SET 
-							n_status = '{$n_status}'
-						WHERE
-							idCatatan in ({$id})";
+	function delete_data($id,$n_status, $table=false){
+		
+		if ($table){
+			$query = "UPDATE wilayah SET n_status = '{$n_status}' WHERE kode_wilayah in ({$id})";
+		}else{
+			$query = "UPDATE catatan SET n_status = '{$n_status}' WHERE idCatatan in ({$id})";
+			
+		}
 		// echo $query;					
 		$result = $this->query($query);					
 	}
@@ -358,5 +398,27 @@ class marticle extends Database {
 		if ($result) return $result;
 		return false;
 	}
+
+	function getWilayah($id=false, $all=false, $debug=false)
+	{
+	
+		$filter = "";
+		
+		if ($id) $filter .= " AND kode_wilayah = {$id}";
+		
+
+
+		$sql = array(
+                'table'=>"wilayah",
+                'field'=>"*",
+                'condition' => "parent = 0  {$filter}"
+                );
+
+        $res = $this->lazyQuery($sql,$debug);
+        
+		if ($res)return $res;
+		return false;
+	}
+	
 }
 ?>

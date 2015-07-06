@@ -28,7 +28,8 @@ class home extends Controller {
 		
 		// uploadFile($data,$path=null,$ext){
 		
-
+		// $quizStatistic = $this->contentHelper->quizStatistic();
+		// db($quizStatistic);
 		$register = $this->contentHelper->getRegistrant();
 		$course = $this->contentHelper->getCourse();
 		$online = $this->contentHelper->getOnlineUser();

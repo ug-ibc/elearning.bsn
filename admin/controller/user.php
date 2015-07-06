@@ -49,7 +49,7 @@ class user extends Controller {
 		// 		$this->view->assign('status',false);
 		// 	}
 		// }
-
+		// db($dataUser);
 		$this->view->assign('data',$dataUser);
 		return $this->loadView('user/userlist');
 

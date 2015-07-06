@@ -79,14 +79,30 @@ class home extends Controller {
 		// exit;
 		global $basedomain;
 		$idCatatan =$_POST['idCatatan'];
+		$wilayah = $_POST['wilayah'];
 		
 		if ($idCatatan != ''){
-			$edit = $this->marticle->edit_data($idCatatan);
+			$edit = $this->marticle->edit_data($idCatatan, $wilayah);
 			echo json_encode($edit);
 		}
 		exit;
 	}
 	
+	public function ajax_edit_wilayah(){
+		
+		// pr($_POST);
+		// echo masuk;
+		// exit;
+		global $basedomain;
+		$idCatatan =$_POST['kode_wilayah'];
+		
+		if ($idCatatan != ''){
+			$edit = $this->marticle->edit_data($idCatatan, 1);
+			echo json_encode($edit);
+		}
+		exit;
+	}
+
 	public function ajax_update(){
 		
 		// pr($_POST);
@@ -95,8 +111,9 @@ class home extends Controller {
 		$id = $_POST['id'];
 		$judul =$_POST['judul'];
 		$keterangan =$_POST['keterangan'];
+		$wilayah = $_POST['wilayah'];
 		if ($judul != '' && $keterangan != ''){
-			$update = $this->marticle->update_data($id,$judul,$keterangan);
+			$update = $this->marticle->update_data($id,$judul,$keterangan,$wilayah);
 		}
 		exit;
 		
@@ -109,13 +126,14 @@ class home extends Controller {
 		// exit;
 		$id = $_POST['id'];
 		$status =$_POST['status'];
+		$wilayah = $_POST['wilayah'];
 		if($status == 1){
 			$n_status = 0;
 		}else{
 			$n_status = 1;
 		}
 		if ($id != '' && $status != ''){
-			$update_status = $this->marticle->update_status($id,$n_status);
+			$update_status = $this->marticle->update_status($id,$n_status,$wilayah);
 		}
 		exit;
 		
@@ -126,10 +144,11 @@ class home extends Controller {
 		// pr($_POST);
 		// echo masuk;
 		// exit;
+		$kode_wilayah = $_POST['kode_wilayah'];
 		$id =$_POST['id'];
 		$n_status = 2;
 		if ($id != ''){
-			$insert = $this->marticle->delete_data($id,$n_status);
+			$insert = $this->marticle->delete_data($id,$n_status, $kode_wilayah);
 			// echo json_encode($data);
 		}
 		exit;
@@ -161,12 +180,13 @@ class home extends Controller {
 		global $basedomain;
 		$judul =$_POST['judul'];
 		$keterangan =$_POST['keterangan'];
+		$wilayah = $_POST['wilayah'];
 		$n_status = 1;
 		$typedata = _p('type');
 		if ($typedata) $tipe = 3;
 		else $tipe = 2;
 		if ($judul != '' && $keterangan != ''){
-			$insert = $this->marticle->insert_data($judul,$keterangan,$n_status,$tipe);
+			$insert = $this->marticle->insert_data($judul,$keterangan,$n_status,$tipe, $wilayah);
 			// echo json_encode($data);
 		}
 		exit;
@@ -185,6 +205,15 @@ class home extends Controller {
 		// exit;
     	$generate = $this->reportHelper->loadMpdf($html, 'certificate');
     
+	}
+
+	function wilayah()
+	{
+
+		$select = $this->marticle->getWilayah($id, $all);
+		// pr($select);
+		$this->view->assign('data',$select);
+		return $this->loadView('home/wilayah');
 	}
 	
 }

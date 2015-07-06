@@ -97,6 +97,12 @@ header .navbar-default{
     background-color:#7E7E7E; 
     border-bottom: 2px solid #ffffff;
 }
+header .navbar-default.menuTop{
+    /*background-color:#FFFFFF; */
+    background: none;
+    border-bottom: 2px solid #ffffff;
+	font-size: 11px;
+}
 header .navbar-default.white{
     background-color:#ffffff; 
 }
@@ -134,7 +140,12 @@ header .navbar {
 }
 header .navbar.logo {
     min-height: 120px; 
-	padding-bottom:18px;
+	/*padding-bottom:0px;*/
+	margin-bottom: -60px;
+}
+header .navbar.menuTop {
+    min-height: 40px; 
+	padding:0px 0;
 }
 
 header .navbar-nav > li  {
@@ -213,6 +224,12 @@ header ul.nav li a {
 	font-weight:300;
 	text-transform:uppercase;
 }
+header ul.nav.menuTop li a {	
+	font-size:13px;
+	border:none;
+	font-weight:300;
+	text-transform:uppercase;
+}
 
 header ul.nav li ul li a {	
 	font-size:12px;
@@ -227,7 +244,11 @@ header ul.nav li ul li a {
   text-shadow: none;
   border: 1px solid rgba(255, 255, 255, 0) !important;
 }
-
+.navbar .nav.menuTop > li > a {
+  color: #7E7E7E;
+  text-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0) !important;
+}
 .navbar .nav a:hover {
 	background:none;
 }
@@ -237,10 +258,20 @@ header ul.nav li ul li a {
 	font-weight:300;
 	color:#FFFFFF;
 }
+.navbar .nav.menuTop > .active > a {
+	background:none;
+	font-weight:300;
+	color:#000000;
+}
 .navbar .nav > .menu:hover > a {
 	background:#050505;
 	font-weight:300;
 	color:#FFFFFF;
+}
+.navbar .nav.menuTop > .menu:hover > a {
+	background:#FFFFFF;	
+	font-weight:300;
+	color:#000000;
 }
 .navbar .nav > .active > a:active,.navbar .nav > .active > a:focus {
 	background:none;
@@ -1323,7 +1354,21 @@ ul.social-network li {
 	background: #222;
 	
 }
-
+.userOnline{
+    position:fixed;
+    font-size: 17px;
+	width:200px;
+	height:50px;
+    top:5px;
+    right:5px;
+    padding: 20px;
+    text-align: center;
+	background:#E9D03F;
+	color:#f5f5f5;
+	border-radius: 10px;
+	z-index: 9999;
+	
+}
 a.scrollup {
 	outline:0;
 	text-align: center;
@@ -1450,7 +1495,10 @@ article img.pull-right, article .align-right{
 		width:100%;
 	}
 
-
+	header .navbar.logo {
+    min-height: 120px; 
+	margin-bottom: 0px;
+	}
 	
 	footer .widget form  input#appendedInputButton {
 		  display: block;
@@ -1483,6 +1531,11 @@ article img.pull-right, article .align-right{
     padding-right: 0;
     padding-left: 0;
   }
+  header .navbar.logo {
+    min-height: 120px; 
+	margin-bottom: 0px;
+	}
+	
 	.navbar-brand {
 		margin-top: 10px;
 		border-bottom: none;
@@ -1610,6 +1663,11 @@ padding-top: 12px;
 		margin-top:20px;
 	}
 
+	header .navbar.logo {
+    min-height: 120px; 
+	margin-bottom: 0px;
+	}
+	
 
 	.search{
 		float:left;
@@ -1634,4 +1692,299 @@ padding-top: 12px;
 
 }
 
+
+
+/*
+Table Style - This is what you want
+------------------------------------------------------------------ */
+table a:link {
+	color: #666;
+	font-weight: bold;
+	text-decoration:none;
+}
+table a:visited {
+	color: #999999;
+	font-weight:bold;
+	text-decoration:none;
+}
+table a:active,
+table a:hover {
+	color: #bd5a35;
+	text-decoration:underline;
+}
+table {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#666;
+	font-size:12px;
+	text-shadow: 1px 1px 0px #fff;
+	background:#eaebec;
+	/*margin:20px;*/
+	border:#ccc 1px solid;
+
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+
+	-moz-box-shadow: 0 1px 2px #d1d1d1;
+	-webkit-box-shadow: 0 1px 2px #d1d1d1;
+	box-shadow: 0 1px 2px #d1d1d1;
+}
+table th {
+	padding:21px 25px 22px 25px;
+	border-top:1px solid #fafafa;
+	border-bottom:1px solid #e0e0e0;
+
+	background: #ededed;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#ebebeb));
+	background: -moz-linear-gradient(top,  #ededed,  #ebebeb);
+}
+table th:first-child{
+	text-align: center;
+	/*padding-left:20px;*/
+}
+table tr:first-child th:first-child{
+	-moz-border-radius-topleft:3px;
+	-webkit-border-top-left-radius:3px;
+	border-top-left-radius:3px;
+}
+table tr:first-child th:last-child{
+	-moz-border-radius-topright:3px;
+	-webkit-border-top-right-radius:3px;
+	border-top-right-radius:3px;
+}
+table tr{
+	text-align: center;
+	/*padding-left:20px;*/
+}
+table tr td:first-child{
+	text-align: left;
+	/*padding-left:20px;*/
+	border-left: 0;
+}
+table tr td {
+	padding:10px;
+	border-top: 1px solid #ffffff;
+	border-bottom:1px solid #e0e0e0;
+	border-left: 1px solid #e0e0e0;
+	
+	background: #fafafa;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
+	background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);
+}
+table tr.even td{
+	background: #f6f6f6;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f6f6f6));
+	background: -moz-linear-gradient(top,  #f8f8f8,  #f6f6f6);
+}
+table tr:last-child td{
+	border-bottom:0;
+}
+table tr:last-child td:first-child{
+	-moz-border-radius-bottomleft:3px;
+	-webkit-border-bottom-left-radius:3px;
+	border-bottom-left-radius:3px;
+}
+table tr:last-child td:last-child{
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-bottom-right-radius:3px;
+	border-bottom-right-radius:3px;
+}
+table tr:hover td{
+	background: #f2f2f2;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
+	background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);	
+}
+
+
+#book{
+    width:1100px;
+    height:650px;
+    margin: 20px;
+    box-shadow: 0px 0px 20px gray;
+}
+
+#book .turn-page{
+    /*
+    background-color:white;
+    */
+    background-color:silver;
+    box-shadow: 0px 0px 10px gray;
+}
+
+
+#book .cover{
+    background:#333;
+}
+
+#book .cover h1{
+    color:white;
+    text-align:center;
+    font-size:50px;
+    line-height:500px;
+    margin:0px;
+}
+
+#book .loader{
+    background-image:url(loader.gif);
+    width:24px;
+    height:24px;
+    display:block;
+    position:absolute;
+    top:238px;
+    left:188px;
+}
+
+#book .data{
+    text-align:center;
+    font-size:40px;
+    color:#999;
+    line-height:500px;
+}
+
+#controls{
+    width:800px;
+    text-align:center;
+    margin:20px 0px;
+    font:30px arial;
+}
+
+#controls input, #controls label{
+    font:30px arial;
+}
+
+#book .odd{
+    background-image:-webkit-linear-gradient(left, #FFF 95%, #ddd 100%);
+    background-image:-moz-linear-gradient(left, #FFF 95%, #ddd 100%);
+    background-image:-o-linear-gradient(left, #FFF 95%, #ddd 100%);
+    background-image:-ms-linear-gradient(left, #FFF 95%, #ddd 100%);
+}
+
+#book .even{
+    background-image:-webkit-linear-gradient(right, #FFF 95%, #ddd 100%);
+    background-image:-moz-linear-gradient(right, #FFF 95%, #ddd 100%);
+    background-image:-o-linear-gradient(right, #FFF 95%, #ddd 100%);
+    background-image:-ms-linear-gradient(right, #FFF 95%, #ddd 100%);
+}
+
+
+.ul-btn li input[type="radio"] {
+    display:none; 
+}
+
+.ul-btn li input[type="radio"]:checked + label { 
+    background-color:#6EC24B;
+	color:#FFFFFF;
+	text-decoration: none;
+}
+
+/*.ul-btn label { 
+	display:inline-block;
+    background-color:#C2C2C2;
+	padding:8px;
+	border-radius:7px;
+	color:#000000;
+	text-decoration: none;
+}*/
+
+.btn-quiz{
+	display:inline-block;
+	background-color:#C2C2C2;
+	padding:8px;
+	border-radius:7px;
+	color:#000000;
+	text-decoration: none;
+
+}
+.btn-quiz.active{
+	background-color:#6EC24B;
+	color:#FFFFFF;
+	text-decoration: none;
+
+}
+.ul-btn li{
+	list-style-position: outside;
+	padding:11px;
+	list-style: none;
+}
+/*
+@import url(http://fonts.googleapis.com/css?family=Cabin:700);
+
+/* HTML5 Boilerplate accessible hidden styles */
+/*[type="radio"] {
+  border: 0; 
+  clip: rect(0 0 0 0); 
+  height: 1px; margin: -1px; 
+  overflow: hidden; 
+  padding: 0; 
+  position: absolute; 
+  width: 1px;
+}*/
+
+/* One radio button per line */
+/*label {
+  display: block;
+  cursor: pointer;
+  line-height: 2.5;
+  font-size: 1.5em;
+}
+
+[type="radio"] + span {
+  display: block;
+}
+*/
+/* the basic, unchecked style */
+/*[type="radio"] + span:before {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.25em;
+  border-radius: 1em;
+  border: 0.125em solid #fff;
+  box-shadow: 0 0 0 0.15em #000;
+  margin-right: 0.75em;
+  transition: 0.5s ease all;
+}*/
+
+/* the checked style using the :checked pseudo class */
+/*[type="radio"]:checked + span:before {
+  background: green;
+  box-shadow: 0 0 0 0.25em #000;
+}*/
+
+/* never forget focus styling */
+/*[type="radio"]:focus + span:after {
+  content: '\0020\2190';
+  font-size: 1.5em;
+  line-height: 1;
+  vertical-align: -0.125em;
+}
+*/
+/* Nothing to see here. */
+/*body {
+  margin: 3em auto;
+  max-width: 30em;
+  font-family: Cabin, serif;
+}
+
+fieldset {
+  font-size: 1em;
+  border: 2px solid #000;
+  padding: 2em;
+  border-radius: 0.5em;
+}
+
+legend {
+  color: #fff;
+  background: #000;
+  padding: 0.25em 1em;
+  border-radius: 1em;
+}
+
+.p {
+  text-align: center;
+  font-size: 14px;
+  padding-top: 120px;
+}
+*/
  

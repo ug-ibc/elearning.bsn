@@ -76,6 +76,8 @@
 <div id="wrapper">
   <!-- start header -->
   <header>
+
+        
     <div class="navbar logo navbar-default white navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
@@ -86,27 +88,23 @@
                     
 
                 </div>
+
             </div>
         </div>
-
-        <div class="navbar navbar-default navbar-static-top" style="background-color:#ffffff;">
+        <div class="navbar navbar-default navbar-static-top menuTop" >
             <div class="container">
-               {*}<div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse2" data-target=".navbar-collapse.2">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>{/*}
                 <div class="navbar-collapse 2 collapse2 " style="overflow:auto;">
-                    <ul class="nav navbar-nav">
+                    <ul class="nav menuTop navbar-nav">
                         
-                      
-                        <li class="menu {$classSearch}"><a href="{$basedomain}search" style="color:#7E7E7E"><i class="fa fa-search"></i> Search Sertifikat</a></li> 
                           {if $user}
-                        <li class="menu"><a href="{$basedomain}home/logout" style="color:#7E7E7E">LOGOUT <i class="fa fa-log-out"></i></a></li>
+                          <li><h5><i class="fa fa-user"></i> Selamat Datang, <i>{$user.0.name}</i></h5></li>
+                          {/if}
+                        <li class="menu {$classSearch}" ><a href="{$basedomain}search" ><i class="fa fa-search"></i> Cari  Sertifikat </a></li> 
+                        
+                          {if $user}
+                        <li class="menu"><a href="{$basedomain}home/logout">LOGOUT <i class="fa fa-log-out"></i></a></li>
                         {else}
-                        <li class="menu"><a href="#" data-toggle="modal" data-target="#myModal" style="color:#7E7E7E">LOGIN <i class="fa fa-sign-in"></i></a></li>
+                        <li class="menu"><a href="#" data-toggle="modal" data-target="#myModal">LOGIN <i class="fa fa-sign-in"></i></a></li>
                         {/if}
                     </ul>
                 </div>

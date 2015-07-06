@@ -31,10 +31,12 @@ class home extends Controller {
 		$vardata['data2'] = $this->userGallery->getgallery();
 		$vardata['quotes'] = $this->contentHelper->getCatatan(2);
 		$vardata['glosarium'] = $this->contentHelper->getCatatan(1);
+		$online = $this->contentHelper->getOnlineUser();
 
+		$this->view->assign('online',$online[0]['total']);
+		// pr($online);
 		$kursus = $this->contentHelper->getKursus();
 		$this->view->assign('kursus',$kursus);
-
 		// pr($vardata);exit;
 		$this->view->assign('data',$vardata);			
 

@@ -258,7 +258,7 @@ function isNumber(evt) {
 	
 	
 	//insert ajax qoutes
-	$('#link').on('click', function(){
+	/*$('#link').on('click', function(){
 		bootbox.dialog({
 			title: "Create link",
 			message:'<div class="row"> ' + '<div class="col-md-12"> ' +
@@ -310,7 +310,7 @@ function isNumber(evt) {
 		});
 
 		$(".demo-modal-radio").niftyCheck();
-	});
+	});*/
 
 
 	//insert ajax qoutes

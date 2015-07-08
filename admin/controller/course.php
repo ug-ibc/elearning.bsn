@@ -311,7 +311,6 @@ class course extends Controller {
 						// upload file
 						// pr($_FILES);
 						if(!empty($_FILES['file_image']['name'])){
-							// echo "masuk files";exit;
 							if($_FILES['file_image']['name'] != ''){
 								if($x['action'] == 'update') deleteFile($x['file_hidden']);
 								$image = uploadFile('file_image',null,'image');
@@ -319,9 +318,16 @@ class course extends Controller {
 							}
 						}else{
 							if(empty($_FILES['file_image']['name']) && $x['file_image'] != ""){	
-								$x['post_image'] = $x['file_image'];
+								//get first url
+								$split_first = explode('watch',$x['file_image']);
+								$hit = count($split_first);
+								if($hit != 1){
+									$split_second = explode('=',$x['file_image']);
+									$x['post_image'] = $split_first[0].'embed/'.$split_second[1];
+								}else{
+									$x['post_image'] = $x['file_image'];
+								}
 							}else{
-								echo "file isi";
 								$x['post_image'] = $x['file_hidden'];
 							}
 						}

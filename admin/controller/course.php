@@ -548,8 +548,16 @@ class course extends Controller {
 
 		$monthid = $_POST['monthid'];
 		$yearid = $_POST['yearid'];
-		$data = $this->mcourse->getTest($monthid,$yearid);
+		// $data = $this->mcourse->getTest($monthid,$yearid);
 		// pr($data);
+		$register_user= $this->mcourse->select_data_register_user();
+		
+		//register  get sertificate
+		$sertificate_user= $this->mcourse->select_data_sertificate_user();
+		
+		//visitor
+		$visitor_user= $this->mcourse->select_data_visitor_user();
+
 		print json_encode($data);
 
 		exit;

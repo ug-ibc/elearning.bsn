@@ -7,23 +7,7 @@
 		<!--Shortcut buttons-->
 		<!--================================-->
 		<div id="mainnav-shortcut">
-			<ul class="list-unstyled">
-				<li class="col-xs-4">
-					<a id="demo-toggle-aside-del" class="shortcut-grid" href="#">
-						<i class="fa fa-magic"></i>
-					</a>
-				</li>
-				<li class="col-xs-4">
-					<a id="demo-alert-del" class="shortcut-grid" href="#">
-						<i class="fa fa-bullhorn"></i>
-					</a>
-				</li>
-				<li class="col-xs-4">
-					<a id="demo-page-alert-del" class="shortcut-grid" href="#">
-						<i class="fa fa-bell"></i>
-					</a>
-				</li>
-			</ul>
+			
 		</div>
 		<!--================================-->
 		<!--End shortcut buttons-->
@@ -98,7 +82,7 @@
 								<span class="menu-title">External Link</span>
 							</a>
 						</li>{/*}
-						<li class="list-divider"></li>
+						
 			
 						<!--Category name-->
 						<li class="list-header">Course</li>
@@ -123,7 +107,7 @@
 							</ul>
 						</li>
 
-						<li class="list-divider"></li>
+						<!-- <li class="list-divider"></li> -->
 			
 						<!--Category name-->
 						<li class="list-header">User</li>
@@ -139,13 +123,12 @@
 							<!--Submenu-->
 							<ul class="collapse {if $page.page eq 'user'}in{/if}">
 								<li class="{if $page.page eq 'user' && $page.function eq 'index'}active-link{/if}"><a href="{$basedomain}user">User list</a></li>
+								<li class="{if $page.page eq 'home' && $page.function eq 'wilayah'}active-link{/if}">
+									<a href="{$basedomain}home/wilayah">
+										Wilayah
+									</a>
+								</li>
 							</ul>
-						</li>
-						<li class="{if $page.page eq 'home' && $page.function eq 'wilayah'}active-link{/if}">
-							<a href="{$basedomain}home/wilayah">
-								<i class="fa fa-quote-left"></i>
-								<span class="menu-title">Wilayah</span>
-							</a>
 						</li>
 					</ul>
 

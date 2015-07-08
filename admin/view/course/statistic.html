@@ -1,32 +1,4 @@
 <script>
-$(window).on('load', function() {
-	//document.getElementById('coba').innerHTML = 'your tip has been submitted!';
-	// Datatables
-	// Row selection and deletion (multiple rows)
-	// -----------------------------------------------------------------
-	var rowDeletion = $('#newslist').DataTable({
-		"responsive": true,
-		"language": {
-			"paginate": {
-			  "previous": '<i class="fa fa-angle-left"></i>',
-			  "next": '<i class="fa fa-angle-right"></i>'
-			}
-		},
-		"dom": '<"toolbar">frtip'
-	});
-
-	$('#create-toolbar').appendTo($("div.toolbar"));
-	$('#separator-toolbar').appendTo($("div.toolbar"));
-	$('#delete-toolbar').appendTo($("div.toolbar"));
-
-	/*$('#newslist tbody').on( 'click', 'tr', function () {
-		$(this).toggleClass('selected');
-	} );
-
-	$('#demo-dt-delete-btn').click( function () {
-		rowDeletion.row('.selected').remove().draw( false );
-	} );*/
-})	
 $('.selectpicker').selectpicker();
 
 function isEmpty() {
@@ -45,7 +17,7 @@ function isEmpty() {
 <!--Page Title-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <div id="page-title">
-	<h1 class="page-header text-overflow">Course Material</h1>
+	<h1 class="page-header text-overflow">Statistic</h1>
 
 	<!--Searchbox-->
 	<!-- <div class="searchbox">
@@ -73,71 +45,79 @@ function isEmpty() {
 <!--Page content-->
 <!--===================================================-->
 <div id="page-content">
-	<!--{pr($data)}-->
-	<!-- Row selection and deletion (multiple rows) -->
-	<!--===================================================-->
-	<div class="panel">
-		<div class="panel-heading">
-			<h3 class="panel-title">Report Statistic Visitor</h3>
-		</div>
-		
-			<div id="delete-toolbar" class="table-toolbar-left">
-			<form class="form-horizontal" method="POST" action="{$basedomain}course/cetak" onsubmit="return isEmpty()">	
-				<!--<a href="{$basedomain}course/cetak"><button id="" class="btn btn-info btn-labeled fa fa-print">Download</button></a>
-				<!--<div class="input-group date">
-				<input type="text" name="start_date" id="dateid" class="form-control" value="">
-				<span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span>
-				</div>-->
-				 <select id="monthid" class="selectpicker" data-live-search="true" name="month" >
-					<option value=''>Choose one of the month</option>
-					<option value='1'>January</option>
-					<option value='2'>February</option>
-					<option value='3'>March</option>
-					<option value='4'>April</option>
-					<option value='5'>May</option>
-					<option value='6'>June</option>
-					<option value='7'>July</option>
-					<option value='8'>August</option>
-					<option value='9'>September</option>
-					<option value='10'>October</option>
-					<option value='11'>November</option>
-					<option value='12'>December</option>
-				</select>
-				<select id="yearid" class="selectpicker" data-live-search="true" name="year" >
-					<option value=''>Choose one of the year</option>
-					<option value='{date(Y) - 1}'>{date(Y) - 1}</option>
-					<option value='{date(Y)}'>{date(Y)}</option>
-				</select>
-				<button id="" type="submit" name="type" value="1" class="btn btn-danger btn-labeled fa fa-print">Download pdf</button>
-				<button id="" type="submit" name="type" value="2" class="btn btn-success btn-labeled fa fa-print">Download xls</button>
-			</form>	
+	<div class="row">
+		<div class="col-lg-10 eq-box-lg">
+			<div class="panel">
+				<div class="panel-heading">
+					<h3 class="panel-title">Report Statistic Visitor</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row" style="margin-bottom:30px">
+						<div class="col-sm-12">
+							<form class="form-horizontal" method="POST" action="{$basedomain}course/cetak" onsubmit="return isEmpty()"> 
+				                <!--<a href="{$basedomain}course/cetak"><button id="" class="btn btn-info btn-labeled fa fa-print">Download</button></a>
+				                <!--<div class="input-group date">
+				                <input type="text" name="start_date" id="dateid" class="form-control" value="">
+				                <span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span>
+				                </div>-->
+				                 <select id="monthid" class="selectpicker" data-live-search="true" name="month" >
+				                    <option value=''>Choose one of the month</option>
+				                    <option value='1'>January</option>
+				                    <option value='2'>February</option>
+				                    <option value='3'>March</option>
+				                    <option value='4'>April</option>
+				                    <option value='5'>May</option>
+				                    <option value='6'>June</option>
+				                    <option value='7'>July</option>
+				                    <option value='8'>August</option>
+				                    <option value='9'>September</option>
+				                    <option value='10'>October</option>
+				                    <option value='11'>November</option>
+				                    <option value='12'>December</option>
+				                </select>
+				                <select id="yearid" class="selectpicker" data-live-search="true" name="year" >
+				                    <option value=''>Choose one of the year</option>
+				                    <option value='{date(Y) - 1}'>{date(Y) - 1}</option>
+				                    <option value='{date(Y)}'>{date(Y)}</option>
+				                </select>
+				                <button id="" type="submit" name="type" value="1" class="btn btn-danger btn-labeled fa fa-file-pdf-o">Download pdf</button>
+				                <button id="" type="submit" name="type" value="2" class="btn btn-success btn-labeled fa fa-file-excel-o">Download xls</button>
+				            </form>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-3 text-center">
+					
+							<!--Chart placeholder -->
+							<div id="demo-morris-donut" class="morris-donut"></div>
+	
+						</div>
+						<div class="col-sm-9">
+							<!--Custom Content-->
+		                    <!--===================================================-->
+		                    <div class="list-group">
+		                        <a href="#" class="list-group-item"><span class="badge badge-success">{$register_user['0']['total']}</span>
+		                            <h4 class="list-group-item-heading text-thin">Registered users</h4>
+		                            <p class="list-group-item-text">Total users that already have an account.</p>
+		                        </a>
+		                        <a href="#" class="list-group-item"><span class="badge badge-purple">{$sertificate_user['0']['total']}</span>
+		                            <h4 class="list-group-item-heading text-thin">Users who already received a certificate</h4>
+		                            <p class="list-group-item-text">Total users that already have certificates by finishing a course</p>
+		                        </a>
+		                        <a href="#" class="list-group-item"><span class="badge badge-dark">{$visitor_user['0']['total']}</span>
+		                            <h4 class="list-group-item-heading text-thin">Users who just browse without log in</h4>
+		                            <p class="list-group-item-text">Anonymous users that only visiting web without loging in</p>
+		                        </a>
+		                    </div>
+		                    <!--===================================================-->
+						</div>
+					</div>
+
+				</div>
 			</div>
-			
-		
-		<div class="panel-body">
-			<table id="newslist" class="table table-striped table-bordered" cellspacing="0" width="100%">
-				<thead>
-					<tr align="center">
-						<th>registered users</th>
-						<th>users who already received a certificate</th>
-						<th>users who just browse the web without login</th>
-						<!--<th><input type="text" name="start_date" id="coba" class="form-control" value="" readonly></th>-->
-						<th>month</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td align="center">{$register_user['0']['total']}</td>
-						<td align="center">{$sertificate_user['0']['total']}</td>
-						<td align="center">{$visitor_user['0']['total']}</td>
-						<td align="center"><label id="message">{$statistic}</label></td>
-					</tr>
-				</tbody>
-			</table>
 		</div>
 	</div>
-	<!--===================================================-->
-	<!-- End Row selection and deletion (multiple rows) -->
 	
 	
 </div>
@@ -146,6 +126,25 @@ function isEmpty() {
 
 {literal}
 <script type="text/javascript">
+
+$(document).ready(function() {
+
+	Morris.Donut({
+		element: 'demo-morris-donut',
+		data: [
+			{label: "Registered", value: 2},
+			{label: "Have certificates", value: 1},
+			{label: "Anonymous", value: 46}
+		],
+		colors: [
+			'#c686be',
+			'#986291',
+			'#ab6fa3'
+		],
+		resize:true
+	});
+})
+
 $('#monthid,#yearid').on('change', function(){
 		var monthid = $('#monthid').val();
 		var yearid = $('#yearid').val();

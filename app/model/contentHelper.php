@@ -120,5 +120,13 @@ class contentHelper extends Database {
         if ($res) return $res;
         return false;
     }
+
+    function getCity()
+    {
+        $query = "SELECT * FROM wilayah WHERE n_status = '1' AND parent= '0'";
+        $result = $this->fetch($query,1);
+
+        return $result;
+    }
 }
 ?>

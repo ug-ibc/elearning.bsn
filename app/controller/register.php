@@ -23,10 +23,10 @@ class register extends Controller {
 	
 	function index(){
 
-        // $getCity = $this->contentHelper->getCity();
-        // // pr($getCity);
+        $getCity = $this->contentHelper->getCity();
+        // db($getCity);
 
-        // $this->view->assign('city', $getCity);
+        $this->view->assign('city', $getCity);
     	return $this->loadView('akun/page_register');
     }
     

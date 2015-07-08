@@ -12,7 +12,19 @@ class helper_model extends Database {
 		$this->user = $getSessi[0];
 
 	}
+    function getOnlineUser($n_status=1, $debug=0)
+    {
+        $filter = "";
+        $sql = array(
+                'table'=>"user",
+                'field'=>"COUNT(1) AS total",
+                'condition' => "n_status IN ({$n_status}) AND is_online = 1 {$filter}"
+                );
 
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res) return $res;
+        return false;
+    }
     
     function getNews($id=false, $categoryid=1, $type=1, $start=0, $limit=5)
     {

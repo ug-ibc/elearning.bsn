@@ -194,8 +194,9 @@ class user extends Controller {
 
         $profile = $this->userHelper->getUserData('idUser', $this->user['idUser']);
         
-        $quiz = $this->quizHelper->getNilai();
-        // pr($quiz);
+        $quiz = $this->quizHelper->getNilaiByProfile();
+        pr($profile);
+        pr($quiz);
         return $this->loadView('akun/setting');
     }
 

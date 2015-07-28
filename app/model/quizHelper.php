@@ -714,6 +714,27 @@ class quizHelper extends Database {
         return false;
     }
 
+    function getNilaiByProfile($idNilai=false)
+    {
+        $filter = "";
+
+        $userid = $this->user['idUser'];
+
+        if ($id) $filter .= " AND n.id = {$idNilai}";
+        
+        $sql = array(
+                'table'=>"nilai AS n, user AS u, grup_kursus AS g",
+                'field'=>"n.*, u.name, u.email, g.namagrup",
+                'condition' => " n.n_status = 1 AND n.idUser = {$userid} {$filter}",
+                'joinmethod' => 'LEFT JOIN',
+                'join' => "n.idUser = u.idUser, n.idGroupKursus = g.idGrup_kursus"
+                );
+
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res) return $res;
+        return false;
+    }
+
     function updateStatusNilai($debug=0)
     {
 

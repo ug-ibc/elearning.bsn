@@ -84,6 +84,7 @@ $(window).on('load', function() {
 					</tr>
 				</thead>
 				<tbody>
+				{if !empty($data)}
 				{foreach $data as $val}
 			<tr>
 				<td>{$val.topic}</td>
@@ -97,7 +98,8 @@ $(window).on('load', function() {
 					<a id ="demo-dt-delete-btn" class="btn btn-danger btn-labeled fa fa-times" href="{$basedomain}webex/deletewebex/?id_webex={$val.id_webex}" onclick="return confirm('Do you really want to delete this data?')">Delete</a>
 				</td>
 			</tr>
-			{/foreach} 
+			{/foreach}
+			{/if} 
 				</tbody>
 			</table>
 		</div>

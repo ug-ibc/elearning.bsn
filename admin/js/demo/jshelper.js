@@ -167,6 +167,37 @@ function isNumber(evt) {
 		  }, 2000);
 	});
 	
+	$('.testimoni-btn-status').on('click', function () {
+		var btn = $(this).button('loading')
+		// business logic...
+		var idGrup_kursus = $(this).attr("value");
+		// alert(idGrup_kursus);
+		var exp = idGrup_kursus.split("_"); 
+		var id = exp[0];
+		var status = exp[1];
+		
+		
+		$.post( basedomain+"home/ajax_update_status_testimoni", { id: id, status: status } );
+		
+		// alert(exp[0]);
+		var doSomething = setTimeout(function(){
+			clearTimeout(doSomething);
+			btn.button('reset')
+		}, 2000);
+		$.niftyNoty({
+			type: 'success',
+			icon : 'fa fa-check',
+			message : 'Update Status Successfully.',
+			container : 'floating',
+			timer : 2000
+		});
+		setTimeout(
+		  function() 
+		  {
+			location.reload();
+		  }, 2000);
+	});
+
 	$('.glosarium-btn-status-wilayah').on('click', function () {
 		var btn = $(this).button('loading')
 		// business logic...

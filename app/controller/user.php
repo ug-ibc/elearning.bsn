@@ -12,6 +12,8 @@ class user extends Controller {
 		$this->loadmodule();
 		$this->view = $this->setSmarty();
 		$this->view->assign('basedomain',$basedomain);
+        $getUserLogin = $this->isUserOnline();
+        $this->user = $getUserLogin[0];
     }
 	
 	function loadmodule()
@@ -19,6 +21,7 @@ class user extends Controller {
         $this->contentHelper = $this->loadModel('contentHelper');
         $this->loginHelper = $this->loadModel('loginHelper');
         $this->userHelper = $this->loadModel('userHelper');
+        $this->quizHelper = $this->loadModel('quizHelper');
 	}
 	
 	function index(){
@@ -189,8 +192,13 @@ class user extends Controller {
 
     function setting(){
 
-        return $this->loadView('user/setting');
+        $profile = $this->userHelper->getUserData('idUser', $this->user['idUser']);
+        
+        $quiz = $this->quizHelper->getNilai();
+        // pr($quiz);
+        return $this->loadView('akun/setting');
     }
+
 
 }
 

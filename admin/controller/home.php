@@ -187,16 +187,18 @@ class home extends Controller {
 		$select = $this->mquiz->getNilai();
 		// pr($select);
 		if ($select){
+			$i = 0;
+			$data = array();
 			foreach ($select as $key => $value) {
 				if ($value['data']){
 					$unserial = unserialize($value['data']);
-					$select[$key]['testimoni'] = $unserial['testimoni'];
-					$select[$key]['status_testimoni'] = $unserial['status_testimoni'];
+					$data[$i]['testimoni'] = $unserial['testimoni'];
+					$data[$i]['status_testimoni'] = intval($unserial['status_testimoni']);
 				}
 			}
 		}
 		// pr($select);
-		$this->view->assign('data',$select);
+		$this->view->assign('data',$data);
 		
 		return $this->loadView('home/testimoni');
 

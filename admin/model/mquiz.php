@@ -215,7 +215,7 @@ class mquiz extends Database {
 		$sql = array(
                 'table'=>"nilai",
                 'field'=>"data",
-                'condition' => " idNilai = {$id} LIMIT 1",
+                'condition' => " idNilai = {$id} AND n_status = 1 LIMIT 1",
                 );
 
         $res = $this->lazyQuery($sql,$debug);

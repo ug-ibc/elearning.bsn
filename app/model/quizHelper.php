@@ -644,7 +644,7 @@ class quizHelper extends Database {
         return false;
     }
 
-    function saveTestimoni($data=array())
+    function saveTestimoni($data=array(), $debug=0)
     {
 
         $dataArr = array();
@@ -664,25 +664,34 @@ class quizHelper extends Database {
         return false;
     }
 
-    function getTestimoni($data=array())
+    function getTestimoni($data=array(), $debug=0)
     {
 
         $sql = array(
                 'table'=>"nilai AS n, user AS u",
-                'field'=>"n.data, u.name, u.email",
+                'field'=>"n.idNilai, n.data, u.name, u.email",
                 'condition' => " n.n_status = 1 ",
+                'joinmethod' => 'LEFT JOIN',
+                'join' => "n.idUser = u.idUser"
                 );
 
         $res = $this->lazyQuery($sql,$debug);
         if ($res){
+            $newData = array();
+            $i = 0;
             foreach ($res as $key => $value) {
                 if ($value['data']){
                     $unserial = unserialize($value['data']);
-                    $res[$key]['testimoni'] = $unserial['testimoni'];
-                    $res[$key]['status_testimoni'] = $unserial['status_testimoni'];
+                    if ($unserial['status_testimoni']==1){
+                        $newData[$i] = $value;
+                        $newData[$i]['testimoni'] = $unserial['testimoni'];
+                        $newData[$i]['status_testimoni'] = $unserial['status_testimoni'];
+                        $i++;
+                    }
+                    
                 }
             }
-            return $res;
+            return $newData;
         }
          
         return false;
@@ -705,7 +714,7 @@ class quizHelper extends Database {
         return false;
     }
 
-    function updateStatusNilai()
+    function updateStatusNilai($debug=0)
     {
 
         $getNilai = $this->getNilai();
@@ -723,7 +732,7 @@ class quizHelper extends Database {
         return false;
     }
 
-    function isQuizRunning($idGroupKursus=false)
+    function isQuizRunning($idGroupKursus=false, $debug=0)
     {
 
         

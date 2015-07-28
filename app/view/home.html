@@ -113,21 +113,27 @@
                 <div class="carousel slide" id="fade-quote-carousel" data-ride="carousel" data-interval="3000">
                   <!-- Carousel indicators -->
                   <ol class="carousel-indicators">
-                    <li data-target="#fade-quote-carousel" data-slide-to="0"></li>
-                    <li data-target="#fade-quote-carousel" data-slide-to="1"></li>
+                    {foreach $testimoni as $k => $val}
+                    <li data-target="#fade-quote-carousel" data-slide-to="{$k}"></li>
+                    {/foreach}
                   </ol>
                   <!-- Carousel items -->
                   <div class="carousel-inner">
-                    <div class="item">
+                    {if $testimoni}
+                    {foreach $testimoni as $k => $val}
+                    <div class="{if $k == 0}active{/if} item">
                         <blockquote>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, veritatis nulla eum laudantium totam tempore optio doloremque laboriosam quas, quos eaque molestias odio aut eius animi. Impedit temporibus nisi accusamus.</p>
+                            <p>{$val.testimoni}</p>
                         </blockquote>   
                     </div>
-                    <div class="active item">
+                    {/foreach}
+                    {/if}
+                    <!-- <div class=" item">
                         <blockquote>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, veritatis nulla eum laudantium totam tempore optio doloremque laboriosam quas, quos eaque molestias odio aut eius animi. Impedit temporibus nisi accusamus.</p>
                         </blockquote>
-                    </div>
+                    </div> -->
+
                   </div>
                 </div>
             </div>

@@ -44,18 +44,7 @@ class mgallery extends Database{
 		if($exec) return 1; else pr('query gagal');
 	}
 
-	function updatealbum2($id_album,$judul)
-	{
-		//query insert data
-		$query = "UPDATE album SET nm_album='".$judul."' WHERE id_album = '".$id_album."'";
-		//eksekusi query
-		$exec = $this->query($query,0);	
-		//kondisi apabila eksekusi berhasil mengembalikan notif 1, jika gagal mencetak query gagal 
-		//pr ($query);exit;
-		if($exec) return 1; else pr('query gagal');
-	}
-
-		function deletealbum($id_album)
+	function deletealbum($id_album)
 	{
 		//query insert data
 		$query = "Delete FROM album WHERE id_album = '".$id_album."'";
@@ -65,7 +54,7 @@ class mgallery extends Database{
 		if($exec) return 1; else pr('query gagal');
 	}
 
-		function deletefoto($id_album)
+	function deletefoto($id_album)
 	{
 		//query insert data
 		$query = "Delete FROM gallery WHERE id_album = '".$id_album."'";
@@ -119,18 +108,7 @@ class mgallery extends Database{
 		if($exec) return 1; else pr('query gagal');
 	}
 
-	function updategallery2($id_gallery,$judul,$deskripsi)
-	{
-		//query insert data
-		$query = "UPDATE gallery SET nm_gallery='".$judul."', deskripsi='".$deskripsi."' WHERE id_gallery = '".$id_gallery."'";
-		//eksekusi query
-		$exec = $this->query($query,0);	
-		//kondisi apabila eksekusi berhasil mengembalikan notif 1, jika gagal mencetak query gagal 
-		//pr ($query);exit;
-		if($exec) return 1; else pr('query gagal');
-	}
-
-		function deletegallery($id_gallery)
+	function deletegallery($id_gallery)
 	{
 		//query insert data
 		$query = "Delete FROM gallery WHERE id_gallery = '".$id_gallery."'";

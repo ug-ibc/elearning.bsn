@@ -51,7 +51,7 @@ class contentHelper extends Database {
 
     function getKursus()
     {
-        $query = "SELECT * FROM kursus ORDER BY create_time desc LIMIT 4";
+        $query = "SELECT * FROM kursus ORDER BY create_time desc";
         $result = $this->fetch($query,1);
 
         foreach ($result as $key => $value) {

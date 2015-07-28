@@ -1,4 +1,3 @@
-Page Title-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 <style>
@@ -12,7 +11,7 @@ Page Title-->
   		</style>	
 
 <div id="page-title">
-	<h1 class="page-header text-overflow">Create Gallery</h1>
+	<h1 class="page-header text-overflow">Update Gallery</h1>
 
 	<!--Searchbox-->
 	<!-- <div class="searchbox">
@@ -31,7 +30,7 @@ Page Title-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <ol class="breadcrumb">
 	<li><a href="{$basedomain}">Home</a></li>
-	<li class="active">Add Gallery</li>
+	<li class="active">Edit Gallery</li>
 </ol>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--End breadcrumb-->
@@ -45,12 +44,13 @@ Page Title-->
 	<div class="col-sm-12">
 			<div class="panel">
 				<div class="panel-heading">
-					<h3 class="panel-title">Create Gallery</h3>
+					<h3 class="panel-title">Update Gallery</h3>
 				</div>
 	
 				<!--Horizontal Form-->
 				<!--===================================================-->
 				<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="id_album" class="form-control" value="{$data.id_album}">
 					<div class="panel-body">
 
 						<div class="form-group">
@@ -91,8 +91,12 @@ Page Title-->
 							</div>
 						</div>
 
+						<!-- File Hidden -->
+						<input type="hidden" name="hiddenFile" value="{$data.path_lokasi}" />
+
+
 						<div class="form-group">
-							<label class="col-sm-2 control-label">Deskripsi</label>
+							<label class="col-sm-2 control-label">Description</label>
 							<div class="col-sm-7">
 								<textarea name="deskripsi" class="form-control" cols="50" rows="5">{$data.deskripsi}</textarea>
 							</div>

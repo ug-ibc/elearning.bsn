@@ -22,6 +22,7 @@ class home extends Controller {
 		
 		$this->contentHelper = $this->loadModel('contentHelper');
 		$this->marticle = $this->loadModel('marticle');
+		$this->mquiz = $this->loadModel('mquiz');
 	}
 	
 	public function index(){
@@ -139,6 +140,21 @@ class home extends Controller {
 		exit;
 		
 	}
+
+	function ajax_update_status_testimoni()
+	{
+		$id = $_POST['id'];
+		$status =$_POST['status'];
+		if($status == 1){
+			$n_status = 0;
+		}else{
+			$n_status = 1;
+		}
+		if ($id != '' && $status != ''){
+			$update_status = $this->mquiz->update_status_testimoni($id,$n_status);
+		}
+		exit;
+	}
 	
 	public function ajax_delete(){
 		
@@ -163,6 +179,26 @@ class home extends Controller {
 		$this->view->assign('data',$select);
 		
 		return $this->loadView('home/quotes');
+
+	}
+
+	public function testimoni(){
+		// echo "masukk ajaa";
+		$select = $this->mquiz->getNilai();
+		// pr($select);
+		if ($select){
+			foreach ($select as $key => $value) {
+				if ($value['data']){
+					$unserial = unserialize($value['data']);
+					$select[$key]['testimoni'] = $unserial['testimoni'];
+					$select[$key]['status_testimoni'] = $unserial['status_testimoni'];
+				}
+			}
+		}
+		// pr($select);
+		$this->view->assign('data',$select);
+		
+		return $this->loadView('home/testimoni');
 
 	}
 
@@ -216,6 +252,8 @@ class home extends Controller {
 		$this->view->assign('data',$select);
 		return $this->loadView('home/wilayah');
 	}
+
+
 	
 }
 

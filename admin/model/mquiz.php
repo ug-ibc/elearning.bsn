@@ -207,5 +207,38 @@ class mquiz extends Database {
         if ($res) return $res;
         return false;
 	}
+
+	function update_status_testimoni($id=false, $n_status=0, $debug=0)
+	{
+
+		if (!$id) return false;
+		$sql = array(
+                'table'=>"nilai",
+                'field'=>"data",
+                'condition' => " idNilai = {$id} LIMIT 1",
+                );
+
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res){
+
+        	$testimoni = unserialize($res[0]['data']);
+
+        	$dataArr['testimoni'] = $testimoni['testimoni'];
+        	$dataArr['status_testimoni'] = $n_status;
+
+        	$serialData = serialize($dataArr);
+
+        	$sql = array(
+	                'table'=>"nilai",
+	                'field'=>"data = '{$serialData}'",
+	                'condition' => " idNilai = {$id} LIMIT 1",
+	                );
+
+	        $res = $this->lazyQuery($sql,$debug,2);
+        }
+
+		return false;
+
+	}
 }
 ?>

@@ -77,6 +77,13 @@
 							</a>
 						</li>
 
+						<li class="{if $page.page eq 'home' && $page.function eq 'quoteslist'}active-link{/if}">
+							<a href="{$basedomain}home/testimoni">
+								<i class="fa fa-quote-left"></i>
+								<span class="menu-title">Testimoni</span>
+							</a>
+
+
 						<li>
 							<a href="#">
 								<i class="fa fa-video-camera"></i>
@@ -87,6 +94,7 @@
 								<li class="{if $page.page eq 'webex' && $page.function eq 'index'}active-link{/if}"><a href="{$basedomain}webex">Add Conference</a></li>
 								<li class="{if $page.page eq 'course' && ($page.function eq 'courselist' || $page.function eq 'addcourse' || $page.function eq 'viewmaterial')}active-link{/if}"><a href="{$basedomain}course/courselist">Upload Video</a></li>
 							</ul>
+
 						</li>
 						{*}<li class="{if $page.page eq 'home' && $page.function eq 'externalLink'}active-link{/if}">
 							<a href="{$basedomain}home/externalLink">

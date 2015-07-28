@@ -4,10 +4,9 @@ class userHelper extends Database {
     function __construct()
     {   
         global $CONFIG;
-        $session = new Session;
-        $getSessi = $session->get_session();
-        // pr($getSessi);
-        $this->user = $getSessi[0];
+        $loadSession = new Session();
+        $getUserData = $loadSession->get_session();
+        $this->user = $getUserData[0];
         $this->salt = $CONFIG['default']['salt'];
         $this->prefix = "";
         $this->date = date('Y-m-d H:i:s');
@@ -79,8 +78,10 @@ class userHelper extends Database {
      * @param $field =  field name
      */
     function getUserData($field,$data){
+
+        // pr($this->user);
         if($data==false) return false;
-        $sql = "SELECT * FROM `person` WHERE `$field` = '".$data."' ";
+        $sql = "SELECT * FROM `user` WHERE `$field` = '".$data."' ";
         $res = $this->fetch($sql,0);  
         if(empty($res)){return false;}
         return $res; 

@@ -650,6 +650,7 @@ class quizHelper extends Database {
         $dataArr = array();
 
         $dataArr['testimoni'] = $data['testimoni'];
+        $dataArr['status_testimoni'] = 0;
 
         $serialData = serialize($dataArr);
         $sql = array(
@@ -660,6 +661,30 @@ class quizHelper extends Database {
 
         $res = $this->lazyQuery($sql,$debug,2);
         if ($res) return $res;
+        return false;
+    }
+
+    function getTestimoni($data=array())
+    {
+
+        $sql = array(
+                'table'=>"nilai AS n, user AS u",
+                'field'=>"n.data, u.name, u.email",
+                'condition' => " n.n_status = 1 ",
+                );
+
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res){
+            foreach ($res as $key => $value) {
+                if ($value['data']){
+                    $unserial = unserialize($value['data']);
+                    $res[$key]['testimoni'] = $unserial['testimoni'];
+                    $res[$key]['status_testimoni'] = $unserial['status_testimoni'];
+                }
+            }
+            return $res;
+        }
+         
         return false;
     }
 

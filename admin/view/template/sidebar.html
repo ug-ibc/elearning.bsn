@@ -76,6 +76,18 @@
 								<span class="menu-title">Quotes of The Day</span>
 							</a>
 						</li>
+
+						<li>
+							<a href="#">
+								<i class="fa fa-video-camera"></i>
+								<span class="menu-title">Webex</span>
+								<i class="arrow"></i>
+							</a>
+							<ul class="collapse {if $page.page eq 'webex'}in{/if}">
+								<li class="{if $page.page eq 'webex' && $page.function eq 'index'}active-link{/if}"><a href="{$basedomain}webex">Add Conference</a></li>
+								<li class="{if $page.page eq 'course' && ($page.function eq 'courselist' || $page.function eq 'addcourse' || $page.function eq 'viewmaterial')}active-link{/if}"><a href="{$basedomain}course/courselist">Upload Video</a></li>
+							</ul>
+						</li>
 						{*}<li class="{if $page.page eq 'home' && $page.function eq 'externalLink'}active-link{/if}">
 							<a href="{$basedomain}home/externalLink">
 								<i class="fa fa-quote-left"></i>

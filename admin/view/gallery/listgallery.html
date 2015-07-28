@@ -84,15 +84,15 @@ $(window).on('load', function() {
 				{if !empty($data)}
 				{foreach $data.data as $val}
 			<tr>
-			<td><img src="../../../public_assets/{$val.path_lokasi}" width="50%" height="50%"></td> 
+			<td><img src="{if !empty($val.path_lokasi)}../../../public_assets/{$val.path_lokasi}{else}../../../public_assets/noimage.png{/if}" alt="Placeholder" width="50%" height="50%" /></td> 
 			<td>{$val.nm_gallery}</td>
 			<td>{$val.deskripsi}</td>
 			<td>{$val.create_date}</td>
 			<td align="center">
 				<table>
 					<tr>
-					<td><a id ="demo-dt-delete-btn" class="btn btn-success btn-labeled fa fa-pencil-square-o" href="{$basedomain}gallery/editgallery/?id_gallery={$val.id_gallery}">Edit</a></td>	
-					<td><a id ="demo-dt-delete-btn" class="btn btn-danger btn-labeled fa fa-times" href="{$basedomain}gallery/deletegallery/?id_gallery={$val.id_gallery}" onclick="return confirm('Apakah anda yakin akan menghapus foto ini?')">Delete</a></td>
+					<td><a id ="demo-dt-delete-btn" class="btn btn-warning btn-labeled fa fa-pencil" href="{$basedomain}gallery/editgallery/?id_gallery={$val.id_gallery}">Edit</a></td>	
+					<td><a id ="demo-dt-delete-btn" class="btn btn-danger btn-labeled fa fa-times" href="{$basedomain}gallery/deletegallery/?id_gallery={$val.id_gallery}" onclick="return confirm('Do you really want to delete this picture?')">Delete</a></td>
 					</tr>
 				</table>
 			</td>

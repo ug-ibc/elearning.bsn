@@ -12,14 +12,13 @@ $(document).ready(function() {
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 <style>
-	        .form-horizontal .control-label{
-	            text-align: left;
-	        }
-	        .col-sm-2 {
-	            text-align: left;
-	        }
-
-  		</style>	
+	.form-horizontal .control-label{
+	    text-align: left;
+	}
+	.col-sm-2 {
+	    text-align: left;
+	}
+</style>	
 
 <div id="page-title">
 	<h1 class="page-header text-overflow">Edit Album Gallery</h1>
@@ -82,6 +81,9 @@ $(document).ready(function() {
 								    <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
 								  </div>
 								</div>
+
+								<!-- File Hidden -->
+								<input type="hidden" name="hiddenFile" value="{$data.cover_album}" />
 
 								<!-- <input type="file" name="cover_album"> -->
 							</div>

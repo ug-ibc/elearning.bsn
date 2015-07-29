@@ -1,6 +1,4 @@
-
-
-     
+   {pr($datavidwebex)}
     <!-- Slider -->
     <section class="callaction" >
     <div class="container" style="margin-top:-50px">
@@ -159,7 +157,44 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12" align="center">
-                <div class="quote"><i class="fa fa-quote-left fa-3x"></i><span style="font-size:25px;color:#a2a2a2">  Testimonial  </span></i></div>
+                <div class="quote"><span style="font-size:25px;color:#a2a2a2">  VIDEO WEBEX  </span></div>
+                <div class="carousel slide" id="fade-quote-carousel" data-ride="carousel" data-interval="3000">
+                  <!-- Carousel indicators -->
+                  <ol class="carousel-indicators">
+                    {foreach $datavidwebex as $k => $valvidwebex}
+                    <li data-target="#fade-quote-carousel" data-slide-to="{$k}"></li>
+                    {/foreach}
+                  </ol>
+                  <!-- Carousel items -->
+                  <div class="carousel-inner">
+                    {if $datavidwebex}
+                    {foreach $datavidwebex as $k => $valvidwebex}
+                    <div class="{if $k == 0}active{/if} item">
+                         <iframe width="600" height="315" src="{$valvidwebex.video}"></iframe> 
+                        <blockquote>
+                            <p></p>
+                        </blockquote>   
+                    </div>
+                    {/foreach}
+                    {/if}
+                    <!-- <div class=" item">
+                        <blockquote>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, veritatis nulla eum laudantium totam tempore optio doloremque laboriosam quas, quos eaque molestias odio aut eius animi. Impedit temporibus nisi accusamus.</p>
+                        </blockquote>
+                    </div> -->
+
+                  </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </section>
+    <section class="callaction">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" align="center">
+                <div class="quote"><i class="fa fa-quote-left fa-3x"></i><span style="font-size:25px;color:#a2a2a2">  Testimonial  </span><i class="fa fa-quote-right fa-3x"></i></div>
                 <div class="carousel slide" id="fade-quote-carousel" data-ride="carousel" data-interval="3000">
                   <!-- Carousel indicators -->
                   <ol class="carousel-indicators">
@@ -218,11 +253,23 @@
             {/foreach}
             </div>
             <div class="col-lg-4" align="center">
-                <h3>QUOTE OF THE DAY</h3>
-                {foreach $data.quotes as $val}
-                <p><i>&quot;{$val.keterangan}&quot;</i>
-                <strong style="color:#7DA55C"><i>{$val.judul}</i></strong></p>
+                <h3>LIST MEETING WEBEX</h3>
+                <table>
+                    <tr>
+                        <th>Topic</th>
+                        <th>Speaker</th>
+                        <th>Date</th>
+                    </tr>
+
+                {foreach $datawebex as $valwebex}
+                <tr>
+                    <td>{$valwebex.topic}</td>
+                    <td>{$valwebex.speaker}</td>
+                    <td>{$valwebex.schedule}</td>
+                </tr>
                 {/foreach}
+
+                </table>
             </div>
             <div class="col-lg-4">
                 <h3 align="center">GLOSARIUM</h3> 
@@ -237,3 +284,17 @@
          </div>
     </div>
     </section>
+
+    <section class="callaction">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" align="center">
+                <h3>QUOTE OF THE DAY</h3>
+                {foreach $data.quotes as $val}
+                <p><i>&quot;{$val.keterangan}&quot;</i>
+                <strong style="color:#7DA55C"><i>{$val.judul}</i></strong></p>
+                {/foreach}
+            </div>
+        </div>
+    </div>
+</section>

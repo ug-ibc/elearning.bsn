@@ -128,5 +128,29 @@ class contentHelper extends Database {
 
         return $result;
     }
+    function getwebex()
+    {
+        //query memanggil data
+
+        $query = "SELECT id_webex, topic, speaker, DATE_FORMAT(schedule,'%d %b %y') as schedule, picture, cover, meeting_number from webex where status= '1'";
+        //pr($query);
+        //$query = "SELECT * FROM news WHERE status in ('0','1') ";
+        //pr($query);
+        //memanggil semua data. Jika hanya memanggil 1 data ->fetch($query,0,0)
+        $result = $this->fetch($query,1,0);
+        return $result;
+    }
+
+    function getvideowebex()
+    {
+        //query memanggil data
+        $query = "SELECT id_video, title, video from video_webex where status= '1' limit 5";
+        //pr($query);
+        //$query = "SELECT * FROM news WHERE status in ('0','1') ";
+        //pr($query);
+        //memanggil semua data. Jika hanya memanggil 1 data ->fetch($query,0,0)
+        $result = $this->fetch($query,1,0);
+        return $result;
+    }
 }
 ?>

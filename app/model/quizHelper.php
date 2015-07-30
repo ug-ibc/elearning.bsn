@@ -669,7 +669,7 @@ class quizHelper extends Database {
 
         $sql = array(
                 'table'=>"nilai AS n, user AS u",
-                'field'=>"n.idNilai, n.data, u.name, u.email",
+                'field'=>"n.idNilai, n.data, u.name, u.email, u.jenispekerjaan",
                 'condition' => " n.n_status = 1 ",
                 'joinmethod' => 'LEFT JOIN',
                 'join' => "n.idUser = u.idUser"

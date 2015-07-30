@@ -49,12 +49,15 @@ class home extends Controller {
 		$this->view->assign('online',$online[0]['total']);
 		// pr($online);
 		$kursus = $this->contentHelper->getKursus();
+		// pr($kursus);
 		$this->view->assign('kursus',$kursus);
 		// pr($vardata);exit;
 		$this->view->assign('data',$vardata);			
 
 		//$this->view->assign('data',$data);
 		//}
+		// exit;
+		
 		return $this->loadView('home');
     }
 

@@ -2156,5 +2156,91 @@ h1.section-heading .line {
     width: 100px;
     height: 100px;
   }
-
-
+.testimonials-carousel {
+  position: relative;
+}
+.testimonials-carousel .fa {
+  color: #6091ba;
+  margin-right: 5px;
+  font-size: 18px;
+}
+.testimonials-carousel .carousel .item {
+  min-height: 300px;
+}
+.testimonials-carousel .people {
+  margin-top: 10px;
+}
+.testimonials-carousel .people .name {
+  color: #6091ba;
+}
+.testimonials-carousel .people .title {
+  color: #999;
+}
+.testimonials-carousel .carousel-controls {
+  margin-top: 20px;
+  text-align: right;
+}
+.testimonials-carousel .carousel-controls a .fa {
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  background: #dddddd;
+  color: #fff;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  margin-right: 0;
+  font-size: 15px;
+}
+.testimonials-carousel .carousel-controls a.next .fa {
+  padding-top: 2px;
+  padding-right: 1px;
+}
+.testimonials-carousel .carousel-controls a.prev .fa {
+  padding-top: 2px;
+  padding-right: 1px;
+}
+.testimonials-carousel .carousel-controls a:hover .fa {
+  background: #6091ba;
+}
+.testimonials {
+  position: relative;
+}
+.testimonials .carousel-controls {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.testimonials .fa {
+  color: #6091ba;
+  margin-right: 5px;
+  font-size: 18px;
+}
+.testimonials .carousel .item {
+  min-height: 298px;
+}
+.testimonials .people {
+  margin-top: 10px;
+}
+.testimonials .people .name {
+  color: #6091ba;
+}
+.testimonials .people .title {
+  color: #999;
+}
+.testimonials .carousel .item {
+    min-height: inherit;
+  }
+blockquote {	
+  font-size: 14px;
+  border-left: 5px solid #ddd;
+  margin: 0 0 20px;
+  padding: 10px 20px;
+}
+blockquote p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #666;
+}

@@ -51,7 +51,16 @@ class contentHelper extends Database {
 
     function getKursus()
     {
-        $query = "SELECT * FROM kursus ORDER BY create_time desc";
+        /*$query = "SELECT * FROM kursus ORDER BY create_time desc";
+        $result = $this->fetch($query,1);
+
+        foreach ($result as $key => $value) {
+            $query = "SELECT COUNT(*) as total FROM materi WHERE idKursus = '{$value['idKursus']}'";
+            $res = $this->fetch($query);
+            $result[$key]['total'] = $res['total'];
+        }*/
+		$query = "SELECT k.*,g.namagrup FROM kursus as k join grup_kursus  as g on g.idGrup_kursus = k.idGrup_kursus
+					ORDER BY k.create_time desc";
         $result = $this->fetch($query,1);
 
         foreach ($result as $key => $value) {
@@ -59,6 +68,7 @@ class contentHelper extends Database {
             $res = $this->fetch($query);
             $result[$key]['total'] = $res['total'];
         }
+		
 
         return $result;
     }

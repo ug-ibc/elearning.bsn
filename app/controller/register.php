@@ -65,7 +65,7 @@ class register extends Controller {
                 // db($register);
                 // logFile($msg);
                 // $html = "klik link berikut ini {$basedomain}register/validate/?ref={$msg}";
-                $send = sendGlobalMail($register['email'],false,$html);
+                // $send = sendGlobalMail($register['email'],false,$html);
 
                 redirect($basedomain.'register/status');
             } 

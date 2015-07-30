@@ -124,7 +124,7 @@ class userHelper extends Database {
 
         if ($data['password'] !== $data['repassword']) return false;
         
-        $field = array('name','email','username','tempatlahir','tanggallahir','pendidikan','institusi','jenispekerjaan','hp'); 
+        $field = array('name','email','username','tempatlahir','tanggallahir','pendidikan','institusi','jenispekerjaan','hp','alamat'); 
 
         foreach ($data as $key => $value) {
             

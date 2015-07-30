@@ -771,5 +771,23 @@ class quizHelper extends Database {
         return false;
     }
 
+    function hasRead()
+    {
+
+        $userid = $this->user['idUser'];
+        if (!$userid) return false;
+        
+        $date = date('Y-m-d H:i:s');
+        $sql = array(
+                'table'=>"tbl_user_activity",
+                'field'=>"userid, kursusid, groupid, createdate, n_status",
+                'values' => "{$userid}, {$kursusid}, {$groupid}, '{$date}', 1 ",
+                );
+
+        $res = $this->lazyQuery($sql,$debug, 1);
+        if ($res) return true;
+        return false;
+    }
+
 }
 ?>

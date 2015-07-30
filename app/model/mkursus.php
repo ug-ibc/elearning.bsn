@@ -31,20 +31,27 @@ class mkursus extends Database{
 		return $result;
 	}
 
-	function getAllCourse($id)
+	function getCourse($id,$idk)
 	{
 		$query = "SELECT * FROM grup_kursus WHERE idGrup_kursus = '{$id}' AND n_status = '1'";
 		$grup = $this->fetch($query);
 
-		$query = "SELECT * FROM kursus WHERE idGrup_kursus = '{$id}' AND n_status = '1'";
+		// $query = "SELECT * FROM kursus WHERE idGrup_kursus = '{$id}' AND n_status = '1'";
+		$query = "SELECT * FROM kursus WHERE 	idKursus = '{$idk}' AND n_status = '1'";
 		$course = $this->fetch($query,1);
 
 		foreach ($course as $key => $value) {
-			$query = "SELECT * FROM materi WHERE idKursus='{$value['idKursus']}' AND idGrup_kursus = '{$id}' AND n_status = '1'";
+			// $query = "SELECT * FROM materi WHERE idKursus='{$value['idKursus']}' AND idGrup_kursus = '{$id}' AND n_status = '1'";
+			$query = "SELECT * FROM materi WHERE idKursus='{$value['idKursus']}'  AND n_status = '1'";
+			// echo "query materi =".$query; 
+			// echo "<br>";
 			$materi = $this->fetch($query,1);
 			if($materi){
 				foreach ($materi as $key2 => $value) {
-					$query = "SELECT * FROM file WHERE n_status = '1' AND idMateri = '{$value['idMateri']}' AND idKursus='{$value['idKursus']}' AND idGrup_kursus = '{$id}'";
+					// $query = "SELECT * FROM file WHERE n_status = '1' AND idMateri = '{$value['idMateri']}' AND idKursus='{$value['idKursus']}' AND idGrup_kursus = '{$id}'";
+					$query = "SELECT * FROM file WHERE n_status = '1' AND idMateri = '{$value['idMateri']}' AND idKursus='{$value['idKursus']}' ";
+					// echo "query file =".$query;
+					// echo "<br>";
 					$file = $this->fetch($query,1);
 
 					$materi[$key2]['file'] = $file;
@@ -62,6 +69,15 @@ class mkursus extends Database{
 		return $dataArr;
 	}
 	
+	function getAllCourse()
+	{
+		
+		// $query = "SELECT * FROM kursus WHERE idGrup_kursus = '{$id}' AND n_status = '1'";
+		$query = "SELECT * FROM kursus WHERE n_status = '1'";
+		$Allcourse = $this->fetch($query,1);
+
+		return $Allcourse;
+	}
 	
 	function get_group_by_certificate($certificate){
 		$query = "SELECT g.idGrup_kursus,g.namagrup FROM grup_kursus as g, nilai as n

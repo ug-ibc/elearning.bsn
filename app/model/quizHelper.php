@@ -644,12 +644,13 @@ class quizHelper extends Database {
         return false;
     }
 
-    function saveTestimoni($data=array())
+    function saveTestimoni($data=array(), $debug=0)
     {
 
         $dataArr = array();
 
         $dataArr['testimoni'] = $data['testimoni'];
+        $dataArr['status_testimoni'] = 0;
 
         $serialData = serialize($dataArr);
         $sql = array(
@@ -660,6 +661,39 @@ class quizHelper extends Database {
 
         $res = $this->lazyQuery($sql,$debug,2);
         if ($res) return $res;
+        return false;
+    }
+
+    function getTestimoni($data=array(), $debug=0)
+    {
+
+        $sql = array(
+                'table'=>"nilai AS n, user AS u",
+                'field'=>"n.idNilai, n.data, u.name, u.email, u.jenispekerjaan",
+                'condition' => " n.n_status = 1 ",
+                'joinmethod' => 'LEFT JOIN',
+                'join' => "n.idUser = u.idUser"
+                );
+
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res){
+            $newData = array();
+            $i = 0;
+            foreach ($res as $key => $value) {
+                if ($value['data']){
+                    $unserial = unserialize($value['data']);
+                    if ($unserial['status_testimoni']==1){
+                        $newData[$i] = $value;
+                        $newData[$i]['testimoni'] = $unserial['testimoni'];
+                        $newData[$i]['status_testimoni'] = $unserial['status_testimoni'];
+                        $i++;
+                    }
+                    
+                }
+            }
+            return $newData;
+        }
+         
         return false;
     }
 
@@ -680,7 +714,28 @@ class quizHelper extends Database {
         return false;
     }
 
-    function updateStatusNilai()
+    function getNilaiByProfile($idNilai=false)
+    {
+        $filter = "";
+
+        $userid = $this->user['idUser'];
+
+        if ($id) $filter .= " AND n.id = {$idNilai}";
+        
+        $sql = array(
+                'table'=>"nilai AS n, user AS u, grup_kursus AS g",
+                'field'=>"n.*, u.name, u.email, g.namagrup",
+                'condition' => " n.n_status = 1 AND n.idUser = {$userid} {$filter}",
+                'joinmethod' => 'LEFT JOIN',
+                'join' => "n.idUser = u.idUser, n.idGroupKursus = g.idGrup_kursus"
+                );
+
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res) return $res;
+        return false;
+    }
+
+    function updateStatusNilai($debug=0)
     {
 
         $getNilai = $this->getNilai();
@@ -698,7 +753,7 @@ class quizHelper extends Database {
         return false;
     }
 
-    function isQuizRunning($idGroupKursus=false)
+    function isQuizRunning($idGroupKursus=false, $debug=0)
     {
 
         

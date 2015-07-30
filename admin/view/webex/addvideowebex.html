@@ -1,0 +1,142 @@
+<script>
+$(document).ready(function() {
+	select();
+})	
+
+function select(){ 
+//document.getElementById("video").innerHTML
+if ( $('#jenisfile').val() == '1') 
+		{
+    		$('#ebook').show(1000);
+            $('#video').hide(1000);
+    	}
+    	else{
+    		$('#ebook').hide(1000);
+            $('#video').show(1000);
+    	}
+}
+
+function checkURL() {
+    var value = $("#linkedit").val();
+	var urlregex = new RegExp("^(http|https|ftp)\://([a-zA-Z0-9\.\-]+(\:[a-zA-Z0-9\.&amp;%\$\-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(\:[0-9]+)*(/($|[a-zA-Z0-9\.\,\?\'\\\+&amp;%\$#\=~_\-]+))*$");	
+	if(value){
+		if (urlregex.test(value)) {
+			//alert('valid')
+			$("#save").removeAttr('disabled');
+			return (true);
+		}else{
+			alert('url not valid');
+			$("#save").attr('disabled','disabled');
+		   return (false);
+		}
+    }else{
+		$("#save").removeAttr('disabled');
+	}
+}
+</script>
+<!--Page Title-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<style>
+	        .form-horizontal .control-label{
+	            text-align: left;
+	        }
+	        .col-sm-2 {
+	            text-align: left;
+	        }
+
+  		</style>	
+<div id="page-title">
+	<h1 class="page-header text-overflow">Add Video Webex</h1>
+
+	<!--Searchbox-->
+	<!-- <div class="searchbox">
+		<div class="input-group custom-search-form">
+			<input type="text" class="form-control" placeholder="Search..">
+			<span class="input-group-btn">
+				<button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+			</span>
+		</div>
+	</div> -->
+</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End page title-->
+
+<!--Breadcrumb-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<ol class="breadcrumb">
+	<li><a href="{$basedomain}">Home</a></li>
+	<li class="active">Add Video Webex</li>
+</ol>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End breadcrumb-->
+
+<!--Page content-->
+<!--===================================================-->
+<div id="page-content">
+	
+	<div class="row">
+	<div class="col-sm-12">
+			<div class="panel">
+				<div class="panel-heading">
+					<h3 class="panel-title">Add Video Webex</h3>
+				</div>
+	
+				<!--Horizontal Form-->
+				<!--===================================================-->
+				<form class="form-horizontal" action="{$basedomain}webex/inputvideowebex" method="post" enctype="multipart/form-data">
+					<div class="panel-body">
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Title</label>
+							<div class="col-sm-7">
+								<input type="text" name="title" class="form-control" required>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">File Type</label>
+							<div class="col-sm-4">
+								<select name = "jenisfile" class="selectpicker" id="jenisfile" onchange="return select()">
+									{*}<option value="">Choose File Type</option>{/*}
+									<option value="1">Link</option>
+									<option value="2">video</option>
+								</select> 
+							</div>
+						</div>
+
+						<div class="form-group" id="video">
+							<label class="col-sm-2 control-label">Video</label>
+							<div class="col-sm-4">
+								<div class="input-group">
+		                			<span class="input-group-btn">
+		                   				<span class="btn btn-primary btn-file">
+		                        		Browse <input type="file" name="file_video">
+		                    			</span>
+		                			</span>
+		                		<input type="text" name="file_hidden" class="form-control" readonly>
+								</div>*)mp4 (Video Format)
+							</div>
+						</div>
+
+						<div class="form-group" id="ebook">
+							<label class="col-sm-2 control-label">Link Video</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id ="linkedit" name="file_video" placeholder ="URL for Video" onblur="return checkURL()">
+							</div>
+						</div>
+					</div>
+					<div class="panel-footer text-right">
+						<button class="btn btn-info" type="submit" id="save">Save</button>
+					</div>
+				</form>
+				<!--===================================================-->
+				<!--End Horizontal Form-->
+	
+			</div>
+		</div>	
+	</div>
+</div>
+<!--===================================================-->
+<!--End page content-->
+

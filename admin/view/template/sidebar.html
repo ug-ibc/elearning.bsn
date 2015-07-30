@@ -76,6 +76,26 @@
 								<span class="menu-title">Quotes of The Day</span>
 							</a>
 						</li>
+
+						<li class="{if $page.page eq 'home' && $page.function eq 'quoteslist'}active-link{/if}">
+							<a href="{$basedomain}home/testimoni">
+								<i class="fa fa-comments"></i>
+								<span class="menu-title">Testimoni</span>
+							</a>
+
+
+						<li>
+							<a href="#">
+								<i class="fa fa-video-camera"></i>
+								<span class="menu-title">Webex</span>
+								<i class="arrow"></i>
+							</a>
+							<ul class="collapse {if $page.page eq 'webex'}in{/if}">
+								<li class="{if $page.page eq 'webex' && $page.function eq 'index'}active-link{/if}"><a href="{$basedomain}webex">Add Conference</a></li>
+								<li class="{if $page.page eq 'webex' && ($page.function eq 'listvideowebex')}active-link{/if}"><a href="{$basedomain}webex/listvideowebex">Upload Video</a></li>
+							</ul>
+
+						</li>
 						{*}<li class="{if $page.page eq 'home' && $page.function eq 'externalLink'}active-link{/if}">
 							<a href="{$basedomain}home/externalLink">
 								<i class="fa fa-quote-left"></i>
@@ -102,7 +122,7 @@
 								<li class="{if $page.page eq 'quiz' && ($page.function eq 'quizlist' || $page.function eq 'index' || $page.function eq 'editquiz')}active-link{/if}"><a href="{$basedomain}quiz/quizlist">Quiz</a>
 								</li>
 								<li class="{if $page.page eq 'quiz' && $page.function eq 'setting'}active-link{/if}"><a href="{$basedomain}quiz/setting">Setting</a></li>
-								<li class="{if $page.page eq 'quiz' && $page.function eq 'setting'}active-link{/if}"><a href="{$basedomain}quiz/nilaiUser">Nilai User</a></li>
+								<li class="{if $page.page eq 'quiz' && $page.function eq 'nilaiUser'}active-link{/if}"><a href="{$basedomain}quiz/nilaiUser">Nilai User</a></li>
 								<li class="{if $page.page eq 'course' && ($page.function eq 'uploadfile' || $page.function eq 'upload')}active-link{/if}"><a href="{$basedomain}course/uploadfile">Upload Ebook & Video</a></li>
 							</ul>
 						</li>

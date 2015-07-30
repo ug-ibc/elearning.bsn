@@ -1,0 +1,139 @@
+<script>
+$(document).ready(function() {
+	// $('#brief').summernote({
+	// 	height: 200
+	// });
+	$('#isi').summernote({
+		height: 200
+	});
+})	
+</script>
+<!--Page Title-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<style>
+	        .form-horizontal .control-label{
+	            text-align: left;
+	        }
+	        .col-sm-2 {
+	            text-align: left;
+	        }
+
+  		</style>	
+<div id="page-title">
+	<h1 class="page-header text-overflow">Create Webex</h1>
+
+	<!--Searchbox-->
+	<!-- <div class="searchbox">
+		<div class="input-group custom-search-form">
+			<input type="text" class="form-control" placeholder="Search..">
+			<span class="input-group-btn">
+				<button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+			</span>
+		</div>
+	</div> -->
+</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End page title-->
+
+<!--Breadcrumb-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<ol class="breadcrumb">
+	<li><a href="{$basedomain}">Home</a></li>
+	<li class="active">Add Webex</li>
+</ol>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End breadcrumb-->
+
+<!--Page content-->
+<!--===================================================-->
+<div id="page-content">
+	
+	<div class="row">
+	<div class="col-sm-12">
+			<div class="panel">
+				<div class="panel-heading">
+					<h3 class="panel-title">Create Webex</h3>
+				</div>
+	
+				<!--Horizontal Form-->
+				<!--===================================================-->
+				<form class="form-horizontal" action="{$basedomain}webex/inputwebex" method="post" enctype="multipart/form-data">
+					<div class="panel-body">
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Topic</label>
+							<div class="col-sm-7">
+								<input type="text" name="topic" class="form-control" required>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Speaker's Name</label>
+							<div class="col-sm-7">
+								<input type="text" name="speaker" class="form-control" required>
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Speaker's Photo</label>
+							<div class="col-sm-4">
+								<div class="fileupload fileupload-new" data-provides="fileupload">
+								  <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="{$app_domain}public_assets/noimage.png" alt="Placeholder" /></div>
+								  <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+								  <div>
+								    <span class="btn btn-default btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="picture"/></span>
+								    <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+								  </div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Cover Webex</label>
+							<div class="col-sm-4">
+								<div class="fileupload fileupload-new" data-provides="fileupload">
+								  <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="{$app_domain}public_assets/noimage.png" alt="Placeholder" /></div>
+								  <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+								  <div>
+								    <span class="btn btn-default btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="cover"/></span>
+								    <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+								  </div>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Schedule</label>
+							<div class="col-sm-3">
+								<div class="input-group date">
+									<input type="text" class="form-control" name="schedule" required>
+									<span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Meeting Number</label>
+							<div class="col-sm-7">
+								<input type="text" name="meeting_number" class="form-control" required>
+							</div>
+						</div>
+
+					</div>
+					<div class="panel-footer text-right">
+						<button class="btn btn-info" type="submit">Save</button>
+					</div>
+				</form>
+				<!--===================================================-->
+				<!--End Horizontal Form-->
+	
+			</div>
+		</div>	
+	
+</div>
+<!--===================================================-->
+<!--End page content-->
+

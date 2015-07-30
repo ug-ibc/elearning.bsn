@@ -20,6 +20,7 @@ class home extends Controller {
         $this->userHelper = $this->loadModel('userHelper');
         $this->userGallery=$this->loadModel('mgallery');
         $this->userNews=$this->loadModel('mnews');
+        $this->quizHelper = $this->loadModel('quizHelper');
 	}
 	
 	function index(){
@@ -33,6 +34,18 @@ class home extends Controller {
 		$vardata['glosarium'] = $this->contentHelper->getCatatan(1);
 		$online = $this->contentHelper->getOnlineUser();
 
+		$datawebex=$this->contentHelper->getwebex();
+		if ($datawebex){	
+			$this->view->assign('datawebex',$datawebex);
+		}
+		$datavidwebex=$this->contentHelper->getvideowebex();
+		if ($datavidwebex){	
+			$this->view->assign('datavidwebex',$datavidwebex);
+		}
+
+		$getTestimoni = $this->quizHelper->getTestimoni();
+		// pr($getTestimoni);
+		$this->view->assign('testimoni',$getTestimoni);
 		$this->view->assign('online',$online[0]['total']);
 		// pr($online);
 		$kursus = $this->contentHelper->getKursus();

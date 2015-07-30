@@ -104,12 +104,12 @@
 
 						       	{if !empty($value.file)}
 								{foreach $value.file as $vals}
-									
+									<br/>
 									{$expl_string = "."|explode:$vals.files}
 									{if ($expl_string[1] == 'pdf')}
-										<a href="{$basedomain}kursus/viewPdf/?pdf={$vals.files}" class="hvr-icon-sink btn btn-info"><i class="fa fa-file-pdf-o"></i> View {$vals.namafile}</a>
+										<a href="{$basedomain}kursus/viewPdf/?pdf={$vals.files}" class="hvr-icon-sink btn btn-info"><i class="fa fa-file-pdf-o"></i> View {$vals.namafile}</a><br/>
 									{elseif ($expl_string[1] == 'mp4')}
-										<a href="#" class="hvr-icon-spin btn btn-info" data-toggle="modal" data-target="#viewVideo"><i class="fa fa-file-video-o"></i> View {$vals.namafile}</a>
+										<a href="#" class="hvr-icon-spin btn btn-info" data-toggle="modal" data-target="#viewVideo"><i class="fa fa-file-video-o"></i> View {$vals.namafile}</a><br/>
 										<div class="modal fade" id="viewVideo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 										  <div class="modal-dialog video">
 											<div class="modal-content">
@@ -132,7 +132,7 @@
 										  </div>
 										</div> 
 									{else}
-										<a href="#" class="hvr-icon-spin btn btn-info" data-toggle="modal" data-target="#viewVideo2"><i class="fa fa-file-video-o"></i> View {$vals.namafile}</a>
+										<a href="#" class="hvr-icon-spin btn btn-info" data-toggle="modal" data-target="#viewVideo2"><i class="fa fa-file-video-o"></i> View {$vals.namafile}</a><br/>
 										<div class="modal fade" id="viewVideo2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 										  <div class="modal-dialog video">
 											<div class="modal-content">

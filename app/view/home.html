@@ -36,8 +36,8 @@
                 <p>Akreditasi merupakan elemen sistem penilaian kesesuaian yang memiliki fungsi memberikan pengakuan formal terhadap kompetensi lembaga penilaian kesesuaian.<a href="{$basedomain}profil"><strong><i>Baca Selengkapnya</i></strong></a></p>
             </div>{/*}
             <div class="col-md-4" align="center">
-                {*}<img src="{$basedomain}assets/img/data/metrologi.JPG" alt="" width="40%"/>{/*}
-                <img src="{$basedomain}assets/img/scale.png" height="60px"/>
+                {*}<img src="{$basedomain}assets/img/data/metrologi.JPG" alt="" width="40%"/>{/*} 
+                <i class="fa fa-balance-scale fa-5x"></i><br/>
                 <h3><span>METROLOGI</span></h3>
                 <p>Metrologi mencakup semua aktivitas yang diperlukan untuk dapat melakukan pengukuran yang benar, tertelusur dan diakui kebenarannya dalam tingkat nasional, regional maupun internasional.<a href="{$basedomain}profil"><strong><i>Baca Selengkapnya</i></strong></a></p>
             </div>
@@ -127,19 +127,18 @@
         <div class="row">
             {if !empty($kursus)}
 			{foreach $kursus as $val}
-            <div class="col-md-3">
+            <div class="col-md-3" style="margin-bottom:5px">
                 <div style="border-radius:10px 10px 0px 0px;padding:1px 15px;font-size:17px;border-bottom:1px solid #E3E3E3;background-color:#F5F5F5;" align="left">
 					<div style="width:60%">
 						<h4><span>{$val.namagrup}</span></h4>
 					</div>
 				</div>
 				<div style="border:1px solid #E3E3E3">
-                    <img src="{$basedomain}public_assets/{$val.image}" alt="" width="255px" height="250px"/>
+                    <img src="{$basedomain}public_assets/{$val.image}" alt="" width="100%" height="250px"/>
                     <div style="padding:15px;padding-bottom:20px">
-						<h3><span>{$val.namakursus}</span></h4>
+						<h3><span>{$val.namakursus}</span></h3>
                         
                         <i><p class="text-center">{$val.keterangan}</p></i>
-                    <!-- <img src="img/data/star.JPG" alt=""/> (3 reviews)<br/><br/> -->
                         <i class="fa fa-file-text-o"></i> {$val.total} Materi
                     </div>
                     <div style="border-top:2px solid #E3E3E3;" align="center">

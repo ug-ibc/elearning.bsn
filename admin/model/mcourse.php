@@ -334,6 +334,15 @@ class mcourse extends Database {
 		return $result;
 	}
 	
+	function select_data_register_user_condt($monthid,$yearid)
+	{
+		$query = "SELECT COUNT(1) AS total FROM user WHERE  YEAR(register_date) = {$yearid} AND MONTH(register_date) = {$monthid} AND n_status IN (1)";
+		// echo $query; 
+		$result = $this->fetch($query,1);
+		
+		return $result;
+	}
+	
 	function select_data_sertificate_user()
 	{
 		$query = "SELECT COUNT(1) AS total FROM nilai WHERE kodeSertifikat is not null and n_status IN (1) ";
@@ -342,9 +351,25 @@ class mcourse extends Database {
 		return $result;
 	}
 	
+	function select_data_sertificate_user_condt($monthid,$yearid)
+	{
+		$query = "SELECT COUNT(1) AS total FROM nilai WHERE YEAR(create_time) = {$yearid} AND MONTH(create_time) = {$monthid} AND kodeSertifikat is not null and n_status IN (1) ";
+		$result = $this->fetch($query,1);
+		
+		return $result;
+	}
+	
 		function select_data_visitor_user()
 	{
 		$query = "SELECT COUNT(1) AS total FROM tbl_activity_log WHERE userID = 0 and n_status IN (1) ";
+		$result = $this->fetch($query,1);
+		
+		return $result;
+	}
+	
+	function select_data_visitor_user_condt($monthid,$yearid)
+	{
+		$query = "SELECT COUNT(1) AS total FROM tbl_activity_log WHERE YEAR(datetimes) = {$yearid} AND MONTH(datetimes) = {$monthid} AND userID = 0 and n_status IN (1) ";
 		$result = $this->fetch($query,1);
 		
 		return $result;

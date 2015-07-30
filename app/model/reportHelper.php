@@ -5,7 +5,7 @@ class reportHelper extends Database {
 	var $prefix = "";
 	var $salt = "";
     var $configkey = "default";
-    var $pdf_ext = '.pdf';
+    // var $pdf_ext = '.pdf';
 	function __construct()
 	{
 
@@ -27,6 +27,7 @@ class reportHelper extends Database {
 		// echo $output;
 		// exit;
         global $CONFIG;
+		$pdf_ext = '.pdf';
         $mpdfEngine = LIBS . 'mpdf/mpdf' . $CONFIG[$this->configkey]['php_ext'];
 
         if (is_file($mpdfEngine)){

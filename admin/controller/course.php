@@ -544,26 +544,74 @@ class course extends Controller {
 
 	}
 	
-	public function test(){
-
+	public function ajax_register(){
+		
 		$monthid = $_POST['monthid'];
 		$yearid = $_POST['yearid'];
 		// $data = $this->mcourse->getTest($monthid,$yearid);
 		// pr($data);
-		$register_user= $this->mcourse->select_data_register_user();
+		$register_user= $this->mcourse->select_data_register_user_condt($monthid,$yearid);
+
+		print json_encode($register_user);
+
+		exit;
+
+	}
+	
+	public function ajax_certificate(){
+		
+		$monthid = $_POST['monthid'];
+		$yearid = $_POST['yearid'];
 		
 		//register  get sertificate
-		$sertificate_user= $this->mcourse->select_data_sertificate_user();
+		$sertificate_user= $this->mcourse->select_data_sertificate_user_condt($monthid,$yearid);
+		
+		print json_encode($sertificate_user);
+
+		exit;
+
+	}
+	
+	public function ajax_visit(){
+		
+		$monthid = $_POST['monthid'];
+		$yearid = $_POST['yearid'];
 		
 		//visitor
-		$visitor_user= $this->mcourse->select_data_visitor_user();
-
-		print json_encode($data);
+		$visitor_user= $this->mcourse->select_data_visitor_user_condt($monthid,$yearid);
+		
+		print json_encode($visitor_user);
 
 		exit;
 
 	}
 
+	public function chart(){
+		
+		$register_user= $this->mcourse->select_data_register_user();
+		$sertificate_user= $this->mcourse->select_data_sertificate_user();
+		$visitor_user= $this->mcourse->select_data_visitor_user();
+		
+		$newformat = array('register'=>$register_user,'certificate'=>$sertificate_user,'visitor'=>$visitor_user);
+		print json_encode($newformat);
+		// print json_encode($register_user);
+		exit;
+	}
+	
+	public function chart_condtn(){
+		$monthid = $_POST['monthid'];
+		$yearid = $_POST['yearid'];
+		
+		$register_user= $this->mcourse->select_data_register_user_condt($monthid,$yearid);
+		$sertificate_user= $this->mcourse->select_data_sertificate_user_condt($monthid,$yearid);
+		$visitor_user= $this->mcourse->select_data_visitor_user_condt($monthid,$yearid);
+		
+		$newformat = array('register'=>$register_user,'certificate'=>$sertificate_user,'visitor'=>$visitor_user);
+		print json_encode($newformat);
+		// print json_encode($register_user);
+		exit;
+	}
+	
 	public function viewvisitor(){
 		
 		//register user
@@ -578,11 +626,11 @@ class course extends Controller {
 		$visitor_user= $this->mcourse->select_data_visitor_user();
 		$this->view->assign('visitor_user',$visitor_user);
 		
-		$month = date('m');
+		/*$month = date('m');
 		$year = date('Y');
 		$statistic_month = $this->mcourse->getTest($month,$year);
 		$statistic = $statistic_month['total'];
-		$this->view->assign('statistic',$statistic);
+		$this->view->assign('statistic',$statistic);*/
 		
 		return $this->loadView('course/statistic');
 	}
@@ -593,21 +641,21 @@ class course extends Controller {
 		// pr($_POST);
 		// exit;
 			//register user
-			$month = $_POST['month'];
-			$year = $_POST['year'];
+			$monthid = $_POST['month'];
+			$yearid = $_POST['year'];
 			
-			$statistic_month = $this->mcourse->getTest($month,$year);
-			$statistic = $statistic_month['total'];
+			// $statistic_month = $this->mcourse->getTest($month,$year);
+			// $statistic = $statistic_month['total'];
 			
-			$register_user= $this->mcourse->select_data_register_user();
+			$register_user= $this->mcourse->select_data_register_user_condt($monthid,$yearid);
 			$user_register = $register_user[0]['total'];
 			
 			//register  get sertificate
-			$sertificate_user= $this->mcourse->select_data_sertificate_user();
+			$sertificate_user= $this->mcourse->select_data_sertificate_user_condt($monthid,$yearid);
 			$user_sertificate = $sertificate_user[0]['total'];
 			
 			//visitor
-			$visitor_user= $this->mcourse->select_data_visitor_user();
+			$visitor_user= $this->mcourse->select_data_visitor_user_condt($monthid,$yearid);
 			$user_visitor = $visitor_user[0]['total'];
 			
 		if($_POST['type'] == 1){
@@ -621,7 +669,6 @@ class course extends Controller {
 									<td>registered users</td>
 									<td>users who already <br>received a certificate</td>
 									<td>users who just browse the web <br>without login</td>
-									<td>month</td>
 								</tr>
 								</thead>
 								<tbody>
@@ -629,7 +676,6 @@ class course extends Controller {
 										<td align=\"center\">$user_register</td>
 										<td align=\"center\">$user_sertificate</td>
 										<td align=\"center\">$user_visitor</td>	
-										<td align=\"center\">$statistic</td>	
 									</tr>
 								</tbody>
 							</table>

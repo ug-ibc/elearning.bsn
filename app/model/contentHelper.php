@@ -51,7 +51,16 @@ class contentHelper extends Database {
 
     function getKursus()
     {
-        $query = "SELECT * FROM kursus ORDER BY create_time desc";
+        /*$query = "SELECT * FROM kursus ORDER BY create_time desc";
+        $result = $this->fetch($query,1);
+
+        foreach ($result as $key => $value) {
+            $query = "SELECT COUNT(*) as total FROM materi WHERE idKursus = '{$value['idKursus']}'";
+            $res = $this->fetch($query);
+            $result[$key]['total'] = $res['total'];
+        }*/
+		$query = "SELECT k.*,g.namagrup FROM kursus as k join grup_kursus  as g on g.idGrup_kursus = k.idGrup_kursus
+					ORDER BY k.create_time desc";
         $result = $this->fetch($query,1);
 
         foreach ($result as $key => $value) {
@@ -59,6 +68,7 @@ class contentHelper extends Database {
             $res = $this->fetch($query);
             $result[$key]['total'] = $res['total'];
         }
+		
 
         return $result;
     }
@@ -126,6 +136,30 @@ class contentHelper extends Database {
         $query = "SELECT * FROM wilayah WHERE n_status = '1' AND parent= '0'";
         $result = $this->fetch($query,1);
 
+        return $result;
+    }
+    function getwebex()
+    {
+        //query memanggil data
+
+        $query = "SELECT id_webex, topic, speaker, DATE_FORMAT(schedule,'%d %b %y') as schedule, picture, cover, meeting_number from webex where status= '1'";
+        //pr($query);
+        //$query = "SELECT * FROM news WHERE status in ('0','1') ";
+        //pr($query);
+        //memanggil semua data. Jika hanya memanggil 1 data ->fetch($query,0,0)
+        $result = $this->fetch($query,1,0);
+        return $result;
+    }
+
+    function getvideowebex()
+    {
+        //query memanggil data
+        $query = "SELECT id_video, title, video from video_webex where status= '1' limit 5";
+        //pr($query);
+        //$query = "SELECT * FROM news WHERE status in ('0','1') ";
+        //pr($query);
+        //memanggil semua data. Jika hanya memanggil 1 data ->fetch($query,0,0)
+        $result = $this->fetch($query,1,0);
         return $result;
     }
 }

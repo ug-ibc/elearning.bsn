@@ -25,14 +25,17 @@ class kursus extends Controller {
 	
 	function index(){
 		global $basedomain;
-
-		$isCourseReady = $this->quizHelper->isCourseReady();
+		$kursus = $this->contentHelper->getKursus();
+		// pr($kursus);
+		$this->view->assign('kursus',$kursus);
+		/*$isCourseReady = $this->quizHelper->isCourseReady();
 		// pr($isCourseReady);
 
 		// pr($this->user);
 		// echo $this->user[idUser];
 		if ($isCourseReady){
 			$data = $this->models->getGrupKursus($this->user);
+			// pr($data);
 			if ($data){
 				foreach ($data as $key => $value) {
 					if ($isCourseReady[$value['idGrup_kursus']]['courseready'] == 1){
@@ -40,9 +43,10 @@ class kursus extends Controller {
 					}
 				}
 			}
+			// pr($courseReady);
 			$this->view->assign('grup',$courseReady);
 			$this->view->assign('user',$this->user[idUser]);
-		}
+		}*/
 		return $this->loadView('kursus/grupkursus');
 
     }
@@ -51,18 +55,42 @@ class kursus extends Controller {
     {
     	global $basedomain;
     	$id = $_GET['id'];
-
-    	$isQuizRunning = $this->quizHelper->isQuizRunning($id);
+		$idk = $_GET['idk'];
+		$isQuizRunning = $this->quizHelper->isQuizRunning($id);
     	// pr($isQuizRunning);
-    	if ($isQuizRunning){ redirect($basedomain.'quiz/startQuiz/?id='.$id); exit;}
-    	$data = $this->models->getAllCourse($id);
-    	// pr($data);
-		$this->view->assign('allcourse',$data);
+		if ($isQuizRunning){ redirect($basedomain.'quiz/startQuiz/?id='.$id); exit;}
+    	$data = $this->models->getCourse($id,$idk);
+		// pr($data);
+    	$Alldata = $this->models->getAllCourse();
+    	// pr($Alldata);
+		$this->view->assign('allcourse',$Alldata);
+		$this->view->assign('course',$data);
 		$this->view->assign('user', $this->user);
 		$this->view->assign('kursusid', $id);
 		$this->view->assign('havequiz', count($data['course']));
     	return $this->loadView('kursus/page_kursus');
     }
+	
+	function subkursusDetail()
+    {
+    	global $basedomain;
+    	$id = $_GET['id'];
+		$idk = $_GET['idk'];
+		$isQuizRunning = $this->quizHelper->isQuizRunning($id);
+    	// pr($isQuizRunning);
+		if ($isQuizRunning){ redirect($basedomain.'quiz/startQuiz/?id='.$id); exit;}
+    	$data = $this->models->getCourse($id,$idk);
+		// pr($data);
+    	$Alldata = $this->models->getAllCourse();
+    	// pr($Alldata);
+		$this->view->assign('allcourse',$Alldata);
+		$this->view->assign('course',$data);
+		$this->view->assign('user', $this->user);
+		$this->view->assign('kursusid', $id);
+		$this->view->assign('havequiz', count($data['course']));
+    	return $this->loadView('kursus/page_kursus');
+    }
+	
     function listGroup(){
 		
 		return $this->loadView('kursus/page_listGroup');

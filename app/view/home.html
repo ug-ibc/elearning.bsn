@@ -128,16 +128,16 @@
             {if !empty($kursus)}
 			{foreach $kursus as $val}
             <div class="col-md-3">
-                <div style="border-radius:10px 10px 0px 0px;padding:10px 15px;font-size:17px;border-bottom:1px solid #E3E3E3;background-color:#F5F5F5;" align="left">
+                <div style="border-radius:10px 10px 0px 0px;padding:1px 15px;font-size:17px;border-bottom:1px solid #E3E3E3;background-color:#F5F5F5;" align="left">
 					<div style="width:60%">
-						<h4><span>{$val.namakursus}</span></h4>
+						<h4><span>{$val.namagrup}</span></h4>
 					</div>
 				</div>
 				<div style="border:1px solid #E3E3E3">
                     <img src="{$basedomain}public_assets/{$val.image}" alt="" width="255px" height="250px"/>
                     <div style="padding:15px;padding-bottom:20px">
-						<h3><span>{$val.namagrup}</span></h4>
-                        <h4 class="text-center">{$val.namakursus}</h4>
+						<h3><span>{$val.namakursus}</span></h4>
+                        
                         <i><p class="text-center">{$val.keterangan}</p></i>
                     <!-- <img src="img/data/star.JPG" alt=""/> (3 reviews)<br/><br/> -->
                         <i class="fa fa-file-text-o"></i> {$val.total} Materi
@@ -234,7 +234,6 @@
         </div>
     </div>
     </section>{/*}
-    
     <section id="featured" style="background-color:#EBEBEB">
 
     <div class="container">
@@ -268,7 +267,7 @@
                     </section><!--//testimonials-->
             </div>
             <div class="col-lg-4">
-                <h1 class="section-heading text-highlight"><span class="line"> Webex Conference</span></h1>
+                {*}<h1 class="section-heading text-highlight"><span class="line"> Webex Conference</span></h1>
                 <table>
                     <tr>
                         <th>Topic</th>
@@ -284,7 +283,36 @@
                 </tr>
                 {/foreach}
 
-                </table>
+                </table>{/*}
+                <section class="news" style="background-color:#EBEBEB">
+                    <h1 class="section-heading text-highlight" style="background-color:#EBEBEB"><span class="line">Jadwal Webex</span></h1>     
+                    <div class="carousel-controls">
+                        <a class="prev" href="1.5.1.html#news-carousel" data-slide="prev"><i class="fa fa-caret-left"></i></a>
+                        <a class="next" href="1.5.1.html#news-carousel" data-slide="next"><i class="fa fa-caret-right"></i></a>
+                    </div><!--//carousel-controls--> 
+                    <div class="section-content clearfix" style="background-color:#EBEBEB">
+                        <div id="news-carousel" class="news-carousel carousel slide">
+                            <div class="carousel-inner">
+                                {if $datawebex}
+                                {foreach $datawebex as $k => $val}
+                                <div class="item {if $k == 0}active{/if}">
+                                    <div class="col-md-12 news-item">
+                                        <h2 class="title">{$val.topic}</a></h2>
+                                        <p>
+                                            Speaker's : <strong>{$val.speaker}</strong><br>
+                                            Schedule : <strong>{$val.schedule}</strong><br>
+                                            Meeting Number : <strong>{$val.meeting_number}</strong>
+                                        </p>
+                                        <img class="thumb" src="{$basedomain}public_assets/{$val.picture}"  alt="" />
+                                        <p>{$data.data.$foo.brief}</p>
+                                    </div>                   
+                                </div><!--//item-->
+                                {/foreach}
+                                {/if}
+                            </div><!--//carousel-inner-->
+                        </div><!--//news-carousel-->  
+                    </div><!--//section-content-->     
+                </section><!--//news-->
             </div>
             <div class="col-lg-4">
                 <h1 class="section-heading text-highlight"><span class="line"> Glosarium</span></h1>

@@ -111,6 +111,21 @@ class kursus extends Controller {
 
     }
 
+    
+    function ajax_marked(){
+
+    	$kursusid = _p('kursusid'); 
+    	$groupid = _p('groupid'); 
+
+    	$marked = $this->quizHelper->hasRead($kursusid, $groupid);
+    	if ($marked){
+    		print json_encode(array('status'=>true));
+    	}else{
+    		print json_encode(array('status'=>false));
+    	}
+
+    	exit;
+    }
 }
 
 ?>

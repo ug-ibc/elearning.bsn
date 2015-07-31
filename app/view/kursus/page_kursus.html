@@ -51,7 +51,9 @@
 							  <a href="#" class="btn btn-default" disabled><i class="fa fa-list"></i> Kursus</a>
 							  {if !empty($allcourse)}
 							  {foreach $allcourse as $val}
-							  <a href="{$basedomain}kursus/subkursusDetail/?id={$val.idGrup_kursus}&idk={$val.idKursus}" class="btn btn-default changetab">{$val.namakursus}</a>
+							  <a href="{$basedomain}kursus/subkursusDetail/?id={$val.idGrup_kursus}&idk={$val.idKursus}" class="btn btn-default changetab">{$val.namakursus}  <br/>
+							  	<span class="label label-danger"><i class="fa fa-times"></i> unread</span>
+							  	<span class="label label-success"><i class="fa fa-check-square"></i> read </span></a>
 							  {/foreach}
 							  {/if}
 							  <!-- <a href="#" class="btn btn-default"><span class="label label-info">Hirarki</span>Infrastruktur Mutu</a> -->
@@ -62,12 +64,12 @@
 					<div class="col-md-8 hiddendiv" style="display:" id="tab{$val.idKursus}">
 			           <div style="background-color:#f5f5f5;padding:1px 15px;border-radius:10px 10px 0px 0px">
 
-			            	<h4>{$val.namakursus}</h4>
+			            	<span style="font-size:20px;font-weight:bold">{$val.namakursus}</span> <a href="#"  style="float:right;padding:10px" class="label label-primary">Baca</a>
 			            </div>
 			            <div style="background-color:#fbfbfb;padding:15px">
 			            {$val.keterangan}<br/>
-			            <p>
-			            {*}<span style="font-size:13px;font-weight:bold">Requirement</span><br/>
+			            {*} <p>
+			           <span style="font-size:13px;font-weight:bold">Requirement</span><br/>
 			            <a href="#" class="label label-danger" style="font-size:11px;"><i class="fa fa-times"></i> Bayu sleep </a>
 			            <a href="#" class="label label-success" style="font-size:11px;">
 			            <i class="fa fa-check-square"></i> Bayu sleep </a>

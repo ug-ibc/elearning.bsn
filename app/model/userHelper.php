@@ -108,7 +108,7 @@ class userHelper extends Database {
     {
 
         $sql = array(
-                'table'=>'social_member',
+                'table'=>'user',
                 'field'=>"COUNT(email) AS total",
                 'condition' => "email = '{$email}'",
                 );

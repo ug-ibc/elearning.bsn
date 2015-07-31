@@ -61,6 +61,7 @@ class contentHelper extends Database {
         }*/
 		$query = "SELECT k.*,g.namagrup FROM kursus as k join grup_kursus  as g on g.idGrup_kursus = k.idGrup_kursus
 					ORDER BY k.create_time desc";
+        // pr($query);
         $result = $this->fetch($query,1);
 
         foreach ($result as $key => $value) {

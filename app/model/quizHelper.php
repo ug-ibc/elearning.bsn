@@ -83,7 +83,7 @@ class quizHelper extends Database {
         return $soal;
     }
 
-    function userAnswer($idKursus, $idMateri=0, $idSoal, $jawabanuser, $idsoalGen=0, $idGrup_kursus=0, $debug=0)
+    function userAnswer($idKursus, $idMateri=0, $idSoal, $jawabanuser, $idsoalGen=0, $idGrup_kursus=0, $attempt=0, $debug=0)
     {
         
         if (!$idKursus or !$idSoal or !$jawabanuser) return false;
@@ -95,8 +95,8 @@ class quizHelper extends Database {
         $idsoalGenSerial = serialize(array('id_generate_soal'=>$idsoalGen));
 
         $sql = "INSERT INTO soal (idSoal, idKursus, idMateri, idUser, jawaban, jawabanuser, attempt_date, n_status, keterangan, attempt, idGrup_kursus, soal) 
-                VALUES ({$idSoal}, {$idKursus}, {$idMateri}, {$idUser}, '{$jawaban}', '{$jawabanuser}', '{$date}', 1, '{$idsoalGenSerial}', 1, $idGrup_kursus, {$idsoalGen})
-                ON DUPLICATE KEY UPDATE jawabanuser = {$jawabanuser}, keterangan = '{$idsoalGen}'";
+                VALUES ({$idSoal}, {$idKursus}, {$idMateri}, {$idUser}, '{$jawaban}', '{$jawabanuser}', '{$date}', 1, '{$idsoalGenSerial}', {$attempt}, $idGrup_kursus, {$idsoalGen})
+                ON DUPLICATE KEY UPDATE jawabanuser = {$jawabanuser}, keterangan = '{$idsoalGenSerial}'";
         /*
         $sql = array(
                 'table'=>"soal ",
@@ -125,14 +125,14 @@ class quizHelper extends Database {
         return false;
     }
 
-    function getUserAnswer($idKursus, $idMateri=1, $n_status=1,$debug=0)
+    function getUserAnswer($idKursus, $idMateri=1, $n_status=1, $attempt=0, $debug=0)
     {
 
         $idUser = $this->user['idUser'];
         $sql = array(
                 'table'=>"soal",
                 'field'=>"idSoal, jawabanuser",
-                'condition' => " idUser = {$idUser} AND idGrup_kursus = {$idKursus} AND n_status = {$n_status}",
+                'condition' => " idUser = {$idUser} AND idGrup_kursus = {$idKursus} AND n_status = {$n_status} AND attempt = {$attempt}",
                 );
 
         $res = $this->lazyQuery($sql,$debug);
@@ -214,7 +214,9 @@ class quizHelper extends Database {
         
 
         // db($newRes);
-
+        $userAttempQuiz = $this->userAttempQuiz();
+        // pr($userAttempQuiz);
+        $countAttemp = $userAttempQuiz[0]['total']+1;
         if ($newRes){
 
             foreach ($newRes as $key => $value) {
@@ -234,8 +236,8 @@ class quizHelper extends Database {
                     VALUES ({$idKursus}, {$idMateri}, {$idUser}, '{$soal}', '{$this->date}','{$tolerancetime}','{$endtime}', 1)
                     ";
             */
-            $sql = "INSERT IGNORE INTO tbl_generate_soal (idGrupKursus, idUser, soal, generate_date, start_date, end_date, n_status) 
-                    VALUES ({$idKursus}, {$idUser}, '{$soal}', '{$this->date}','{$tolerancetime}','{$endtime}', 1)
+            $sql = "INSERT IGNORE INTO tbl_generate_soal (idGrupKursus, idUser, soal, generate_date, start_date, end_date, attempt, n_status) 
+                    VALUES ({$idKursus}, {$idUser}, '{$soal}', '{$this->date}','{$tolerancetime}','{$endtime}', {$countAttemp}, 1)
                     ";
 
                     
@@ -257,7 +259,7 @@ class quizHelper extends Database {
                 */
                 $sql = array(
                         'table'=>"tbl_generate_soal",
-                        'field'=>"id, start_date, end_date",
+                        'field'=>"id, start_date, end_date, attempt",
                         'condition' => " idGrupKursus = {$idKursus} AND finish = 0 AND idUser = {$idUser} AND n_status = 1 ORDER BY id DESC LIMIT 1",
                         );
                 $result = $this->lazyQuery($sql,$debug);
@@ -268,6 +270,19 @@ class quizHelper extends Database {
         }else{
 
         } 
+        return false;
+    }
+
+    function userAttempQuiz()
+    {
+        $sql = array(
+                'table'=>"tbl_generate_soal",
+                'field'=>"COUNT(idUser) AS total",
+                'condition'=>"idUser = '{$this->user['idUser']}' AND finish = 1",
+                );
+
+        $result = $this->lazyQuery($sql,$debug);
+        if ($result) return $result;
         return false;
     }
 

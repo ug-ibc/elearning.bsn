@@ -78,7 +78,9 @@ class quiz extends Controller {
 
       $getGenerateSoal = $this->quizHelper->getGenerateSoal();
       $idsoalGen = $getGenerateSoal[0]['id'];
-    	$updateData = $this->quizHelper->userAnswer($kursus, $materi, $soal, $pilihan, $idsoalGen, $idGrup_kursus);
+      $attempt = $getGenerateSoal[0]['attempt'];
+      // pr($getGenerateSoal);
+    	$updateData = $this->quizHelper->userAnswer($kursus, $materi, $soal, $pilihan, $idsoalGen, $idGrup_kursus, $attempt);
     	if ($updateData){
     		print json_encode(array('status'=>true));
     	}else{
@@ -115,9 +117,11 @@ class quiz extends Controller {
 		$soalList = array();
     $getKursus = array();
 		$getQuiz = $this->quizHelper->getQuiz($groupKursus);
-    // db($getQuiz);
-       	$getUserAnswer = $this->quizHelper->getUserAnswer($groupKursus);
-       	if ($getUserAnswer){
+    // db($generateSoal);
+
+       	$getUserAnswer = $this->quizHelper->getUserAnswer($groupKursus,1,1, $generateSoal[0]['attempt']);
+       	// pr($getUserAnswer);
+        if ($getUserAnswer){
        		foreach ($getUserAnswer as $key => $value) {
        			$answerList[$value['idSoal']] = $value['jawabanuser'];
        			$soalList[] = $value['idSoal'];

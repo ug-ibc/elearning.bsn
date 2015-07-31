@@ -286,11 +286,11 @@
                 <section class="news" style="background-color:#EBEBEB">
                     <h1 class="section-heading text-highlight" style="background-color:#EBEBEB"><span class="line">Jadwal Webex</span></h1>     
                     <div class="carousel-controls">
-                        <a class="prev" href="1.5.1.html#news-carousel" data-slide="prev"><i class="fa fa-caret-left"></i></a>
-                        <a class="next" href="1.5.1.html#news-carousel" data-slide="next"><i class="fa fa-caret-right"></i></a>
+                        <a class="prev" href="1.5.1.html#webex-carousel" data-slide="prev"><i class="fa fa-caret-left"></i></a>
+                        <a class="next" href="1.5.1.html#webex-carousel" data-slide="next"><i class="fa fa-caret-right"></i></a>
                     </div><!--//carousel-controls--> 
                     <div class="section-content clearfix" style="background-color:#EBEBEB">
-                        <div id="news-carousel" class="news-carousel carousel slide">
+                        <div id="webex-carousel" class="news-carousel carousel slide">
                             <div class="carousel-inner">
                                 {if $datawebex}
                                 {foreach $datawebex as $k => $val}
@@ -314,14 +314,39 @@
                 </section><!--//news-->
             </div>
             <div class="col-lg-4">
-                <h1 class="section-heading text-highlight"><span class="line"> Glosarium</span></h1>
-                {*}<p>Standardisasi adalah proses merencanakan, merumuskan, menetapkan, menerapkan, memberlakukan, memelihara, dan mengawasi Standar yang dilaksanakan secara tertib dan bekerja sama dengan semua Pemangku Kepentingan 
-                </p>{/*}
+                {*}<h1 class="section-heading text-highlight"><span class="line"> Glosarium</span></h1>
+                <p>Standardisasi adalah proses merencanakan, merumuskan, menetapkan, menerapkan, memberlakukan, memelihara, dan mengawasi Standar yang dilaksanakan secara tertib dan bekerja sama dengan semua Pemangku Kepentingan 
+                </p>
                 {foreach $data.glosarium as $val}
                 <p style="padding-left:15px"><span style="color:#7DA55C">{$val.judul}</span><br/>
                     {$val.keterangan}
                 </p>
                 {/foreach}
+                {/*}
+                <section class="news" style="background-color:#EBEBEB">
+                    <h1 class="section-heading text-highlight" style="background-color:#EBEBEB"><span class="line">Glosarium</span></h1>     
+                    <div class="carousel-controls">
+                        <a class="prev" href="1.5.1.html#glosarium-carousel" data-slide="prev"><i class="fa fa-caret-left"></i></a>
+                        <a class="next" href="1.5.1.html#glosarium-carousel" data-slide="next"><i class="fa fa-caret-right"></i></a>
+                    </div><!--//carousel-controls--> 
+                    <div class="section-content clearfix" style="background-color:#EBEBEB">
+                        <div id="glosarium-carousel" class="news-carousel carousel slide">
+                            <div class="carousel-inner">
+                                {if $data.glosarium}
+                                {foreach $data.glosarium as $k => $val}
+                                <div class="item {if $k == 0}active{/if}">
+                                    <div class="col-md-12">
+                                        <p><span style="color:#7DA55C">{$val.judul}</span><br/>
+                                            {$val.keterangan}
+                                        </p>
+                                    </div>                   
+                                </div><!--//item-->
+                                {/foreach}
+                                {/if}
+                            </div><!--//carousel-inner-->
+                        </div><!--//news-carousel-->  
+                    </div><!--//section-content-->     
+                </section><!--//news-->
             </div>
          </div>
     </div>

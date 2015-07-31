@@ -771,7 +771,7 @@ class quizHelper extends Database {
         return false;
     }
 
-    function hasRead()
+    function hasRead($kursusid=0, $groupid=0)
     {
 
         $userid = $this->user['idUser'];

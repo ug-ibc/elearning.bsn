@@ -86,7 +86,7 @@ class userHelper extends Database {
 
         $filter = "";
         if(!$id==false) $filter = " AND id = {$id}";
-        $sql = "SELECT * FROM `user` WHERE 1";
+        $sql = "SELECT * FROM `user` WHERE n_status IN (1)";
         $res = $this->fetch($sql,1);  
         if(empty($res)){return false;}
         return $res; 
@@ -143,16 +143,18 @@ class userHelper extends Database {
         return false;
     }
 
-    function updateUser($data=false,$n_status=0)
+    function updateUser($data=false,$n_status=2)
     {
-
+        // pr($data);
         if (empty($data)) return false;
 
         
+        foreach ($data as $key => $value) {
+            $sql = "UPDATE user SET n_status = {$n_status} WHERE idUser IN ({$value}) LIMIT 1";
+            // pr($sql);
+            $res = $this->query($sql);
+        }
         
-        $sql = "UPDATE social_member SET n_status = {$n_status} WHERE id IN ({$data}) LIMIT 1";
-        pr($sql);
-        $res = $this->query($sql);
         if ($res) return true;
         return false;
     }

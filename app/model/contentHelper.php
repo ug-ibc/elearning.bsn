@@ -146,7 +146,7 @@ class contentHelper extends Database {
     {
         //query memanggil data
 
-        $query = "SELECT id_webex, topic, speaker, DATE_FORMAT(schedule,'%d %b %y') as schedule, picture, cover, meeting_number from webex where status= '1'";
+        $query = "SELECT id_webex, topic, speaker, DATE_FORMAT(schedule,'%d %b %y') as schedule, picture, site, meeting_number from webex where status= '1'";
         //pr($query);
         //$query = "SELECT * FROM news WHERE status in ('0','1') ";
         //pr($query);

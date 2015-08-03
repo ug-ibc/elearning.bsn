@@ -76,30 +76,30 @@ $(window).on('load', function() {
 					<tr>
 						<th>Topic</th>
 						<th class="min-tablet">Speaker</th>
-						<th class="min-desktop">Photo</th>
-						<th>Cover</th>
+						<th class="min-desktop">Picture</th>
 						<th class="min-desktop">Schedule</th>
+						<th class="min-desktop">Time</th>
+						<th class="min-desktop">Site</th>
 						<th class="min-desktop">Meeting Number</th>
 						<th class="min-tablet">Action</th>
 					</tr>
 				</thead>
 				<tbody>
-				{if !empty($data)}
 				{foreach $data as $val}
 			<tr>
 				<td>{$val.topic}</td>
 				<td>{$val.speaker}</td>
 				<td><img src="{if !empty($val.picture)}../public_assets/{$val.picture}{else}../public_assets/noimage.png{/if}" alt="Placeholder" width="50%" height="50%" /></td>
-				<td><img src="{if !empty($val.cover)}../public_assets/{$val.cover}{else}../public_assets/noimage.png{/if}" alt="Placeholder" width="50%" height="50%" /></td>
 				<td>{$val.schedule}</td>
+				<td>{$val.waktu}</td>
+				<td>{$val.site}</td>
 				<td>{$val.meeting_number}</td>
 				<td align="center">
 					<a id ="demo-dt-delete-btn" class="btn btn-warning btn-labeled fa fa-pencil" href="{$basedomain}webex/editwebex/?id_webex={$val.id_webex}">Edit</a>	
 					<a id ="demo-dt-delete-btn" class="btn btn-danger btn-labeled fa fa-times" href="{$basedomain}webex/deletewebex/?id_webex={$val.id_webex}" onclick="return confirm('Do you really want to delete this data?')">Delete</a>
 				</td>
 			</tr>
-			{/foreach}
-			{/if} 
+			{/foreach} 
 				</tbody>
 			</table>
 		</div>

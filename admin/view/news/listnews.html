@@ -91,8 +91,8 @@ $(window).on('load', function() {
 				<td>{$val.brief}</td>
 				<td>{if $val.status==0} <font style="color:red">Unpublish </font> {elseif $val.status==1} <font style="color:green"> Publish </font>{/if}</td>
 				<td align="center">
-					<a id ="demo-dt-delete-btn" class="btn btn-success btn-labeled fa fa-pencil-square-o" href="{$basedomain}news/editnews/?id_news={$val.id_news}">Edit</a>	
-					<a id ="demo-dt-delete-btn" class="btn btn-danger btn-labeled fa fa-times" href="{$basedomain}news/deletenews/?id_news={$val.id_news}">Delete</a>
+					<a id ="demo-dt-delete-btn" class="btn btn-warning btn-labeled fa fa-pencil" href="{$basedomain}news/editnews/?id_news={$val.id_news}">Edit</a>	
+					<a id ="demo-dt-delete-btn" class="btn btn-danger btn-labeled fa fa-times" href="{$basedomain}news/deletenews/?id_news={$val.id_news}" onclick="return confirm('Do you really want to delete this news?')">Delete</a>
 				</td>
 			</tr>
 			{/foreach}

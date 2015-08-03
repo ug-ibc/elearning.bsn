@@ -23,6 +23,7 @@ class home extends Controller {
 		$this->contentHelper = $this->loadModel('contentHelper');
 		$this->marticle = $this->loadModel('marticle');
 		$this->mquiz = $this->loadModel('mquiz');
+		$this->mcourse = $this->loadModel('mcourse');
 	}
 	
 	public function index(){
@@ -43,6 +44,20 @@ class home extends Controller {
 
 		return $this->loadView('home/home');
 
+	}
+	
+	public function chart(){
+		
+		$monthArray =array('1','2','3','4','5','6','7','8','9','10','11','12');
+		
+		$year = date('Y');
+		
+		$register_user= $this->mcourse->select_data_register_user_condt_home($monthArray,$year);
+		$visitor_user= $this->mcourse->select_data_visitor_user_condt_home($monthArray,$year);
+		
+		$newformat = array('register'=>$register_user,'visitor'=>$visitor_user);
+		print json_encode($newformat);
+		exit;
 	}
 	
 	//view glosarium

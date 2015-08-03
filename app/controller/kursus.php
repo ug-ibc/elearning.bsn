@@ -77,19 +77,42 @@ class kursus extends Controller {
     	// pr($Alldata);
     	
     	if ($this->user){
-    		$hasRead = true;
+    		$islogin = true;
     		$getHasRead = $this->quizHelper->getHasRead($id);
 	    	if ($getHasRead){
 	    		$hasRead = array();
 	    		foreach ($getHasRead as $key => $value) {
 	    			$hasRead[] = $value['kursusid'];
+
 	    		}
+
+	    		$notcomplete = array();
+	    		if ($Alldata){
+		    		foreach ($Alldata as $key => $value) {
+		    			$idData[] = $value['idKursus'];
+		    		}
+		    	}
+
+		    	if ($hasRead){
+		    		foreach ($idData as $key => $value) {
+		    			if (!in_array($value, $hasRead)) $notcomplete[] = $value;
+		    		}
+		    	}
+
+		    	if (count($notcomplete)>0) $alreadyApply = false;
+		    	else $alreadyApply = true;
+	    	}else{
+	    		$hasRead = false;
 	    	}
     	}else{
-    		$hasRead = false;
+    		$islogin = false;
     	}
     	
+
+    	// pr($idData);
     	// pr($hasRead);
+    	$this->view->assign('alreadyApply',$alreadyApply);
+    	$this->view->assign('islogin',$islogin);
     	$this->view->assign('hasRead',$hasRead);
     	$this->view->assign('allcourse',$Alldata);
 		$this->view->assign('course',$data);
@@ -112,17 +135,40 @@ class kursus extends Controller {
     	$Alldata = $this->models->getAllCourse($id);
     	// pr($Alldata);
     	if ($this->user){
-    		$hasRead = true;
+    		$islogin = true;
     		$getHasRead = $this->quizHelper->getHasRead($id);
+    		// pr($getHasRead);
 	    	if ($getHasRead){
 	    		$hasRead = array();
 	    		foreach ($getHasRead as $key => $value) {
 	    			$hasRead[] = $value['kursusid'];
 	    		}
+
+	    		$notcomplete = array();
+	    		if ($Alldata){
+		    		foreach ($Alldata as $key => $value) {
+		    			$idData[] = $value['idKursus'];
+		    		}
+		    	}
+
+		    	if ($hasRead){
+		    		foreach ($idData as $key => $value) {
+		    			if (!in_array($value, $hasRead)) $notcomplete[] = $value;
+		    		}
+		    	}
+
+		    	if (count($notcomplete)>0) $alreadyApply = false;
+		    	else $alreadyApply = true;
+	    	}else{
+	    		$hasRead = false;
 	    	}
     	}else{
-    		$hasRead = false;
+    		$islogin = true;
     	}
+
+    	// pr($alreadyApply);
+    	$this->view->assign('alreadyApply',$alreadyApply);
+    	$this->view->assign('islogin',$islogin);
     	$this->view->assign('hasRead',$hasRead);
 		$this->view->assign('allcourse',$Alldata);
 		$this->view->assign('course',$data);

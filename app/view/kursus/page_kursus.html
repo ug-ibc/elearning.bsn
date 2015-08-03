@@ -19,9 +19,11 @@
 				<img src="{$basedomain}assets/img/data/iconslide.JPG"/><br/><br/>
 				<span style="font-size:24px;color:#252A72">Ujian {$course.grup.namagrup}</span>
 				{*}<br/><span style="color:#000000">{count($course.course)} Pokok Bahasan</span>{/*}<br/><br/>
+				{if $alreadyApply}
 					{if $havequiz}
 				   <div style="border-radius:5px 10px;background-color:#4155D0;width:100%;height:100%;padding:10px 0px;"><a href="{if $user}{$basedomain}quiz/startQuiz/?id={$kursusid}{else}javascript:void(0){/if}" style="text-decoration:none;color:#FFFFFF;font-size:24px;" {if !$user} data-target="#myModal" data-toggle="modal" {/if} class="applykursus" data-kursus="{$kursusid}">APPLY NOW
                         </a></div>
+                	{/if}
                 	{/if}
 			</div>
 
@@ -52,11 +54,15 @@
 							  {if !empty($allcourse)}
 							  {foreach $allcourse as $val}
 							  <a href="{$basedomain}kursus/subkursusDetail/?id={$val.idGrup_kursus}&idk={$val.idKursus}" class="btn btn-default changetab">{$val.namakursus}  <br/>
+							  	{if $islogin}
 							  	{if $hasRead}
 							  	{if !in_array($val.idKursus, $hasRead)}
 							  	<span class="label label-danger"><i class="fa fa-times"></i> unread</span>
 							  	{else}
 							  	<span class="label label-success"><i class="fa fa-check-square"></i> read </span></a>
+							  	{/if}
+							  	{else}
+							  	<span class="label label-danger"><i class="fa fa-times"></i> unread</span>
 							  	{/if}
 							  	{/if}
 							  {/foreach}

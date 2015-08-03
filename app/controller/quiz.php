@@ -119,7 +119,7 @@ class quiz extends Controller {
 		$getQuiz = $this->quizHelper->getQuiz($groupKursus);
     // db($generateSoal);
 
-       	$getUserAnswer = $this->quizHelper->getUserAnswer($groupKursus,1,1, $generateSoal[0]['attempt']);
+       	$getUserAnswer = $this->quizHelper->getUserAnswer($groupKursus,1,1, intval($generateSoal[0]['attempt']));
        	// pr($getUserAnswer);
         if ($getUserAnswer){
        		foreach ($getUserAnswer as $key => $value) {

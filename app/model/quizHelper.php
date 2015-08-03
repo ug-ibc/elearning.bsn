@@ -240,7 +240,7 @@ class quizHelper extends Database {
                     VALUES ({$idKursus}, {$idUser}, '{$soal}', '{$this->date}','{$tolerancetime}','{$endtime}', {$countAttemp}, 1)
                     ";
 
-                    
+            logFile($sql);        
             // pr($sql);
             // $sql = array(
             //         'table'=>"tbl_generate_soal",

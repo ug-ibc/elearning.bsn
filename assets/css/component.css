@@ -65,7 +65,7 @@
 .tabs nav a {
 	color: #becbd2;
 	display: block;
-	font-size: 1.45em;
+	font-size: 1.15em;
 	line-height: 2.5;
 	padding: 0 1.25em;
 	white-space: nowrap;
@@ -115,7 +115,7 @@
 
 /* Content */
 .content section {
-	font-size: 1.25em;
+	font-size: 0.85em;
 	padding: 3em 1em;
 	display: none;
 	max-width: 1230px;

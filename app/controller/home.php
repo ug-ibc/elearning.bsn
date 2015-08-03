@@ -48,7 +48,7 @@ class home extends Controller {
 		$this->view->assign('testimoni',$getTestimoni);
 		$this->view->assign('online',$online[0]['total']);
 		// pr($online);
-		$kursus = $this->contentHelper->getKursus();
+		$kursus = $this->contentHelper->getKursus(true);
 		// pr($kursus);
 		$this->view->assign('kursus',$kursus);
 		// pr($vardata);exit;

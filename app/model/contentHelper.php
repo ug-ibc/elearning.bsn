@@ -49,7 +49,7 @@ class contentHelper extends Database {
         return false;
     }
 
-    function getKursus()
+    function getKursus($limit=false)
     {
         /*$query = "SELECT * FROM kursus ORDER BY create_time desc";
         $result = $this->fetch($query,1);
@@ -59,9 +59,10 @@ class contentHelper extends Database {
             $res = $this->fetch($query);
             $result[$key]['total'] = $res['total'];
         }*/
+        if($limit) $climit = "LIMIT 4"; else $climit="";
 		$query = "SELECT k.*,g.namagrup FROM kursus as k join grup_kursus  as g on g.idGrup_kursus = k.idGrup_kursus
 
-					ORDER BY k.create_time desc";
+					ORDER BY k.create_time desc {$climit}";
         // pr($query);
 
         $result = $this->fetch($query,1);

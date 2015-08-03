@@ -169,7 +169,7 @@ class mcourse extends Database {
 	function upload_insert($x){
 		if($x['action'] == 'insert'){
 			$n_status = '1';
-			$query = "INSERT INTO file (namafile,jenisfile,statusfile,idMateri,idKursus,idGrup_kursus,files,n_status)
+			$query = "INSERT IGNORE INTO file (namafile,jenisfile,statusfile,idMateri,idKursus,idGrup_kursus,files,n_status)
 				  VALUES ('$x[namafile]','$x[jenisfile]','$x[statusfile]','$x[idMateri]','$x[idKursus]',
 				  '$x[idGrup_kursus]','$x[post_image]',$n_status)";
 

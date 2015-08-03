@@ -73,9 +73,23 @@ class kursus extends Controller {
 		if ($isQuizRunning){ redirect($basedomain.'quiz/startQuiz/?id='.$id); exit;}
     	$data = $this->models->getCourse($id,$idk);
 		// pr($data);
-    	$Alldata = $this->models->getAllCourse();
+    	$Alldata = $this->models->getAllCourse($id);
     	// pr($Alldata);
-		$this->view->assign('allcourse',$Alldata);
+    	
+    	if ($this->user){
+    		$getHasRead = $this->quizHelper->getHasRead($id);
+	    	if ($getHasRead){
+	    		foreach ($getHasRead as $key => $value) {
+	    			$hasRead[] = $value['kursusid'];
+	    		}
+	    	}
+    	}else{
+    		$hasRead = false;
+    	}
+    	
+    	// pr($hasRead);
+    	$this->view->assign('hasRead',$hasRead);
+    	$this->view->assign('allcourse',$Alldata);
 		$this->view->assign('course',$data);
 		$this->view->assign('user', $this->user);
 		$this->view->assign('kursusid', $id);
@@ -93,8 +107,19 @@ class kursus extends Controller {
 		if ($isQuizRunning){ redirect($basedomain.'quiz/startQuiz/?id='.$id); exit;}
     	$data = $this->models->getCourse($id,$idk);
 		// pr($data);
-    	$Alldata = $this->models->getAllCourse();
+    	$Alldata = $this->models->getAllCourse($id);
     	// pr($Alldata);
+    	if ($this->user){
+    		$getHasRead = $this->quizHelper->getHasRead($id);
+	    	if ($getHasRead){
+	    		foreach ($getHasRead as $key => $value) {
+	    			$hasRead[] = $value['kursusid'];
+	    		}
+	    	}
+    	}else{
+    		$hasRead = false;
+    	}
+    	$this->view->assign('hasRead',$hasRead);
 		$this->view->assign('allcourse',$Alldata);
 		$this->view->assign('course',$data);
 		$this->view->assign('user', $this->user);

@@ -277,6 +277,19 @@ class quiz extends Controller {
       }
       exit;
     }
+
+    function readCourse()
+    {
+
+      global $basedomain;
+      $kursus = _p('kursus');
+      $grupkursus = _p('grupkursus');
+
+      $read = $this->quizHelper->hasRead($kursus, $grupkursus);
+      redirect($basedomain."kursusDetail/?id={$grupkursus}&idk={$kursus}");
+
+      exit;
+    }
 }
 
 ?>

@@ -144,3 +144,20 @@ function compare(data1, data2)
 function validateNumber(evt){
      evt.value = evt.value.replace(/[^0-9]/g,"");
 }
+
+$(document).on('click','.bacaMateri', function(){
+
+	var kursus = $(this).attr('data-kursus');
+	var grupkursus = $(this).attr('data-grupkursus');
+	var template = "";
+
+	$.post(basedomain+'quiz/readCourse', {kursus:kursus,grupkursus:grupkursus}, function(data){
+
+		if (data.status==true){
+			
+			window.location.href=basedomain+'quiz/hasil';	
+		}
+		
+	},"JSON")
+	
+})

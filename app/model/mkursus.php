@@ -69,11 +69,14 @@ class mkursus extends Database{
 		return $dataArr;
 	}
 	
-	function getAllCourse()
+	function getAllCourse($groupid=false)
 	{
 		
+		$filter = "";
+		if ($groupid) $filter .= " AND idGrup_kursus = {$groupid}";
 		// $query = "SELECT * FROM kursus WHERE idGrup_kursus = '{$id}' AND n_status = '1'";
-		$query = "SELECT * FROM kursus WHERE n_status = '1'";
+		$query = "SELECT * FROM kursus WHERE n_status = '1' {$filter}";
+		// pr($query);
 		$Allcourse = $this->fetch($query,1);
 
 		return $Allcourse;

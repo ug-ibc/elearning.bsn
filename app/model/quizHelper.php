@@ -803,7 +803,7 @@ class quizHelper extends Database {
         return false;
     }
 
-    function hasRead($kursusid=0, $groupid=0)
+    function hasRead($kursusid=0, $groupid=0, $debug=false)
     {
 
         $userid = $this->user['idUser'];
@@ -813,11 +813,29 @@ class quizHelper extends Database {
         $sql = array(
                 'table'=>"tbl_user_activity",
                 'field'=>"userid, kursusid, groupid, createdate, n_status",
-                'values' => "{$userid}, {$kursusid}, {$groupid}, '{$date}', 1 ",
+                'value' => "{$userid}, {$kursusid}, {$groupid}, '{$date}', 1 ",
                 );
 
         $res = $this->lazyQuery($sql,$debug, 1);
         if ($res) return true;
+        return false;
+    }
+
+    function getHasRead($groupid=0, $kursusid=0, $debug=false)
+    {
+
+        $userid = $this->user['idUser'];
+        if (!$userid) return false;
+        
+        $date = date('Y-m-d H:i:s');
+        $sql = array(
+                'table'=>"tbl_user_activity",
+                'field'=>"userid, kursusid, groupid, createdate, n_status",
+                'condition' => "userid = {$userid} AND  groupid = {$groupid} AND n_status = 1 ",
+                );
+
+        $res = $this->lazyQuery($sql,$debug);
+        if ($res) return $res;
         return false;
     }
 

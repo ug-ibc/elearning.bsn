@@ -374,5 +374,25 @@ class mcourse extends Database {
 		
 		return $result;
 	}
+	
+	function select_data_register_user_condt_home($monthArray,$year)
+	{
+		foreach ($monthArray as $val) {
+			$query = "SELECT COUNT(1) AS total FROM user WHERE  YEAR(register_date) = {$year} AND MONTH(register_date) = {$val} AND n_status IN (1)";
+			$result = $this->fetch($query,1);
+			$newArray[]= $result;
+		}
+		return $newArray;
+	}
+	
+	function select_data_visitor_user_condt_home($monthArray,$year)
+	{
+		foreach ($monthArray as $val) {
+			$query = "SELECT COUNT(1) AS total FROM tbl_activity_log WHERE  YEAR(datetimes) = {$year} AND MONTH(datetimes) = {$val} AND userID = 0  AND n_status IN (1)";
+			$result = $this->fetch($query,1);
+			$newArray[]= $result;
+		}
+		return $newArray;
+	}
 }
 ?>

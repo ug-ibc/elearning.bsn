@@ -7,57 +7,83 @@ $(document).ready(function() {
 	// -----------------------------------------------------------------
 	// http://morrisjs.github.io/morris.js/
 	// =================================================================
-
+	$.post(basedomain+"home/chart",function(register_user){
+			var Jan_reg = register_user.register[0][0].total;
+			var Feb_reg = register_user.register[1][0].total;
+			var Mar_reg = register_user.register[2][0].total;
+			var Apr_reg = register_user.register[3][0].total;
+			var May_reg = register_user.register[4][0].total;
+			var Jun_reg = register_user.register[5][0].total;
+			var Jul_reg = register_user.register[6][0].total;
+			var Aug_reg = register_user.register[7][0].total;
+			var Sep_reg = register_user.register[8][0].total;
+			var Oct_reg = register_user.register[9][0].total;
+			var Nov_reg = register_user.register[10][0].total;
+			var Des_reg = register_user.register[11][0].total;
+			
+			var Jan_visit = register_user.visitor[0][0].total;
+			var Feb_visit = register_user.visitor[1][0].total;
+			var Mar_visit = register_user.visitor[2][0].total;
+			var Apr_visit = register_user.visitor[3][0].total;
+			var May_visit = register_user.visitor[4][0].total;
+			var Jun_visit = register_user.visitor[5][0].total;
+			var Jul_visit = register_user.visitor[6][0].total;
+			var Aug_visit = register_user.visitor[7][0].total;
+			var Sep_visit = register_user.visitor[8][0].total;
+			var Oct_visit = register_user.visitor[9][0].total;
+			var Nov_visit = register_user.visitor[10][0].total;
+			var Des_visit = register_user.visitor[11][0].total;
+			
 	Morris.Area({
 		element: 'demo-morris-area',
 		data: [{
 			period: 'Jan',
-			dl: 77,
-			up: 25
+			dl: Jan_visit,
+			up: Jan_reg
 			}, {
 			period: 'Feb',
-			dl: 127,
-			up: 58
+			dl: Feb_visit,
+			up: Feb_reg
 			}, {
 			period: 'Mar',
-			dl: 115,
-			up: 46
+			dl: Mar_visit,
+			up: Mar_reg
 			}, {
 			period: 'Apr',
-			dl: 239,
-			up: 57
+			dl: Apr_visit,
+			up: Apr_reg
 			}, {
 			period: 'May',
-			dl: 46,
-			up: 75
+			dl: May_visit,
+			up: May_reg
 			}, {
 			period: 'Jun',
-			dl: 97,
-			up: 57
+			dl: Jun_visit,
+			up: Jun_reg
 			}, {
 			period: 'Jul',
-			dl: 105,
-			up: 70
+			dl: Jul_visit,
+			up: Jul_reg
 			}, {
 			period: 'Aug',
-			dl: 115,
-			up: 106
+			dl: Aug_visit,
+			up: Aug_reg
 			}, {
 			period: 'Sep',
-			dl: 239,
-			up: 187
+			dl: Sep_visit,
+			up: Sep_reg
 			}, {
 			period: 'Oct',
-			dl: 246,
-			up: 215
+			dl: Oct_visit,
+			up: Oct_reg
 			},{
 			period: 'Nov',
-			dl: 246,
-			up: 215
+			dl: Nov_visit,
+			up: Nov_reg
 			},{
 			period: 'Des',
-			dl: 246,
-			up: 215
+			dl: Des_visit,
+			up: Des_reg
 			}],
 		gridEnabled: false,
 		gridLineColor: 'transparent',
@@ -74,7 +100,7 @@ $(document).ready(function() {
 		fillOpacity: 0.7,
 		parseTime:false
 	});
-
+	},"JSON");
 })	
 </script>
 

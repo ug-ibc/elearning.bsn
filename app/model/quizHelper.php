@@ -425,15 +425,22 @@ class quizHelper extends Database {
                 else $wrong[] = $value['idSoal_user'];
             }
 
+            $jumlahSoal = unserialize($getGenerateSoal[0]['soal']);
             // pr(count($res));
+            if (count($res) != count($jumlahSoal)){
+                $wrong = count($jumlahSoal) - count($correct);
+
+            }else{
+                $wrong = count($wrong);
+            }
             $idKursus = $res[0]['idKursus'];
             $idGroupKursus = $res[0]['idGrup_kursus'];
-            $nilai = array('benar'=>count($correct), 'idGroupKursus'=>$idGroupKursus, 'idKursus'=>$idKursus, 'salah'=>count($wrong));
+            $nilai = array('benar'=>count($correct), 'idGroupKursus'=>$idGroupKursus, 'idKursus'=>$idKursus, 'salah'=>$wrong);
             $saveToTable = $this->saveNilai($nilai);
 
 
             $data['correct'] = count($correct);
-            $data['wrong'] = count($wrong);
+            $data['wrong'] = $wrong;
             $data['rawdata'] = array('correct'=>$correct, 'wrong'=>$wrong);
 
             return $data;

@@ -38,14 +38,13 @@ var $models = FALSE;
 			$upload1 = uploadFile('picture',false,'image');
 			// pr($judul);exit;
 			$picture=$upload1['full_name'];
-			$upload2 = uploadFile('cover',false,'image');
-			// pr($judul);exit;
-			$cover=$upload2['full_name'];
+			$waktu = $_POST['waktu'];
+			$site = $_POST['site'];
 			$schedule = $_POST['schedule'];
 			//pr($status);exit;
 			$meeting_number = $_POST['meeting_number'];
 			//pr($meeting_number);exit;
-			$data=$this->models->inputwebex($topic,$speaker,$picture,$cover,$schedule,$meeting_number);
+			$data=$this->models->inputwebex($topic,$speaker,$picture,$waktu,$site,$schedule,$meeting_number);
 			//kondisi untuk memberi peringatan proses input berhasil atau tidak
 			if($data == 1){
 				echo "<script>alert('Data Successfully Created');window.location.href='".$CONFIG['admin']['base_url']."webex'</script>";
@@ -90,6 +89,8 @@ var $models = FALSE;
 			$topic = $_POST['topic'];
 			$speaker = $_POST['speaker'];
 			$schedule = $_POST['schedule'];
+			$waktu = $_POST['waktu'];
+			$site = $_POST['site'];
 			$meeting_number = $_POST['meeting_number'];
 
 			if($_FILES['picture']['name']){
@@ -100,15 +101,7 @@ var $models = FALSE;
 				$picture = $_POST['hiddenpicture'];
 			}
 
-			if($_FILES['cover']['name']){
-				deleteFile($_POST['hiddencover']);
-				$upload2 = uploadFile('cover',false,'image');
-				$cover=$upload2['full_name'];
-			} else {
-				$cover = $_POST['hiddencover'];
-			}
-
-			$data=$this->models->updatewebex($id_webex,$topic,$speaker,$picture,$cover,$schedule,$meeting_number);
+			$data=$this->models->updatewebex($id_webex,$topic,$speaker,$picture,$waktu,$site,$schedule,$meeting_number);
 			if($data == 1){
 				echo "<script>alert('Data Successfully Update');window.location.href='".$CONFIG['admin']['base_url']."webex'</script>";
 			}

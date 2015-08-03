@@ -301,10 +301,11 @@
                                 <div class="item {if $k == 0}active{/if}">
                                     <div class="col-md-12 news-item">
                                         <h2 class="title">{$val.topic}</a></h2>
-                                        <p>
+                                        <p style="font-size:14px;margin-top:-15px">
                                             Speaker's : <strong>{$val.speaker}</strong><br>
                                             Schedule : <strong>{$val.schedule}</strong><br>
                                             Meeting Number : <strong>{$val.meeting_number}</strong>
+                                            Site : <strong>{$val.site}</strong>
                                         </p>
                                         <img class="thumb" src="{$basedomain}public_assets/{$val.picture}"  alt="" />
                                         <p>{$data.data.$foo.brief}</p>

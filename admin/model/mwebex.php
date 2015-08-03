@@ -2,11 +2,11 @@
 class mwebex extends Database{
 
 	//fungsi untuk eksekusi penyimpanan data news ke database
-	function inputwebex($topic,$speaker,$picture,$cover,$schedule,$meeting_number)
+	function inputwebex($topic,$speaker,$picture,$waktu,$site,$schedule,$meeting_number)
 	{
 		//query insert data
-		$query = "INSERT INTO webex (topic,speaker,picture,cover,schedule,meeting_number,status)
-					VALUES('".$topic."','".$speaker."','".$picture."','".$cover."','".$schedule."','".$meeting_number."','1')";
+		$query = "INSERT INTO webex (topic,speaker,picture,waktu,site,schedule,meeting_number,status)
+					VALUES('".$topic."','".$speaker."','".$picture."','".$waktu."','".$site."','".$schedule."','".$meeting_number."','1')";
 		//pr($query); exit;
 		//eksekusi query
 		$exec = $this->query($query,0);	
@@ -19,7 +19,7 @@ class mwebex extends Database{
 	{
 		//query memanggil data
 
-		$query = "SELECT id_webex, topic, speaker, DATE_FORMAT(schedule,'%d %b %y') as schedule, picture, cover, meeting_number from webex where status= '1'";
+		$query = "SELECT id_webex, topic, speaker, DATE_FORMAT(schedule,'%d %b %y') as schedule, picture, site, waktu, meeting_number from webex where status= '1'";
 		//pr($query);
 		//$query = "SELECT * FROM news WHERE status in ('0','1') ";
 		//pr($query);
@@ -48,10 +48,10 @@ class mwebex extends Database{
 		if($exec) return 1; else pr('query gagal');
 	}
 
-	function updatewebex($id_webex,$topic,$speaker,$picture,$cover,$schedule,$meeting_number)
+	function updatewebex($id_webex,$topic,$speaker,$picture,$waktu,$site,$schedule,$meeting_number)
 	{
 		//query insert data
-		$query = "UPDATE webex SET topic='".$topic."', speaker='".$speaker."', picture='".$picture."', cover='".$cover."', schedule='".$schedule."',meeting_number='".$meeting_number."' WHERE id_webex = '".$id_webex."'";
+		$query = "UPDATE webex SET topic='".$topic."', speaker='".$speaker."', picture='".$picture."', waktu='".$waktu."', site='".$site."', schedule='".$schedule."',meeting_number='".$meeting_number."' WHERE id_webex = '".$id_webex."'";
 		//eksekusi query
 		$exec = $this->query($query,0);	
 		//kondisi apabila eksekusi berhasil mengembalikan notif 1, jika gagal mencetak query gagal 

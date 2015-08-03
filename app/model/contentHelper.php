@@ -62,13 +62,13 @@ class contentHelper extends Database {
         if($limit) $climit = "LIMIT 4"; else $climit="";
 		$query = "SELECT k.*,g.namagrup FROM kursus as k join grup_kursus  as g on g.idGrup_kursus = k.idGrup_kursus
 
-					ORDER BY k.create_time desc {$climit}";
+					WHERE k.n_status= '1' ORDER BY k.create_time desc {$climit}";
         // pr($query);
 
         $result = $this->fetch($query,1);
 
         foreach ($result as $key => $value) {
-            $query = "SELECT COUNT(*) as total FROM materi WHERE idKursus = '{$value['idKursus']}'";
+            $query = "SELECT COUNT(*) as total FROM materi WHERE idKursus = '{$value['idKursus']}' AND n_status= '1'";
             $res = $this->fetch($query);
             $result[$key]['total'] = $res['total'];
         }

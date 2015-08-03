@@ -286,8 +286,12 @@ class quiz extends Controller {
       $grupkursus = _p('grupkursus');
 
       $read = $this->quizHelper->hasRead($kursus, $grupkursus);
-      redirect($basedomain."kursusDetail/?id={$grupkursus}&idk={$kursus}");
+      if ($read){
 
+        print json_encode(array('status'=>true));
+      }else{
+        print json_encode(array('status'=>false));
+      }
       exit;
     }
 }

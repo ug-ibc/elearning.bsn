@@ -153,10 +153,8 @@ $(document).on('click','.bacaMateri', function(){
 
 	$.post(basedomain+'quiz/readCourse', {kursus:kursus,grupkursus:grupkursus}, function(data){
 
-		if (data.status==true){
-			
-			window.location.href=basedomain+'quiz/hasil';	
-		}
+		window.location.href=basedomain+'kursus/kursusDetail/?id='+grupkursus+'&idk='+kursus;	
+		
 		
 	},"JSON")
 	

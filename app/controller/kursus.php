@@ -77,8 +77,10 @@ class kursus extends Controller {
     	// pr($Alldata);
     	
     	if ($this->user){
+    		$hasRead = true;
     		$getHasRead = $this->quizHelper->getHasRead($id);
 	    	if ($getHasRead){
+	    		$hasRead = array();
 	    		foreach ($getHasRead as $key => $value) {
 	    			$hasRead[] = $value['kursusid'];
 	    		}
@@ -110,8 +112,10 @@ class kursus extends Controller {
     	$Alldata = $this->models->getAllCourse($id);
     	// pr($Alldata);
     	if ($this->user){
+    		$hasRead = true;
     		$getHasRead = $this->quizHelper->getHasRead($id);
 	    	if ($getHasRead){
+	    		$hasRead = array();
 	    		foreach ($getHasRead as $key => $value) {
 	    			$hasRead[] = $value['kursusid'];
 	    		}

@@ -42,10 +42,24 @@
 {pr($list_course)}	
 {pr($group_course)}
 {pr($nilai)}-->
+<section class="callaction" style="margin-bottom:-60px;margin-top:-60px">
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-8 col-md-offset-1">
+				<span style="color:#6091BA; font-size:30px;text-transform:uppercase">{$nilai.name}</span><br/>
+				<span style="color:#656565;font-size:25px">{$nilai.jenispekerjaan}</span><br/>
+				<span style="color:#000000;font-size:20px;text-transform:uppercase"> {$nilai.kodeSertifikat}</span><br/>
+			</div>
+		</div>
+	</div>
+</section>
 <section class="callaction">
 	<div class="container">
+
 		<div class="row">
 			<div class="col-md-8 col-md-offset-1" align="center">
+		
 				  
 <table width="100%"> 
 	<tr>
@@ -80,7 +94,7 @@
                 </div>
             </div>
 			{if isset($user) && $kategori != 'Kurang'}
-            <a href="{$basedomain}search/cetak/?id_crtfkt={$nilai.kodeSertifikat}&id_grp={$group_course.idGrup_kursus}&id_usr={$nilai.idUser}">
+            <a href="{$basedomain}search/cetak/?id_crtfkt={$nilai.kodeSertifikat}&id_grp={$group_course.idGrup_kursus}&id_usr={$nilai.idUser}" style="text-decoration:none">
             <div class="col-md-12 nilai hvr-grow-shadow" style="margin-top:20px;background-color:#39B3D7;color:white;font-size:19px;padding-top:20px;padding-bottom:20px" >
             	<i class="fa fa-file-pdf-o"></i> Download Sertifikat
        		 </div>

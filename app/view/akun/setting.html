@@ -166,13 +166,20 @@
                 </div>
                 <div id="collapse{$value.idMateri}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                   <div class="panel-body">
-                    Kode Sertifikat :{$value.kodeSertifikat}<br/>
-                    Nilai           :{$value.nilai}<br/>
-                    Mengulang       :{$value.statusulang} kali<br/>
-                    Kelulusan       :{$value.statuskelulusan}<br/>
-
-                    <a href="#" class="btn btn-primary">Cetak Setifikat</a>
-
+                  <table width="100%">
+                    <tr>
+                      <th>Kode Sertifikat</th>
+                      <th>Nilai</th>
+                      <th>Mengulang</th>
+                      <th>Aksi</th>
+                    </tr>
+                    <tr>
+                      <td>{$value.kodeSertifikat}</td>
+                      <td>{$value.nilai}</td>
+                      <td>{$value.statusulang} Kali</td>
+                      <td><a href="#" class="btn btn-info">Cetak Sertifikat</a></td>
+                    </tr>
+                  </table>
                     
                   </div>
                 </div>

@@ -48,6 +48,7 @@ class search extends Controller {
 				$this->view->assign('group_course',$group_course);
 				$this->view->assign('list_course',$list_course);
 				$this->view->assign('nilai',$nilai);
+				// pr($nilai);
 				$this->view->assign('keyword',$certificate);
 				$this->view->assign('user',$this->user);
 				$this->view->assign('kategori',$kategori);

@@ -18,7 +18,7 @@
 			<div class="col-md-3" align="center" style="color:#FFFFFF;background-color:#D3D3D3;padding-top:10px;margin-left:5px;border-radius:5px;">
 				<img src="{$basedomain}assets/img/data/iconslide.JPG"/><br/><br/>
 				<span style="font-size:24px;color:#252A72">Ujian {$course.grup.namagrup}</span>
-				<br/><span style="color:#000000">{count($course.course)} Pokok Bahasan</span><br/><br/>
+				{*}<br/><span style="color:#000000">{count($course.course)} Pokok Bahasan</span>{/*}<br/><br/>
 					{if $havequiz}
 				   <div style="border-radius:5px 10px;background-color:#4155D0;width:100%;height:100%;padding:10px 0px;"><a href="{if $user}{$basedomain}quiz/startQuiz/?id={$kursusid}{else}javascript:void(0){/if}" style="text-decoration:none;color:#FFFFFF;font-size:24px;" {if !$user} data-target="#myModal" data-toggle="modal" {/if} class="applykursus" data-kursus="{$kursusid}">APPLY NOW
                         </a></div>
@@ -143,7 +143,7 @@
 												<h4 class="modal-title" id="myModalLabel">View Video</h4>
 											  </div>
 											  <div class="modal-body">
-												<iframe width="100%" height="264" src="{$vals.files}"></iframe>
+												<iframe width="100%" height="264" allowfullscreen="" src="{$vals.files}"></iframe>
 											  </div>
 											</div>
 										  </div>

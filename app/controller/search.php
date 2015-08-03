@@ -48,6 +48,7 @@ class search extends Controller {
 				$this->view->assign('group_course',$group_course);
 				$this->view->assign('list_course',$list_course);
 				$this->view->assign('nilai',$nilai);
+				// pr($nilai);
 				$this->view->assign('keyword',$certificate);
 				$this->view->assign('user',$this->user);
 				$this->view->assign('kategori',$kategori);
@@ -85,11 +86,14 @@ class search extends Controller {
 		$tanggal = $ex2[0].'/'.$ex1[1].'/'.$ex1[0];
 		
 		if($certificate[nilai] >= $criteria[kategoriBaik]){
-			$kategori = "Baik";
+			// $kategori = "Baik";
+			$kategori = "Sangat Baik";
 		}elseif($certificate[nilai] >= $criteria[kategoriCukup] && $certificate[nilai] < $criteria[kategoriBaik]){
-			$kategori = "Cukup";
+			// $kategori = "Cukup";
+			$kategori = "Baik";
 		}else{
-			$kategori = "Kurang";
+			// $kategori = "Kurang";
+			$kategori = "";
 		}
 		$background_certificate =  $basedomain."assets/img/certificate/bg.jpg";
 		$this->reportHelper =$this->loadModel('reportHelper');

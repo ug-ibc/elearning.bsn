@@ -251,6 +251,7 @@ class quiz extends Controller {
       
       $getNilai = $this->quizHelper->getNilai();
       // pr($getNilai);
+      // pr($correctionAnswer);
       if ($correctionAnswer){
         $this->view->assign('correct', $correctionAnswer['correct']);
         $this->view->assign('wrong', $correctionAnswer['wrong']);

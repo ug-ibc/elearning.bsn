@@ -188,7 +188,7 @@ class quizHelper extends Database {
         $timeCourse = ($isCourseReady[$idKursus]['waktu'] * 60);
 
         // pr($isCourseReady);
-        // db($whatCourse);
+        // db($isCourseReady);
         if ($whatCourse){
 
             foreach ($whatCourse as $key => $value) {
@@ -401,7 +401,7 @@ class quizHelper extends Database {
         return false;
     }
 
-    function correctionAnswer()
+    function correctionAnswer($debug=false)
     {
 
         $idUser = $this->user['idUser'];
@@ -415,6 +415,7 @@ class quizHelper extends Database {
                 );
 
         $res = $this->lazyQuery($sql,$debug);
+        // pr($res);
         if ($res){
 
             $correct = array();
@@ -424,6 +425,7 @@ class quizHelper extends Database {
                 else $wrong[] = $value['idSoal_user'];
             }
 
+            // pr(count($res));
             $idKursus = $res[0]['idKursus'];
             $idGroupKursus = $res[0]['idGrup_kursus'];
             $nilai = array('benar'=>count($correct), 'idGroupKursus'=>$idGroupKursus, 'idKursus'=>$idKursus, 'salah'=>count($wrong));
@@ -538,24 +540,35 @@ class quizHelper extends Database {
         return $result;
     }
 
-    function isCourseReady($idGroupKursus=false)
+    function isCourseReady($idGroupKursus=false, $debug=0)
     {
 
         // SELECT count(*) as jumlah, `idGrup_kursus`, `idKursus` FROM `banksoal` group by idKursus order by idGrup_kursus 
         
         $sql = array(
-                'table'=>"banksoal",
-                'field'=>"COUNT(*) AS jumlahsoal, idGrup_kursus, idKursus",
-                'condition' => " n_status = 1 GROUP BY idKursus ORDER BY idGrup_kursus ASC",
+                'table'=>"banksoal AS b, kursus AS k, grup_kursus AS gk",
+                'field'=>"COUNT(b.idSoal) AS jumlahsoal, b.idGrup_kursus, b.idKursus, k.namakursus, k.keterangan, gk.namagrup, k.image",
+                'condition' => " b.n_status = 1 GROUP BY b.idKursus ORDER BY b.idGrup_kursus ASC",
+                'joinmethod' => 'LEFT JOIN',
+                'join' => "b.idKursus = k.idKursus, b.idGrup_kursus = gk.idGrup_kursus"
                 );
 
         $res = $this->lazyQuery($sql,$debug);
+        // pr($res);
+
         if ($res){
+
+            foreach ($res as $key => $value) {
+                $getMateri = $this->getMateri(false, $value['idGrup_kursus']);
+                $res[$key]['total'] = count($getMateri); 
+                // pr($getMateri);
+            }
 
             foreach ($res as $key => $value) {
                 $data[$value['idGrup_kursus']][] = $value;
             }
 
+            // pr($data);
             foreach ($data as $key => $value) {
                 $tmp = $this->getQuizSetting($key);
                 if ($tmp) $getQuizSetting[] = $tmp;
@@ -567,7 +580,8 @@ class quizHelper extends Database {
                     $dataSetting[$value[0]['idGroupKursus']] = $value[0];
                 }
             }
-            // pr($data);
+            
+            // pr($dataSetting);
             if ($dataSetting){
                 foreach ($dataSetting as $key => $value) {
                     $dataSetting[$key]['soalkursus'] = $data[$key];
@@ -589,6 +603,7 @@ class quizHelper extends Database {
         }
         return false;
     }
+
 
     function isCourseReady_old($idGroupKursus=false)
     {
@@ -719,9 +734,11 @@ class quizHelper extends Database {
         if (!$userid) return false;
         // pr($this->user);
         $sql = array(
-                'table'=>"nilai",
-                'field'=>"*",
-                'condition' => " n_status = 1 AND idUser = {$userid} ORDER BY idNilai DESC LIMIT 1",
+                'table'=>"nilai AS n, tbl_quiz_setting AS s",
+                'field'=>"n.*, s.kategorikurang",
+                'condition' => " n.n_status = 1 AND n.idUser = {$userid} ORDER BY n.idNilai DESC LIMIT 1",
+                'joinmethod' => 'LEFT JOIN',
+                'join' => 'n.idGroupKursus = s.idGroupKursus'
                 );
 
         $res = $this->lazyQuery($sql,$debug);

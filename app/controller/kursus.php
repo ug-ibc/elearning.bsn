@@ -27,26 +27,38 @@ class kursus extends Controller {
 		global $basedomain;
 		$kursus = $this->contentHelper->getKursus();
 		// pr($kursus);
-		$this->view->assign('kursus',$kursus);
-		/*$isCourseReady = $this->quizHelper->isCourseReady();
+		// $this->view->assign('kursus',$kursus);
+		$isCourseReady = $this->quizHelper->isCourseReady();
 		// pr($isCourseReady);
 
 		// pr($this->user);
 		// echo $this->user[idUser];
 		if ($isCourseReady){
-			$data = $this->models->getGrupKursus($this->user);
-			// pr($data);
+			
+			/*$data = $this->models->getGrupKursus($this->user);
 			if ($data){
 				foreach ($data as $key => $value) {
 					if ($isCourseReady[$value['idGrup_kursus']]['courseready'] == 1){
 						$courseReady[] = $value;
 					}
 				}
+			}*/
+
+			$dataKursus = array();
+			foreach ($isCourseReady as $key => $value) {
+
+				if ($value['soalkursus']){
+					foreach ($value['soalkursus'] as $key => $val) {
+						$dataKursus[] = $val;
+					}
+					
+				}
+				
 			}
-			// pr($courseReady);
-			$this->view->assign('grup',$courseReady);
+			// pr($dataKursus);
+			$this->view->assign('kursus',$dataKursus);
 			$this->view->assign('user',$this->user[idUser]);
-		}*/
+		}
 		return $this->loadView('kursus/grupkursus');
 
     }

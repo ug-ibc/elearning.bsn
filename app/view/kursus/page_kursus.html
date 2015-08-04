@@ -52,19 +52,19 @@
 							  <a href="#" class="btn btn-default" disabled><i class="fa fa-list"></i> Kursus</a>
 							  {if !empty($allcourse)}
 							  {foreach $allcourse as $val}
-							  <a href="{$basedomain}kursus/subkursusDetail/?id={$val.idGrup_kursus}&idk={$val.idKursus}" class="btn btn-default changetab">{$val.namakursus}  <br/>
+							  <a href="{$basedomain}kursus/subkursusDetail/?id={$val.idGrup_kursus}&idk={$val.idKursus}" class="btn btn-default changetab">
 							  	{if $islogin}
 							  	{if $hasRead}
 							  	{if !in_array($val.idKursus, $hasRead)}
-							  	<span class="label label-danger"><i class="fa fa-times"></i> unread</span>
+							  	<span class="label label-danger"> unread</span>
 							  	{else}
-							  	<span class="label label-success"><i class="fa fa-check-square"></i> read </span>
+							  	<span class="label label-success"> read </span>
 							  	{/if}
 							  	{else}
-							  	<span class="label label-danger"><i class="fa fa-times"></i> unread</span>
+							  	<span class="label label-danger"> unread</span>
 							  	{/if}
 							  	{/if}
-							  	</a>
+							  {$val.namakursus} </a> <br/>
 							  {/foreach}
 							  {/if}
 							  <!-- <a href="#" class="btn btn-default"><span class="label label-info">Hirarki</span>Infrastruktur Mutu</a> -->
@@ -117,9 +117,10 @@
 						    <div id="collapse{$value.idMateri}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 						      <div class="panel-body">
 						        {$value.keterangan}<br/><br />
-						        
+						       
 						       	{if !empty($value.file)}
 								{foreach $value.file as $vals}
+									{if !empty($vals.files)}
 									<br/>
 									{$expl_string = "."|explode:$vals.files}
 									{if ($expl_string[1] == 'pdf')}
@@ -148,7 +149,7 @@
 										  </div>
 										</div> 
 									{else}
-										<a href="#" class="hvr-icon-spin btn btn-info" data-toggle="modal" data-target="#viewVideo{$vals.idFile}"><i class="fa fa-file-video-o"></i> View {$vals.namafile}ee</a><br/>
+										<a href="#" class="hvr-icon-spin btn btn-info" data-toggle="modal" data-target="#viewVideo{$vals.idFile}"><i class="fa fa-file-video-o"></i> View {$vals.namafile}</a><br/>
 										<div class="modal fade" id="viewVideo{$vals.idFile}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 										  <div class="modal-dialog video">
 											<div class="modal-content">
@@ -162,6 +163,7 @@
 											</div>
 										  </div>
 										</div> 
+									{/if}
 									{/if}
 								{/foreach}
 						        {/if}

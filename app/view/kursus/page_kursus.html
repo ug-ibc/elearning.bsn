@@ -10,7 +10,7 @@
 						</div>
 					</div>
 					<div class="col-md-10"  style="color:#FFFFFF;height:241px">
-						<h1  style="color:#FFFFFF">{$course.grup.namagrup}</h1>
+						<h1  style="color:#FFFFFF">&nbsp;{$course.grup.namagrup}</h1>
 						{$course.grup.syaratkelulusan}
 					</div>
 				</div>
@@ -49,7 +49,6 @@
 				<div class="row">
 					<div class="col-md-3">
 						<div class="col-md-12 btn-group-vertical" role="group" aria-label="..." align="left">
-						  
 							  <a href="#" class="btn btn-default" disabled><i class="fa fa-list"></i> Kursus</a>
 							  {if !empty($allcourse)}
 							  {foreach $allcourse as $val}
@@ -59,12 +58,13 @@
 							  	{if !in_array($val.idKursus, $hasRead)}
 							  	<span class="label label-danger"><i class="fa fa-times"></i> unread</span>
 							  	{else}
-							  	<span class="label label-success"><i class="fa fa-check-square"></i> read </span></a>
+							  	<span class="label label-success"><i class="fa fa-check-square"></i> read </span>
 							  	{/if}
 							  	{else}
 							  	<span class="label label-danger"><i class="fa fa-times"></i> unread</span>
 							  	{/if}
 							  	{/if}
+							  	</a>
 							  {/foreach}
 							  {/if}
 							  <!-- <a href="#" class="btn btn-default"><span class="label label-info">Hirarki</span>Infrastruktur Mutu</a> -->

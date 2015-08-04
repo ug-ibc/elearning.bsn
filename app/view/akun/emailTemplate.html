@@ -1,0 +1,121 @@
+﻿
+<html>
+    <body>
+        <table id="background-table" style="" cellpadding="0" cellspacing="0" align="center" border="0" width="100%">
+           <tbody>
+                <tr>
+                      <td align="center" bgcolor="#ffffff">
+                           <table class="w640" style="margin:0 10px;" cellpadding="0" cellspacing="0" border="0" width="640">
+                           <tbody>
+                                <tr><td class="w640" height="10" width="640"></td></tr>
+                                
+                                <tr>
+                                    <td id="header" class="w640" align="center" bgcolor="#ccd" width="640">
+                        
+                                        <table class="w640" cellpadding="0" cellspacing="0" border="0" width="640">
+                                            <tbody>
+                                                <tr><td class="w30" width="30"></td><td class="w580" height="10" width="580"></td><td class="w30" width="30"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="w30" width="30"></td>
+                                                    <td class="w580" width="580">
+                                                        <div id="headline" align="center">
+                                                            <p>
+                                                                <strong><h2>BADAN STANDARISASI NASIONAL (BSN)</h2></strong>
+                                                            </p>
+                                                        </div>
+                                                    </td>
+                                                    <td class="w30" width="30"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                                                            
+                                    </td>
+                                </tr>
+                                                                                        
+                                <tr><td class="w640" bgcolor="#ffffff" height="30" width="640"></td></tr>
+                                <tr id="simple-content-row">
+                                    <td class="w640" bgcolor="#ffffff" width="640">
+                                    <table class="w640" cellpadding="0" cellspacing="0" align="left" border="0" width="640">
+                                        <tbody>
+                                            <tr>
+                                                <td class="w30" width="30"></td>
+                                                <td class="w580" width="580">
+                                                    <repeater>
+                                                        <layout label="Text only">
+                                                        <table class="w580" cellpadding="0" cellspacing="0" border="0" width="580">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="w580" width="580">
+                                                                        <p class="article-title" align="left"><singleline label="Title">Selamat datang, {$name}</singleline>
+</p>
+<p>Kami sudah menerima permintaan pembuatan akun anda di <a href="#">Badan Standarisasi Nasional</a>. Berikut ini adalah informasi akun anda</p>
+
+<p>Email : <u>{$email}</u></p>
+                                                                        <div class="article-content" align="left">
+                                                                        <multiline label="Description"><a href="{$basedomain}register/validate/?ref={$encode}">Silahkan klik link berikut ini untuk verifikasi email anda</a></multiline>
+<p>Atau copy link berikut ke browser anda : <a href="{$basedomain}register/validate/?ref={$encode}">{$basedomain}register/validate/?ref={$encode}</a></p>
+<p>Untuk informasi lebih lanjut, silahkan kunjungi <a href="#">bsn.org</a></u></p>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="w580" height="10" width="580"></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        </layout>
+                                                                                                 
+                                                    </repeater>
+                                                </td>
+                                                <td class="w30" width="30"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    </td>
+                                </tr>
+                                <tr><td class="w640" bgcolor="#ffffff" height="15" width="640"></td></tr>
+                                                                                        
+                                <tr>
+                                    <td class="w640" width="640">
+                                        <table id="footer" class="w640" cellpadding="0" cellspacing="0" bgcolor="#999999" border="0" width="640">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="w30" width="30"></td>
+                                                    <td class="w580 h0" height="5" width="360"></td>
+                                                    <td class="w0" width="60"></td>
+                                                    <td class="w0" width="160"></td>
+                                                    <td class="w30" width="30"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="w30" width="30"></td>
+                                                    <td class="w580" valign="top" width="360">
+                                                        <span class="hide"><p id="permission-reminder" class="footer-content-left" align="left"></p></span>
+                                                        <p class="footer-content-left" align="left"><preferences lang="en" >Tim BSN</preferences> | <unsubscribe>2015</unsubscribe></p>
+                                                    </td>
+                                                    <td class="hide w0" width="60"></td>
+                                                    <td class="hide w0" valign="top" width="160">
+                                                        <p id="street-address" class="footer-content-right" align="right"></p>
+                                                    </td>
+                                                    <td class="w30" width="30"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="w30" width="30"></td>
+                                                    <td class="w580 h0" height="15" width="360"></td>
+                                                    <td class="w0" width="60"></td>
+                                                    <td class="w0" width="160"></td>
+                                                    <td class="w30" width="30"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr><td class="w640" height="60" width="640"></td></tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

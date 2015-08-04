@@ -1,0 +1,84 @@
+<!--<section class="callaction">
+	<div class="container">
+		<div class="col-md-12" align="left" style="border-bottom:2px solid #F5F5F5;margin-bottom:50px;padding-bottom:3px">
+	        <span style="font-size:23px;border-bottom:2px solid #E37A43;">GRUP KURSUS</span>
+	    </div><br/>
+		<div class="row">
+			{if !empty($grup)}
+			{foreach $grup as $val}
+			<div class="col-md-3">
+                <div style="border:1px solid #E3E3E3;border-radius:10px 10px 0px 0px">
+                    <div style="border-radius:10px 10px 0px 0px;padding:10px 15px;font-size:17px;border-bottom:1px solid #E3E3E3;background-color:#F5F5F5;" align="left">
+                        <div style="width:60%">
+                        <span>{$val.namagrup}</span>
+                        </div>
+                    </div>
+                    <div  style="padding-left:15px;padding-top:10px;padding-bottom:20px">
+                        {if $val.status_nilai ==1}<div align="center" style="width:70px;background-color:#39B3D7;padding-top:15px;padding-bottom:15px;border-radius:50px;margin-top:-45px;margin-right:5px;float:right;color:#FFFFFF;box-shadow: 2px 2px 5px #7E7E7E;">
+                            SCORE<br/>
+                            <span style="font-size:29px;">{$val.nilai}</span>
+                        </div>{/if}
+                        <p>{$val.syaratkelulusan}</p>
+						<i class="fa fa-file-text-o"></i> {$val.total} Kursus
+                        {if $val.status_nilai == 1}
+							{if $val.nilai > $val.kategoriBaik}
+								<br/><br/><a href="{$basedomain}home/cetak/?id_usr={$user}&id_grp={$val.idGrup_kursus}" class="label label-success" style="font-size:13px;"><i class="fa fa-print"></i> Print Sertifikat</a>
+								{$val.kategoriBaik}
+							{elseif ($val.nilai >= $val.kategoriCukup) && ($val.nilai <= $val.kategoriBaik)}
+								<br/><br/><a href="{$basedomain}home/cetak/?id_usr={$user}&id_grp={$val.idGrup_kursus}" class="label label-success" style="font-size:13px;"><i class="fa fa-print"></i> Print Sertifikat</a>
+							{else}
+							{/if}
+						{/if}
+                    </div>
+                    <div style="border-top:1px solid #E3E3E3;" align="center">
+                        {if $val.status_nilai !=1}
+							<a href="{$basedomain}kursus/kursusDetail/?id={$val.idGrup_kursus}" class="hvr-shutter-in-horizontal" style="width:100%;height:100%;padding:10px 0px;text-decoration:none"></i> <strong>APPLY NOW</strong> </a>
+						{else}
+							<a href="javascript:void(0)" class="hvr-shutter-out-horizontal" style="width:100%;height:100%;padding:10px 0px;text-decoration:none"></i> <strong>COMPLETE</strong> </a>
+                       {/if}
+                      </div>
+                </div>
+            </div>
+            {/foreach}
+            {/if}
+		</div>
+	</div>
+</section>-->
+<section class="callaction">
+    <div class="container">
+
+        <div class="row">
+		<div class="col-md-12" align="left" style="border-bottom:2px solid #F5F5F5;margin-bottom:50px;padding-bottom:3px">
+	        <span style="font-size:23px;border-bottom:2px solid #E37A43;">KURSUS</span>
+	    </div>
+        </div>
+        <div class="row">
+            {if !empty($kursus)}
+			{foreach $kursus as $val}
+            <div class="col-md-3">
+                <div style="border-radius:10px 10px 0px 0px;padding:10px 15px;font-size:17px;border-bottom:1px solid #E3E3E3;background-color:#F5F5F5;" align="left">
+					<div style="width:60%">
+						<h4><span>{$val.namagrup}</span></h4>
+					</div>
+				</div>
+				<div style="border:1px solid #E3E3E3">
+                    <img src="{$basedomain}public_assets/{$val.image}" alt="" width="100%" height="250px"/>
+                    <div style="padding:15px;padding-bottom:20px">
+						{*}<h3><span>{$val.namagrup}</span></h4>{/*}
+                        <h4 class="text-center">{$val.namakursus}</h4>
+                        <i><p class="text-center">{$val.keterangan}</p></i>
+                    <!-- <img src="img/data/star.JPG" alt=""/> (3 reviews)<br/><br/> -->
+                        <i class="fa fa-file-text-o"></i> {$val.total} Materi
+                    </div>
+                    <div style="border-top:2px solid #E3E3E3;" align="center">
+                        <a href="{$basedomain}kursus/kursusDetail/?id={$val.idGrup_kursus}&idk={$val.idKursus}" class="hvr-shutter-in-horizontal" style="width:100%;height:100%;padding:10px 0px;text-decoration:none"> <strong>APPLY NOW</strong>
+                        </a>
+                      </div>
+                </div>
+            </div>
+            {/foreach}
+            {/if}
+        </div>
+        
+    </div>
+    </section>

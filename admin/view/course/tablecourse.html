@@ -1,0 +1,33 @@
+<table id="newslist" class="table table-striped table-bordered" cellspacing="0" width="100%">
+				<thead>
+					<tr>
+						<th>No</th>
+						<th>Group Name</th>
+						<th>Requirement</th>
+						<th class="min-tablet">Create Time</th>
+						<th class="min-tablet">Status</th>
+						<th class="min-tablet">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{$no = 1}
+					{foreach $data as $value}
+					<tr>
+						<td align="center">{$no}</td>
+						<td>{$value.namagrup}</td>
+						<td>{$value.syaratkelulusan}</td>
+						<td>{$value.create_time}</td>
+						<td style="color:green">
+							{if $value.n_status == '1'}
+								{$var = 'Active'}
+								{$var}
+							{else}
+								{$var = 'Non Active'}	
+								{$var}
+							{/if}</td>
+						<td style="color:green">Active</td>
+					</tr>
+					<!--{$no++}-->
+					{/foreach}
+				</tbody>
+			</table>

@@ -1,0 +1,182 @@
+
+{*}<section class="callaction">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8" style="background-color:#AF0096">
+				<div class="row">
+					<div class="col-md-1" style="padding-top:20px">
+						<div style="color:#FFFFFF;background-color:#73496E;padding:10px">
+							<i class="fa fa-file-text fa-3"></i>
+						</div>
+					</div>
+					<div class="col-md-10"  style="color:#FFFFFF;height:300px">
+						<h1  style="color:#FFFFFF">PENDAFTARAN E-LEARNING </h1>
+						Petunjuk Pendaftaran Kursus : 
+						<ol type="1">
+							<li>Lorem ipsum dolor sit amet, consectetu</li>
+							<li>Lorem ipsum dolor sit amet, consectetu</li>
+							<li>Lorem ipsum dolor sit amet, consectetu</li>
+							<li>Lorem ipsum dolor sit amet, consectetu</li>
+							<li>Lorem ipsum dolor sit amet, consectetu</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<img src="{$basedomain}assets/img/data/waktukuis.JPG"/>
+			</div>
+
+		</div>
+	</div>
+	{/*}</section>
+	<section class="callaction">
+	<div class="container">
+		<div class="col-md-12" align="left" style="border-bottom:2px solid #F5F5F5;margin-bottom:50px;padding-bottom:3px">
+	        <span style="font-size:23px;border-bottom:2px solid #E37A43;">REGISTRASI USER</span>
+	        
+	        <!-- <p>Lorem ipsum dolor sit amet, consectetur consectetur  adipiscing elit donec mer lacinia.</p> -->
+	    </div><br/>
+		<div class="row">
+			<div class="col-md-9">
+				<form method="POST" action="{$basedomain}register/signup" class="form-horizontal" onsubmit="return validatePassword()">
+				<div class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
+				    <div class="col-sm-6">
+				    	<div class="input-group">
+						  <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
+				    	<input type="text" class="form-control" placeholder="Name..." name="name" required/>
+				    </div>
+				    </div>
+				  </div>
+				 <div class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
+				    <div class="col-sm-6">
+				    	<div class="input-group">
+						  <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
+				    	<input type="text" class="form-control" placeholder="Username..." name="username" required/>
+				    </div>
+				    </div>
+				  </div>
+				 <div class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+				    <div class="col-sm-6">
+				    	<div class="input-group">
+						  <span class="input-group-addon" id="basic-addon1"><i class="fa fa-envelope"></i></span>
+				    	<input type="text" class="form-control" placeholder="Email..." name="email" required id="register-email"/>
+				    </div>
+				    </div><span id="email-error"></span>
+				  </div>
+				 <div class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">Password</label>
+				    <div class="col-sm-6">
+				    	<div class="input-group">
+						  <span class="input-group-addon" id="basic-addon1"><i class="fa fa-lock"></i></span>
+				    	<input type="password" class="form-control" placeholder="Password..." name="password" required id="register-password"/>
+				    </div>
+				    </div>
+				  </div>
+				 <div class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">Confirm Password</label>
+				    <div class="col-sm-6">
+				    	<div class="input-group">
+						  <span class="input-group-addon" id="basic-addon1"><i class="fa fa-lock"></i></span>
+				    	<input type="password" class="form-control" placeholder="Confirm Password..." name="repassword" required id="register-rePassword"/>
+				    </div>
+				    </div>
+				  </div>
+				  <span id="password-error"></span>
+				<div class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">Tempat Lahir</label>
+				    <div class="col-sm-6">
+				    	<div class="input-group">
+						  <span class="input-group-addon" id="basic-addon1"><i class="fa fa-hospital-o"></i></span>
+				    	<input type="text" class="form-control" placeholder="Tempat Lahir..." name="tempatlahir" required/>
+				    </div>
+				    </div>
+				  </div>
+				<div class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">Tanggal Lahir</label>
+				    <div class="col-sm-6">
+				    	<div class="input-group">
+						  <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
+				    	<input type="text" class="form-control" id="datepicker" placeholder="YYYY-MM-DD" name="tanggallahir" required />
+				    </div>
+				    </div>
+				  </div>
+				<div class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">Pendidikan</label>
+				    <div class="col-sm-6">
+				    	<div class="input-group">
+						  <span class="input-group-addon" id="basic-addon1"><i class="fa fa-mortar-board"></i></span>
+				    	<input type="text" class="form-control" placeholder="Pendidikan..."/ name="pendidikan" required>
+				    </div>
+				    </div>
+				  </div>
+
+				<div class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">Institusi</label>
+				    <div class="col-sm-6">
+				    	<div class="input-group">
+						  <span class="input-group-addon" id="basic-addon1"><i class="fa fa-university"></i></span>
+				    	<input type="text" class="form-control" placeholder="Institusi..." name="institusi" required/>
+				    </div>
+				    </div>
+				  </div>
+
+				<div class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">Pekerjaan</label>
+				    <div class="col-sm-6">
+				    	<div class="input-group">
+						  <span class="input-group-addon" id="basic-addon1"><i class="fa fa-briefcase"></i></span>
+				    	<input type="text" class="form-control" placeholder="Pekerjaan..." name="jenispekerjaan" required/>
+				    </div>
+				    </div>
+				  </div>
+
+				<div class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">Handphone</label>
+				    <div class="col-sm-6">
+				    	<div class="input-group">
+						  <span class="input-group-addon" id="basic-addon1"><i class="fa fa-phone"></i></span>
+				    	<input type="text" class="form-control" placeholder="Handphone..." name="hp" required onkeypress='return event.charCode <= 57'/>
+				    </div>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">Alamat</label>
+				    <div class="col-sm-6">
+				    	<div class="input-group">
+						  <span class="input-group-addon" id="basic-addon1"><i class="fa fa-phone"></i></span>
+				    	<textarea class="form-control" placeholder="Alamat..." name="alamat"></textarea>
+				    </div>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				      <label for="inputEmail3" class="col-sm-2 control-label">Provinsi</label>
+
+				    <div class="col-sm-6">
+				           	<select class="form-control selectProvinsi" name="city" required>
+				           		<option value="">- Pilih Provinsi -</option>
+				           		{foreach $city as $val}
+				           		<option value="{$val.kode_wilayah}">{$val.nama_wilayah}</option>
+				           		{/foreach}
+				           	</select>
+				           	
+				    </div>
+			          </div>
+				  <div class="form-group">
+					    <div class="col-sm-offset-2 col-sm-10">
+					     <input type="reset" value="Kosongkan" class="btn btn-default">
+			   			<input type="submit" value="Mendaftar" id="tmbl" class="btn btn-primary" name="btnDaftar">
+					    <input type="hidden" name="token" value="1">
+					    </div>
+					  </div>
+				</form>
+			</div>
+			<div class="col-md-3">
+				&nbsp;
+			</div>
+
+		</div>
+	</div>
+	</section>

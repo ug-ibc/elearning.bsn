@@ -1,0 +1,164 @@
+	
+<!--MAIN NAVIGATION-->
+<!--===================================================-->
+<nav id="mainnav-container">
+	<div id="mainnav">
+
+		<!--Shortcut buttons-->
+		<!--================================-->
+		<div id="mainnav-shortcut">
+			
+		</div>
+		<!--================================-->
+		<!--End shortcut buttons-->
+		<!--{pr($page.function)}
+		{pr($page.page)}-->
+
+		<!--Menu-->
+		<!--================================-->
+		<div id="mainnav-menu-wrap">
+			<div class="nano">
+				<div class="nano-content">
+					<ul id="mainnav-menu" class="list-group">
+						
+						<li class="list-header">Home</li>
+
+						<li class="{if $page.page eq 'home' && $page.function eq 'index'}active-link{/if}">
+							<a href="{$basedomain}home">
+								<i class="fa fa-dashboard"></i>
+								<span class="menu-title">
+									Dashboard
+								</span>
+							</a>
+						</li>
+
+						<li class="{if $page.page eq 'course' && $page.function eq 'viewvisitor'}active-link{/if}">
+							<a href="{$basedomain}course/viewvisitor">
+								<i class="fa fa-eye"></i>
+								<span class="menu-title">Report Statistic Visitor </span>
+							</a>
+			
+						</li>
+						<!--Category name-->
+						<li class="list-header">About BSN</li>
+			
+						<!--Menu list item-->
+						<li>
+							<a href="#">
+								<i class="fa fa-newspaper-o"></i>
+								<span class="menu-title">News</span>
+								<i class="arrow"></i>
+							</a>
+			
+							<!--Submenu-->
+							<ul class="collapse {if $page.page eq 'news'}in{/if}">
+								<li class="{if $page.function eq 'addnews'}active-link{/if}"><a href="{$basedomain}news/addnews">Add News</a></li>
+								<li class="{if $page.page eq 'news' && $page.function eq 'index'}active-link{/if}"><a href="{$basedomain}news">News List</a></li>
+							</ul>
+						</li>
+						<li class="{if $page.page eq 'gallery'}active-link{/if}">
+							<a href="{$basedomain}gallery">
+								<i class="fa fa-picture-o"></i>
+								<span class="menu-title">
+									Gallery
+								</span>
+							</a>
+						</li>
+						<li class="{if $page.page eq 'home' && $page.function eq 'glosariumlist'}active-link{/if}">
+							<a href="{$basedomain}home/glosariumlist">
+								<i class="fa fa-book"></i>
+								<span class="menu-title">Glosarium</span>
+							</a>
+						</li>
+						<li class="{if $page.page eq 'home' && $page.function eq 'quoteslist'}active-link{/if}">
+							<a href="{$basedomain}home/quoteslist">
+								<i class="fa fa-quote-left"></i>
+								<span class="menu-title">Quotes of The Day</span>
+							</a>
+						</li>
+
+						<li class="{if $page.page eq 'home' && $page.function eq 'quoteslist'}active-link{/if}">
+							<a href="{$basedomain}home/testimoni">
+								<i class="fa fa-comments"></i>
+								<span class="menu-title">Testimoni</span>
+							</a>
+
+
+						<li>
+							<a href="#">
+								<i class="fa fa-video-camera"></i>
+								<span class="menu-title">Webex</span>
+								<i class="arrow"></i>
+							</a>
+							<ul class="collapse {if $page.page eq 'webex'}in{/if}">
+								<li class="{if $page.page eq 'webex' && $page.function eq 'index'}active-link{/if}"><a href="{$basedomain}webex">Add Conference</a></li>
+								<li class="{if $page.page eq 'webex' && ($page.function eq 'listvideowebex')}active-link{/if}"><a href="{$basedomain}webex/listvideowebex">Upload Video</a></li>
+							</ul>
+
+						</li>
+						{*}<li class="{if $page.page eq 'home' && $page.function eq 'externalLink'}active-link{/if}">
+							<a href="{$basedomain}home/externalLink">
+								<i class="fa fa-quote-left"></i>
+								<span class="menu-title">External Link</span>
+							</a>
+						</li>{/*}
+						
+			
+						<!--Category name-->
+						<li class="list-header">Course</li>
+			
+						<!--Menu list item-->
+						<li>
+							<a href="#">
+								<i class="fa fa-pencil-square-o"></i>
+								<span class="menu-title">Manage Course</span>
+								<i class="arrow"></i>
+							</a>
+			
+							<!--Submenu-->
+							<ul class="collapse {if $page.page eq 'course' || $page.page eq 'quiz'}in{/if}">
+								<li class="{if $page.page eq 'course' && $page.function eq 'index'}active-link{/if}"><a href="{$basedomain}course">Course Group</a></li>
+								<li class="{if $page.page eq 'course' && ($page.function eq 'courselist' || $page.function eq 'addcourse' || $page.function eq 'viewmaterial')}active-link{/if}"><a href="{$basedomain}course/courselist">Course</a></li>
+								<li class="{if $page.page eq 'quiz' && ($page.function eq 'quizlist' || $page.function eq 'index' || $page.function eq 'editquiz')}active-link{/if}"><a href="{$basedomain}quiz/quizlist">Quiz</a>
+								</li>
+								<li class="{if $page.page eq 'quiz' && $page.function eq 'setting'}active-link{/if}"><a href="{$basedomain}quiz/setting">Setting</a></li>
+								<li class="{if $page.page eq 'quiz' && $page.function eq 'nilaiUser'}active-link{/if}"><a href="{$basedomain}quiz/nilaiUser">Nilai User</a></li>
+								<li class="{if $page.page eq 'course' && ($page.function eq 'uploadfile' || $page.function eq 'upload')}active-link{/if}"><a href="{$basedomain}course/uploadfile">Upload Ebook & Video</a></li>
+							</ul>
+						</li>
+
+						<!-- <li class="list-divider"></li> -->
+			
+						<!--Category name-->
+						<li class="list-header">User</li>
+			
+						<!--Menu list item-->
+						<li>
+							<a href="#">
+								<i class="fa fa-group"></i>
+								<span class="menu-title">Manage Users</span>
+								<i class="arrow"></i>
+							</a>
+			
+							<!--Submenu-->
+							<ul class="collapse {if $page.page eq 'user'}in{/if}">
+								<li class="{if $page.page eq 'user' && $page.function eq 'index'}active-link{/if}"><a href="{$basedomain}user">User list</a></li>
+								<li class="{if $page.page eq 'home' && $page.function eq 'wilayah'}active-link{/if}">
+									<a href="{$basedomain}home/wilayah">
+										Wilayah
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+
+				</div>
+			</div>
+		</div>
+		<!--================================-->
+		<!--End menu-->
+
+	</div>
+</nav>
+<!--===================================================-->
+<!--END MAIN NAVIGATION-->

@@ -1,0 +1,159 @@
+<script>
+	function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+	}
+	
+	jQuery(function($){
+	   $(".kategoriBaik").mask("99");
+	   $(".kategoriCukup").mask("99");
+	   $(".kategoriKurang").mask("99");
+	});
+	
+</script>
+
+
+<!--Page Title-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<div id="page-title">
+	<h1 class="page-header text-overflow">Setting Quiz</h1>
+
+	<!--Searchbox-->
+	<!-- <div class="searchbox">
+		<div class="input-group custom-search-form">
+			<input type="text" class="form-control" placeholder="Search..">
+			<span class="input-group-btn">
+				<button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+			</span>
+		</div>
+	</div> -->
+</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End page title-->
+
+<!--Breadcrumb-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<ol class="breadcrumb">
+	<li><a href="{$basedomain}">Home</a></li>
+	<li class="active">Setting Quiz</li>
+</ol>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End breadcrumb-->
+
+<!--Page content-->
+<!--===================================================-->
+<div id="page-content">
+	
+	<div class="row">
+
+		<div class="col-sm-12">
+			<div class="panel">
+				<div class="panel-heading">
+					<h3 class="panel-title">Setting Form</h3>
+				</div>
+	
+				<!--Horizontal Form-->
+				<!--===================================================-->
+				<form class="form-horizontal" action="{$basedomain}quiz/setting" method="post">
+					<div class="panel-body">
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Group Course</label>
+							<div class="col-sm-4">
+								<select class="selectpicker pilihGrupKursus" name="idGroupKursus">
+									<option>Silahkan pilih</option>
+									{foreach $grup as $val}
+									<option value="{$val.idGrup_kursus}" {if $val.idGrup_kursus == $data.idGrup_kursus}selected{/if}>{$val.namagrup}</option>
+									{/foreach}
+									
+								</select> 
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Maksimal Soal / Quiz</label>
+							<div class="col-sm-4">
+								<input type="text" name="maxSoal" value="{$data.maxSoal}" class="form-control maxSoal" placeholder="Jumlah soal" onkeypress="return isNumber(event)">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Penilaian Sangat Baik</label>
+							<div class="col-sm-4">
+								<input type="text" name="kategoriBaik" value="{$data.kategoriBaik}" class="form-control kategoriBaik" placeholder="Nilai Baik">
+							</div>
+							
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Penilaian Baik</label>
+							<div class="col-sm-4">
+								<input type="text" name="kategoriCukup" value="{$data.kategoriCukup}" class="form-control kategoriCukup" placeholder="Nilai Cukup">
+							</div>
+							
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Penilaian Tidak Lulus</label>
+							<div class="col-sm-4">
+								<input type="text" name="kategoriKurang" value="{$data.kategoriKurang}" class="form-control kategoriKurang" placeholder="Nilai Kurang">
+							</div>
+							
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Waktu</label>
+							<div class="col-sm-4">
+								<input type="text" name="waktu" value="{$data.waktu}" class="form-control waktu" placeholder="Waktu dalam menit" onkeypress="return isNumber(event)">
+							</div>
+							
+						</div>
+
+					</div>
+					<div class="panel-footer text-right">
+						<input type="hidden" name="id" value="{$data.id}">
+						<button class="btn btn-info" type="submit" name="save">Simpan</button>
+					</div>
+
+				</form>
+				<!--===================================================-->
+				<!--End Horizontal Form-->
+	
+			</div>
+		</div>
+	</div>
+	
+	
+</div>
+<!--===================================================-->
+<!--End page content-->
+{literal}
+	<script type="text/javascript">
+
+		$(document).on('change','.pilihGrupKursus', function(){
+
+			var grupid = $(this).val();
+			var template = "";
+
+			$.post(basedomain+'quiz/ajaxQuizSetting', {grupid:grupid}, function(data){
+				// console.log(data);
+				if (data.status==true){
+					$('.maxSoal').val(data.result.maxSoal);
+					$('.kategoriBaik').val(data.result.kategoriBaik);
+					$('.kategoriCukup').val(data.result.kategoriCukup);
+					$('.kategoriKurang').val(data.result.kategoriKurang);
+					$('.waktu').val(data.result.waktu);
+				}else{
+					$('.maxSoal').val('');
+					$('.kategoriBaik').val('');
+					$('.kategoriCukup').val('');
+					$('.kategoriKurang').val('');
+					$('.waktu').val('');
+				}
+				
+			},"JSON")
+			
+		})
+
+	</script>
+
+{/literal}

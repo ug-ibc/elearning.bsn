@@ -1,0 +1,293 @@
+
+{if !$alreadySubmit}
+<section class="callaction">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-md-8" style="background-color:#AF0096">
+				<div class="row">
+					<div class="col-md-1" style="padding-top:20px">
+						<div style="color:#FFFFFF;background-color:#73496E;padding:10px">
+							<i class="fa fa-file-text fa-3"></i>
+						</div>
+					</div>
+					<div class="col-md-10"  style="color:#FFFFFF">
+						<h1  style="color:#FFFFFF">E-LEARNING STANDARISASI DAN PENILAIAN KESESUAIAN</h1>
+						Petunjuk Kursus : 
+						<ol type="1">
+							<li>Lorem ipsum dolor sit amet, consectetu</li>
+							<li>Lorem ipsum dolor sit amet, consectetu</li>
+							<li>Lorem ipsum dolor sit amet, consectetu</li>
+							<li>Lorem ipsum dolor sit amet, consectetu</li>
+							<li>Lorem ipsum dolor sit amet, consectetu</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3" align="center" style="color:#FFFFFF;background-color:#D3D3D3;padding-top:10px;margin-left:5px;border-radius:5px;">
+				<img src="{$basedomain}assets/img/data/iconslide.JPG"/><br/><br/>
+				
+{if $user}
+			<span style="font-size:24px;color:#252A72">WAKTU TERSISA</span>
+				   <div style="border-radius:5px 10px;background-color:#4155D0;width:100%;height:100%;padding:10px 0px;"><a href="{$basedomain}quiz/startQuiz" style="text-decoration:none;color:#FFFFFF;font-size:24px;"><h3 style="color:#FFFFFF"><div id="countdown"></div></h3>
+                        </a></div>
+{/if}
+			</div>
+			<div class="col-md-4">
+			<!-- 	<img src="{$basedomain}assets/img/data/waktukuis.JPG"/>
+				<h2><div id="countdown"></div></h2>
+			</div> -->
+
+		</div>
+	</div>
+	</section>
+{/if}
+	{if $user}
+
+	{if $alreadySubmit}
+	<section class="callaction">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-md-12" align="center">
+				<div style="background-color:#F5F5F5;font-size:18px;padding:20px;border-radius:10px">Anda sudah mengikuti quiz ini
+					<br/>
+					<br/>
+				<a href="{$basedomain}kursus" class="label label-info" style="font-size:15px">Kembali</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	</section>
+	{else}
+	{if !$startQuiz}
+	<section class="callaction">
+	<div class="container">
+		<div class="col-md-12" align="left" style="border-bottom:2px solid #F5F5F5;margin-bottom:50px;padding-bottom:3px">
+	        <span style="font-size:23px;border-bottom:2px solid #E37A43;">Ikuti Kuis</span>
+	        
+	        <!-- <p>Lorem ipsum dolor sit amet, consectetur consectetur  adipiscing elit donec mer lacinia.</p> -->
+	    </div>
+		<div class="row">
+			<div class="col-md-9">
+				Pilih kursus<br/>
+				<select id="pilihKursus" class="selectpicker" >
+				 	<option value="0">Pilih Kursus</option>
+					{if $kursus}
+					{foreach $kursus as $val}
+					<option value="{$val.idKursus}">{$val.namakursus}</option>
+					{/foreach}
+					{/if}
+					
+				</select><br/>
+				Pilih materi<br/>
+				<select class="selectpicker" id="pilihMateri">
+					<option>Pilih Materi</option>
+					
+				</select><br/><br/>
+				<a href="javascript:void(0)" class="btn-quiz hvr-shutter-out-vertical" id="ikutQuiz">Ikut Quiz</a>
+			</div>
+		</div>
+	</div>
+	</section>
+
+	{else}
+	{if !$hiddenStatus}
+	<section class="callaction">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				<a href="{$basedomain}quiz/startQuiz" class="btn-quiz hvr-shutter-out-vertical" id="ikutQuiz">Quiz anda sedang berlangsung, Klik disini untuk melanjutkan</a>
+			</div>
+		</div>
+	</div>
+	</section>
+	{/if}
+	{/if}
+	{/if}
+<section class="callaction">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+
+				{if !empty($soal)}
+				{foreach $soal as $val}
+				<div class="row">
+					<div class="col-md-1"><br/>
+						<span style="background-color:#26CCC6;padding:15px;100px;color:#FFFFFF;font-size:17px;font-weight:bold;">{$val.no}</span>
+					</div>
+
+					<div class="col-md-11" style="padding-top:10px;font-size:14px">
+						<p >{$val.soal}</p>
+						<ul class="ul-btn soal_{$val.idSoal}">
+							{foreach $val.acakpilihan as $key => $value}
+							<li>
+								<input type="radio" name="pilihan_{$val.idSoal}" id="radio_{$val.idSoal}_{$key}" {if isset($val.jawabanuser)}{if $val.jawabanuser==$key}checked{/if}{/if}><label for="radio_{$val.idSoal}_{$key}" class="btn-quiz hvr-shutter-out-vertical chooseAnswer " data-pilihan="{$key}" data-soal="{$val.idSoal}" data-kursus="{$val.idKursus}" data-materi="{$val.idMateri}" data-idGrup_kursus="{$val.idGrup_kursus}">{$value}</label>
+							</li>
+							{/foreach}
+							{*}
+							<li>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
+							</li>
+							<li>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
+							</li>
+							<li>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
+							</li>{/*}
+						</ul>
+					</div>
+
+				</div>
+				
+				<div class="row">
+					<div class="col-md-12">	
+					<hr style="margin-top:-15px;border-bottom:1px solid #444444"/>
+					</div>
+				</div>
+				{/foreach}
+				{/if}
+				{*}
+				<div class="row">
+					<div class="col-md-1"><br/>
+						<span style="background-color:#26CCC6;padding:15px;100px;color:#FFFFFF;font-size:17px;font-weight:bold">2</span>
+					</div>
+
+					<div class="col-md-11" style="padding-top:10px;font-size:18px">
+						<p >Lorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer lacinia</p>
+						<ul class="ul-btn">
+							<li>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
+							</li>
+							<li>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
+							</li>
+							<li>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
+							</li>
+							<li>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">	
+					<hr style="margin-top:-15px;border-bottom:1px solid #444444"/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-1"><br/>
+						<span style="background-color:#26CCC6;padding:15px;100px;color:#FFFFFF;font-size:17px;font-weight:bold">3</span>
+					</div>
+
+					<div class="col-md-11" style="padding-top:10px;font-size:18px">
+						<p >Lorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer lacinia</p>
+						<ul class="ul-btn">
+							<li>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
+							</li>
+							<li>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
+							</li>
+							<li>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
+							</li>
+							<li>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">	
+					<hr style="margin-top:-15px;border-bottom:1px solid #444444"/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-1"><br/>
+						<span style="background-color:#26CCC6;padding:15px;100px;color:#FFFFFF;font-size:17px;font-weight:bold">4</span>
+					</div>
+
+					<div class="col-md-11" style="padding-top:10px;font-size:18px">
+						<p >Lorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer lacinia</p>
+						<ul class="ul-btn">
+							<li>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
+							</li>
+							<li>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
+							</li>
+							<li>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
+							</li>
+							<li>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">	
+					<hr style="margin-top:-15px;border-bottom:1px solid #444444"/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-1"><br/>
+						<span style="background-color:#26CCC6;padding:15px;100px;color:#FFFFFF;font-size:17px;font-weight:bold">5</span>
+					</div>
+
+					<div class="col-md-11" style="padding-top:10px;font-size:18px">
+						<p >Lorem ipsum dolor sit amet, consectetur consectetur adipiscing elit donec mer lacinia. adipiscing elit donec mer lacinia</p>
+						<ul class="ul-btn">
+							<li>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
+							</li>
+							<li>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
+							</li>
+							<li>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
+							</li>
+							<li>
+								<a href="#" class="btn-quiz hvr-shutter-out-vertical">Lorem ipsum dolor sit amet, consectetur it done</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">	
+					<hr style="margin-top:-15px;border-bottom:1px solid #444444"/>
+					</div>
+				</div>
+				{/*}
+
+				{if $soal}
+				<div class="row">
+					<div class="col-md-6">
+						<a href="javascript:void(0)" class="hvr-float-shadow" style="background-color:#C50010;color:#FFFFFF;padding:10px 20px;font-size:24px;text-decoration:none;border-radius:10px" id="finishQuiz" data-token="{$user.idUser}" data-quiz="{$dataQuiz.id}">SUBMIT</a>
+					</div>
+
+					{*}
+					<div class="col-md-6" align="right">
+						<a href="#" class="hvr-float-shadow" style="background-color:#28CAC5;color:#FFFFFF;padding:10px 30px;font-size:24px;text-decoration:none;border-radius:10px">NEXT</a>
+					</div>
+					{/*}
+				</div>
+				{/if}
+			</div>
+
+
+		</div>
+	</div>
+	</section>
+{/if}
+

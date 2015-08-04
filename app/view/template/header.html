@@ -1,0 +1,137 @@
+
+{$classHome=''}
+{$classBerita=''}
+{$classProfil=''}
+{$classQuiz=''}
+{$classKursus=''}
+
+{if $page.page=='home'}
+    {$classHome='active'}
+{/if}
+{if $page.page=='berita'}
+    {$classBerita='active'}
+{/if}
+{if $page.page=='tutorial'}
+    {$classTutorial='active'}
+{/if}
+{if $page.page=='profil'}
+    {$classProfil='active'}
+{/if}
+{if $page.page=='quiz'}
+    {$classQuiz='active'}
+{/if}
+
+{if $page.page=='kursus'}
+    {$classKursus='active'}
+{/if}
+
+{if $page.page=='search'}
+    {$classSearch='active'}
+{/if}
+<!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button> -->
+
+<a href="#" class="userOnline"><i class="fa fa-users"></i>  {$userOnline} Online</a><section id="featured">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">FORM LOGIN</h4>
+      </div>
+      <form method="POST" action="{$basedomain}login/local" class="form-horizontal" onsubmit="return checkBefore()" >
+      <div class="modal-body">
+       
+            <div class="form-group">
+                <!-- <label for="inputEmail3" class="col-sm-2 control-label">Username</label><br/> -->
+                <div class="col-sm-12">
+                    <div class="input-group">
+                      <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
+                    <input type="text" class="form-control" placeholder="Username..." name="username"/>
+                </div>
+                </div>
+              </div>
+            <div class="form-group">
+             <!--    <label for="inputEmail3" class="col-sm-2 control-label">Password</label><br/> -->
+                <div class="col-sm-12">
+                    <div class="input-group">
+
+                      <span class="input-group-addon" id="basic-addon1"><i class="fa fa-lock"></i></span>
+                    <input type="password" class="form-control" placeholder="Password..." name="password"/>
+                    <input type="hidden" name="is_applykursus" value="" id="is_applykursus">
+                </div>
+                </div>
+              </div>
+        
+      </div>
+      <div class="modal-footer">
+        <input type="hidden" name="token" value="1"/>
+       <span  style="float:left;font-size:12px;padding-top:10px"> Belum memiliki akun? <a href="{$basedomain}register">Sign Up</a></span>
+        <button type="submit" class="btn btn-primary">Sign In</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div id="wrapper">
+  <!-- start header -->
+  <header>
+
+        
+    <div class="navbar logo navbar-default white navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    
+                    <a class="navbar-brand" href="{$basedomain}"><img src="{$basedomain}assets/img/bsni.jpeg" alt="logo" width="200px"/> 
+                    <p style="border:0px solid #eee;margin-left:220px;margin-top:-70px;color:#281870;font-size:22px;">
+                      E-Learning  Standardisasi  dan<br/> Penilaian  Kesesuaian</p></a>
+                    
+
+                </div>
+
+            </div>
+        </div>
+        <div class="navbar navbar-default navbar-static-top menuTop" >
+            <div class="container">
+                <div class="navbar-collapse 2 collapse2 " style="overflow:auto;">
+                    <ul class="nav menuTop navbar-nav">
+                        
+                          {if $user}
+                          <li><h5><i class="fa fa-user"></i> Selamat Datang, <i>{$user.0.name}</i> <a href="{$basedomain}user/setting"><i class="fa fa-cog fa-2x"></i></a></h5></li>
+                          {/if}
+                        <li class="menu {$classSearch}" ><a href="{$basedomain}search" ><i class="fa fa-search"></i> Cari  Sertifikat </a></li> 
+                        
+                          {if $user}
+                        <li class="menu"><a href="{$basedomain}home/logout">LOGOUT <i class="fa fa-log-out"></i></a></li>
+                        {else}
+                        <li class="menu"><a href="#" data-toggle="modal" data-target="#myModal">LOGIN <i class="fa fa-sign-in"></i></a></li>
+                        {/if}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse " style="overflow:auto">
+                    <ul class="nav navbar-nav">
+                        <li class="menu {$classHome}"><a href="{$basedomain}">BERANDA</a></li> 
+                      <li class="menu {$classProfil}"><a href="{$basedomain}profil">PROFIL</a></li>
+                      {*}<li class="menu {$classQuiz}"><a href="{$basedomain}">E-LEARNING</a></li>{/*}
+                        <li class="menu {$classKursus}"><a href="{$basedomain}kursus">KURSUS</a></li>
+                        <li class="menu {$classBerita}"><a href="{$basedomain}berita">BERITA</a></li>
+                        <li class="menu {$classTutorial}"><a href="{$basedomain}tutorial">TUTORIAL</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+  </header>
+  <!-- end header -->

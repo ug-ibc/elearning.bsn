@@ -1,0 +1,144 @@
+<script type="text/javascript">
+{literal}
+    $(window).load(function(){
+        $('#linkLuar').modal('show');
+    });
+{/literal}
+</script>
+<div class="modal fade" id="linkLuar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog video">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Link Terkait</h4>
+      </div>
+      
+      <div class="modal-body">
+       
+          <div class="media">
+            <div style="margin-right:-130px;float:left">
+              <a href="http://www.iso.org/iso/home/about/training-technical-assistance/standards-in-education/education_materials-higher-edu.htm" target="_blank"><img class="media-object img-lg img-circle" width="50%" src="{$basedomain}assets/img/works/2012_iso-logo_print.png" alt="Profile picture"></a>
+            </div>
+            <div class="media-body">
+              <a href="http://www.iso.org/iso/home/about/training-technical-assistance/standards-in-education/education_materials-higher-edu.htm" target="_blank"><h4 class="text-thin">ISO Repository of teaching materials</h4></a>Think globally, act locally. Perkaya keilmuan standardisasi di level internasional melalui situs web yang dikembangkan oleh ISO (International Organization for Standardization). Berisi daftar materi pembelajaran standardisasi berupa buku, jurnal, artikel dan presentasi dari berbagai negara.
+            </div>
+            <hr>
+             <div style="margin-right:-130px;margin-top:50px;float:left">
+              <a href="http://www.wisestandard.org/" target="_blank"><img class="media-object img-lg" width="50%" src="{$basedomain}assets/img/works/url.jpeg" alt="Profile picture"></a>
+            </div>
+            <div class="media-body">
+              <a href="http://www.wisestandard.org/" target="_blank"><h4 class="text-thin">APEC SCSC Education Program</h4></a>APEC Sub-committee on Standards and Conformance telah mengembangkan project Strategic Education Program for Trade Facilitation sejak 2007. Sampai saat ini sudah 5 publikasi yang telah diterbitkan. Salah satu buku yang sangat menarik berjudul Standardization: Fundamentals, Impact, and Business Strategy. Salah satu babnya membahas strategi pemanfaatan standar untuk memenangkan persaingan di tingkat nasional, regional dan internasional.
+            </div>
+            <hr>
+             <div style="margin-right:-35px;margin-top:50px;float:left">
+              <a href="http://www.pro-norm.de/" target="_blank"><img class="media-object img-lg" width="60%" src="{$basedomain}assets/img/works/eu_asia_center_logo.gif" alt="Profile picture"></a>
+            </div>
+            <div class="media-body">
+              <a href="http://www.pro-norm.de/" target="_blank"><h4 class="text-thin">EU-ASIA</h4></a>Indonesia pernah berkolaborasi dengan Uni Eropa untuk mempromosikan Sistem Standardisasi Uni Eropa melalui dunia pendidikan. Hasilnya adalah kurikulum dan textbook “Standardisation in Companies and Market” yang ditujukan bagi mahasiswa atau akademisi tingkat master. Fasilitas pembelajaran online kini tersedia gratis dan dapat diakses di http://www.pro-norm.de yang dimoderatori oleh Prof. Dr.-Ing. Wilfried Hesser dari Helmut Schmidt University, Hamburg, Jerman
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="callaction">
+
+  <div class="text">
+    {if $nilai.nilai > $nilai.kategorikurang}
+<span>S</span><span>E</span><span>L</span><span>A</span><span>M</span><span>A</span><span>T</span><span>&nbsp;&nbsp;</span><span>A</span><span>N</span><span>D</span><span>A</span><span>&nbsp;&nbsp;</span><span>L</span><span>U</span><span>L</span><span>U</span><span>S</span>
+  {else}
+  <span>A</span><span>N</span><span>D</span><span>A</span><span>&nbsp;&nbsp;</span><span>T</span><span>I</span><span>D</span><span>A</span><span>K</span>&nbsp;&nbsp;</span><span>L</span><span>U</span><span>L</span><span>U</span><span>S</span>
+  {/if}
+</div>
+	<div class="container">
+    <div class="row" >
+      <div class="col-md-10 col-md-offset-1">
+        <div class="row" style="background-color:#D5DAD2;border:1px solid #FFD7D7;border-radius:10px 10px 0px 0px;padding-bottom:10px">
+      <div class="col-md-12" style="background-color:#829AA8;color:#FFFFFF;margin-bottom:20px;padding:15px;border-radius:10px 10px 0px 0px">
+        HASIL
+      </div>
+            <div class="col-md-4 nilai" style="background-color:#E9F1F4;border:2px solid #E3E3E3;">
+
+                <div align="center">
+
+                  <div style="padding-top:70px;padding-bottom:50px;">
+                   <span style="font-size:90px">{$correct}</span>
+                 </div>
+                   <h5>Benar</h5>
+                </div>
+            </div>
+             <div class="col-md-4 nilai" style="background-color:#E9F1F4;border:2px solid #E3E3E3;">
+                <div align="center">
+
+                  <div style="padding-top:70px;padding-bottom:50px;">
+                   <span style="font-size:90px">{$wrong}</span>
+                 </div>
+                   <h5>Salah</h5>
+                </div>
+            </div>
+             <div class="col-md-4 nilai" style="background-color:#E9F1F4;border:2px solid #E3E3E3;">
+                 <div  align="center">
+
+                  <div style="padding-top:70px;padding-bottom:50px;">
+                   <span style="font-size:90px">{floor(($correct/($correct+$wrong))*100)}</span>
+                 </div>
+                   <h5>Nilai</h5>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="row" >
+      <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-12" align="left" style="border-bottom:2px solid #F5F5F5;padding-bottom:3px">
+          <span style="font-size:23px;border-bottom:2px solid #69BD45;">TESTIMONIAL</span>
+          
+          <!-- <p>Lorem ipsum dolor sit amet, consectetur consectetur  adipiscing elit donec mer lacinia.</p> -->
+      </div><br/>
+    </div>
+  </div>
+    <div class="row" >
+      <div class="col-md-10 col-md-offset-1">
+        <form method="post" action="">
+        
+        <textarea name="testimoni" class="form-control"></textarea><br/>
+        <input type="hidden" name="idNilai" value="{$nilai.idNilai}">
+        <input type="hidden" name="idUser" value="{$nilai.idUser}">
+        <input type="submit" name="submit" class="btn btn-primary" value="Submit">
+        </form>
+      </div>
+    </div>
+    </div>
+		<!-- <div class="row">
+			<div class="col-md-8" style="background-color:#AF0096">
+				<div class="row">
+					<div class="col-md-1" style="padding-top:20px">
+						<div style="color:#FFFFFF;background-color:#73496E;padding:10px">
+							<i class="fa fa-file-text fa-3"></i>
+						</div>
+					</div>
+					<div class="col-md-10"  style="color:#FFFFFF">
+						<h1  style="color:#FFFFFF">Hasil Quiz anda</h1>
+						
+						<h3>Benar : {$correct}</h3>
+						<h3>Salah : {$wrong}</h3>
+						
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3" align="center" style="color:#FFFFFF;background-color:#D3D3D3;padding-top:10px;margin-left:5px;border-radius:5px;">
+				<img src="{$basedomain}assets/img/data/iconslide.JPG"/><br/><br/>
+				
+
+			</div>
+			<div class="col-md-4"> -->
+			<!-- 	<img src="{$basedomain}assets/img/data/waktukuis.JPG"/>
+				<h2><div id="countdown"></div></h2>
+			</div> -->
+<!-- 
+		</div>
+	</div> -->
+</div>
+	</section>
+	

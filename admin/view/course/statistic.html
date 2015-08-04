@@ -1,0 +1,212 @@
+<script>
+$('.selectpicker').selectpicker();
+
+function isEmpty() {
+ //   alert("The form was submitted");	
+ var month = document.getElementById("monthid").value;
+ var year = document.getElementById("yearid").value;
+ 
+	 if(month == '' && year == ''){
+		 alert('Choose month and year first!');
+		return false;
+	 }else if(month != '' && year == ''){
+		alert('Choose year first!');
+		return false;
+	 }else if(month == '' && year != ''){
+		alert('Choose month first!');
+		return false;
+	 }
+}
+
+</script>
+
+<!--Page Title-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<div id="page-title">
+	<h1 class="page-header text-overflow">Statistic</h1>
+
+	<!--Searchbox-->
+	<!-- <div class="searchbox">
+		<div class="input-group custom-search-form">
+			<input type="text" class="form-control" placeholder="Search..">
+			<span class="input-group-btn">
+				<button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+			</span>
+		</div>
+	</div> -->
+</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End page title-->
+
+<!--Breadcrumb-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<ol class="breadcrumb">
+	<li><a href="{$basedomain}">Home</a></li>
+	<li><a href="{$basedomain}course/courselist">Report Statistic Visitor</a></li>
+	<li class="active">Report Statistic Visitor</li>
+</ol>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End breadcrumb-->
+
+<!--Page content-->
+<!--===================================================-->
+<div id="page-content">
+	<div class="row">
+		<div class="col-lg-10 eq-box-lg">
+			<div class="panel">
+				<div class="panel-heading">
+					<h3 class="panel-title">Report Statistic Visitor</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row" style="margin-bottom:30px">
+						<div class="col-sm-12">
+							<form class="form-horizontal" method="POST" action="{$basedomain}course/cetak" onsubmit="return isEmpty()"> 
+				                <!--<a href="{$basedomain}course/cetak"><button id="" class="btn btn-info btn-labeled fa fa-print">Download</button></a>
+				                <!--<div class="input-group date">
+				                <input type="text" name="start_date" id="dateid" class="form-control" value="">
+				                <span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span>
+				                </div>-->
+				                 <select id="monthid" class="selectpicker" data-live-search="true" name="month" >
+				                    <option value=''>Choose one of the month</option>
+				                    <option value='1'>January</option>
+				                    <option value='2'>February</option>
+				                    <option value='3'>March</option>
+				                    <option value='4'>April</option>
+				                    <option value='5'>May</option>
+				                    <option value='6'>June</option>
+				                    <option value='7'>July</option>
+				                    <option value='8'>August</option>
+				                    <option value='9'>September</option>
+				                    <option value='10'>October</option>
+				                    <option value='11'>November</option>
+				                    <option value='12'>December</option>
+				                </select>
+				                <select id="yearid" class="selectpicker" data-live-search="true" name="year" >
+				                    <option value=''>Choose one of the year</option>
+				                    <option value='{date(Y) - 1}'>{date(Y) - 1}</option>
+				                    <option value='{date(Y)}'>{date(Y)}</option>
+				                </select>
+				                <button id="" type="submit" name="type" value="1" class="btn btn-danger btn-labeled fa fa-file-pdf-o">Download pdf</button>
+				                <button id="" type="submit" name="type" value="2" class="btn btn-success btn-labeled fa fa-file-excel-o">Download xls</button>
+				            </form>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-3 text-center">
+					
+							<!--Chart placeholder -->
+							<div id="demo-morris-donut" class="morris-donut"></div>
+	
+						</div>
+						<div class="col-sm-9">
+							<!--Custom Content-->
+		                    <!--===================================================-->
+		                    <div class="list-group">
+		                        
+								<a href="#" class="list-group-item" id=""><span class="badge badge-success"><label id="register">{$register_user['0']['total']}</label></span>
+		                            <h4 class="list-group-item-heading text-thin">Registered users</h4>
+		                            <p class="list-group-item-text">Total users that already have an account.</p>
+		                        </a>
+		                        <a href="#" class="list-group-item"><span class="badge badge-purple"><label id="sertificate">{$sertificate_user['0']['total']}</label></span>
+		                            <h4 class="list-group-item-heading text-thin">Users who already received a certificate</h4>
+		                            <p class="list-group-item-text">Total users that already have certificates by finishing a course</p>
+		                        </a>
+		                        <a href="#" class="list-group-item"><span class="badge badge-dark"><label id="visit">{$visitor_user['0']['total']}</label></span>
+		                            <h4 class="list-group-item-heading text-thin">Users who just browse without log in</h4>
+		                            <p class="list-group-item-text">Anonymous users that only visiting web without loging in</p>
+		                        </a>
+		                    </div>
+		                    <!--===================================================-->
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+</div>
+<!--===================================================-->
+<!--End page content-->
+
+{literal}
+<script type="text/javascript">
+
+$(document).ready(function() {
+		//untuk update data chart
+		window.Morris.Donut.prototype.setData = function(data, redraw) {
+			if (redraw == null) {
+				redraw = true;
+			}
+			this.data = data;
+			this.values = (function() {
+			var _i, _len, _ref, _results;
+			_ref = this.data;
+			_results = [];
+			for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+				row = _ref[_i];
+				_results.push(parseFloat(row.value));
+			}
+			return _results;
+			}).call(this);
+			this.dirty = true;
+			if (redraw) {
+				return this.redraw();
+			}
+		}
+
+		var donut ="";
+		$.post(basedomain+"course/chart",function(register_user){
+			var temp_a = register_user.register[0].total;
+			var temp_b = register_user.certificate[0].total;
+			var temp_c = register_user.visitor[0].total;
+			
+			donut = Morris.Donut({
+			element: 'demo-morris-donut',
+			data: [
+				//{label: "Registered", value: register_user[0].total},
+				{label: "Registered", value: temp_a},
+				{label: "Have certificates", value: temp_b},
+				{label: "Anonymous", value: temp_c}
+			],
+			colors: [
+				'#c686be',
+				'#986291',
+				'#ab6fa3'
+			],
+			resize:true
+		});
+		},"JSON");
+			
+$('#monthid,#yearid').on('change', function(){
+		var monthid = $('#monthid').val();
+		var yearid = $('#yearid').val();
+		if(monthid != '' && yearid != ''){
+				$.post(basedomain+"course/ajax_register", {monthid:monthid, yearid:yearid}, function(register_user){
+								$('#register').text(register_user[0].total);
+								},"JSON");
+				$.post(basedomain+"course/ajax_certificate", {monthid:monthid, yearid:yearid}, function(sertificate_user){
+								$('#sertificate').text(sertificate_user[0].total);
+								},"JSON");		
+				$.post(basedomain+"course/ajax_visit", {monthid:monthid, yearid:yearid}, function(visitor_user){
+								$('#visit').text(visitor_user[0].total);
+								},"JSON");	
+				
+				$.post(basedomain+"course/chart_condtn", {monthid:monthid, yearid:yearid},function(register_user){
+						donut.setData([
+					{label: "Registered", value: register_user.register[0].total},
+					{label: "Have certificates", value: register_user.certificate[0].total},
+					{label: "Anonymous", value: register_user.visitor[0].total}
+				  ]);	
+			},"JSON");
+
+		}		
+	});	
+})
+
+
+		
+</script>	
+{/literal}

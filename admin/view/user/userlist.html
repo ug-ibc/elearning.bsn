@@ -1,0 +1,186 @@
+<script>
+{literal}
+$(window).on('load', function() {
+	// SWITCHERY - CHECKING STATE
+	// =================================================================
+	// Require Switchery
+	// http://abpetkov.github.io/switchery/
+	// =================================================================
+	// var changeCheckbox = document.getElementById('statususer'), changeField = document.getElementById('checkstate');
+	// new Switchery(changeCheckbox)
+	// changeField.innerHTML = "Active";
+	// changeCheckbox.onchange = function() {
+	// 	var state;
+	// 	if(changeCheckbox.checked == true) state = "Active"; else state = "Not Active"; 
+	// 	changeField.innerHTML = state;
+	// };
+
+	// Datatables
+	// Row selection and deletion (multiple rows)
+	// -----------------------------------------------------------------
+	var rowDeletion = $('#newslist').DataTable({
+		"responsive": true,
+		"language": {
+			"paginate": {
+			  "previous": '<i class="fa fa-angle-left"></i>',
+			  "next": '<i class="fa fa-angle-right"></i>'
+			}
+		},
+		"dom": '<"toolbar">frtip'
+	});
+
+	$('#create-toolbar').appendTo($("div.toolbar"));
+	$('#separator-toolbar').appendTo($("div.toolbar"));
+	$('#delete-toolbar').appendTo($("div.toolbar"));
+
+	$('#newslist tbody').on( 'click', 'tr', function () {
+		$(this).toggleClass('selected');
+	} );
+
+	$('#demo-dt-delete-btn').click( function () {
+		rowDeletion.row('.selected').remove().draw( false );
+	} );
+})	
+{/literal}
+</script>
+
+<!--Page Title-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<div id="page-title">
+	<h1 class="page-header text-overflow">User List</h1>
+
+	<!--Searchbox-->
+	<div class="searchbox">
+		<div class="input-group custom-search-form">
+			<input type="text" class="form-control" placeholder="Search..">
+			<span class="input-group-btn">
+				<button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+			</span>
+		</div>
+	</div>
+</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End page title-->
+
+<!--Breadcrumb-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<ol class="breadcrumb">
+	<li><a href="{$basedomain}">Home</a></li>
+	<li class="active">User List</li>
+</ol>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End breadcrumb-->
+
+<!--Page content-->
+<!--===================================================-->
+<div id="page-content">
+	
+	<!-- Row selection and deletion (multiple rows) -->
+	<!--===================================================-->
+	<div class="panel">
+		<div class="panel-heading">
+			<h3 class="panel-title">Table of User List</h3>
+		</div>
+		{*}
+		<div id="create-toolbar" class="table-toolbar-left">
+			<button class="btn btn-info btn-labeled fa fa-pencil-square-o">Create</button>
+		</div>{/*}
+			
+		<form method="post" action="{$basedomain}user/deleteuser" onsubmit="return checkForm()">
+		<div id="separator-toolbar" class="table-toolbar-left">&nbsp;</div>
+		
+		<div id="delete-toolbar" class="table-toolbar-left">
+			<button id="" class="btn btn-danger btn-labeled fa fa-times" type="submit">Nonaktifkan</button>
+		</div>
+		<div class="panel-body">
+			<table id="newslist" class="table table-striped table-bordered" cellspacing="0" width="100%">
+				<thead>
+					<tr>
+						<th>&nbsp;</th>
+						<th>No</th>
+						<th>Username</th>
+						<th class="min-tablet">Email</th>
+						<th class="min-tablet">Pekerjaan</th>
+						<th class="min-tablet">Pendidikan</th>
+						<th class="min-tablet">No Hp</th>
+						<th class="min-tablet">Institusi</th>
+						<th class="min-desktop">Register Date</th>
+						<!-- <th class="min-desktop">Status</th> -->
+					</tr>
+				</thead>
+				<tbody>
+					{if $data}
+						{$no = 1}
+						{foreach $data as $val}
+							<tr>
+								<td><input type="checkbox" name="userid[]" value="{$val.idUser}" ></td>
+								<td>{$no++}</td>
+								<td>{$val.username}</td>
+								<td>{$val.email}</td>
+								<td>{$val.jenispekerjaan}</td>
+								<td>{$val.pendidikan}</td>
+								<td>{$val.hp}</td>
+								<td>{$val.institusi}</td>
+								<td>{$val.register_date}</td>
+								<!-- <td class="text-center"> -->
+									{*}<select>
+										<option value="0"><span style="color:red">Pending</span></option>
+									</select>{/*}
+									<!-- <input id="statususer" type="checkbox" checked>
+									<span id="checkstate" class="label label-info"></span> -->
+								<!-- </td> -->
+								{*}
+								{if $val.n_status == 0}
+
+									<td style="color:red">Pending</td>
+								{else if $val.n_status == 2}
+									<td style="color:black">Deleted</td>
+
+								{else}
+									<td style="color:green">Active</td>
+								{/if}
+								{/*}
+							</tr>
+						{/foreach}
+					{/if}
+					
+					{*}
+					<tr>
+						<td>Title 2</td>
+						<td>Accountant</td>
+						<td style="color:red">Unpublished</td>
+						<td>John Doe</td>
+						<td>2011-07-25</td>
+						<td>2011-07-25</td>
+					</tr>
+					{/*}
+				</tbody>
+			</table>
+		</div>
+		</form>
+	</div>
+	<!--===================================================-->
+	<!-- End Row selection and deletion (multiple rows) -->
+	
+	
+</div>
+<!--===================================================-->
+<!--End page content-->
+
+{literal}
+	<script type="text/javascript">
+
+		function checkForm()
+		{
+
+			var txt;
+			var r = confirm("Anda yakin ingin menghapus data ?");
+			if (r == true) {
+			    // txt = "You pressed OK!";
+			} else {
+			    return false;
+			}
+		}
+	</script>
+
+{/literal}

@@ -5,7 +5,11 @@ class mquiz extends Database {
 	
 	function inputquiz($soal,$pilihan1,$pilihan2,$pilihan3,$pilihan4,$jenissoal,$keterangan,$jawaban,$kursus,$materi,$groupkursus, $quizstatus)
 	{
+<<<<<<< HEAD
 		$query = "INSERT INTO banksoal (soal,pilihan1,pilihan2,pilihan3,pilihan4,jenissoal,keterangan,jawaban,idKursus,idMateri,idGrup_kursus, n_status)
+=======
+		$query = "INSERT IGNORE INTO banksoal (soal,pilihan1,pilihan2,pilihan3,pilihan4,jenissoal,keterangan,jawaban,idKursus,idMateri,idGrup_kursus, n_status)
+>>>>>>> 2f51bc66142d2a2f32a064f20fc019a370ffb5ca
 					VALUES
 						('".$soal."','".$pilihan1."','".$pilihan2."','".$pilihan3."'
 							,'".$pilihan4."','".$jenissoal."','".$keterangan."','".$jawaban."'

@@ -23,7 +23,11 @@ body {
     font-family: 'Lato', Calibri, Arial, sans-serif;
 }
 
+<<<<<<< HEAD
 a {
+=======
+/*a {
+>>>>>>> 2f51bc66142d2a2f32a064f20fc019a370ffb5ca
 	color: #ccc;
 	text-decoration: none;
 	outline: none;
@@ -32,7 +36,11 @@ a {
 a:hover {
 	color: #000;
 }
+<<<<<<< HEAD
 
+=======
+*/
+>>>>>>> 2f51bc66142d2a2f32a064f20fc019a370ffb5ca
 .container > header {
 	width: 90%;
 	max-width: 69em;

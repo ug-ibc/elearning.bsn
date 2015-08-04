@@ -251,9 +251,24 @@
                         <div class="section-content">
                             <div id="testimonials-carousel" class="testimonials-carousel carousel slide">
                                 <div class="carousel-inner">
+<<<<<<< HEAD
                                     {if $testimoni}
                                     {foreach $testimoni as $k => $val}
                                     <div class="item {if $k == 0}active{/if}">
+=======
+                                    <div class="item active">
+                                        <blockquote class="quote">                                  
+                                            <p align="left"><i class="fa fa-quote-left"></i>Dengan pemanfaatan teknologi ini, Indonesia diharapkan akan mencapai level budaya standar yang tinggi.</p>
+                                        </blockquote>                
+                                        <div class="row">
+                                            <p class="people col-md-12 col-sm-4 col-xs-8"><span class="name">Prof. Dr. Bambang Prasetya, M.Sc.</span><br /><span class="title">Kepala BSN</span></p>
+                                            {*}<img class="profile col-md-4 pull-right" src="{$basedomain}assets/img/testimonials/profile-1.png"  alt="" />{/*}
+                                        </div>                               
+                                    </div><!--//item-->
+                                    {if $testimoni}
+                                    {foreach $testimoni as $k => $val}
+                                    <div class="item">
+>>>>>>> 2f51bc66142d2a2f32a064f20fc019a370ffb5ca
                                         <blockquote class="quote">                                  
                                             <p align="left"><i class="fa fa-quote-left"></i>{$val.testimoni}</p>
                                         </blockquote>                

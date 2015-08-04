@@ -1,0 +1,199 @@
+ <!-- {pr($profile)} -->
+  <section id="callaction">
+
+    <div class="container" >
+         <div class="row">
+            <div class="col-md-12" >
+                
+      <div id="tabs" class="tabs">
+        <nav>
+          <ul>
+            <li><a href="#section-1"><i class="fa fa-user"></i> <span>Biodata</span></a></li>
+            <li><a href="#section-2"><span>Nilai</span></a></li>
+          </ul>
+        </nav>
+        <div class="content">
+
+          <section id="section-1">
+            <form method="POST" action="{$basedomain}register/signup" class="form-horizontal" onsubmit="return validatePassword()">
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
+            <div class="col-sm-6">
+              <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
+              <input type="text" class="form-control" value="{$profile.name}" name="name"  readonly  required/>
+            </div>
+            </div>
+          </div>
+         <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
+            <div class="col-sm-6">
+              <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
+              <input type="text" class="form-control" name="username"  value="{$profile.username}" readonly required/>
+            </div>
+            </div>
+          </div>
+         <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+            <div class="col-sm-6">
+              <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1"><i class="fa fa-envelope"></i></span>
+              <input type="text" class="form-control" name="email"  value="{$profile.email}" readonly required id="register-email"/>
+            </div>
+            </div><span id="email-error"></span>
+          </div>
+         <!-- <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Password</label>
+            <div class="col-sm-6">
+              <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1"><i class="fa fa-lock"></i></span>
+              <input type="password" class="form-control" placeholder="Password..." name="password" required id="register-password"/>
+            </div>
+            </div>
+          </div>
+         <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Confirm Password</label>
+            <div class="col-sm-6">
+              <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1"><i class="fa fa-lock"></i></span>
+              <input type="password" class="form-control" placeholder="Confirm Password..." name="repassword" required id="register-rePassword"/>
+            </div>
+            </div>
+          </div>
+          <span id="password-error"></span>
+         --><div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Tempat Lahir</label>
+            <div class="col-sm-6">
+              <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1"><i class="fa fa-hospital-o"></i></span>
+              <input type="text" class="form-control" name="tempatlahir" value="{$profile.tempatlahir}" readonly required/>
+            </div>
+            </div>
+          </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Tanggal Lahir</label>
+            <div class="col-sm-6">
+              <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
+              <input type="text" class="form-control" id="datepicker" value="{$profile.tanggallahir}"name="tanggallahir"  readonly required />
+            </div>
+            </div>
+          </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Pendidikan</label>
+            <div class="col-sm-6">
+              <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1"><i class="fa fa-mortar-board"></i></span>
+              <input type="text" class="form-control" value="{$profile.pendidikan}"  name="pendidikan"  readonly required>
+            </div>
+            </div>
+          </div>
+
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Institusi</label>
+            <div class="col-sm-6">
+              <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1"><i class="fa fa-university"></i></span>
+              <input type="text" class="form-control"  name="institusi" value="{$profile.institusi}"  readonly required/>
+            </div>
+            </div>
+          </div>
+
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Pekerjaan</label>
+            <div class="col-sm-6">
+              <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1"><i class="fa fa-briefcase"></i></span>
+              <input type="text" class="form-control" name="jenispekerjaan" value="{$profile.jenispekerjaan}"  readonly required/>
+            </div>
+            </div>
+          </div>
+
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Handphone</label>
+            <div class="col-sm-6">
+              <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1"><i class="fa fa-phone"></i></span>
+              <input type="text" class="form-control" name="hp" value="{$profile.hp}"  readonly required onkeypress='return event.charCode <= 57'/>
+            </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Alamat</label>
+            <div class="col-sm-6">
+              <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1"><i class="fa fa-home"></i></span>
+              <textarea class="form-control"  name="alamat" value="{$profile.name}" readonly ></textarea>
+            </div> 
+            </div>
+          </div>
+          <!-- <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">Provinsi</label>
+
+            <div class="col-sm-6">
+                    <select class="form-control selectProvinsi" name="city" required>
+                      <option value="">- Pilih Provinsi -</option>
+                      {foreach $city as $val}
+                      <option value="{$val.kode_wilayah}">{$val.nama_wilayah}</option>
+                      {/foreach}
+                    </select>
+                    
+            </div>
+                </div> -->
+          <!-- <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+               <input type="reset" value="Kosongkan" class="btn btn-default">
+              <input type="submit" value="Mendaftar" id="tmbl" class="btn btn-primary" name="btnDaftar">
+              <input type="hidden" name="token" value="1">
+              </div>
+            </div> -->
+        </form>
+          </section>
+
+          <section id="section-2">
+              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <!-- {pr($quiz)} -->
+            {if !empty($quiz)}
+            {foreach $quiz as $value}
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse{$value.idMateri}" aria-expanded="true" aria-controls="collapse{$value.idMateri}">
+                    <span style="font-size:19px">{$value.namagrup} - {$value.kodeSertifikat}</span>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapse{$value.idMateri}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                  <div class="panel-body">
+                  <table width="100%">
+                    <tr>
+                      <th>Kode Sertifikat</th>
+                      <th>Nilai</th>
+                      <th>Mengulang</th>
+                      <th>Aksi</th>
+                    </tr>
+                    <tr>
+                      <td>{$value.kodeSertifikat}</td>
+                      <td>{$value.nilai}</td>
+                      <td>{$value.statusulang} Kali</td>
+                      <td><a href="#" class="btn btn-info">Cetak Sertifikat</a></td>
+                    </tr>
+                  </table>
+                    
+                  </div>
+                </div>
+              </div>
+              {/foreach}
+              {/if}
+            </div>
+          </div>
+
+          </section>
+
+        </div><!-- /content -->
+      </div><!-- /tabs -->
+            </div>
+         </div>
+    </div>
+    </section>

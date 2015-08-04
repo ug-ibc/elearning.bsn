@@ -1,0 +1,109 @@
+<section class="callaction">
+	<div class="container"><div class="col-md-12" align="left" style="border-bottom:2px solid #F5F5F5;margin-bottom:50px;padding-bottom:3px">
+	        <span style="font-size:23px;border-bottom:2px solid #E37A43;">Cari Sertifikat</span>
+	        
+	        <!-- <p>Lorem ipsum dolor sit amet, consectetur consectetur  adipiscing elit donec mer lacinia.</p> -->
+	    </div>
+		<div class="row">
+			<form  role="search" method="POST" action="{$basedomain}search/">
+			<div class="col-md-9 col-md-offset-1" align="center">
+				
+			        <div class="form-group">
+			        	
+			        	<div class="input-group">
+	  						<span class="input-group-addon" id="sizing-addon1"><i class="fa fa-search"></i></span> 
+				         {if $keyword}
+								{$key_value = "$keyword"}
+							{else}
+								{$key_value = ""}	
+							{/if}
+						  <input type="text" class="form-control" placeholder="Search Sertifikat misal: ELS/1/XV"  value = "{$key_value}" name="cari">
+			        	</div>
+			        </div>
+			</div>
+
+			<div class="col-md-1" align="center">
+					<button type="submit" class="btn btn-info" >Search</button>
+			</div>
+
+			</form>
+		</div>
+			 {if $message}
+				<div class="col-md-5" align="center">
+				<h3>{$message}</h3>
+				</div>
+			{/if}
+		
+	</div>
+</section>
+
+{if $group_course}	
+<!--{pr($group_course)}	
+{pr($list_course)}	
+{pr($group_course)}
+{pr($nilai)}-->
+<section class="callaction" style="margin-bottom:-60px;margin-top:-60px">
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-8 col-md-offset-1">
+				<span style="color:#6091BA; font-size:30px;text-transform:uppercase">{$nilai.name}</span><br/>
+				<span style="color:#656565;font-size:25px">{$nilai.jenispekerjaan}</span><br/>
+				<span style="color:#000000;font-size:20px;text-transform:uppercase"> {$nilai.kodeSertifikat}</span><br/>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="callaction">
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-8 col-md-offset-1" align="center">
+		
+				  
+<table width="100%"> 
+	<tr>
+		<th align="center" >GROUP KURSUS</th>
+	</tr>
+    
+<tr>
+	<td>{$group_course.namagrup}</td>
+</tr>
+
+	<tr>
+		<th align="center" >LIST MATERI</th>
+	</tr>
+	{if $list_course}
+	{foreach $list_course as $val_list}
+	<tr class='even'>
+		<td>{$val_list.namamateri}</td>
+	</tr>
+	{/foreach}
+	{/if}
+	<tr class="odd" align="center"><th>Jumlah Attempt : 1</th></tr>
+</table>
+			</div>
+			<div class="col-md-3" align="center">
+			 <div class="col-md-12 nilai" style="background-color:#D5DAD2;border:2px solid #E3E3E3;">
+                 <div  align="center">
+
+                  <div style="padding-top:70px;padding-bottom:50px;">
+                   <span style="font-size:90px">{$nilai.nilai}</span>
+                 </div>
+                   <h5>SKOR</h5>
+                </div>
+            </div>
+			{if isset($user) && $kategori != 'Kurang'}
+            <a href="{$basedomain}search/cetak/?id_crtfkt={$nilai.kodeSertifikat}&id_grp={$group_course.idGrup_kursus}&id_usr={$nilai.idUser}" style="text-decoration:none">
+            <div class="col-md-12 nilai hvr-grow-shadow" style="margin-top:20px;background-color:#39B3D7;color:white;font-size:19px;padding-top:20px;padding-bottom:20px" >
+            	<i class="fa fa-file-pdf-o"></i> Download Sertifikat
+       		 </div>
+       		 </a>
+			 {/if}
+			 {/if}
+			</div>
+		</div>
+		
+		
+	</div>
+</section>

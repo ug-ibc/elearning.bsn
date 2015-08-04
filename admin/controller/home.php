@@ -160,12 +160,15 @@ class home extends Controller {
 	{
 		$id = $_POST['id'];
 		$status =$_POST['status'];
+
+		
 		if($status == 1){
 			$n_status = 0;
 		}else{
 			$n_status = 1;
 		}
 		if ($id != '' && $status != ''){
+
 			$update_status = $this->mquiz->update_status_testimoni($id,$n_status);
 		}
 		exit;
@@ -207,13 +210,14 @@ class home extends Controller {
 			foreach ($select as $key => $value) {
 				if ($value['data']){
 					$unserial = unserialize($value['data']);
-					$data[$i]['testimoni'] = $unserial['testimoni'];
-					$data[$i]['status_testimoni'] = intval($unserial['status_testimoni']);
+					// $select[$key]['idNilai'] = $value['idNilai'];
+					$select[$key]['testimoni'] = $unserial['testimoni'];
+					$select[$key]['status_testimoni'] = intval($unserial['status_testimoni']);
 				}
 			}
 		}
 		// pr($select);
-		$this->view->assign('data',$data);
+		$this->view->assign('data',$select);
 		
 		return $this->loadView('home/testimoni');
 

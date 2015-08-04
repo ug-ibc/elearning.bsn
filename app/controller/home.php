@@ -12,6 +12,8 @@ class home extends Controller {
 		$this->loadmodule();
 		$this->view = $this->setSmarty();
 		$this->view->assign('basedomain',$basedomain);
+		$getUserLogin = $this->isUserOnline();
+		$this->user = $getUserLogin[0];
     }
 	
 	function loadmodule()
@@ -26,8 +28,6 @@ class home extends Controller {
 	function index(){
 
 		$this->log($aksi='surf', $activity='landing home bsn');
-		//$data=$this->userGallery->getgallery();
-		//if ($data){	
 		$vardata['data'] = $this->userNews->getnews2();
 		$vardata['data2'] = $this->userGallery->getgallery();
 		$vardata['quotes'] = $this->contentHelper->getCatatan(2);
@@ -44,20 +44,32 @@ class home extends Controller {
 		}
 
 		$getTestimoni = $this->quizHelper->getTestimoni();
-		// pr($getTestimoni);
+		
+		$isCourseReady = $this->quizHelper->isCourseReady();
+		
+		if ($isCourseReady){
+			
+			$dataKursus = array();
+			foreach ($isCourseReady as $key => $value) {
+
+				if ($value['soalkursus']){
+					foreach ($value['soalkursus'] as $key => $val) {
+						$dataKursus[] = $val;
+					}
+					
+				}
+				
+			}
+			$this->view->assign('kursus',$dataKursus);
+			$this->view->assign('user',$this->user[idUser]);
+		}
+
 		$this->view->assign('testimoni',$getTestimoni);
 		$this->view->assign('online',$online[0]['total']);
-		// pr($online);
 		$kursus = $this->contentHelper->getKursus(true);
-		// pr($kursus);
-		$this->view->assign('kursus',$kursus);
-		// pr($vardata);exit;
+		// $this->view->assign('kursus',$kursus);
 		$this->view->assign('data',$vardata);			
 
-		//$this->view->assign('data',$data);
-		//}
-		// exit;
-		
 		return $this->loadView('home');
     }
 

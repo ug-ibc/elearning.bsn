@@ -76,6 +76,7 @@ var $models = FALSE;
 	public function editwebex(){
 		global $CONFIG;
 		$id_webex = $_GET['id_webex'];
+		// db($_POST);
 		//kondisi apabila tidak melakukan perubahan
 		if ($_POST == null){	
 			$data=$this->models->selectwebex($id_webex);

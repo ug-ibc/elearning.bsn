@@ -7,7 +7,10 @@ $(document).ready(function() {
 	$('#demo-tp-textinput').timepicker({
 		minuteStep:5,
 		showInputs: false,
-		disableFocus: true
+		disableFocus: true,
+		showSeconds: true,
+        showMeridian: false,
+        defaultTime: false
 	});
 })	
 
@@ -129,7 +132,7 @@ $(document).ready(function() {
 							<label class="col-sm-2 control-label">Time</label>
 							<div class="col-sm-3">
 								<div class="input-group">
-									<input type="text" id="demo-tp-textinput" class="form-control" name="waktu" required>
+									<input type="text" id="demo-tp-textinput" class="form-control" name="waktu" value="{$data.waktu}" required>
 									<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
 								</div>
 							</div>

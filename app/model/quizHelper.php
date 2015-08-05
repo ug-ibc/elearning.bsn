@@ -846,5 +846,13 @@ class quizHelper extends Database {
         return false;
     }
 
+    function getGroupById($id)
+    {
+        $sql = "SELECT * FROM grup_kursus WHERE idGrup_kursus = {$id}";
+        $res = $this->fetch($sql,0);
+
+        return $res;
+    }
+
 }
 ?>

@@ -3,9 +3,11 @@ class mquiz extends Database {
 	
 	//var $prefix = "lelang";
 	
-	function inputquiz($soal,$pilihan1,$pilihan2,$pilihan3,$pilihan4,$jenissoal,$keterangan,$jawaban,$kursus,$materi,$groupkursus, $quizstatus)
+	function inputquiz($soal,$pilihan1,$pilihan2,$pilihan3,$pilihan4,$jenissoal=0,$keterangan,$jawaban,$kursus,$materi,$groupkursus, $quizstatus)
 	{
+
 		$query = "INSERT IGNORE INTO banksoal (soal,pilihan1,pilihan2,pilihan3,pilihan4,jenissoal,keterangan,jawaban,idKursus,idMateri,idGrup_kursus, n_status)
+
 					VALUES
 						('".$soal."','".$pilihan1."','".$pilihan2."','".$pilihan3."'
 							,'".$pilihan4."','".$jenissoal."','".$keterangan."','".$jawaban."'

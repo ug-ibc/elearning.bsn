@@ -53,6 +53,8 @@
 							  {if !empty($allcourse)}
 							  {foreach $allcourse as $val}
 							  <a href="{$basedomain}kursus/subkursusDetail/?id={$val.idGrup_kursus}&idk={$val.idKursus}" class="btn btn-default changetab">
+
+							  {$val.namakursus} 
 							  	{if $islogin}
 							  	{if $hasRead}
 							  	{if !in_array($val.idKursus, $hasRead)}
@@ -63,8 +65,7 @@
 							  	{else}
 							  	<span class="label label-danger"> unread</span>
 							  	{/if}
-							  	{/if}
-							  {$val.namakursus} </a> <br/>
+							  	{/if}</a> <br/>
 							  {/foreach}
 							  {/if}
 							  <!-- <a href="#" class="btn btn-default"><span class="label label-info">Hirarki</span>Infrastruktur Mutu</a> -->
@@ -75,7 +76,7 @@
 					<div class="col-md-8 hiddendiv" style="display:" id="tab{$val.idKursus}">
 			           <div style="background-color:#f5f5f5;padding:1px 15px;border-radius:10px 10px 0px 0px">
 			           		{if $user}
-			            	<span style="font-size:20px;font-weight:bold">{$val.namakursus}</span> <a href="javascript:void(0)"  style="float:right;padding:10px" class="label label-primary bacaMateri" data-kursus="{$val.idKursus}" data-grupkursus="{$val.idGrup_kursus}">Baca</a>
+			            	<span style="font-size:20px;font-weight:bold">{$val.namakursus}</span> <a href="javascript:void(0)"  style="float:right;padding:5px;margin-top:3px" class="label label-primary bacaMateri" data-kursus="{$val.idKursus}" data-grupkursus="{$val.idGrup_kursus}">Baca</a>
 			            	{else}
 			            	<span style="font-size:20px;font-weight:bold">{$val.namakursus}</span> <a href="#"  style="float:right;padding:10px" class="label label-primary " >Baca</a>
 			            	{/if}

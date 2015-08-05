@@ -150,9 +150,12 @@ class quiz extends Controller {
        		
        		
        	}
+
+        $grupkursus = $this->quizHelper->getGroupById($groupKursus);
        	
         // db($dataSoal);
        	$this->view->assign('kursus', $getKursus);
+        $this->view->assign('grupkursus', $grupkursus);
        	$this->view->assign('user', $this->user);
        	$this->view->assign('startQuiz', $startQuiz);
        	$this->view->assign('hiddenStatus', true);

@@ -1,0 +1,118 @@
+<!-- REGISTRATION FORM -->
+<!--===================================================-->
+<div class="cls-content">
+	<div class="cls-content-lg panel">
+		<div class="panel-body">
+			<p class="pad-btm">Create an account</p>
+			<form action="{$basedomain}user/do_register" method="POST">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<div class="input-group">
+								<div class="input-group-addon"><i class="fa fa-male"></i></div>
+								<input type="text" class="form-control" placeholder="Full name" name="name" required>
+							</div>
+						</div>
+						<div id="emaildiv" class="form-group">
+							<div class="input-group">
+								<div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+								<input type="email" class="form-control" placeholder="E-mail" name="email" id="email" required>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div id="usernamediv" class="form-group">
+							<div class="input-group">
+								<div class="input-group-addon"><i class="fa fa-user"></i></div>
+								<input type="text" class="form-control" placeholder="Username" name="username" id="username" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
+								<input type="password" class="form-control" placeholder="Password" name="password" required>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-8 text-left checkbox">
+						<label class="form-checkbox form-icon">
+							<input type="checkbox" id="terms"> I agree with the <a href="#" class="btn-link">Terms and Conditions</a>
+						</label>
+					</div>
+					<div class="col-xs-4">
+						<div class="form-group text-right">
+							<button class="btn btn-success text-uppercase" id="submit" type="submit">Sign Up</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="text-center pad-ver">
+		Already have an account ? <a href="{$basedomain}user/login" class="btn-link mar-rgt">Sign In</a>
+	</div>
+</div>
+<!--===================================================-->
+{literal}
+<script type="text/javascript">
+	$(document).on('submit',function(){
+	   if($("#terms").is(':checked')){
+	   	return true;
+	   } else {
+				$.niftyNoty({
+					type: 'danger',
+					icon : 'fa fa-info',
+					message : 'You have to agree with the terms and condition first!',
+					container : 'floating',
+					timer : 3000
+				});
+	
+	   	return false;
+	   }
+	});
+
+	$(document).on('change', '#email', function() {
+		var data = $("#email").val();
+		$.post(basedomain+"user/checkField", {field:'email',data:data}, function(data){
+			if(data == 0){
+				$.niftyNoty({
+					type: 'danger',
+					icon : 'fa fa-times',
+					message : '<strong>Email</strong> already used. Use different email',
+					container : 'floating',
+					timer : 10000
+				});
+				$("#emaildiv").attr('class','form-group has-error');
+				$("#submit").attr('disabled','disabled');
+			} else {
+				$("#emaildiv").attr('class','form-group');
+				$("#submit").removeAttr('disabled');
+			}
+		});
+
+	});
+
+	$(document).on('change', '#username', function() {
+		var data = $("#username").val();
+		$.post(basedomain+"user/checkField", {field:'username',data:data}, function(data){
+			if(data == 0){
+				$.niftyNoty({
+					type: 'danger',
+					icon : 'fa fa-times',
+					message : '<strong>Username</strong> already exist',
+					container : 'floating',
+					timer : 10000
+				});
+				$("#usernamediv").attr('class','form-group has-error');
+				$("#submit").attr('disabled','disabled');
+			} else {
+				$("#usernamediv").attr('class','form-group');
+				$("#submit").removeAttr('disabled');
+			}
+		});
+
+	});
+</script>
+{/literal}

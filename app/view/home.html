@@ -79,7 +79,7 @@
                                 <div class="item active">
                                     {for $foo=0 to 2}
                                     {if $foo < 3 && !empty($data.data.$foo)}
-                                    <div class="col-md-4" style="padding-left:15px">
+                                    <div class="col-md-4" style="padding-left:15px;padding-bottom:15px">
                                     <h2 class="title"><a href="{$basedomain}berita/detail/?id_news={$data.data.$foo.id_news}" style="text-decoration:none">{$data.data.$foo.judul}</a></h2>
                                         <div class="row news-item">
                                         <div class="col-xm-2">

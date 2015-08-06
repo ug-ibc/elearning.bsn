@@ -63,7 +63,7 @@ class home extends Controller {
 			$this->view->assign('kursus',$dataKursus);
 			$this->view->assign('user',$this->user[idUser]);
 		}
-
+		
 		$this->view->assign('testimoni',$getTestimoni);
 		$this->view->assign('online',$online[0]['total']);
 		$kursus = $this->contentHelper->getKursus(true);

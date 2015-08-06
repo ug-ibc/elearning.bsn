@@ -157,27 +157,29 @@
             {if !empty($quiz)}
             {foreach $quiz as $value}
               <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOne">
+                <div class="panel-heading" role="tab" id="heading{$value.idNilai}">
                   <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse{$value.idMateri}" aria-expanded="true" aria-controls="collapse{$value.idMateri}">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse{$value.idNilai}" aria-expanded="true" aria-controls="collapse{$value.idNilai}">
                     <span style="font-size:19px">{$value.namagrup} - {$value.kodeSertifikat}</span>
                     </a>
                   </h4>
                 </div>
-                <div id="collapse{$value.idMateri}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div id="collapse{$value.idNilai}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{$value.idNilai}">
                   <div class="panel-body">
                   <table width="100%">
                     <tr>
                       <th>Kode Sertifikat</th>
                       <th>Nilai</th>
                       <th>Mengulang</th>
-                      <th>Aksi</th>
+                      <th>Status</th>
+                      <th>Sertifikat</th>
                     </tr>
                     <tr>
                       <td>{$value.kodeSertifikat}</td>
                       <td>{$value.nilai}</td>
                       <td>{$value.statusulang} Kali</td>
-                      <td><a href="{$basedomain}home/cetak/?id_grp={$value.idGroupKursus}&id_usr={$profile.idUser}" class="btn btn-info">Cetak Sertifikat</a></td>
+                      <td>{if $value.statuskelulusan eq 0}Tidak Lulus{else}Lulus{/if}</td>
+                      <td>{if $value.statuskelulusan eq 1}<a href="{$basedomain}home/cetak/?id_grp={$value.idGroupKursus}&id_usr={$profile.idUser}" class="btn btn-info">Cetak Sertifikat</a>{else}Maaf anda belum lulus{/if}</td>
 					  
                     </tr>
                   </table>

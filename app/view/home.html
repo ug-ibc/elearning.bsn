@@ -79,11 +79,17 @@
                                 <div class="item active">
                                     {for $foo=0 to 2}
                                     {if $foo < 3 && !empty($data.data.$foo)}
-                                    <div class="col-md-4 news-item">
-                                        <h2 class="title"><a href="{$basedomain}berita/detail/?id_news={$data.data.$foo.id_news}">{$data.data.$foo.judul}</a></h2>
-                                        <img class="thumb" src="{$basedomain}public_assets/{$data.data.$foo.gambar}"  alt="" />
-                                        <p>{$data.data.$foo.brief}</p>
-                                        <a class="read-more" href="{$basedomain}berita/detail/?id_news={$data.data.$foo.id_news}">Read more<i class="fa fa-chevron-right"></i></a>                
+                                    <div class="col-md-4" style="padding-left:15px">
+                                    <h2 class="title"><a href="{$basedomain}berita/detail/?id_news={$data.data.$foo.id_news}" style="text-decoration:none">{$data.data.$foo.judul}</a></h2>
+                                        <div class="row news-item">
+                                        <div class="col-xm-2">
+                                        <img class="thumb" src="{$basedomain}public_assets/{$data.data.$foo.gambar}"  alt=""/>
+                                        </div>
+                                        <div class="col-md-12">
+                                        <p>{limit_char($data.data.$foo.brief,150)} ...</p>
+                                        <a class="read-more" href="{$basedomain}berita/detail/?id_news={$data.data.$foo.id_news}">Read more<i class="fa fa-chevron-right"></i></a>
+                                        </div>
+                                        </div>            
                                     </div><!--//news-item-->
                                     {/if}
                                     {/for}
@@ -93,11 +99,17 @@
                                 <div class="item">
                                     {for $foo=3 to 5}
                                     {if $foo < 6 && !empty($data.data.$foo)}
-                                    <div class="col-md-4 news-item">
-                                        <h2 class="title"><a href="{$basedomain}berita/detail/?id_news={$data.data.$foo.id_news}">{$data.data.$foo.judul}</a></h2>
-                                        <img class="thumb" src="{$basedomain}public_assets/{$data.data.$foo.gambar}"  alt="" />
-                                        <p>{$data.data.$foo.brief}</p>
-                                        <a class="read-more" href="{$basedomain}berita/detail/?id_news={$data.data.$foo.id_news}">Read more<i class="fa fa-chevron-right"></i></a>                
+                                    <div class="col-md-4" style="padding-left:15px">
+                                    <h2 class="title"><a href="{$basedomain}berita/detail/?id_news={$data.data.$foo.id_news}" style="text-decoration:none">{$data.data.$foo.judul}</a></h2>
+                                        <div class="row news-item">
+                                        <div class="col-xm-2">
+                                        <img class="thumb" src="{$basedomain}public_assets/{$data.data.$foo.gambar}"  alt=""/>
+                                        </div>
+                                        <div class="col-md-12">
+                                        <p>{limit_char($data.data.$foo.brief,150)} ...</p>
+                                        <a class="read-more" href="{$basedomain}berita/detail/?id_news={$data.data.$foo.id_news}">Read more<i class="fa fa-chevron-right"></i></a>
+                                        </div>
+                                        </div>            
                                     </div><!--//news-item-->
                                     {/if}
                                     {/for}

@@ -28,6 +28,9 @@
 {if $page.page=='search'}
     {$classSearch='active'}
 {/if}
+{if $page.page=='user'}
+    {$classNilai='active'}
+{/if}
 <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
   Launch demo modal
 </button> -->
@@ -101,7 +104,7 @@
                     <ul class="nav menuTop navbar-nav">
                         
                           {if $user}
-                          <li><h5><i class="fa fa-user"></i> Selamat Datang, <i>{$user.0.name}</i> <a href="{$basedomain}user/setting"><i class="fa fa-cog fa-2x"></i></a></h5></li>
+                          <li><h4><i class="fa fa-user"></i> Selamat Datang, <i>{$user.0.name}</i></h4></li>
                           {/if}
                         <li class="menu {$classSearch}" ><a href="{$basedomain}search" ><i class="fa fa-search"></i> Cari  Sertifikat </a></li> 
                         
@@ -132,6 +135,9 @@
                         <li class="menu {$classKursus}"><a href="{$basedomain}kursus">KURSUS</a></li>
                         <li class="menu {$classBerita}"><a href="{$basedomain}berita">BERITA</a></li>
                         <li class="menu {$classTutorial}"><a href="{$basedomain}tutorial">TUTORIAL</a></li>
+                        {if $user}
+                        <li class="menu {$classNilai}"><a href="{$basedomain}user/setting">NILAI</a></li>
+                        {/if}
                     </ul>
                 </div>
             </div>

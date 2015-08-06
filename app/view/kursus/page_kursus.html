@@ -65,7 +65,7 @@
 							  	{else}
 							  	<span class="label label-danger"> unread</span>
 							  	{/if}
-							  	{/if}</a> <br/>
+							  	{/if}</a> 
 							  {/foreach}
 							  {/if}
 							  <!-- <a href="#" class="btn btn-default"><span class="label label-info">Hirarki</span>Infrastruktur Mutu</a> -->
@@ -74,11 +74,20 @@
 					{if !empty($course.course)}
 					{foreach $course.course as $val}
 					<div class="col-md-8 hiddendiv" style="display:" id="tab{$val.idKursus}">
-			           <div style="background-color:#f5f5f5;padding:1px 15px;border-radius:10px 10px 0px 0px">
+			           <div style="background-color:#f5f5f5;padding:6px 15px;border-radius:10px 10px 0px 0px">
 			           		{if $user}
-			            	<span style="font-size:20px;font-weight:bold">{$val.namakursus}</span> <a href="javascript:void(0)"  style="float:right;padding:5px;margin-top:3px" class="label label-primary bacaMateri" data-kursus="{$val.idKursus}" data-grupkursus="{$val.idGrup_kursus}">Baca</a>
+			            	<span style="font-size:20px;font-weight:bold;">{$val.namakursus}</span> 
+			            	{if $hasRead}
+							{if !in_array($val.idKursus, $hasRead)}
+			            	<a href="javascript:void(0)"  style="float:right;padding:5px;margin-top:3px" class="label label-primary bacaMateri" data-kursus="{$val.idKursus}" data-grupkursus="{$val.idGrup_kursus}">Baca</a>
 			            	{else}
-			            	<span style="font-size:20px;font-weight:bold">{$val.namakursus}</span> <a href="#"  style="float:right;padding:10px" class="label label-primary " >Baca</a>
+			            	<span  style="float:right;padding:5px;margin-top:3px" class="label label-success bacaMateri"><i class="fa fa-check"></i>Read</span>
+			            	{/if}
+			            	{else}
+			            	<a href="javascript:void(0)"  style="float:right;padding:5px;margin-top:3px" class="label label-primary bacaMateri" data-kursus="{$val.idKursus}" data-grupkursus="{$val.idGrup_kursus}">Baca</a>
+			            	{/if}
+			            	{else}
+			            	<span style="font-size:20px;font-weight:bold">{$val.namakursus}</span> {*}<a href="#"  style="float:right;padding:10px" class="label label-primary " >Baca</a>{/*}
 			            	{/if}
 			            </div>
 			            <div style="background-color:#fbfbfb;padding:15px">

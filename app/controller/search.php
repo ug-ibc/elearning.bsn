@@ -38,20 +38,25 @@ class search extends Controller {
 				$nilai = $this->models->get_value_by_certificate($id_group);
 				
 				if($nilai[nilai] >= $criteria[kategoriBaik]){
-					$kategori = "Baik";
+					// $kategori = "Baik";
+					$kategori = "Sangat Baik";
 				}elseif($nilai[nilai] >= $criteria[kategoriCukup] && $nilai[nilai] < $criteria[kategoriBaik]){
-					$kategori = "Cukup";
+					// $kategori = "Cukup";
+					$kategori = "Baik";
 				}else{
 					$kategori = "Kurang";
 				}
+				$idGroupKursus = $group_course['idGrup_kursus'];
+				$idUser = $nilai['idUser'];
+				$attemp = $this->models->get_attempt_user($idGroupKursus,$idUser);
 				
 				$this->view->assign('group_course',$group_course);
 				$this->view->assign('list_course',$list_course);
 				$this->view->assign('nilai',$nilai);
-				// pr($nilai);
 				$this->view->assign('keyword',$certificate);
 				$this->view->assign('user',$this->user);
 				$this->view->assign('kategori',$kategori);
+				$this->view->assign('attemp',$attemp);
 				
 				return $this->loadView('kursus/page_search');
 			}else{

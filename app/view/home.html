@@ -169,6 +169,54 @@
         </div>
 		
     </section>
+
+
+
+
+        <section class="callaction">
+                <div class="container">
+
+                    <div class="row"> 
+                <section class="news">
+                    <h1 class="section-heading text-highlight"><span class="line">Video WebConference 2</span></h1>     
+                    <div class="carousel-controls">
+                        <a class="prev" href="1.5.1.html#news-carousel" data-slide="prev"><i class="fa fa-caret-left"></i></a>
+                        <a class="next" href="1.5.1.html#news-carousel" data-slide="next"><i class="fa fa-caret-right"></i></a>
+                    </div><!--//carousel-controls--> 
+                    <div class="section-content clearfix">
+                        <div id="news-carousel" class="news-carousel carousel slide">
+                            <div class="carousel-inner">
+
+                                <div class="item active">
+                                {if $datavidwebex}
+                                {foreach $datavidwebex as $k => $valvidwebex}
+                                    <div class="col-md-3" style="padding-left:15px;padding-bottom:15px">
+                                    
+                                       <!--  <div class="col-xm-2">
+                                         
+                                        </div> -->
+                                        <div class="col-md-12">
+                                        
+                                        <iframe width="100%" height="200" allowfullscreen="" src="{$valvidwebex.video}"></iframe> 
+                                        </div>          
+                                    </div><!--//news-item-->
+                                    {/foreach}
+                                    {/if}
+                                </div><!--//item-->
+                                
+                                
+                            </div><!--//carousel-inner-->
+                        </div><!--//news-carousel-->  
+                    </div><!--//section-content-->     
+                </section><!--//news-->
+            </div>
+        </div>
+    </section>
+
+
+
+
+{*}
     <section id="featured" style="background-color:#FFFFFF;height:60px">
         <div class="container">
             &nbsp;
@@ -213,7 +261,7 @@
 
         </div>
     </div>
-    </section>
+    </section>{/*}
     {*}<section class="callaction">
     <div class="container">
         <div class="row">

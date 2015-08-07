@@ -42,6 +42,12 @@ class home extends Controller {
 		if ($datavidwebex){	
 			$this->view->assign('datavidwebex',$datavidwebex);
 		}
+		
+		// pr($datavidwebex);
+		// $totalvidwebex=count($datavidwebex);
+
+		// $datatot=$totalvidwebex%4;
+
 
 		$getTestimoni = $this->quizHelper->getTestimoni();
 		

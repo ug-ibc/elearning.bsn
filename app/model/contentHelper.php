@@ -63,7 +63,7 @@ class contentHelper extends Database {
 		$query = "SELECT k.*,g.namagrup FROM kursus as k join grup_kursus  as g on g.idGrup_kursus = k.idGrup_kursus
 
 					WHERE k.n_status= '1' ORDER BY k.create_time desc {$climit}";
-        // pr($query);
+        //pr($query);
 
         $result = $this->fetch($query,1);
 

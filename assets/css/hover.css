@@ -2124,8 +2124,7 @@
   backface-visibility: hidden;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
-  /*background: #6EC24B;*/
-  background: #D3D3D3;
+  background: #6EC24B;
   -webkit-transition-property: color;
   transition-property: color;
   -webkit-transition-duration: 0.3s;

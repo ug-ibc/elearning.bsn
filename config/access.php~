@@ -1,0 +1,10 @@
+<?php
+/* Konfigurasi DB */
+
+$dbConfig[0]['host'] = '202.169.54.14';
+$dbConfig[0]['user'] = 'pengguna_distanceE';
+$dbConfig[0]['pass'] = 'BSNdistancee2015';
+$dbConfig[0]['name'] = 'db_distancelearning';
+$dbConfig[0]['server'] = 'mysql';
+
+?>

@@ -108,5 +108,14 @@ class mkursus extends Database{
 		$result = $this->fetch($query);
 		return $result;
 	}
+	
+	function get_attempt_user($idGroupKursus,$idUser){
+		$query = "SELECT count(1) as jml from nilai where idGroupKursus = {$idGroupKursus} and idUser = {$idUser}";
+		$result = $this->fetch($query);
+		return $result;
+	
+	
+	}
+	
 }
 ?>

@@ -79,11 +79,17 @@
                                 <div class="item active">
                                     {for $foo=0 to 2}
                                     {if $foo < 3 && !empty($data.data.$foo)}
-                                    <div class="col-md-4 news-item">
-                                        <h2 class="title"><a href="{$basedomain}berita/detail/?id_news={$data.data.$foo.id_news}">{$data.data.$foo.judul}</a></h2>
-                                        <img class="thumb" src="{$basedomain}public_assets/{$data.data.$foo.gambar}"  alt="" />
-                                        <p>{$data.data.$foo.brief}</p>
-                                        <a class="read-more" href="{$basedomain}berita/detail/?id_news={$data.data.$foo.id_news}">Read more<i class="fa fa-chevron-right"></i></a>                
+                                    <div class="col-md-4" style="padding-left:15px;padding-bottom:15px">
+                                    <h2 class="title"><a href="{$basedomain}berita/detail/?id_news={$data.data.$foo.id_news}" style="text-decoration:none">{$data.data.$foo.judul}</a></h2>
+                                        <div class="row news-item">
+                                        <div class="col-xm-2">
+                                        <img class="thumb" src="{$basedomain}public_assets/{$data.data.$foo.gambar}"  alt=""/>
+                                        </div>
+                                        <div class="col-md-12">
+                                        <p>{limit_char($data.data.$foo.brief,150)} ...</p>
+                                        <a class="read-more" href="{$basedomain}berita/detail/?id_news={$data.data.$foo.id_news}">Read more<i class="fa fa-chevron-right"></i></a>
+                                        </div>
+                                        </div>            
                                     </div><!--//news-item-->
                                     {/if}
                                     {/for}
@@ -93,11 +99,17 @@
                                 <div class="item">
                                     {for $foo=3 to 5}
                                     {if $foo < 6 && !empty($data.data.$foo)}
-                                    <div class="col-md-4 news-item">
-                                        <h2 class="title"><a href="{$basedomain}berita/detail/?id_news={$data.data.$foo.id_news}">{$data.data.$foo.judul}</a></h2>
-                                        <img class="thumb" src="{$basedomain}public_assets/{$data.data.$foo.gambar}"  alt="" />
-                                        <p>{$data.data.$foo.brief}</p>
-                                        <a class="read-more" href="{$basedomain}berita/detail/?id_news={$data.data.$foo.id_news}">Read more<i class="fa fa-chevron-right"></i></a>                
+                                    <div class="col-md-4" style="padding-left:15px">
+                                    <h2 class="title"><a href="{$basedomain}berita/detail/?id_news={$data.data.$foo.id_news}" style="text-decoration:none">{$data.data.$foo.judul}</a></h2>
+                                        <div class="row news-item">
+                                        <div class="col-xm-2">
+                                        <img class="thumb" src="{$basedomain}public_assets/{$data.data.$foo.gambar}"  alt=""/>
+                                        </div>
+                                        <div class="col-md-12">
+                                        <p>{limit_char($data.data.$foo.brief,150)} ...</p>
+                                        <a class="read-more" href="{$basedomain}berita/detail/?id_news={$data.data.$foo.id_news}">Read more<i class="fa fa-chevron-right"></i></a>
+                                        </div>
+                                        </div>            
                                     </div><!--//news-item-->
                                     {/if}
                                     {/for}
@@ -129,7 +141,7 @@
 			{foreach $kursus as $val}
             <div class="col-md-3" style="margin-bottom:5px">
                 <div style="border-radius:10px 10px 0px 0px;padding:1px 15px;font-size:17px;border-bottom:1px solid #E3E3E3;background-color:#F5F5F5;" align="left">
-					<div style="width:60%">
+					<div style="width:100%">
 						<h4><span>{$val.namagrup}</span></h4>
 					</div>
 				</div>
@@ -140,9 +152,10 @@
 						<img src="{$basedomain}public_assets/{$val.image}" alt="" width="100%" height="250px"/>
 					{/if}
 					<div style="padding:15px;padding-bottom:20px">
-						<h3><span>{$val.namakursus}</span></h3>
-                        
-                        <i><p class="text-center">{$val.keterangan}</p></i>
+						<div class="title" style="height:70px;">
+                        <h3><span>{$val.namakursus}</span></h3>
+                        </div>
+                        <i><p class="text-center">{limit_char($val.keterangan,120)}<br>. . .</p></i>
                         <i class="fa fa-file-text-o"></i> {$val.total} Materi
                     </div>
                     <div style="border-top:2px solid #E3E3E3;" align="center">
@@ -156,6 +169,54 @@
         </div>
 		
     </section>
+
+
+
+
+        <section class="callaction">
+                <div class="container">
+
+                    <div class="row"> 
+                <section class="news">
+                    <h1 class="section-heading text-highlight"><span class="line">Video WebConference 2</span></h1>     
+                    <div class="carousel-controls">
+                        <a class="prev" href="1.5.1.html#news-carousel" data-slide="prev"><i class="fa fa-caret-left"></i></a>
+                        <a class="next" href="1.5.1.html#news-carousel" data-slide="next"><i class="fa fa-caret-right"></i></a>
+                    </div><!--//carousel-controls--> 
+                    <div class="section-content clearfix">
+                        <div id="news-carousel" class="news-carousel carousel slide">
+                            <div class="carousel-inner">
+
+                                <div class="item active">
+                                {if $datavidwebex}
+                                {foreach $datavidwebex as $k => $valvidwebex}
+                                    <div class="col-md-3" style="padding-left:15px;padding-bottom:15px">
+                                    
+                                       <!--  <div class="col-xm-2">
+                                         
+                                        </div> -->
+                                        <div class="col-md-12">
+                                        
+                                        <iframe width="100%" height="200" allowfullscreen="" src="{$valvidwebex.video}"></iframe> 
+                                        </div>          
+                                    </div><!--//news-item-->
+                                    {/foreach}
+                                    {/if}
+                                </div><!--//item-->
+                                
+                                
+                            </div><!--//carousel-inner-->
+                        </div><!--//news-carousel-->  
+                    </div><!--//section-content-->     
+                </section><!--//news-->
+            </div>
+        </div>
+    </section>
+
+
+
+
+{*}
     <section id="featured" style="background-color:#FFFFFF;height:60px">
         <div class="container">
             &nbsp;
@@ -200,7 +261,7 @@
 
         </div>
     </div>
-    </section>
+    </section>{/*}
     {*}<section class="callaction">
     <div class="container">
         <div class="row">
@@ -316,7 +377,7 @@
                                             Speaker's : <strong>{$val.speaker}</strong><br>
                                             Schedule : <strong>{$val.schedule}</strong><br>
                                             Meeting Number : <strong>{$val.meeting_number}</strong>
-                                            Site : <strong>{$val.site}</strong>
+                                            <strong><a href="{$val.site}" style="text-decoration:none">Menuju Situs<i class="fa fa-external-link" style="padding-left:5px"></i></a></strong>
                                         </p>
                                         <img class="thumb" src="{$basedomain}public_assets/{$val.picture}"  alt="" />
                                         <p>{$data.data.$foo.brief}</p>

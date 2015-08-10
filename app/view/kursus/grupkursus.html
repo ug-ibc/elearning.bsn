@@ -55,19 +55,23 @@
         <div class="row">
             {if !empty($kursus)}
 			{foreach $kursus as $val}
-            <div class="col-md-3">
-                <div style="border-radius:10px 10px 0px 0px;padding:10px 15px;font-size:17px;border-bottom:1px solid #E3E3E3;background-color:#F5F5F5;" align="left">
-					<div style="width:60%">
-						<h4><span>{$val.namagrup}</span></h4>
-					</div>
-				</div>
-				<div style="border:1px solid #E3E3E3">
-                    <img src="{$basedomain}public_assets/{$val.image}" alt="" width="100%" height="250px"/>
+            <div class="col-md-3" style="margin-bottom:5px">
+                <div style="border-radius:10px 10px 0px 0px;padding:1px 15px;font-size:17px;border-bottom:1px solid #E3E3E3;background-color:#F5F5F5;" align="left">
+                    <div style="width:100%">
+                        <h4><span>{$val.namagrup}</span></h4>
+                    </div>
+                </div>
+                <div style="border:1px solid #E3E3E3">
+                    {if ($val.image == "")}
+                        <img src="{$basedomain}assets/img/noimage.png" alt="" width="100%" height="250px"/>
+                    {else}
+                        <img src="{$basedomain}public_assets/{$val.image}" alt="" width="100%" height="250px"/>
+                    {/if}
                     <div style="padding:15px;padding-bottom:20px">
-						{*}<h3><span>{$val.namagrup}</span></h4>{/*}
-                        <h4 class="text-center">{$val.namakursus}</h4>
-                        <i><p class="text-center">{$val.keterangan}</p></i>
-                    <!-- <img src="img/data/star.JPG" alt=""/> (3 reviews)<br/><br/> -->
+                        <div class="title" style="height:70px;">
+                        <h3><span>{$val.namakursus}</span></h3>
+                        </div>
+                        <i><p class="text-center">{limit_char($val.keterangan,120)}<br>. . .</p></i>
                         <i class="fa fa-file-text-o"></i> {$val.total} Materi
                     </div>
                     <div style="border-top:2px solid #E3E3E3;" align="center">
@@ -79,6 +83,5 @@
             {/foreach}
             {/if}
         </div>
-        
     </div>
     </section>

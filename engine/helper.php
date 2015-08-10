@@ -66,4 +66,23 @@ function db($var=false)
 	debug($var);
 }
 
+function limit_words ($text, $max_words) {
+    $split = preg_split('/(\s+)/', $text, -1, PREG_SPLIT_DELIM_CAPTURE);
+    $truncated = '';
+    for ($i = 0; $i < min(count($split), $max_words*2); $i += 2) {
+        $truncated .= $split[$i].$split[$i+1];
+    }
+    return trim($truncated);
+}
+
+function limit_char ($text,$char)
+{
+	if ( mb_strlen( $text, 'utf8' ) > $char ) {
+	   $last_space = strrpos( substr( $text, 0, $char ), ' ' ); // find the last space within 35 characters
+	   $text = substr( $text, 0, $last_space );
+	}
+
+	return $text;
+}	
+
 ?>

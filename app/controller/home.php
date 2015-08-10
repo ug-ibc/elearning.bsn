@@ -42,6 +42,12 @@ class home extends Controller {
 		if ($datavidwebex){	
 			$this->view->assign('datavidwebex',$datavidwebex);
 		}
+		
+		// pr($datavidwebex);
+		// $totalvidwebex=count($datavidwebex);
+
+		// $datatot=$totalvidwebex%4;
+
 
 		$getTestimoni = $this->quizHelper->getTestimoni();
 		
@@ -64,7 +70,6 @@ class home extends Controller {
 			$this->view->assign('user',$this->user[idUser]);
 		}
 
-		// pr($getTestimoni);
 		$this->view->assign('testimoni',$getTestimoni);
 		$this->view->assign('online',$online[0]['total']);
 		$kursus = $this->contentHelper->getKursus(true);

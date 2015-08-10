@@ -47,12 +47,15 @@ class kursus extends Controller {
 			$dataKursus = array();
 			foreach ($isCourseReady as $key => $value) {
 
-				if ($value['soalkursus']){
-					foreach ($value['soalkursus'] as $key => $val) {
-						$dataKursus[] = $val;
+				if ($value['courseready']==1){
+					if ($value['soalkursus']){
+						foreach ($value['soalkursus'] as $key => $val) {
+							$dataKursus[] = $val;
+						}
+						
 					}
-					
 				}
+				
 				
 			}
 			// pr($dataKursus);

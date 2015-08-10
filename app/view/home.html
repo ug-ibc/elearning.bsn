@@ -138,7 +138,8 @@
 
         <div class="row">
             {if !empty($kursus)}
-			{foreach $kursus as $val}
+			{foreach $kursus as $key => $val}
+			{if $key < 4}
             <div class="col-md-3" style="margin-bottom:5px">
                 <div style="border-radius:10px 10px 0px 0px;padding:1px 15px;font-size:17px;border-bottom:1px solid #E3E3E3;background-color:#F5F5F5;" align="left">
 					<div style="width:100%">
@@ -164,6 +165,7 @@
                       </div>
                 </div>
             </div>
+		{/if}
             {/foreach}
             {/if}
         </div>
@@ -178,7 +180,7 @@
 
                     <div class="row"> 
                 <section class="news">
-                    <h1 class="section-heading text-highlight"><span class="line">Video WebConference 2</span></h1>     
+                    <h1 class="section-heading text-highlight"><span class="line">Video Web Conference</span></h1>     
                     <div class="carousel-controls">
                         <a class="prev" href="1.5.1.html#news-carousel" data-slide="prev"><i class="fa fa-caret-left"></i></a>
                         <a class="next" href="1.5.1.html#news-carousel" data-slide="next"><i class="fa fa-caret-right"></i></a>

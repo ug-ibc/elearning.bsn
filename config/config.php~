@@ -18,10 +18,10 @@ $CONFIG['default']['admin'] = false;
 $CONFIG['default']['salt'] = "c0d3k1r-v1.0";
 $CONFIG['default']['hostname'] = "10.10.200.115";
 
-$CONFIG['default']['base_url'] = 'http://localhost/AAPI/API/';
-$CONFIG['default']['root_path'] = $_SERVER['DOCUMENT_ROOT'].'/AAPI/API';
+$CONFIG['default']['base_url'] = 'http://elearning1.bsn.go.id/';
+$CONFIG['default']['root_path'] = $_SERVER['DOCUMENT_ROOT'].'/';
 
-$CONFIG['default']['upload_path'] = $_SERVER['DOCUMENT_ROOT'].'/AAPI/API/tmp/';
+$CONFIG['default']['upload_path'] = $_SERVER['DOCUMENT_ROOT'].'/public_assets/';
 $CONFIG['default']['max_filesize'] = 2097152;
 $CONFIG['default']['upload_path_temporary'] = "/home/";
 $CONFIG['default']['zip_foldername'] = "PUT_YOUR_ZIP_HERE";
@@ -31,8 +31,7 @@ $CONFIG['default']['images'] = APPPATH.'images/';
 $CONFIG['default']['js'] = APPPATH.'js/';
 
 $CONFIG['default']['zip_ext'] = array('application/zip', 'application/x-zip', 'application/x-zip-compressed',  'application/octet-stream', 'application/x-compress', 'application/x-compressed', 'multipart/x-zip');
-$CONFIG['default']['image'] = array('image/jpeg', 'image/pjpeg');
-$CONFIG['default']['doc'] = array('application/pdf','binary/octet-stream','application/x-unknown','application/msword');
+$CONFIG['default']['image'] = array('image/jpeg', 'image/pjpeg','image/png');
 
 $CONFIG['default']['unzip'] = 'zipArchive'; //s_linux or zipArchive
 
@@ -43,9 +42,16 @@ $CONFIG['uri']['short'] = false;
 $CONFIG['uri']['friendly'] = true;
 $CONFIG['uri']['extension'] = ".html";
 
-$CONFIG['email']['EMAIL_FROM_DEFAULT'] = "";
+$CONFIG['email']['EMAIL_SUBJECT'] = "[ NOTIFICATION ] BSN";
+$CONFIG['email']['EMAIL_FROM_DEFAULT'] = "trinata.webmail@gmail.com";
 $CONFIG['email']['EMAIL_SMTP_HOST'] = "mail.gmail.com";
-$CONFIG['email']['EMAIL_SMTP_USER'] = "";
+$CONFIG['email']['EMAIL_SMTP_USER'] = "trinata.webmail@gmail.com";
+$CONFIG['email']['EMAIL_SMTP_PASSWORD'] = "testermail";
+/*
+$CONFIG['email']['EMAIL_FROM_DEFAULT'] = "diklat@bsn.go.id";
+$CONFIG['email']['EMAIL_SMTP_HOST'] = "10.1.1.26";
+$CONFIG['email']['EMAIL_SMTP_USER'] = "diklat@bsn.go.id";
 $CONFIG['email']['EMAIL_SMTP_PASSWORD'] = "";
+*/
 
 ?>

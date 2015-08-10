@@ -197,9 +197,35 @@ class user extends Controller {
         $quiz = $this->quizHelper->getNilaiByProfile();
         // pr($profile);
         // pr($quiz);
+        if ($quiz){
+            foreach ($quiz as $key => $value) {
+                $groupid[$value['idGroupKursus']][$value['idNilai']] = $value['nilai'];
+            }
+            // pr($groupid);
+            if ($groupid){
+                foreach ($groupid as $key => $value) {
+                    $max = max($value);
+
+                    $searchKey = array_search($max, $value);
+
+                    $maxRes[$key]= $searchKey;
+                }
+            }
+            // pr($maxRes);
+
+            foreach ($quiz as $key => $value) {
+
+                if (in_array($value['idNilai'], $maxRes)){
+
+                    $newData[] = $value;
+                }
+            }
+            // pr($newData);
+        }
+
 
         $this->view->assign('profile',$profile);
-        $this->view->assign('quiz',$quiz);
+        $this->view->assign('quiz',$newData);
         return $this->loadView('akun/setting');
     }
 

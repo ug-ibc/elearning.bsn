@@ -19,7 +19,7 @@ function countDown()
 
 						if (data.status==true){
 							alert('waktu anda sudah selesai');
-							window.location.href = basedomain+'kursus';
+							window.location.href = basedomain+'quiz/hasil';
 						}
 					}, "JSON")
 					

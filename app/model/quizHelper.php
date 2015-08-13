@@ -435,7 +435,9 @@ class quizHelper extends Database {
             }
             $idKursus = $res[0]['idKursus'];
             $idGroupKursus = $res[0]['idGrup_kursus'];
-            $nilai = array('benar'=>count($correct), 'idGroupKursus'=>$idGroupKursus, 'idKursus'=>$idKursus, 'salah'=>$wrong);
+            $getQuizSetting = $this->getQuizSetting($idGroupKursus);
+            $nilaiminimal = $getQuizSetting[0]['kategoriCukup'];
+            $nilai = array('benar'=>count($correct), 'idGroupKursus'=>$idGroupKursus, 'idKursus'=>$idKursus, 'salah'=>$wrong, 'nilaiminimal'=>$nilaiminimal);
             $saveToTable = $this->saveNilai($nilai);
 
 
@@ -486,8 +488,14 @@ class quizHelper extends Database {
         $benar = $data['benar'];
         $salah = $data['salah'];
         $nilai = floor(($benar/($benar+$salah))*100);
-        $statusulang = 0;
-        $statuskelulusan = 0;
+        if ($nilai >= $data['nilaiminimal']){
+            $statuskelulusan = 1;
+            $statusulang = 0;
+        }else{
+            $statusulang = 1;
+            $statuskelulusan = 0;
+        }
+        
         $create_time = date('Y-m-d H:i:s');
         $idUser = $this->user['idUser'];
         $idKursus = $data['idKursus'];
@@ -764,12 +772,13 @@ class quizHelper extends Database {
         $sql = array(
                 'table'=>"nilai AS n, user AS u, grup_kursus AS g",
                 'field'=>"n.*, u.name, u.email, g.namagrup",
-                'condition' => " n.n_status = 1 AND n.idUser = {$userid} {$filter}",
+                'condition' => " n.n_status = 1 AND n.idUser = {$userid} AND statuskelulusan = 1 {$filter}  ORDER BY n.create_time DESC",
                 'joinmethod' => 'LEFT JOIN',
                 'join' => "n.idUser = u.idUser, n.idGroupKursus = g.idGrup_kursus"
                 );
 
         $res = $this->lazyQuery($sql,$debug);
+        // pr($res);
         if ($res) return $res;
         return false;
     }

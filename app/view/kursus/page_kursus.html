@@ -141,10 +141,10 @@
                                                     {foreach $value.file as $vals}
                                                     {if !empty($vals.files)}
                                                     	{$expl_string = "."|explode:$vals.files}
-                                                    	{if ($expl_string[1] == 'pdf')}
+                                                    	{if ($vals.jenisfile == '1')}
                                                     	<tr>
                                                     		<td>{$vals.namafile}</td>
-                                                    		<td>Ebook</td>
+                                                    		<td><i class="fa fa-file-pdf-o"> Ebook</td>
                                                     		<td><a href="#" data-toggle="modal" data-target="#viewEbook{$vals.idFile}"> View </a></td>
                                                     	</tr>
                                                     	<div class="modal fade" id="viewEbook{$vals.idFile}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -155,7 +155,7 @@
 												<h4 class="modal-title" id="myModalLabel">View Ebook</h4>
 											  </div>
 											  <div class="modal-body">
-												<iframe width="700px" height="425px" src="{$vals.files}" frameborder="0" allowfullscreen allowtransparency></iframe>
+												<iframe width="555px" height="425px" src="{$vals.files}" frameborder="0" allowfullscreen allowtransparency></iframe>
 											  </div>
 											</div>
 										  </div>

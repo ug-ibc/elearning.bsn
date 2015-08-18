@@ -132,7 +132,7 @@ $(document).on('change','#file_image', function(){
 						<div class="form-group">
 							<label class="col-sm-3 control-label">File Type</label>
 							<div class="col-sm-4">
-								<select name = "jenisfile" id="jenisfile"  class="selectpicker" onchange="valFileType()">
+								<select name = "jenisfile" id="jenisfile"  class="selectpicker">
 								{if isset($data_list_upload[0].jenisfile)}
 									
 								{/if}
@@ -226,13 +226,13 @@ $(document).on('change','#file_image', function(){
 							{/if}
 						{/if}
 							
-						<div class="form-group" id="shwlink">
+						<div class="form-group">
 							<label class="col-sm-3 control-label">Link</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id ="link" name="file_image" value="{if isset($link)}{$link}{/if}"  placeholder ="URL for Video" onblur="return checkURL()">
+								<input type="text" class="form-control" id ="link" name="file_image" value="{if isset($link)}{$link}{/if}"  placeholder ="URL http://..." onblur="return checkURL()">
 							</div>
 						</div>
-						<div class="form-group">
+						{*}<div class="form-group">
 							<label class="col-sm-3 control-label">Upload File</label>
 							<div class="col-sm-4">
 								<div class="input-group">
@@ -244,7 +244,7 @@ $(document).on('change','#file_image', function(){
 									<input type="text" name="file_hidden" class="form-control" value="{if isset($file)}{$file}{/if}" readonly>
 								</div>*)mp4 (Video Format) <br>*)pdf (Ebook Format)
 							</div>
-						</div>
+						</div>{/*}
 								
 					</div>
 					<div class="panel-footer text-right">

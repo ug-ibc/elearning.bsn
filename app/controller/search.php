@@ -30,13 +30,11 @@ class search extends Controller {
 			$certificate = $_POST['cari'];
 			$group_course = $this->models->get_group_by_certificate($certificate);
 			$id_group = $group_course['idGrup_kursus'];
-			// pr($group_course);
 			if($id_group != ''){
 				$list_course = $this->models->get_list_course_by_certificate($id_group);
 				// pr($list_course);
 				$criteria = $this->contentHelper->get_criteria($id_group);
-				$nilai = $this->models->get_value_by_certificate($id_group);
-				
+				$nilai = $this->models->get_value_by_certificate($id_group,$certificate);
 				if($nilai[nilai] >= $criteria[kategoriBaik]){
 					// $kategori = "Baik";
 					$kategori = "Sangat Baik";
@@ -49,7 +47,6 @@ class search extends Controller {
 				$idGroupKursus = $group_course['idGrup_kursus'];
 				$idUser = $nilai['idUser'];
 				$attemp = $this->models->get_attempt_user($idGroupKursus,$idUser);
-				
 				$this->view->assign('group_course',$group_course);
 				$this->view->assign('list_course',$list_course);
 				$this->view->assign('nilai',$nilai);

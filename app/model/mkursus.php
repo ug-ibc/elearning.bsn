@@ -97,14 +97,15 @@ class mkursus extends Database{
 		return $result;
 	}
 	
-	function get_value_by_certificate($id_group){
+	function get_value_by_certificate($id_group,$certificate){
 		$query = "SELECT n.nilai,n.idUser,n.kodeSertifikat,n.create_time,
 					t.kategoriBaik,t.kategoriCukup,t.kategoriKurang,
 					u.name, u.jenispekerjaan
 					FROM nilai as n
 					join tbl_quiz_setting as t on t.idGroupKursus = n.idGroupKursus
 					join user as u on u.idUser = n.idUser
-					where n.idGroupKursus  ={$id_group} order by n.nilai desc limit 1";
+					where n.idGroupKursus  ={$id_group} and n.kodeSertifikat like '$certificate%' order by n.nilai";
+		
 		$result = $this->fetch($query);
 		return $result;
 	}

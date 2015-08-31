@@ -92,8 +92,16 @@ function isNumber(evt) {
 								</select> 
 							</div>
 						</div>
-
 						<div class="form-group">
+							<label class="col-sm-3 control-label">Sort Number</label>
+							<div class="col-sm-2">
+								<input type="text" name="quota" class="form-control" 
+								value="{if isset($data_list[0].quota)}{$data_list[0].quota}{/if}"
+								required>
+							</div>
+						</div>
+
+						{*}<div class="form-group">
 							<label class="col-sm-3 control-label">Course Type</label>
 							<div class="col-sm-4">
 								<select name ="jeniskursus" id="jeniskursus" class="selectpicker typeKursus">
@@ -136,7 +144,7 @@ function isNumber(evt) {
 									{/if}
 								</select> 	
 							</div>
-						</div>	
+						</div>{/*}	
 
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Course Image</label>
@@ -155,7 +163,7 @@ function isNumber(evt) {
 						<!-- HIDDEN FILE -->
 						<input type="hidden" name="hiddenFile" value="{if isset($data_list[0].image)}{$data_list[0].image}{else}dummy.jpg{/if}">
 
-						<div class="form-group">
+						{*}<div class="form-group">
 							<label class="col-sm-3 control-label">Start Date</label>
 							<div class="col-sm-4">
 								<div class="input-group date">
@@ -178,7 +186,7 @@ function isNumber(evt) {
 							<div class="col-sm-4">
 								<input type="text" name ="quota" class="form-control" onkeypress="return isNumber(event)" placeholder="number only" value="{if isset($data_list[0].quota)}{$data_list[0].quota}{/if}">
 							</div>
-						</div>
+						</div>{/*}
 						<!-- input id hidden-->
 							<input type="hidden" name="id" id="id" class="form-control" value="{if isset($data_list[0].idKursus)}{$data_list[0].idKursus}{/if}">
 						<!-- input id hidden-->

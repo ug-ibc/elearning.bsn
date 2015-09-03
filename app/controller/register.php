@@ -65,6 +65,19 @@ class register extends Controller {
             
                 if ($_POST['token']){
 
+                    $is_email_valid = false;
+                    $email_validate = $_POST['email'];
+
+                    if (filter_var($email_validate, FILTER_VALIDATE_EMAIL)) {
+                        $is_email_valid = true;
+                    }
+
+                    if (!$is_email_valid){
+                        logFile('email not valid = '. $email_validate);
+                        redirect($basedomain.'register');
+                        exit;
+                    } 
+
                     $register = $this->userHelper->createAccount($_POST);
                     if ($register){
 

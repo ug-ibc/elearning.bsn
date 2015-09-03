@@ -38,7 +38,7 @@
 	    </div><br/>
 		<div class="row">
 			<div class="col-md-9">
-				<form method="POST" action="{$basedomain}register/signup" class="form-horizontal" onsubmit="return validatePassword()">
+				<form name="regis" method="POST" action="{$basedomain}register/signup" class="form-horizontal" onsubmit="return validatePassword()">
 				<div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
 				    <div class="col-sm-6">
@@ -164,6 +164,12 @@
 				           	
 				    </div>
 			          </div>
+			      <div class="form-group">
+			      	<label for="inputEmail3" class="col-sm-2 control-label"></label>
+			      	<div class="col-sm-6">
+			      		<div class="g-recaptcha" data-sitekey="6LcrRQwTAAAAACXhdfD4V076USxhqLX-CqWrDqTK" onclick="return alert('di klik bro')"></div>
+			      	</div>
+			      </div>    
 				  <div class="form-group">
 					    <div class="col-sm-offset-2 col-sm-10">
 					     <input type="reset" value="Kosongkan" class="btn btn-default">

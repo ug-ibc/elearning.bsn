@@ -51,27 +51,43 @@ class register extends Controller {
     function signup()
     {
         global $basedomain;
-        // pr($_POST);exit;
-        if ($_POST['token']){
+        // pr($_POST);
+        if($_POST['g-recaptcha-response']){
+            $response=json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=6LcrRQwTAAAAACtWyyx6tUJO_TWg8l7ddhrriCDI&response=".$_POST['g-recaptcha-response']."&remoteip=".$_SERVER['REMOTE_ADDR']), true);
+            // pr($response);
+            if($response['success'] == false)
+            {
+              echo '<h2>You are spammer ! Get the @$%K out</h2>';
+              exit;
+            }
+            else
+            {
+            
+                if ($_POST['token']){
 
-            $register = $this->userHelper->createAccount($_POST);
-            if ($register){
+                    $register = $this->userHelper->createAccount($_POST);
+                    if ($register){
 
-                $this->view->assign('email', $register['email']);
-                $this->view->assign('name', $register['name']);
-                $this->view->assign('encode', $register['encode']);
-                
-                $html = $this->loadView('akun/emailTemplate');
-                // db($register);
-                // logFile($msg);
-                // $html = "klik link berikut ini {$basedomain}register/validate/?ref={$msg}";
-                $send = sendGlobalMail($register['email'],false,$html);
+                        $this->view->assign('email', $register['email']);
+                        $this->view->assign('name', $register['name']);
+                        $this->view->assign('encode', $register['encode']);
+                        
+                        $html = $this->loadView('akun/emailTemplate');
+                        // db($register);
+                        // logFile($msg);
+                        // $html = "klik link berikut ini {$basedomain}register/validate/?ref={$msg}";
+                        $send = sendGlobalMail($register['email'],false,$html);
 
-                redirect($basedomain.'register/status');
-            } 
-            else redirect($basedomain.'register');
+                        redirect($basedomain.'register/status');
+                    } 
+                    else redirect($basedomain.'register');
 
-            exit;
+                    exit;
+                }
+            }
+        } else {
+            echo "<script>alert('Silahkan Cek Captcha terlebih dahulu')</script>";
+            redirect($basedomain."register");
         }
     }
 

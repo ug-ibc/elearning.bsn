@@ -50,6 +50,7 @@ class login extends Controller {
                 }
                 exit;
             }else{
+                echo "<script>alert('Username atau Password anda salah');</script>";
                 redirect($basedomain);exit;
             }
 

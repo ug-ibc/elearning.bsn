@@ -71,7 +71,7 @@
                         <div class="title" style="height:70px;">
                         <h3><span>{$val.namakursus}</span></h3>
                         </div>
-                        <i><p class="text-center">{limit_char($val.keterangan,120)}<br>. . .</p></i>
+                        <i><p class="text-center">{substr($val.keterangan,0,110)}. . .</p></i>
                         <i class="fa fa-file-text-o"></i> {$val.total} Materi
                     </div>
                     <div style="border-top:2px solid #E3E3E3;" align="center">

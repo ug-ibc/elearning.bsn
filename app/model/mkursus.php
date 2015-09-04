@@ -75,7 +75,7 @@ class mkursus extends Database{
 		$filter = "";
 		if ($groupid) $filter .= " AND idGrup_kursus = {$groupid}";
 		// $query = "SELECT * FROM kursus WHERE idGrup_kursus = '{$id}' AND n_status = '1'";
-		$query = "SELECT * FROM kursus WHERE n_status = '1' {$filter}";
+		$query = "SELECT * FROM kursus WHERE n_status = '1' {$filter} ORDER BY list_order ASC";
 		// pr($query);
 		$Allcourse = $this->fetch($query,1);
 

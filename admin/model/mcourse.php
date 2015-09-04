@@ -105,9 +105,9 @@ class mcourse extends Database {
 	function course_insert($x){
 		if($x['action'] == 'insert'){
 			$n_status = '1';
-			$query = "INSERT INTO kursus (namakursus,keterangan,idGrup_kursus,n_status,image,quota)
+			$query = "INSERT INTO kursus (namakursus,keterangan,idGrup_kursus,n_status,image,quota,list_order)
 				  VALUES ('$x[namakursus]','".addslashes(html_entity_decode($x[keterangan]))."',
-				  '$x[idGrup_kursus]',$n_status,'$x[image]','$x[quota]')";
+				  '$x[idGrup_kursus]',$n_status,'$x[image]','$x[quota]','$x[list_order]')";
 			// echo $query;
 			// exit;
 			$result = $this->query($query);	
@@ -118,7 +118,8 @@ class mcourse extends Database {
 							namakursus = '{$x["namakursus"]}',
 							keterangan = '".addslashes(html_entity_decode($x[keterangan]))."',
 							idGrup_kursus = '{$x["idGrup_kursus"]}',
-							image = '{$x["image"]}'
+							image = '{$x["image"]}',
+							list_order = '{$x["list_order"]}'
 						WHERE
 							idKursus = '{$x["id"]}'";
 			// echo $query;				

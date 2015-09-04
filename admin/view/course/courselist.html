@@ -89,10 +89,10 @@ function selectAll(source) {
 						<th>&nbsp;<input type="checkbox" class ="pilihan" id="id_tahun" onClick="return selectAll(this)"/></th>
 						<!--<th>No</th>-->
 						<th>Course Name</th>
-						<th>Type</th>
+						<!-- <th>Type</th> -->
 						<th class="min-tablet">Group</th>
 						<th class="min-tablet">Schedule</th>
-						<th class="min-tablet">Quota</th>
+						<th class="min-tablet">Order</th>
 						<th class="min-tablet">Status</th>
 						<th class="min-tablet">Course<br>Material</th>
 						<th class="min-tablet">Action</th>
@@ -105,7 +105,7 @@ function selectAll(source) {
 						<td align="center"><input value="{$value.idKursus}" type="checkbox" name="check[]" id="check[]"></td>
 						<!--<td align="center" >{$no}</td>-->
 						<td>{$value.namakursus}</td>
-						<td>
+						{*}<td>
 						{if $value.jeniskursus == '1'}
 							{$jk = 'optional'}
 						{elseif $value.jeniskursus == '2'}
@@ -113,7 +113,7 @@ function selectAll(source) {
 						{else}
 							{$jk = 'required'}
 						{/if}
-						{$jk}</td>
+						{$jk}</td>{/*}
 						{foreach $data_listgroup as $value_list}
 							{if $value.idGrup_kursus == $value_list.idGrup_kursus}
 							{$Group_kursus = $value_list.namagrup}
@@ -121,7 +121,7 @@ function selectAll(source) {
 						{/foreach}
 						<td>{$Group_kursus}</td>
 						<td>{$value.start_date} - {$value.end_date}</td>
-						<td>{$value.quota}</td>
+						<td>{$value.list_order}</td>
 						{if $value.n_status == '1'}
 							{$var = 'Active'}
 							{$style= 'color:green'}

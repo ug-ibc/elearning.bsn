@@ -136,8 +136,8 @@ class quiz extends Controller {
        			$dataSoal[] = $this->quizHelper->randomJawaban($value, false);
        		}
 
-       		
-       	// pr($dataSoal);exit;
+       	// pr($answerList);	
+       	// db($dataSoal);exit;
    			foreach ($dataSoal as $key => $value) {
        			$dataSoal[$key]['no'] = ($start+1);
        			

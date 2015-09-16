@@ -133,7 +133,7 @@ class quizHelper extends Database {
         $sql = array(
                 'table'=>"soal",
                 'field'=>"idSoal, jawabanuser",
-                'condition' => " idUser = {$idUser} AND idGrup_kursus = {$idKursus} AND n_status = {$n_status} AND attempt = {$attempt}",
+                'condition' => " idUser = {$idUser} AND idGrup_kursus = {$idKursus} AND n_status = {$n_status} AND attempt = {$attempt} AND attempt_date >= DATE(NOW())",
                 );
 
         $res = $this->lazyQuery($sql,$debug);

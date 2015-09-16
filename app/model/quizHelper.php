@@ -34,6 +34,7 @@ class quizHelper extends Database {
             */
             
             $soal = unserialize($getSoalUser[0]['soal']);
+            // pr($soal);exit;
             $implodeID = implode(',', $soal);
             $sql = array(
                     'table'=>"banksoal",
@@ -187,12 +188,19 @@ class quizHelper extends Database {
         $whatCourse = $isCourseReady[$idKursus]['soalkursus'];
         $timeCourse = ($isCourseReady[$idKursus]['waktu'] * 60);
 
+        $sumGroupCOurse = count($whatCourse);
         // pr($isCourseReady);
-        // db($isCourseReady);
         if ($whatCourse){
 
+            $i = 1;
+            $tmpCount = array();
             foreach ($whatCourse as $key => $value) {
                 
+                if ($i == $sumGroupCOurse){
+                    $jumlahindex = array_sum($tmpCount);
+                    $quizLimit = intval($isCourseReady[$idKursus]['maxSoal']) - intval($jumlahindex);
+
+                }
                 $sql = array(
                         'table'=>"banksoal",
                         'field'=>"idSoal",
@@ -200,9 +208,12 @@ class quizHelper extends Database {
                         );
 
                 $res[] = $this->lazyQuery($sql,$debug);
+
+                $tmpCount[] = $quizLimit;
+                $i++;
             }
 
-            // pr($res);
+            // db($res);
             foreach ($res as $key => $value) {
                 
                 foreach ($value as $key => $val) {
@@ -600,7 +611,7 @@ class quizHelper extends Database {
             if ($dataSetting){
                 foreach ($dataSetting as $key => $value) {
                     $dataSetting[$key]['soalkursus'] = $data[$key];
-                    $dataSetting[$key]['jumlahpembagian'] = $value['maxSoal'] / count($data[$key]);
+                    $dataSetting[$key]['jumlahpembagian'] = floor($value['maxSoal'] / count($data[$key]));
                     
                     $notready = array();
                     foreach ($data[$key] as $keys => $val) {

@@ -118,7 +118,7 @@ class quiz extends Controller {
     $getKursus = array();
 		$getQuiz = $this->quizHelper->getQuiz($groupKursus);
     // db($generateSoal);
-
+    // pr($getQuiz);exit;
        	$getUserAnswer = $this->quizHelper->getUserAnswer($groupKursus,1,1, intval($generateSoal[0]['attempt']));
        	// pr($getUserAnswer);
         if ($getUserAnswer){
@@ -137,7 +137,7 @@ class quiz extends Controller {
        		}
 
        		
-       	// pr($dataSoal);
+       	// pr($dataSoal);exit;
    			foreach ($dataSoal as $key => $value) {
        			$dataSoal[$key]['no'] = ($start+1);
        			
